@@ -1368,17 +1368,17 @@
 					<dict>
 						<key>backup</key>
 						<dict>
-							<key>6</key>
+							<key>7</key>
 							<dict>
 								<key>class</key>
 								<string>BLWrapperHandle</string>
 								<key>name</key>
-								<string>Classes/DialerViewController/6/DialerViewController.xib</string>
+								<string>Classes/DialerViewController/7/DialerViewController.xib</string>
 							</dict>
 						</dict>
 					</dict>
 					<key>change date</key>
-					<date>2012-10-16T12:36:35Z</date>
+					<date>2013-01-15T13:50:58Z</date>
 					<key>changed values</key>
 					<array/>
 					<key>class</key>
@@ -1388,7 +1388,7 @@
 					<key>flags</key>
 					<integer>0</integer>
 					<key>hash</key>
-					<string>db230136d1bdea7fda72ecf324a5a159
+					<string>09f67d190a1a865b101bd2daf42fe5b8
 </string>
 					<key>name</key>
 					<string>DialerViewController.xib</string>
@@ -1902,9 +1902,9 @@
 					<key>versions</key>
 					<dict>
 						<key>en</key>
-						<string>6</string>
+						<string>7</string>
 						<key>fr</key>
-						<string>6</string>
+						<string>7</string>
 					</dict>
 				</dict>
 				<dict>
@@ -7504,17 +7504,17 @@
 					<dict>
 						<key>backup</key>
 						<dict>
-							<key>12</key>
+							<key>13</key>
 							<dict>
 								<key>class</key>
 								<string>BLWrapperHandle</string>
 								<key>name</key>
-								<string>LinphoneUI/UICallBar/12/UICallBar.xib</string>
+								<string>LinphoneUI/UICallBar/13/UICallBar.xib</string>
 							</dict>
 						</dict>
 					</dict>
 					<key>change date</key>
-					<date>2012-11-13T08:39:33Z</date>
+					<date>2013-01-15T13:51:00Z</date>
 					<key>changed values</key>
 					<array/>
 					<key>class</key>
@@ -7524,7 +7524,7 @@
 					<key>flags</key>
 					<integer>0</integer>
 					<key>hash</key>
-					<string>6ce20b228103dd1de3d5c07ecc8cc68a
+					<string>352aa2cf941e0012c2cefaa1131f0115
 </string>
 					<key>name</key>
 					<string>UICallBar.xib</string>
@@ -8626,9 +8626,9 @@
 					<key>versions</key>
 					<dict>
 						<key>en</key>
-						<string>12</string>
+						<string>13</string>
 						<key>fr</key>
-						<string>12</string>
+						<string>13</string>
 					</dict>
 				</dict>
 				<dict>
@@ -10061,17 +10061,17 @@
 					<dict>
 						<key>backup</key>
 						<dict>
-							<key>9</key>
+							<key>11</key>
 							<dict>
 								<key>class</key>
 								<string>BLWrapperHandle</string>
 								<key>name</key>
-								<string>LinphoneUI/UIMainBar/9/UIMainBar.xib</string>
+								<string>LinphoneUI/UIMainBar/11/UIMainBar.xib</string>
 							</dict>
 						</dict>
 					</dict>
 					<key>change date</key>
-					<date>2012-09-25T09:16:21Z</date>
+					<date>2013-01-15T14:27:05Z</date>
 					<key>changed values</key>
 					<array/>
 					<key>class</key>
@@ -10081,7 +10081,7 @@
 					<key>flags</key>
 					<integer>0</integer>
 					<key>hash</key>
-					<string>001c2f28174fcded7ef3fd932a9875d7
+					<string>0f55b8360b8964017f6058b9f7dbf4e0
 </string>
 					<key>name</key>
 					<string>UIMainBar.xib</string>
@@ -10416,9 +10416,9 @@
 					<key>versions</key>
 					<dict>
 						<key>en</key>
-						<string>9</string>
+						<string>11</string>
 						<key>fr</key>
-						<string>9</string>
+						<string>11</string>
 					</dict>
 				</dict>
 				<dict>
@@ -12175,7 +12175,7 @@
 						</dict>
 					</dict>
 					<key>change date</key>
-					<date>2013-01-14T12:21:14Z</date>
+					<date>2013-01-15T14:20:17Z</date>
 					<key>changed values</key>
 					<array/>
 					<key>class</key>
@@ -12185,7 +12185,7 @@
 					<key>flags</key>
 					<integer>0</integer>
 					<key>hash</key>
-					<string>84262943eea3c4fe4997634207e98892
+					<string>c7e2e960d8feffd0332d0e99451e1d99
 </string>
 					<key>name</key>
 					<string>Localizable.strings</string>
@@ -13282,13 +13282,13 @@ La cause était: %2$@</string>
 							<key>errors</key>
 							<array/>
 							<key>flags</key>
-							<integer>2</integer>
+							<integer>3</integer>
 							<key>key</key>
 							<string>http://www.linphone.org</string>
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>http://www.linphone.org</string>
+								<string>http://www.dyl.com/</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14647,13 +14647,13 @@ Activer l'application dans Réglages &gt; Confidentialité &gt; Contacts</string
 							<key>errors</key>
 							<array/>
 							<key>flags</key>
-							<integer>2</integer>
+							<integer>3</integer>
 							<key>key</key>
 							<string>© 2010-2012 Belledonne Communications </string>
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>© 2010-2012 Belledonne Communications </string>
+								<string>© 2010-2013 Belledonne Communications</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
