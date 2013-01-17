@@ -72,9 +72,9 @@
 		<string>audio</string>
 	</array>
 	<key>UILaunchImageFile~ipad</key>
-	<string>linphone_splashscreen</string>
+	<string>ringmail_splashscreen</string>
 	<key>UILaunchImageFile~iphone</key>
-	<string>linphone_splashscreen</string>
+	<string>ringmail_splashscreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>wifi</string>
