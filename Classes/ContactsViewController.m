@@ -66,16 +66,8 @@ static BOOL sSipFilter = FALSE;
 @synthesize tableController;
 @synthesize tableView;
 
-@synthesize allButton;
-@synthesize linphoneButton;
 @synthesize backButton;
 @synthesize addButton;
-
-typedef enum _HistoryView {
-    History_All,
-    History_Linphone,
-    History_MAX
-} HistoryView;
 
 
 #pragma mark - Lifecycle Functions
@@ -88,8 +80,6 @@ typedef enum _HistoryView {
     [tableController release];
     [tableView release];
     
-    [allButton release];
-    [linphoneButton release];
     [backButton release];
     [addButton release];
     
@@ -161,48 +151,16 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self changeView:History_All];
-    
-    // Set selected+over background: IB lack !
-    [linphoneButton setBackgroundImage:[UIImage imageNamed:@"contacts_linphone_selected.png"]
-                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
-    
-    [linphoneButton setTitle:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]
-					forState:UIControlStateNormal];
-	
-	[LinphoneUtils buttonFixStates:linphoneButton];
-    
-    // Set selected+over background: IB lack !
-    [allButton setBackgroundImage:[UIImage imageNamed:@"contacts_all_selected.png"] 
-                    forState:(UIControlStateHighlighted | UIControlStateSelected)];
-    
-    [LinphoneUtils buttonFixStates:allButton];
-    
+
+	[ContactSelection setSipFilter:FALSE];
+    [tableController loadData];
+
     [tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
     [tableController.tableView setBackgroundView:nil]; // Can't do it in Xib: issue with ios4
 }
 
 
 #pragma mark -
-
-- (void)changeView:(HistoryView)view {
-    if(view == History_All) {
-        [ContactSelection setSipFilter:FALSE];
-        [tableController loadData];
-        allButton.selected = TRUE;
-    } else {
-        allButton.selected = FALSE;
-    }
-    
-    if(view == History_Linphone) {
-        [ContactSelection setSipFilter:TRUE];
-        [tableController loadData];
-        linphoneButton.selected = TRUE;
-    } else {
-        linphoneButton.selected = FALSE;
-    }
-}
 
 - (void)update {
     switch ([ContactSelection getSelectionMode]) {
@@ -216,26 +174,11 @@ static UICompositeViewDescription *compositeDescription = nil;
             [backButton setHidden:TRUE];
             break;
     }
-    if([ContactSelection getSipFilter]) {
-        allButton.selected = FALSE;
-        linphoneButton.selected = TRUE;
-    } else {
-        allButton.selected = TRUE;
-        linphoneButton.selected = FALSE;   
-    }
     [tableController loadData];
 }
 
 
 #pragma mark - Action Functions
-
-- (IBAction)onAllClick:(id)event {
-    [self changeView: History_All];
-}
-
-- (IBAction)onLinphoneClick:(id)event {
-    [self changeView: History_Linphone];
-}
 
 - (IBAction)onAddContactClick:(id)event {
     // Go to Contact details view

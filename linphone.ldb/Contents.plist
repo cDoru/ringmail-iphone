@@ -1048,17 +1048,17 @@
 					<dict>
 						<key>backup</key>
 						<dict>
-							<key>14</key>
+							<key>15</key>
 							<dict>
 								<key>class</key>
 								<string>BLWrapperHandle</string>
 								<key>name</key>
-								<string>Classes/ContactsViewController/14/ContactsViewController.xib</string>
+								<string>Classes/ContactsViewController/15/ContactsViewController.xib</string>
 							</dict>
 						</dict>
 					</dict>
 					<key>change date</key>
-					<date>2012-12-06T16:04:33Z</date>
+					<date>2013-01-23T13:08:09Z</date>
 					<key>changed values</key>
 					<array/>
 					<key>class</key>
@@ -1068,112 +1068,12 @@
 					<key>flags</key>
 					<integer>0</integer>
 					<key>hash</key>
-					<string>55cfac63b99a2e8b631ee79f15a579c5
+					<string>0a00b8baf61050d8188f81b2bf37a4d4
 </string>
 					<key>name</key>
 					<string>ContactsViewController.xib</string>
 					<key>objects</key>
 					<array>
-						<dict>
-							<key>change date</key>
-							<date>2001-01-01T00:00:00Z</date>
-							<key>changed values</key>
-							<array/>
-							<key>class</key>
-							<string>BLStringKeyObject</string>
-							<key>comment</key>
-							<string>Class = "IBUIButton"; accessibilityLabel = "All contacts filter"; ObjectID = "4";</string>
-							<key>errors</key>
-							<array/>
-							<key>flags</key>
-							<integer>0</integer>
-							<key>key</key>
-							<string>4.accessibilityLabel</string>
-							<key>localizations</key>
-							<dict>
-								<key>en</key>
-								<string>All contacts filter</string>
-								<key>fr</key>
-								<string>Afficher tout les contacts</string>
-							</dict>
-							<key>snapshots</key>
-							<dict/>
-						</dict>
-						<dict>
-							<key>change date</key>
-							<date>2001-01-01T00:00:00Z</date>
-							<key>changed values</key>
-							<array/>
-							<key>class</key>
-							<string>BLStringKeyObject</string>
-							<key>comment</key>
-							<string>Class = "IBUIButton"; normalTitle = "All"; ObjectID = "4";</string>
-							<key>errors</key>
-							<array/>
-							<key>flags</key>
-							<integer>0</integer>
-							<key>key</key>
-							<string>4.normalTitle</string>
-							<key>localizations</key>
-							<dict>
-								<key>en</key>
-								<string>All</string>
-								<key>fr</key>
-								<string>Tous</string>
-							</dict>
-							<key>snapshots</key>
-							<dict/>
-						</dict>
-						<dict>
-							<key>change date</key>
-							<date>2001-01-01T00:00:00Z</date>
-							<key>changed values</key>
-							<array/>
-							<key>class</key>
-							<string>BLStringKeyObject</string>
-							<key>comment</key>
-							<string>Class = "IBUIButton"; accessibilityLabel = "Linphone contacts filter"; ObjectID = "5";</string>
-							<key>errors</key>
-							<array/>
-							<key>flags</key>
-							<integer>0</integer>
-							<key>key</key>
-							<string>5.accessibilityLabel</string>
-							<key>localizations</key>
-							<dict>
-								<key>en</key>
-								<string>Linphone contacts filter</string>
-								<key>fr</key>
-								<string>Afficher les contacts Linphone</string>
-							</dict>
-							<key>snapshots</key>
-							<dict/>
-						</dict>
-						<dict>
-							<key>change date</key>
-							<date>2001-01-01T00:00:00Z</date>
-							<key>changed values</key>
-							<array/>
-							<key>class</key>
-							<string>BLStringKeyObject</string>
-							<key>comment</key>
-							<string>Class = "IBUIButton"; normalTitle = "Linphone"; ObjectID = "5";</string>
-							<key>errors</key>
-							<array/>
-							<key>flags</key>
-							<integer>0</integer>
-							<key>key</key>
-							<string>5.normalTitle</string>
-							<key>localizations</key>
-							<dict>
-								<key>en</key>
-								<string>Linphone</string>
-								<key>fr</key>
-								<string>Linphone</string>
-							</dict>
-							<key>snapshots</key>
-							<dict/>
-						</dict>
 						<dict>
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
@@ -1352,15 +1252,115 @@
 							<key>snapshots</key>
 							<dict/>
 						</dict>
+						<dict>
+							<key>change date</key>
+							<date>2001-01-01T00:00:00Z</date>
+							<key>changed values</key>
+							<array/>
+							<key>class</key>
+							<string>BLStringKeyObject</string>
+							<key>comment</key>
+							<string>Class = "IBUIButton"; accessibilityLabel = "All contacts filter"; ObjectID = "4";</string>
+							<key>errors</key>
+							<array/>
+							<key>flags</key>
+							<integer>0</integer>
+							<key>key</key>
+							<string>4.accessibilityLabel</string>
+							<key>localizations</key>
+							<dict>
+								<key>en</key>
+								<string>All contacts filter</string>
+								<key>fr</key>
+								<string>Afficher tout les contacts</string>
+							</dict>
+							<key>snapshots</key>
+							<dict/>
+						</dict>
+						<dict>
+							<key>change date</key>
+							<date>2001-01-01T00:00:00Z</date>
+							<key>changed values</key>
+							<array/>
+							<key>class</key>
+							<string>BLStringKeyObject</string>
+							<key>comment</key>
+							<string>Class = "IBUIButton"; normalTitle = "All"; ObjectID = "4";</string>
+							<key>errors</key>
+							<array/>
+							<key>flags</key>
+							<integer>0</integer>
+							<key>key</key>
+							<string>4.normalTitle</string>
+							<key>localizations</key>
+							<dict>
+								<key>en</key>
+								<string>All</string>
+								<key>fr</key>
+								<string>Tous</string>
+							</dict>
+							<key>snapshots</key>
+							<dict/>
+						</dict>
+						<dict>
+							<key>change date</key>
+							<date>2001-01-01T00:00:00Z</date>
+							<key>changed values</key>
+							<array/>
+							<key>class</key>
+							<string>BLStringKeyObject</string>
+							<key>comment</key>
+							<string>Class = "IBUIButton"; accessibilityLabel = "Linphone contacts filter"; ObjectID = "5";</string>
+							<key>errors</key>
+							<array/>
+							<key>flags</key>
+							<integer>0</integer>
+							<key>key</key>
+							<string>5.accessibilityLabel</string>
+							<key>localizations</key>
+							<dict>
+								<key>en</key>
+								<string>Linphone contacts filter</string>
+								<key>fr</key>
+								<string>Afficher les contacts Linphone</string>
+							</dict>
+							<key>snapshots</key>
+							<dict/>
+						</dict>
+						<dict>
+							<key>change date</key>
+							<date>2001-01-01T00:00:00Z</date>
+							<key>changed values</key>
+							<array/>
+							<key>class</key>
+							<string>BLStringKeyObject</string>
+							<key>comment</key>
+							<string>Class = "IBUIButton"; normalTitle = "Linphone"; ObjectID = "5";</string>
+							<key>errors</key>
+							<array/>
+							<key>flags</key>
+							<integer>0</integer>
+							<key>key</key>
+							<string>5.normalTitle</string>
+							<key>localizations</key>
+							<dict>
+								<key>en</key>
+								<string>Linphone</string>
+								<key>fr</key>
+								<string>Linphone</string>
+							</dict>
+							<key>snapshots</key>
+							<dict/>
+						</dict>
 					</array>
 					<key>snapshots</key>
 					<dict/>
 					<key>versions</key>
 					<dict>
 						<key>en</key>
-						<string>14</string>
+						<string>15</string>
 						<key>fr</key>
-						<string>14</string>
+						<string>15</string>
 					</dict>
 				</dict>
 				<dict>

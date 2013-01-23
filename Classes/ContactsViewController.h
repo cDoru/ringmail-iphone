@@ -46,13 +46,9 @@ typedef enum _ContactSelectionMode {
 
 @property (nonatomic, retain) IBOutlet ContactsTableViewController* tableController;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) IBOutlet UIButton* allButton;
-@property (nonatomic, retain) IBOutlet UIButton* linphoneButton;
 @property (nonatomic, retain) IBOutlet UIButton *backButton;
 @property (nonatomic, retain) IBOutlet UIButton *addButton;
 
-- (IBAction)onAllClick:(id)event;
-- (IBAction)onLinphoneClick:(id)event;
 - (IBAction)onAddContactClick:(id)event;
 - (IBAction)onBackClick:(id)event;
 
