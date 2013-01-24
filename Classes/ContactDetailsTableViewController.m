@@ -555,7 +555,7 @@ static const int contactSections[ContactSections_MAX] = {ContactSections_None, C
             int index = ABMultiValueGetIndexForIdentifier(lMap, [entry identifier]);
             CFStringRef valueRef = ABMultiValueCopyValueAtIndex(lMap, index);
             if(valueRef != NULL) {
-                dest = [FastAddressBook normalizeSipURI:[NSString stringWithString:(NSString*) valueRef]];
+                dest = [NSString stringWithString:(NSString*) valueRef];
                 CFRelease(valueRef);
             }
             CFRelease(lMap);
