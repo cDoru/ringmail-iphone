@@ -45,3 +45,6 @@ sharing_server=https://www.linphone.org:444/upload.php
 ice=0
 stun=stun.linphone.org
 
+[app]
+hide_wizard_preference=1
+hide_run_assistant_preference=1
