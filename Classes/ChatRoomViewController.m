@@ -163,6 +163,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 											 selector:@selector(onMessageChange:) 
 												 name:UITextViewTextDidChangeNotification 
 											   object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(coreUpdateEvent:)
+                                                 name:kLinphoneCoreUpdate
+                                               object:nil];
 	if([tableController isEditing])
         [tableController setEditing:FALSE animated:FALSE];
     [editButton setOff];
@@ -205,6 +210,9 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                     object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self 
                                                     name:UITextViewTextDidChangeNotification
+												  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kLinphoneCoreUpdate
 												  object:nil];
 }
 
@@ -393,7 +401,7 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
                 [self saveAndSend:[UIImage imageWithData:data] url:url];
             }];
         }
-        [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+        [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
             [waitView setHidden:TRUE];
             [sheet showInView:[PhoneMainView instance].view];
@@ -403,6 +411,12 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
 
 
 #pragma mark - Event Functions
+
+- (void)coreUpdateEvent:(NSNotification*)notif {
+    if(![LinphoneManager isLcReady]) {
+        chatRoom = NULL;
+    }
+}
 
 - (void)textReceivedEvent:(NSNotification *)notif {
     //LinphoneChatRoom *room = [[[notif userInfo] objectForKey:@"room"] pointerValue];
@@ -549,7 +563,7 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
             block(UIImagePickerControllerSourceTypePhotoLibrary);
         }];
 	}
-    [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel",nil)];
+    [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel",nil) block:nil];
     
     [sheet showInView:[PhoneMainView instance].view];
 }

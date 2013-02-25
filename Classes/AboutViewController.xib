@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1930</string>
+			<string key="NS.object.0">1926</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -233,7 +233,7 @@
 					</object>
 					<object class="IBUIWebView" id="364833627">
 						<reference key="NSNextResponder" ref="775128611"/>
-						<int key="NSvFlags">314</int>
+						<int key="NSvFlags">298</int>
 						<string key="NSFrame">{{10, 380}, {300, 210}}</string>
 						<reference key="NSSuperview" ref="775128611"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -484,6 +484,6 @@
 			<string key="NS.key.0">ringmail_logo.png</string>
 			<string key="NS.object.0">{512, 512}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">1930</string>
+		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>
 </archive>
