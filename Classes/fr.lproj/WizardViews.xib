@@ -192,14 +192,14 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
-							<string key="IBUIAccessibilityLabel">Créer un compte linphone.org</string>
+							<string key="IBUIAccessibilityLabel">Créer un compte RingMail</string>
 							<boolean value="YES" key="IBUIIsAccessibilityElement"/>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<bool key="IBUIAdjustsImageWhenHighlighted">NO</bool>
-						<string key="IBUINormalTitle">Créer un compte sur linphone.org</string>
+						<string key="IBUINormalTitle">Créer un compte RingMail</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="514969770">
 							<int key="NSColorSpace">2</int>
 							<bytes key="NSRGB">MC43MjU0OTAxOTYxIDAuNzY4NjI3NDUxIDAuNzk2MDc4NDMxNAA</bytes>
@@ -239,14 +239,14 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
-							<string key="IBUIAccessibilityLabel">S'enregistrer sur un compte linphone.org</string>
+							<string key="IBUIAccessibilityLabel">S'enregistrer sur un compte RingMail</string>
 							<boolean value="YES" key="IBUIIsAccessibilityElement"/>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<bool key="IBUIAdjustsImageWhenHighlighted">NO</bool>
-						<string key="IBUINormalTitle">J'ai déjà un compte linphone.org</string>
+						<string key="IBUINormalTitle">J'ai déjà un compte RingMail</string>
 						<reference key="IBUIHighlightedTitleColor" ref="514969770"/>
 						<reference key="IBUINormalTitleColor" ref="1013845973"/>
 						<reference key="IBUINormalTitleShadowColor" ref="929224261"/>
@@ -559,7 +559,7 @@
 						<int key="IBUITag">200</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Entrez votre nom d'utilisateur et votre mot de passe de votre compte linphone.org.</string>
+						<string key="IBUIText">Entrez le nom d'utilisateur et le mot de passe de votre compte RingMail.</string>
 						<reference key="IBUITextColor" ref="784405869"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
