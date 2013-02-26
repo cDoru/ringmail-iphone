@@ -12,9 +12,7 @@
 			<key>change date</key>
 			<date>2001-01-01T00:00:00Z</date>
 			<key>changed values</key>
-			<array>
-				<string>&lt;reference&gt;</string>
-			</array>
+			<array/>
 			<key>class</key>
 			<string>BLBundleObject</string>
 			<key>errors</key>
@@ -5501,36 +5499,27 @@
 					<dict>
 						<key>backup</key>
 						<dict>
-							<key>18</key>
+							<key>20</key>
 							<dict>
 								<key>class</key>
 								<string>BLWrapperHandle</string>
 								<key>name</key>
-								<string>Classes/WizardViews/18/WizardViews.xib</string>
-							</dict>
-							<key>19</key>
-							<dict>
-								<key>class</key>
-								<string>BLWrapperHandle</string>
-								<key>name</key>
-								<string>Classes/WizardViews/19/WizardViews.xib</string>
+								<string>Classes/WizardViews/20/WizardViews.xib</string>
 							</dict>
 						</dict>
 					</dict>
 					<key>change date</key>
-					<date>2013-02-25T16:59:51Z</date>
+					<date>2013-02-26T09:05:53Z</date>
 					<key>changed values</key>
-					<array>
-						<string>&lt;reference&gt;</string>
-					</array>
+					<array/>
 					<key>class</key>
 					<string>BLNibFileObject</string>
 					<key>errors</key>
 					<array/>
 					<key>flags</key>
-					<integer>1</integer>
+					<integer>0</integer>
 					<key>hash</key>
-					<string>4d7ff7592ebb7f7631f9d4eb636f748e
+					<string>ffc34c55010444201abd39f612961313
 </string>
 					<key>name</key>
 					<string>WizardViews.xib</string>
@@ -5540,9 +5529,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5569,9 +5556,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5598,9 +5583,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5627,9 +5610,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5656,9 +5637,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5685,9 +5664,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5714,9 +5691,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5743,9 +5718,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5772,9 +5745,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5801,13 +5772,11 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
-							<string>Class = "IBUITextField"; accessibilityLabel = "Username"; ObjectID = "59";</string>
+							<string>Class = "IBUITextField"; accessibilityLabel = "Email address"; ObjectID = "59";</string>
 							<key>errors</key>
 							<array/>
 							<key>flags</key>
@@ -5817,9 +5786,9 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Username</string>
+								<string>Email address</string>
 								<key>fr</key>
-								<string>Nom d'utilisateur</string>
+								<string>Adresse email</string>
 								<key>ru</key>
 								<string>Имя пользователя</string>
 							</dict>
@@ -5830,13 +5799,11 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
-							<string>Class = "IBUITextField"; placeholder = "Username"; ObjectID = "59";</string>
+							<string>Class = "IBUITextField"; placeholder = "Email address"; ObjectID = "59";</string>
 							<key>errors</key>
 							<array/>
 							<key>flags</key>
@@ -5846,9 +5813,9 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Username</string>
+								<string>Email address</string>
 								<key>fr</key>
-								<string>Nom d'utilisateur</string>
+								<string>Adresse email</string>
 								<key>ru</key>
 								<string>Имя пользователя</string>
 							</dict>
@@ -5859,9 +5826,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5888,9 +5853,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5917,9 +5880,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5946,9 +5907,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -5975,9 +5934,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6004,9 +5961,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6033,9 +5988,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6062,9 +6015,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6091,9 +6042,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6120,9 +6069,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6149,13 +6096,11 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
-							<string>Class = "IBUILabel"; text = "Enter the username and password of your RingMail account."; ObjectID = "67";</string>
+							<string>Class = "IBUILabel"; text = "Enter the email address and password of your RingMail account."; ObjectID = "67";</string>
 							<key>errors</key>
 							<array/>
 							<key>flags</key>
@@ -6165,9 +6110,9 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Enter the username and password of your RingMail account.</string>
+								<string>Enter the email address and password of your RingMail account.</string>
 								<key>fr</key>
-								<string>Entrez le nom d'utilisateur et le mot de passe de votre compte RingMail.</string>
+								<string>Entrez l'adresse email et le mot de passe de votre compte RingMail.</string>
 								<key>ru</key>
 								<string>Введите имя пользователя и пароль Вашей учётной записи на linphone.org.</string>
 							</dict>
@@ -6178,13 +6123,11 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
-							<string>Class = "IBUITextField"; accessibilityLabel = "Username"; ObjectID = "68";</string>
+							<string>Class = "IBUITextField"; accessibilityLabel = "Email address"; ObjectID = "68";</string>
 							<key>errors</key>
 							<array/>
 							<key>flags</key>
@@ -6194,9 +6137,9 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Username</string>
+								<string>Email address</string>
 								<key>fr</key>
-								<string>Nom d'utilisateur</string>
+								<string>Adresse email</string>
 								<key>ru</key>
 								<string>Имя пользователя</string>
 							</dict>
@@ -6207,13 +6150,11 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
-							<string>Class = "IBUITextField"; placeholder = "Username"; ObjectID = "68";</string>
+							<string>Class = "IBUITextField"; placeholder = "Email address"; ObjectID = "68";</string>
 							<key>errors</key>
 							<array/>
 							<key>flags</key>
@@ -6223,9 +6164,9 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Username</string>
+								<string>Email address</string>
 								<key>fr</key>
-								<string>Nom d'utilisateur</string>
+								<string>Adresse email</string>
 								<key>ru</key>
 								<string>Имя пользователя</string>
 							</dict>
@@ -6236,13 +6177,11 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
-							<string>Class = "IBUILabel"; text = "Enter your username and password with your email address."; ObjectID = "73";</string>
+							<string>Class = "IBUILabel"; text = "Enter your email address and password."; ObjectID = "73";</string>
 							<key>errors</key>
 							<array/>
 							<key>flags</key>
@@ -6252,9 +6191,9 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Enter your username and password with your email address.</string>
+								<string>Enter your email address and password.</string>
 								<key>fr</key>
-								<string>Entrez votre nom d'utilsateur, votre mot de passe ainsi que votre adresse email.</string>
+								<string>Entrez votre adresse email et votre mot de passe.</string>
 								<key>ru</key>
 								<string>Введите имя пользователя пароль и адрес электронной почты.</string>
 							</dict>
@@ -6265,13 +6204,11 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
-							<string>Class = "IBUITextField"; accessibilityLabel = "Username"; ObjectID = "74";</string>
+							<string>Class = "IBUITextField"; accessibilityLabel = "Email address"; ObjectID = "74";</string>
 							<key>errors</key>
 							<array/>
 							<key>flags</key>
@@ -6281,9 +6218,9 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Username</string>
+								<string>Email address</string>
 								<key>fr</key>
-								<string>Nom d'utilisateur</string>
+								<string>Adresse email</string>
 								<key>ru</key>
 								<string>Имя пользователя</string>
 							</dict>
@@ -6294,13 +6231,11 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
-							<string>Class = "IBUITextField"; placeholder = "Username"; ObjectID = "74";</string>
+							<string>Class = "IBUITextField"; placeholder = "Email address"; ObjectID = "74";</string>
 							<key>errors</key>
 							<array/>
 							<key>flags</key>
@@ -6310,9 +6245,9 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Username</string>
+								<string>Email address</string>
 								<key>fr</key>
-								<string>Nom d'utilisateur</string>
+								<string>Adresse email</string>
 								<key>ru</key>
 								<string>Имя пользователя</string>
 							</dict>
@@ -6323,9 +6258,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6352,9 +6285,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6381,9 +6312,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6410,9 +6339,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6439,9 +6366,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6468,9 +6393,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6497,9 +6420,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6526,9 +6447,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6555,9 +6474,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6584,9 +6501,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6613,13 +6528,11 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
-							<string>Class = "IBUITextField"; placeholder = "Username"; ObjectID = "104";</string>
+							<string>Class = "IBUITextField"; placeholder = "Email address"; ObjectID = "104";</string>
 							<key>errors</key>
 							<array/>
 							<key>flags</key>
@@ -6629,9 +6542,9 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Username</string>
+								<string>Email address</string>
 								<key>fr</key>
-								<string>Nom d'utilisateur</string>
+								<string>Adresse email</string>
 								<key>ru</key>
 								<string>Имя пользователя</string>
 							</dict>
@@ -6642,9 +6555,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6671,9 +6582,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6700,9 +6609,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6729,9 +6636,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6758,9 +6663,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6787,9 +6690,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6816,9 +6717,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6845,9 +6744,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6874,9 +6771,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6903,9 +6798,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6932,9 +6825,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6961,9 +6852,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -6990,9 +6879,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -7019,9 +6906,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -7048,9 +6933,7 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array>
-								<string>&lt;reference&gt;</string>
-							</array>
+							<array/>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -7199,11 +7082,11 @@
 					<key>versions</key>
 					<dict>
 						<key>en</key>
-						<string>19</string>
+						<string>20</string>
 						<key>fr</key>
-						<string>18</string>
+						<string>20</string>
 						<key>ru</key>
-						<string>18</string>
+						<string>20</string>
 					</dict>
 				</dict>
 				<dict>
@@ -12927,7 +12810,7 @@
 						</dict>
 					</dict>
 					<key>change date</key>
-					<date>2013-02-07T11:17:03Z</date>
+					<date>2013-02-26T09:16:09Z</date>
 					<key>changed values</key>
 					<array/>
 					<key>class</key>
@@ -12937,7 +12820,7 @@
 					<key>flags</key>
 					<integer>0</integer>
 					<key>hash</key>
-					<string>87b1bbd3734aab8f1960f6130b3a76c3
+					<string>ab92fa53dfd1280f2284b625d30046e4
 </string>
 					<key>name</key>
 					<string>Localizable.strings</string>
@@ -15238,10 +15121,10 @@ La cause était: %2$@</string>
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>The email is invalid.
+								<string>The email address is invalid.
 </string>
 								<key>fr</key>
-								<string>Cet email est invalide.</string>
+								<string>Cette adresse email est invalide.</string>
 								<key>ru</key>
 								<string>Недопустимы адрес электронной почты.
 </string>
@@ -15328,10 +15211,10 @@ La cause était: %2$@</string>
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>The username is too short (minimum %d characters).
+								<string>The email address is too short (minimum %d characters).
 </string>
 								<key>fr</key>
-								<string>Le nom d'utilisateur est trop court (minimum %d caractères).</string>
+								<string>L'adresse email est trop courte (minimum %d caractères).</string>
 								<key>ru</key>
 								<string>Слишком короткое имя пользователя (минимум %d знаков).
 </string>
@@ -15497,31 +15380,6 @@ La cause était: %2$@</string>
 								<string>L'appel video ne peut pas aboutir car les conditions réseaux sont inssufisantent. </string>
 								<key>ru</key>
 								<string>Видео не может быть активировано из-за низкой скорости подключения, доступно только аудио</string>
-							</dict>
-							<key>snapshots</key>
-							<dict/>
-						</dict>
-						<dict>
-							<key>change date</key>
-							<date>2001-01-01T00:00:00Z</date>
-							<key>changed values</key>
-							<array/>
-							<key>class</key>
-							<string>BLStringKeyObject</string>
-							<key>comment</key>
-							<string>No comment provided by engineer.</string>
-							<key>errors</key>
-							<array/>
-							<key>flags</key>
-							<integer>0</integer>
-							<key>key</key>
-							<string>You miss %@ call</string>
-							<key>localizations</key>
-							<dict>
-								<key>en</key>
-								<string>You miss %@ call</string>
-								<key>fr</key>
-								<string>Appel manqué de %@</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16540,6 +16398,31 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>This device is not configured for sending Email. Please configure the Mail settings in the Settings app.</string>
+							</dict>
+							<key>snapshots</key>
+							<dict/>
+						</dict>
+						<dict>
+							<key>change date</key>
+							<date>2001-01-01T00:00:00Z</date>
+							<key>changed values</key>
+							<array/>
+							<key>class</key>
+							<string>BLStringKeyObject</string>
+							<key>comment</key>
+							<string>No comment provided by engineer.</string>
+							<key>errors</key>
+							<array/>
+							<key>flags</key>
+							<integer>0</integer>
+							<key>key</key>
+							<string>You miss %@ call</string>
+							<key>localizations</key>
+							<dict>
+								<key>en</key>
+								<string>You miss %@ call</string>
+								<key>fr</key>
+								<string>Appel manqué de %@</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>

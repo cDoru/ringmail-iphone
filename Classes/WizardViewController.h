@@ -46,6 +46,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *externalAccountButton;
 
 @property (nonatomic, retain) IBOutlet UIImageView *choiceViewLogoImageView;
+@property (nonatomic, retain) IBOutlet UITextField *createAccountViewEmailField;
 
 @property (nonatomic, retain) IBOutlet UITapGestureRecognizer *viewTapGestureRecognizer;
 

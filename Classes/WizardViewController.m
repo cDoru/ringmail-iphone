@@ -56,6 +56,7 @@ typedef enum _ViewElement {
 @synthesize externalAccountButton;
 
 @synthesize choiceViewLogoImageView;
+@synthesize createAccountViewEmailField;
 
 @synthesize viewTapGestureRecognizer;
 
@@ -96,6 +97,7 @@ typedef enum _ViewElement {
     [externalAccountButton release];
 
     [choiceViewLogoImageView release];
+    [createAccountViewEmailField release];
     
     [historyViews release];
     
@@ -291,6 +293,11 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
     }
     
+    // RingMail customization: do not show username field, the email is the username
+    if (view == createAccountView) {
+        [createAccountViewEmailField setHidden:TRUE];
+    }
+
     // Animation
     if(animation && [[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
       CATransition* trans = [CATransition animation];
@@ -559,11 +566,22 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *password = [WizardViewController findTextField:ViewElement_Password  view:contentView].text;
     
     NSMutableString *errors = [NSMutableString string];
-    if ([username length] == 0) {
-        
-        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a username.\n", nil)]];
+
+    int username_length = [[LinphoneManager instance] lpConfigIntForKey:@"username_length" forSection:@"wizard"];
+    int password_length = [[LinphoneManager instance] lpConfigIntForKey:@"password_length" forSection:@"wizard"];
+
+    if ([username length] < username_length) {
+        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"The username is too short (minimum %d characters).\n", nil), username_length]];
+    }
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @".+@.+\\.[A-Za-z]{2}[A-Za-z]*"];
+    if(![emailTest evaluateWithObject:username]) {
+        [errors appendString:NSLocalizedString(@"The email is invalid.\n", nil)];
     }
     
+    if ([password length] < password_length) {
+        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"The password is too short (minimum %d characters).\n", nil), password_length]];
+    }
+
     if([errors length]) {
         UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)",nil)
                                                             message:[errors substringWithRange:NSMakeRange(0, [errors length] - 1)]
@@ -584,28 +602,25 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *username = [WizardViewController findTextField:ViewElement_Username  view:contentView].text;
     NSString *password = [WizardViewController findTextField:ViewElement_Password  view:contentView].text;
     NSString *password2 = [WizardViewController findTextField:ViewElement_Password2  view:contentView].text;
-    NSString *email = [WizardViewController findTextField:ViewElement_Email view:contentView].text;
     NSMutableString *errors = [NSMutableString string];
     
     int username_length = [[LinphoneManager instance] lpConfigIntForKey:@"username_length" forSection:@"wizard"];
     int password_length = [[LinphoneManager instance] lpConfigIntForKey:@"password_length" forSection:@"wizard"];
     
     if ([username length] < username_length) {
-        
         [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"The username is too short (minimum %d characters).\n", nil), username_length]];
     }
-    
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @".+@.+\\.[A-Za-z]{2}[A-Za-z]*"];
+    if(![emailTest evaluateWithObject:username]) {
+        [errors appendString:NSLocalizedString(@"The email is invalid.\n", nil)];
+    }
+
     if ([password length] < password_length) {
         [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"The password is too short (minimum %d characters).\n", nil), password_length]];
     }
     
     if (![password2 isEqualToString:password]) {
         [errors appendString:NSLocalizedString(@"The passwords are different.\n", nil)];
-    }
-    
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @".+@.+\\.[A-Za-z]{2}[A-Za-z]*"];
-    if(![emailTest evaluateWithObject:email]) {
-        [errors appendString:NSLocalizedString(@"The email is invalid.\n", nil)];
     }
     
     if([errors length]) {
