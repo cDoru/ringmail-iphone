@@ -161,8 +161,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-	[ContactSelection setSipFilter:FALSE];
-    [ContactSelection setEmailFilter:FALSE];
     [tableController loadData];
 
     [tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
