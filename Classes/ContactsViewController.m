@@ -28,6 +28,7 @@
 static ContactSelectionMode sSelectionMode = ContactSelectionModeNone;
 static NSString* sAddAddress = nil;
 static BOOL sSipFilter = FALSE;
+static BOOL sEmailFilter = FALSE;
 
 + (void)setSelectionMode:(ContactSelectionMode)selectionMode {
     sSelectionMode = selectionMode;
@@ -57,6 +58,14 @@ static BOOL sSipFilter = FALSE;
 
 + (BOOL)getSipFilter {
     return sSipFilter;
+}
+
++ (void)setEmailFilter:(BOOL)enable {
+    sEmailFilter = enable;
+}
+
++ (BOOL)getEmailFilter {
+    return sEmailFilter;
 }
 
 @end
@@ -153,6 +162,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [super viewDidLoad];
 
 	[ContactSelection setSipFilter:FALSE];
+    [ContactSelection setEmailFilter:FALSE];
     [tableController loadData];
 
     [tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
