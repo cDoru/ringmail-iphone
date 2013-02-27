@@ -448,11 +448,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)createAccount:(NSString*)identity password:(NSString*)password email:(NSString*)email {
     NSString *useragent = [LinphoneManager getUserAgent];
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC create_account_with_useragent %@ %@ %@ %@", identity, password, email, useragent];
+    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC create_account_with_useragent %@ %@ %@", email, password, useragent];
     
     NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
-    [request setMethod: @"create_account_with_useragent" withParameters:[NSArray arrayWithObjects:identity, password, email, useragent, nil]];
+    [request setMethod: @"create_account_with_useragent" withParameters:[NSArray arrayWithObjects:email, password, useragent, nil]];
     
     XMLRPCConnectionManager *manager = [XMLRPCConnectionManager sharedManager];
     [manager spawnConnectionWithXMLRPCRequest: request delegate: self];
@@ -545,8 +545,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onCheckValidationClick:(id)sender {
     NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
-    NSString *identity = [self identityFromUsername:username];
-    [self checkAccountValidation:identity];
+    [self checkAccountValidation:username];
 }
 
 - (IBAction)onSignInExternalClick:(id)sender {
@@ -650,8 +649,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [errorView show];
         [errorView release];
     } else {
-        NSString *identity = [self identityFromUsername:username];
-        [self checkUserExist:identity];
+        [self checkUserExist:username];
     }
 }
 
