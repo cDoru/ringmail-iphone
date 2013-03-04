@@ -365,7 +365,12 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 		LinphoneAddress *from = linphone_address_new(identity);
 		LinphoneAuthInfo *info;
 		if (from != 0){
-			info=linphone_auth_info_new(linphone_address_get_username(from),NULL,password,NULL,NULL);
+			NSString* fromSipUri = [NSString stringWithUTF8String:linphone_address_as_string_uri_only(from)];
+			NSString* fromSipScheme = [NSString stringWithUTF8String:linphone_address_get_scheme(from)];
+			fromSipUri = [fromSipUri substringFromIndex:([fromSipScheme length] + 1)];
+			NSRange range = [fromSipUri rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"@"]];
+			fromSipUri = [fromSipUri substringToIndex:range.location];
+			info=linphone_auth_info_new(linphone_address_get_username(from),[fromSipUri cStringUsingEncoding:[NSString defaultCStringEncoding]],password,NULL,NULL);
 			linphone_core_add_auth_info(lc,info);
             linphone_address_destroy(from);
 		}

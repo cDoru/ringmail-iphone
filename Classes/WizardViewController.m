@@ -403,7 +403,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     linphone_address_set_domain(linphoneAddress, [domain UTF8String]);
     const char* identity = linphone_address_as_string_uri_only(linphoneAddress);
 	LinphoneProxyConfig* proxyCfg = linphone_core_create_proxy_config([LinphoneManager getLc]);
-	LinphoneAuthInfo* info = linphone_auth_info_new([username UTF8String], NULL, [password UTF8String], NULL, NULL);
+	NSString* addressSipUri = [NSString stringWithUTF8String:linphone_address_as_string_uri_only(linphoneAddress)];
+	NSString* addressSipScheme = [NSString stringWithUTF8String:linphone_address_get_scheme(linphoneAddress)];
+	addressSipUri = [addressSipUri substringFromIndex:([addressSipScheme length] + 1)];
+	NSRange range = [addressSipUri rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"@"]];
+	addressSipUri = [addressSipUri substringToIndex:range.location];
+	LinphoneAuthInfo* info = linphone_auth_info_new([username UTF8String], [addressSipUri cStringUsingEncoding:[NSString defaultCStringEncoding]], [password UTF8String], NULL, NULL);
 	linphone_proxy_config_set_identity(proxyCfg, identity);
 	linphone_proxy_config_set_server_addr(proxyCfg, [server UTF8String]);
     if([server compare:domain options:NSCaseInsensitiveSearch] != 0) {
