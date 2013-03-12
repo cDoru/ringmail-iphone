@@ -12,7 +12,9 @@
 			<key>change date</key>
 			<date>2001-01-01T00:00:00Z</date>
 			<key>changed values</key>
-			<array/>
+			<array>
+				<string>&lt;reference&gt;</string>
+			</array>
 			<key>class</key>
 			<string>BLBundleObject</string>
 			<key>errors</key>
@@ -69,10 +71,6 @@
 							<dict>
 								<key>en</key>
 								<string>Edit</string>
-								<key>fr</key>
-								<string>Éditer</string>
-								<key>ru</key>
-								<string>Редактировать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -96,10 +94,6 @@
 							<dict>
 								<key>en</key>
 								<string>Edit</string>
-								<key>fr</key>
-								<string>Éditer</string>
-								<key>ru</key>
-								<string>Редактировать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -122,8 +116,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Ok</string>
-								<key>fr</key>
 								<string>Ok</string>
 							</dict>
 							<key>snapshots</key>
@@ -148,10 +140,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -175,10 +163,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -202,10 +186,6 @@
 							<dict>
 								<key>en</key>
 								<string>Cancel</string>
-								<key>fr</key>
-								<string>Annuler</string>
-								<key>ru</key>
-								<string>Отменить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -229,10 +209,6 @@
 							<dict>
 								<key>en</key>
 								<string>Cancel</string>
-								<key>fr</key>
-								<string>Annuler</string>
-								<key>ru</key>
-								<string>Отменить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -302,10 +278,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -329,10 +301,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -402,10 +370,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -429,10 +393,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -456,10 +416,6 @@
 							<dict>
 								<key>en</key>
 								<string>Edit</string>
-								<key>fr</key>
-								<string>Éditer</string>
-								<key>ru</key>
-								<string>Редактировать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -483,10 +439,6 @@
 							<dict>
 								<key>en</key>
 								<string>Edit</string>
-								<key>fr</key>
-								<string>Éditer</string>
-								<key>ru</key>
-								<string>Редактировать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -509,8 +461,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Ok</string>
-								<key>fr</key>
 								<string>Ok</string>
 							</dict>
 							<key>snapshots</key>
@@ -535,10 +485,6 @@
 							<dict>
 								<key>en</key>
 								<string>Send</string>
-								<key>fr</key>
-								<string>Envoyez</string>
-								<key>ru</key>
-								<string>Послать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -562,10 +508,6 @@
 							<dict>
 								<key>en</key>
 								<string>Send</string>
-								<key>fr</key>
-								<string>Envoyez</string>
-								<key>ru</key>
-								<string>Envoyer</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -589,10 +531,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's name</string>
-								<key>fr</key>
-								<string>Nom du contact</string>
-								<key>ru</key>
-								<string>Имя контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -639,10 +577,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's avatar</string>
-								<key>fr</key>
-								<string>Avatar du contact</string>
-								<key>ru</key>
-								<string>Аватар контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -666,10 +600,6 @@
 							<dict>
 								<key>en</key>
 								<string>Send picture</string>
-								<key>fr</key>
-								<string>Envoyer l'image</string>
-								<key>ru</key>
-								<string>Послать картинку</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -693,10 +623,6 @@
 							<dict>
 								<key>en</key>
 								<string>Upload or download progression</string>
-								<key>fr</key>
-								<string>Progression du téléversement/téléchargement</string>
-								<key>ru</key>
-								<string>Прогресс загрузки/скачивания</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -720,10 +646,6 @@
 							<dict>
 								<key>en</key>
 								<string>Cancel</string>
-								<key>fr</key>
-								<string>Annuler</string>
-								<key>ru</key>
-								<string>Отменить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -750,8 +672,6 @@
 							<dict>
 								<key>en</key>
 								<string>Enter your message here</string>
-								<key>fr</key>
-								<string>Entrez votre message ici</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -798,8 +718,6 @@
 							<dict>
 								<key>en</key>
 								<string>Pict</string>
-								<key>fr</key>
-								<string>Img</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -823,8 +741,6 @@
 							<dict>
 								<key>en</key>
 								<string>Cancel</string>
-								<key>fr</key>
-								<string>Annuler</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -892,10 +808,6 @@
 							<dict>
 								<key>en</key>
 								<string>Edit</string>
-								<key>fr</key>
-								<string>Éditer</string>
-								<key>ru</key>
-								<string>Редактировать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -919,10 +831,6 @@
 							<dict>
 								<key>en</key>
 								<string>Edit</string>
-								<key>fr</key>
-								<string>Éditer</string>
-								<key>ru</key>
-								<string>Редактировать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -945,8 +853,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Ok</string>
-								<key>fr</key>
 								<string>Ok</string>
 							</dict>
 							<key>snapshots</key>
@@ -971,10 +877,6 @@
 							<dict>
 								<key>en</key>
 								<string>New Discussion</string>
-								<key>fr</key>
-								<string>Nouvelle discussion</string>
-								<key>ru</key>
-								<string>Новое обсуждение</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -998,10 +900,6 @@
 							<dict>
 								<key>en</key>
 								<string>New discussion</string>
-								<key>fr</key>
-								<string>Nouvelle discussion</string>
-								<key>ru</key>
-								<string>Новое обсуждение</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1025,10 +923,6 @@
 							<dict>
 								<key>en</key>
 								<string>Enter a address</string>
-								<key>fr</key>
-								<string>Entrez une addresse</string>
-								<key>ru</key>
-								<string>Введите адрес</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1052,10 +946,6 @@
 							<dict>
 								<key>en</key>
 								<string>To:</string>
-								<key>fr</key>
-								<string>À:</string>
-								<key>ru</key>
-								<string>Введите адрес</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1082,8 +972,6 @@
 							<dict>
 								<key>en</key>
 								<string>To:</string>
-								<key>fr</key>
-								<string>À:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1151,10 +1039,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add contact</string>
-								<key>fr</key>
-								<string>Ajouter un contact</string>
-								<key>ru</key>
-								<string>Добавить контакт</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1178,10 +1062,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add contact</string>
-								<key>fr</key>
-								<string>Ajouter un contact</string>
-								<key>ru</key>
-								<string>Добавить контакт</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1205,8 +1085,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1230,8 +1108,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1259,8 +1135,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Linphone</string>
-								<key>fr</key>
 								<string>Linphone</string>
 							</dict>
 							<key>snapshots</key>
@@ -1308,10 +1182,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add contact</string>
-								<key>fr</key>
-								<string>Ajouter un contact</string>
-								<key>ru</key>
-								<string>Добавить контакт</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1335,8 +1205,6 @@
 							<dict>
 								<key>en</key>
 								<string>All contacts filter</string>
-								<key>fr</key>
-								<string>Afficher tout les contacts</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1360,10 +1228,6 @@
 							<dict>
 								<key>en</key>
 								<string>All</string>
-								<key>fr</key>
-								<string>Tous</string>
-								<key>ru</key>
-								<string>Все</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1387,10 +1251,6 @@
 							<dict>
 								<key>en</key>
 								<string>Linphone contacts filter</string>
-								<key>fr</key>
-								<string>Afficher les contacts Linphone</string>
-								<key>ru</key>
-								<string>Показать контакты Linphone</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1413,8 +1273,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Linphone</string>
-								<key>fr</key>
 								<string>Linphone</string>
 							</dict>
 							<key>snapshots</key>
@@ -1443,20 +1301,29 @@
 								<key>name</key>
 								<string>Classes/DialerViewController/7/DialerViewController.xib</string>
 							</dict>
+							<key>8</key>
+							<dict>
+								<key>class</key>
+								<string>BLWrapperHandle</string>
+								<key>name</key>
+								<string>Classes/DialerViewController/8/DialerViewController.xib</string>
+							</dict>
 						</dict>
 					</dict>
 					<key>change date</key>
-					<date>2013-01-15T13:50:58Z</date>
+					<date>2013-03-12T09:21:47Z</date>
 					<key>changed values</key>
-					<array/>
+					<array>
+						<string>&lt;reference&gt;</string>
+					</array>
 					<key>class</key>
 					<string>BLNibFileObject</string>
 					<key>errors</key>
 					<array/>
 					<key>flags</key>
-					<integer>0</integer>
+					<integer>1</integer>
 					<key>hash</key>
-					<string>09f67d190a1a865b101bd2daf42fe5b8
+					<string>2a46aeaf53f89232f459b8eb1e01cac7
 </string>
 					<key>name</key>
 					<string>DialerViewController.xib</string>
@@ -1466,7 +1333,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1481,10 +1350,6 @@
 							<dict>
 								<key>en</key>
 								<string>Enter a address</string>
-								<key>fr</key>
-								<string>Entrez une addresse</string>
-								<key>ru</key>
-								<string>Введите адрес</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1493,11 +1358,13 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
-							<string>Class = "IBUITextField"; placeholder = "Enter SIP address or phone number..."; ObjectID = "4";</string>
+							<string>Class = "IBUITextField"; placeholder = "Enter RingMail destination..."; ObjectID = "4";</string>
 							<key>errors</key>
 							<array/>
 							<key>flags</key>
@@ -1507,11 +1374,7 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Enter SIP address or phone number...</string>
-								<key>fr</key>
-								<string>Entrez une addresse SIP ou un numéro de téléphone...</string>
-								<key>ru</key>
-								<string>Введите адрес SIP или номер телефона ...</string>
+								<string>Enter RingMail destination...</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1520,7 +1383,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1535,8 +1400,6 @@
 							<dict>
 								<key>en</key>
 								<string>3</string>
-								<key>fr</key>
-								<string>3</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1545,7 +1408,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1560,8 +1425,6 @@
 							<dict>
 								<key>en</key>
 								<string>4</string>
-								<key>fr</key>
-								<string>4</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1570,7 +1433,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1585,8 +1450,6 @@
 							<dict>
 								<key>en</key>
 								<string>5</string>
-								<key>fr</key>
-								<string>5</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1595,7 +1458,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1610,8 +1475,6 @@
 							<dict>
 								<key>en</key>
 								<string>6</string>
-								<key>fr</key>
-								<string>6</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1620,7 +1483,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1635,8 +1500,6 @@
 							<dict>
 								<key>en</key>
 								<string>7</string>
-								<key>fr</key>
-								<string>7</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1645,7 +1508,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1660,8 +1525,6 @@
 							<dict>
 								<key>en</key>
 								<string>8</string>
-								<key>fr</key>
-								<string>8</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1670,7 +1533,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1685,8 +1550,6 @@
 							<dict>
 								<key>en</key>
 								<string>9</string>
-								<key>fr</key>
-								<string>9</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1695,7 +1558,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1710,8 +1575,6 @@
 							<dict>
 								<key>en</key>
 								<string>2</string>
-								<key>fr</key>
-								<string>2</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1720,7 +1583,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1735,8 +1600,6 @@
 							<dict>
 								<key>en</key>
 								<string>1</string>
-								<key>fr</key>
-								<string>1</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1745,7 +1608,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1760,10 +1625,6 @@
 							<dict>
 								<key>en</key>
 								<string>Star</string>
-								<key>fr</key>
-								<string>Étoile</string>
-								<key>ru</key>
-								<string>Звёздочка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1772,7 +1633,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1787,8 +1650,6 @@
 							<dict>
 								<key>en</key>
 								<string>0</string>
-								<key>fr</key>
-								<string>0</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1797,7 +1658,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1812,10 +1675,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sharp</string>
-								<key>fr</key>
-								<string>Dièse</string>
-								<key>ru</key>
-								<string>Решётка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1824,7 +1683,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1839,10 +1700,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1851,7 +1708,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1866,10 +1725,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add call</string>
-								<key>fr</key>
-								<string>Ajouter un appel</string>
-								<key>ru</key>
-								<string>Добавить звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1878,7 +1733,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1893,10 +1750,6 @@
 							<dict>
 								<key>en</key>
 								<string>Backspace</string>
-								<key>fr</key>
-								<string>Effacer</string>
-								<key>ru</key>
-								<string>Стереть</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1905,7 +1758,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1920,10 +1775,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add to contact</string>
-								<key>fr</key>
-								<string>Ajouter au contact</string>
-								<key>ru</key>
-								<string>Добавить контакт</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1932,7 +1783,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1947,10 +1800,6 @@
 							<dict>
 								<key>en</key>
 								<string>Call</string>
-								<key>fr</key>
-								<string>Appeler</string>
-								<key>ru</key>
-								<string>Позвонить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1959,7 +1808,9 @@
 							<key>change date</key>
 							<date>2001-01-01T00:00:00Z</date>
 							<key>changed values</key>
-							<array/>
+							<array>
+								<string>&lt;reference&gt;</string>
+							</array>
 							<key>class</key>
 							<string>BLStringKeyObject</string>
 							<key>comment</key>
@@ -1974,10 +1825,6 @@
 							<dict>
 								<key>en</key>
 								<string>Transfer call</string>
-								<key>fr</key>
-								<string>Transférer l'appel</string>
-								<key>ru</key>
-								<string>Перевести звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -1990,7 +1837,7 @@
 					<key>versions</key>
 					<dict>
 						<key>en</key>
-						<string>7</string>
+						<string>8</string>
 						<key>fr</key>
 						<string>7</string>
 					</dict>
@@ -2045,10 +1892,6 @@
 							<dict>
 								<key>en</key>
 								<string>Enter a address</string>
-								<key>fr</key>
-								<string>Entrez une addresse</string>
-								<key>ru</key>
-								<string>Введите адрес</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2072,10 +1915,6 @@
 							<dict>
 								<key>en</key>
 								<string>Enter SIP address or phone number...</string>
-								<key>fr</key>
-								<string>Entrez une addresse SIP ou un numéro de téléphone...</string>
-								<key>ru</key>
-								<string>Введите адрес SIP или номер телефона...</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2099,10 +1938,6 @@
 							<dict>
 								<key>en</key>
 								<string>Star</string>
-								<key>fr</key>
-								<string>Étoile</string>
-								<key>ru</key>
-								<string>Звёздочка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2125,8 +1960,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>6</string>
-								<key>fr</key>
 								<string>6</string>
 							</dict>
 							<key>snapshots</key>
@@ -2151,8 +1984,6 @@
 							<dict>
 								<key>en</key>
 								<string>0</string>
-								<key>fr</key>
-								<string>0</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2176,10 +2007,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sharp</string>
-								<key>fr</key>
-								<string>Dièse</string>
-								<key>ru</key>
-								<string>Решётка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2202,8 +2029,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>9</string>
-								<key>fr</key>
 								<string>9</string>
 							</dict>
 							<key>snapshots</key>
@@ -2228,8 +2053,6 @@
 							<dict>
 								<key>en</key>
 								<string>8</string>
-								<key>fr</key>
-								<string>8</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2252,8 +2075,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>7</string>
-								<key>fr</key>
 								<string>7</string>
 							</dict>
 							<key>snapshots</key>
@@ -2278,8 +2099,6 @@
 							<dict>
 								<key>en</key>
 								<string>4</string>
-								<key>fr</key>
-								<string>4</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2302,8 +2121,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>5</string>
-								<key>fr</key>
 								<string>5</string>
 							</dict>
 							<key>snapshots</key>
@@ -2328,8 +2145,6 @@
 							<dict>
 								<key>en</key>
 								<string>3</string>
-								<key>fr</key>
-								<string>3</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2352,8 +2167,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>2</string>
-								<key>fr</key>
 								<string>2</string>
 							</dict>
 							<key>snapshots</key>
@@ -2378,8 +2191,6 @@
 							<dict>
 								<key>en</key>
 								<string>1</string>
-								<key>fr</key>
-								<string>1</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2403,10 +2214,6 @@
 							<dict>
 								<key>en</key>
 								<string>Transfer Call</string>
-								<key>fr</key>
-								<string>Transférer l'appel</string>
-								<key>ru</key>
-								<string>Перевести звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2430,10 +2237,6 @@
 							<dict>
 								<key>en</key>
 								<string>Call</string>
-								<key>fr</key>
-								<string>Appeler</string>
-								<key>ru</key>
-								<string>Позвонить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2457,10 +2260,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2484,10 +2283,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add call</string>
-								<key>fr</key>
-								<string>Ajouter un appel</string>
-								<key>ru</key>
-								<string>Добавить звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2511,10 +2306,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add to Contact</string>
-								<key>fr</key>
-								<string>Ajouter au contact</string>
-								<key>ru</key>
-								<string>Добавить контакт</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2538,10 +2329,6 @@
 							<dict>
 								<key>en</key>
 								<string>Backscape</string>
-								<key>fr</key>
-								<string>Effacer</string>
-								<key>ru</key>
-								<string>Стереть</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2565,10 +2352,6 @@
 							<dict>
 								<key>en</key>
 								<string>Switch camera</string>
-								<key>fr</key>
-								<string>Changer de camera</string>
-								<key>ru</key>
-								<string>Переключить камеру</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2638,10 +2421,6 @@
 							<dict>
 								<key>en</key>
 								<string>Username</string>
-								<key>fr</key>
-								<string>Nom d'utilisateur</string>
-								<key>ru</key>
-								<string>Имя пользователя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2665,10 +2444,6 @@
 							<dict>
 								<key>en</key>
 								<string>Username</string>
-								<key>fr</key>
-								<string>Nom d'utilisateur</string>
-								<key>ru</key>
-								<string>Имя пользователя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2692,10 +2467,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
-								<key>ru</key>
-								<string>Пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2719,10 +2490,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
-								<key>ru</key>
-								<string>Пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2746,10 +2513,6 @@
 							<dict>
 								<key>en</key>
 								<string>Login</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
-								<key>ru</key>
-								<string>Войти</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2773,10 +2536,6 @@
 							<dict>
 								<key>en</key>
 								<string>Login</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
-								<key>ru</key>
-								<string>Войти</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2846,10 +2605,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2873,10 +2628,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2900,10 +2651,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's avatar</string>
-								<key>fr</key>
-								<string>Avatar du contact</string>
-								<key>ru</key>
-								<string>Аватар контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2927,10 +2674,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's name</string>
-								<key>fr</key>
-								<string>Nom du contact</string>
-								<key>ru</key>
-								<string>Имя контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -2977,10 +2720,6 @@
 							<dict>
 								<key>en</key>
 								<string>Date:</string>
-								<key>fr</key>
-								<string>Date:</string>
-								<key>ru</key>
-								<string>Дата:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3004,10 +2743,6 @@
 							<dict>
 								<key>en</key>
 								<string>Call date</string>
-								<key>fr</key>
-								<string>Date de l'appel</string>
-								<key>ru</key>
-								<string>Дата звонка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3054,10 +2789,6 @@
 							<dict>
 								<key>en</key>
 								<string>Duration:</string>
-								<key>fr</key>
-								<string>Durée:</string>
-								<key>ru</key>
-								<string>Длительность:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3081,10 +2812,6 @@
 							<dict>
 								<key>en</key>
 								<string>Call duration</string>
-								<key>fr</key>
-								<string>Durée de l'appel</string>
-								<key>ru</key>
-								<string>Длительность звонка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3131,10 +2858,6 @@
 							<dict>
 								<key>en</key>
 								<string>Call type</string>
-								<key>fr</key>
-								<string>Type d'appel</string>
-								<key>ru</key>
-								<string>Тип звонка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3181,10 +2904,6 @@
 							<dict>
 								<key>en</key>
 								<string>Type:</string>
-								<key>fr</key>
-								<string>Type:</string>
-								<key>ru</key>
-								<string>Тип:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3208,10 +2927,6 @@
 							<dict>
 								<key>en</key>
 								<string>Callback</string>
-								<key>fr</key>
-								<string>Rappeler</string>
-								<key>ru</key>
-								<string>Позвонить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3235,8 +2950,6 @@
 							<dict>
 								<key>en</key>
 								<string>Call</string>
-								<key>fr</key>
-								<string>Appeler</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3260,10 +2973,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add to contact</string>
-								<key>fr</key>
-								<string>Ajouter au contact</string>
-								<key>ru</key>
-								<string>Добавить к контактам</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3287,10 +2996,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add to contacts</string>
-								<key>fr</key>
-								<string>Ajouter aux contacts</string>
-								<key>ru</key>
-								<string>Добавить к контактам</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3314,10 +3019,6 @@
 							<dict>
 								<key>en</key>
 								<string>Address:</string>
-								<key>fr</key>
-								<string>Adresse:</string>
-								<key>ru</key>
-								<string>Адрес:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3341,10 +3042,6 @@
 							<dict>
 								<key>en</key>
 								<string>Address</string>
-								<key>fr</key>
-								<string>Adresse</string>
-								<key>ru</key>
-								<string>Адрес</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3391,10 +3088,6 @@
 							<dict>
 								<key>en</key>
 								<string>Send message</string>
-								<key>fr</key>
-								<string>Envoyer un message</string>
-								<key>ru</key>
-								<string>Послать сообщение</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3418,10 +3111,6 @@
 							<dict>
 								<key>en</key>
 								<string>Send message</string>
-								<key>fr</key>
-								<string>Envoyer un message</string>
-								<key>ru</key>
-								<string>Послать сообщение</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3491,10 +3180,6 @@
 							<dict>
 								<key>en</key>
 								<string>All contacts filter</string>
-								<key>fr</key>
-								<string>Afficher tout les contacts</string>
-								<key>ru</key>
-								<string>Показать все контакты</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3518,10 +3203,6 @@
 							<dict>
 								<key>en</key>
 								<string>All</string>
-								<key>fr</key>
-								<string>Tous</string>
-								<key>ru</key>
-								<string>Все</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3545,10 +3226,6 @@
 							<dict>
 								<key>en</key>
 								<string>Missed contacts filter</string>
-								<key>fr</key>
-								<string>Afficher les contacts Linphone</string>
-								<key>ru</key>
-								<string>Показать пропущенные</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3572,10 +3249,6 @@
 							<dict>
 								<key>en</key>
 								<string>Missed</string>
-								<key>fr</key>
-								<string>Manqués</string>
-								<key>ru</key>
-								<string>Пропущ.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3599,10 +3272,6 @@
 							<dict>
 								<key>en</key>
 								<string>Edit</string>
-								<key>fr</key>
-								<string>Éditer</string>
-								<key>ru</key>
-								<string>Редактировать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3626,10 +3295,6 @@
 							<dict>
 								<key>en</key>
 								<string>Edit</string>
-								<key>fr</key>
-								<string>Éditer</string>
-								<key>ru</key>
-								<string>Редактир.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3652,8 +3317,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Ok</string>
-								<key>fr</key>
 								<string>Ok</string>
 							</dict>
 							<key>snapshots</key>
@@ -3678,10 +3341,6 @@
 							<dict>
 								<key>en</key>
 								<string>Delete all</string>
-								<key>fr</key>
-								<string>Supprimer tout</string>
-								<key>ru</key>
-								<string>Удалить все</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3705,10 +3364,6 @@
 							<dict>
 								<key>en</key>
 								<string>Delete all</string>
-								<key>fr</key>
-								<string>Supprimer tout</string>
-								<key>ru</key>
-								<string>Все</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3778,10 +3433,6 @@
 							<dict>
 								<key>en</key>
 								<string>Switch camera</string>
-								<key>fr</key>
-								<string>Changer de camera</string>
-								<key>ru</key>
-								<string>Сменить камеру</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3851,10 +3502,6 @@
 							<dict>
 								<key>en</key>
 								<string>Decline</string>
-								<key>fr</key>
-								<string>Refuser</string>
-								<key>ru</key>
-								<string>Отклонить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3878,10 +3525,6 @@
 							<dict>
 								<key>en</key>
 								<string>Accept</string>
-								<key>fr</key>
-								<string>Accepter</string>
-								<key>ru</key>
-								<string>Принять</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3905,10 +3548,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's name</string>
-								<key>fr</key>
-								<string>Nom du contact</string>
-								<key>ru</key>
-								<string>Имя контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3955,10 +3594,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's avatar</string>
-								<key>fr</key>
-								<string>Avatar du contact</string>
-								<key>ru</key>
-								<string>Аватар контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -3982,10 +3617,6 @@
 							<dict>
 								<key>en</key>
 								<string>Incoming call</string>
-								<key>fr</key>
-								<string>Appel entrant</string>
-								<key>ru</key>
-								<string>Входящий звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4009,10 +3640,6 @@
 							<dict>
 								<key>en</key>
 								<string>Incoming call</string>
-								<key>fr</key>
-								<string>Appel entrant</string>
-								<key>ru</key>
-								<string>Входящий звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4041,8 +3668,6 @@
 							<dict>
 								<key>en</key>
 								<string>Incoming call</string>
-								<key>fr</key>
-								<string>Appel entrant</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4110,10 +3735,6 @@
 							<dict>
 								<key>en</key>
 								<string>Start</string>
-								<key>fr</key>
-								<string>Démarrer</string>
-								<key>ru</key>
-								<string>Начать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4137,10 +3758,6 @@
 							<dict>
 								<key>en</key>
 								<string>Start</string>
-								<key>fr</key>
-								<string>Démarrer</string>
-								<key>ru</key>
-								<string>Начать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4164,10 +3781,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4191,10 +3804,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4218,10 +3827,6 @@
 							<dict>
 								<key>en</key>
 								<string>Cancel</string>
-								<key>fr</key>
-								<string>Annuler</string>
-								<key>ru</key>
-								<string>Отменить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4245,10 +3850,6 @@
 							<dict>
 								<key>en</key>
 								<string>Cancel</string>
-								<key>fr</key>
-								<string>Annuler</string>
-								<key>ru</key>
-								<string>Отменить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4275,8 +3876,6 @@
 							<dict>
 								<key>en</key>
 								<string>Linphone setup assistant icon</string>
-								<key>fr</key>
-								<string>Icône de l'assistant de configuration de compte</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4300,8 +3899,6 @@
 							<dict>
 								<key>en</key>
 								<string>This assistant will help you to use a SIP account for your calls.</string>
-								<key>fr</key>
-								<string>Cet assistant va vous aider à utiliser votre compte SIP pour vos appels.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4325,8 +3922,6 @@
 							<dict>
 								<key>en</key>
 								<string>Create linphone.org account</string>
-								<key>fr</key>
-								<string>Créer un compte linphone.org</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4350,8 +3945,6 @@
 							<dict>
 								<key>en</key>
 								<string>Create an account on linphone.org</string>
-								<key>fr</key>
-								<string>Crée un compte linphone.org</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4375,8 +3968,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4400,8 +3991,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sign in linphone.org account</string>
-								<key>fr</key>
-								<string>S'enregistrer sur un compte linphone.org</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4425,8 +4014,6 @@
 							<dict>
 								<key>en</key>
 								<string>I have already a linphone.org account</string>
-								<key>fr</key>
-								<string>J'ai déjà un compte linphone.org</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4450,8 +4037,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sign in SIP account</string>
-								<key>fr</key>
-								<string>S'enregistrer sur un compte SIP</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4475,8 +4060,6 @@
 							<dict>
 								<key>en</key>
 								<string>I have already a SIP account</string>
-								<key>fr</key>
-								<string>J'ai déjà un compte SIP</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4500,8 +4083,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4525,8 +4106,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4550,8 +4129,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4575,8 +4152,6 @@
 							<dict>
 								<key>en</key>
 								<string>Enter your username and password with your SIP domain</string>
-								<key>fr</key>
-								<string>Entrez votre nom d'utilisateur, votre mot de passe ainsi que votre domaine SIP</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4600,8 +4175,6 @@
 							<dict>
 								<key>en</key>
 								<string>Username</string>
-								<key>fr</key>
-								<string>Nom d'utilisateur</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4625,8 +4198,6 @@
 							<dict>
 								<key>en</key>
 								<string>Username</string>
-								<key>fr</key>
-								<string>Nom d'utilisateur</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4650,8 +4221,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4675,8 +4244,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4700,8 +4267,6 @@
 							<dict>
 								<key>en</key>
 								<string>Domain</string>
-								<key>fr</key>
-								<string>Domaine</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4725,8 +4290,6 @@
 							<dict>
 								<key>en</key>
 								<string>Domain</string>
-								<key>fr</key>
-								<string>Domaine</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4750,8 +4313,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sign in</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4775,8 +4336,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sign in</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4800,8 +4359,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sign in</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4825,8 +4382,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sign in</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4850,8 +4405,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4875,8 +4428,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4900,8 +4451,6 @@
 							<dict>
 								<key>en</key>
 								<string>Enter your username and password of your linphone.org account</string>
-								<key>fr</key>
-								<string>Entrez le nom d'utilisateur et le mot de passe de votre compte linphone.org</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4925,8 +4474,6 @@
 							<dict>
 								<key>en</key>
 								<string>Username</string>
-								<key>fr</key>
-								<string>Nom d'utilisateur</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4950,8 +4497,6 @@
 							<dict>
 								<key>en</key>
 								<string>Username</string>
-								<key>fr</key>
-								<string>Nom d'utilisateur</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -4975,8 +4520,6 @@
 							<dict>
 								<key>en</key>
 								<string>Enter your username and password with your email address</string>
-								<key>fr</key>
-								<string>Entrer votre nom d'utilisateur, votre mot de passe ainsi que votre addresse email</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5000,8 +4543,6 @@
 							<dict>
 								<key>en</key>
 								<string>Username</string>
-								<key>fr</key>
-								<string>Nom d'utilisateur</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5025,8 +4566,6 @@
 							<dict>
 								<key>en</key>
 								<string>Username</string>
-								<key>fr</key>
-								<string>Nom d'utilisateur</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5050,8 +4589,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5075,8 +4612,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5100,8 +4635,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password again</string>
-								<key>fr</key>
-								<string>Mot de passe à nouveau</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5125,8 +4658,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5150,8 +4681,6 @@
 							<dict>
 								<key>en</key>
 								<string>Register</string>
-								<key>fr</key>
-								<string>Créer</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5175,8 +4704,6 @@
 							<dict>
 								<key>en</key>
 								<string>Register</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5199,8 +4726,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Email</string>
-								<key>fr</key>
 								<string>Email</string>
 							</dict>
 							<key>snapshots</key>
@@ -5225,8 +4750,6 @@
 							<dict>
 								<key>en</key>
 								<string>Email</string>
-								<key>fr</key>
-								<string>Email</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5250,8 +4773,6 @@
 							<dict>
 								<key>en</key>
 								<string>Check validation</string>
-								<key>fr</key>
-								<string>Vérifier la validation</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5275,8 +4796,6 @@
 							<dict>
 								<key>en</key>
 								<string>Check validation</string>
-								<key>fr</key>
-								<string>Verifiez la validation</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5300,8 +4819,6 @@
 							<dict>
 								<key>en</key>
 								<string>Username</string>
-								<key>fr</key>
-								<string>Nom d'utilisateur</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5325,8 +4842,6 @@
 							<dict>
 								<key>en</key>
 								<string>Your account is created. Please check your mails in order to validate your account.</string>
-								<key>fr</key>
-								<string>Votre compte est crée. Vérifier vos emails pour valider votre compte.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5350,8 +4865,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5375,8 +4888,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5444,10 +4955,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5471,10 +4978,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5544,10 +5047,6 @@
 							<dict>
 								<key>en</key>
 								<string>RingMail setup assistant icon</string>
-								<key>fr</key>
-								<string>Icône de l'assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Иконка помощника настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5571,10 +5070,6 @@
 							<dict>
 								<key>en</key>
 								<string>This assistant will help you to use a SIP account for your calls.</string>
-								<key>fr</key>
-								<string>Cet assistant va vous aider à utiliser votre compte SIP pour vos appels.</string>
-								<key>ru</key>
-								<string>Этот помощник поможет Вам настроить учётную запись SIP чтобы Вы могли совершать звонки.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5598,10 +5093,6 @@
 							<dict>
 								<key>en</key>
 								<string>Create a RingMail account</string>
-								<key>fr</key>
-								<string>Créer un compte RingMail</string>
-								<key>ru</key>
-								<string>Создать учётную запись на linphone.org</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5625,10 +5116,6 @@
 							<dict>
 								<key>en</key>
 								<string>Create a RingMail account</string>
-								<key>fr</key>
-								<string>Créer un compte RingMail</string>
-								<key>ru</key>
-								<string>Создать аккаунт на linphone.org</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5652,10 +5139,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sign in RingMail account</string>
-								<key>fr</key>
-								<string>S'enregistrer sur un compte RingMail</string>
-								<key>ru</key>
-								<string>Войти на linphone.org</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5679,10 +5162,6 @@
 							<dict>
 								<key>en</key>
 								<string>I already have a RingMail account</string>
-								<key>fr</key>
-								<string>J'ai déjà un compte RingMail</string>
-								<key>ru</key>
-								<string>Войти на linphone.org</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5706,10 +5185,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sign in SIP account</string>
-								<key>fr</key>
-								<string>S'enregistrer sur un compte SIP</string>
-								<key>ru</key>
-								<string>Войти на SIP сервер</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5733,10 +5208,6 @@
 							<dict>
 								<key>en</key>
 								<string>I have already a SIP account</string>
-								<key>fr</key>
-								<string>J'ai déjà un compte SIP</string>
-								<key>ru</key>
-								<string>Войти на SIP сервер</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5760,10 +5231,6 @@
 							<dict>
 								<key>en</key>
 								<string>Enter your username and password with your SIP domain.</string>
-								<key>fr</key>
-								<string>Entrez votre nom d'utilisateur, votre mot de passe ainsi que votre domaine SIP.</string>
-								<key>ru</key>
-								<string>Введите имя пользователя, пароль и сервер SIP.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5787,10 +5254,6 @@
 							<dict>
 								<key>en</key>
 								<string>Email address</string>
-								<key>fr</key>
-								<string>Adresse email</string>
-								<key>ru</key>
-								<string>Имя пользователя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5814,10 +5277,6 @@
 							<dict>
 								<key>en</key>
 								<string>Email address</string>
-								<key>fr</key>
-								<string>Adresse email</string>
-								<key>ru</key>
-								<string>Имя пользователя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5841,10 +5300,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
-								<key>ru</key>
-								<string>Пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5868,10 +5323,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
-								<key>ru</key>
-								<string>Пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5895,10 +5346,6 @@
 							<dict>
 								<key>en</key>
 								<string>Domain</string>
-								<key>fr</key>
-								<string>Domaine</string>
-								<key>ru</key>
-								<string>сервер SIP</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5922,10 +5369,6 @@
 							<dict>
 								<key>en</key>
 								<string>Domain</string>
-								<key>fr</key>
-								<string>Domaine</string>
-								<key>ru</key>
-								<string>сервер SIP</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5949,10 +5392,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sign in</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
-								<key>ru</key>
-								<string>Войти</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -5976,10 +5415,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sign in</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
-								<key>ru</key>
-								<string>Войти</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6003,10 +5438,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sign in</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
-								<key>ru</key>
-								<string>Войти</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6030,10 +5461,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sign in</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
-								<key>ru</key>
-								<string>Войти</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6057,10 +5484,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
-								<key>ru</key>
-								<string>Пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6084,10 +5507,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
-								<key>ru</key>
-								<string>Пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6111,10 +5530,6 @@
 							<dict>
 								<key>en</key>
 								<string>Enter the email address and password of your RingMail account.</string>
-								<key>fr</key>
-								<string>Entrez l'adresse email et le mot de passe de votre compte RingMail.</string>
-								<key>ru</key>
-								<string>Введите имя пользователя и пароль Вашей учётной записи на linphone.org.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6138,10 +5553,6 @@
 							<dict>
 								<key>en</key>
 								<string>Email address</string>
-								<key>fr</key>
-								<string>Adresse email</string>
-								<key>ru</key>
-								<string>Имя пользователя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6165,10 +5576,6 @@
 							<dict>
 								<key>en</key>
 								<string>Email address</string>
-								<key>fr</key>
-								<string>Adresse email</string>
-								<key>ru</key>
-								<string>Имя пользователя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6192,10 +5599,6 @@
 							<dict>
 								<key>en</key>
 								<string>Enter your email address and password.</string>
-								<key>fr</key>
-								<string>Entrez votre adresse email et votre mot de passe.</string>
-								<key>ru</key>
-								<string>Введите имя пользователя пароль и адрес электронной почты.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6219,10 +5622,6 @@
 							<dict>
 								<key>en</key>
 								<string>Email address</string>
-								<key>fr</key>
-								<string>Adresse email</string>
-								<key>ru</key>
-								<string>Имя пользователя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6246,10 +5645,6 @@
 							<dict>
 								<key>en</key>
 								<string>Email address</string>
-								<key>fr</key>
-								<string>Adresse email</string>
-								<key>ru</key>
-								<string>Имя пользователя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6273,10 +5668,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
-								<key>ru</key>
-								<string>Пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6300,10 +5691,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
-								<key>ru</key>
-								<string>Пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6327,10 +5714,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password again</string>
-								<key>fr</key>
-								<string>Mot de passe à nouveau</string>
-								<key>ru</key>
-								<string>Повторите пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6354,10 +5737,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
-								<key>ru</key>
-								<string>Пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6381,10 +5760,6 @@
 							<dict>
 								<key>en</key>
 								<string>Register</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
-								<key>ru</key>
-								<string>Создать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6408,10 +5783,6 @@
 							<dict>
 								<key>en</key>
 								<string>Register</string>
-								<key>fr</key>
-								<string>S'enregistrer</string>
-								<key>ru</key>
-								<string>Создать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6435,10 +5806,6 @@
 							<dict>
 								<key>en</key>
 								<string>Email</string>
-								<key>fr</key>
-								<string>Email</string>
-								<key>ru</key>
-								<string>Электронная почта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6462,10 +5829,6 @@
 							<dict>
 								<key>en</key>
 								<string>Email</string>
-								<key>fr</key>
-								<string>Email</string>
-								<key>ru</key>
-								<string>Электронная почта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6489,10 +5852,6 @@
 							<dict>
 								<key>en</key>
 								<string>Check validation</string>
-								<key>fr</key>
-								<string>Vérifier la validation</string>
-								<key>ru</key>
-								<string>Проверить валидацию</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6516,10 +5875,6 @@
 							<dict>
 								<key>en</key>
 								<string>Check validation</string>
-								<key>fr</key>
-								<string>Vérifier la validation</string>
-								<key>ru</key>
-								<string>Проверить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6543,10 +5898,6 @@
 							<dict>
 								<key>en</key>
 								<string>Email address</string>
-								<key>fr</key>
-								<string>Adresse email</string>
-								<key>ru</key>
-								<string>Имя пользователя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6570,10 +5921,6 @@
 							<dict>
 								<key>en</key>
 								<string>Your account is created. Please check your mails in order to validate your account.</string>
-								<key>fr</key>
-								<string>Votre compte est crée. Vérifier vos emails pour valider votre compte.</string>
-								<key>ru</key>
-								<string>Ваша учётная запись создана. Пожалуйста проверьте Вашу почту чтобы подтвердить Ваши данные.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6597,10 +5944,6 @@
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
-								<key>ru</key>
-								<string>Пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6624,10 +5967,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Помощник настройки учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6651,10 +5990,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Помощник настройки учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6678,10 +6013,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Помощник настройки учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6705,10 +6036,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Помощник настройки учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6732,10 +6059,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Помощник настройки учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6759,10 +6082,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Помощник настройки учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6786,10 +6105,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Помощник настройки учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6813,10 +6128,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Помощник настройки учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6840,10 +6151,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Помощник настройки учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6867,10 +6174,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Помощник настройки учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6894,10 +6197,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Помощник настройки учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6921,10 +6220,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Помощник настройки учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -6948,10 +6243,6 @@
 							<dict>
 								<key>en</key>
 								<string>RingMail setup assistant icon</string>
-								<key>fr</key>
-								<string>Icône de l'assistant de configuration de compte</string>
-								<key>ru</key>
-								<string>Иконка помощника настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7070,8 +6361,6 @@
 							<dict>
 								<key>en</key>
 								<string>Account setup assistant</string>
-								<key>fr</key>
-								<string>Assistant de configuration de compte</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7139,10 +6428,6 @@
 							<dict>
 								<key>en</key>
 								<string>Start</string>
-								<key>fr</key>
-								<string>Démarrer</string>
-								<key>ru</key>
-								<string>Начать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7166,10 +6451,6 @@
 							<dict>
 								<key>en</key>
 								<string>Start</string>
-								<key>fr</key>
-								<string>Démarrer</string>
-								<key>ru</key>
-								<string>Начать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7193,10 +6474,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7220,10 +6497,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7247,10 +6520,6 @@
 							<dict>
 								<key>en</key>
 								<string>Cancel</string>
-								<key>fr</key>
-								<string>Annuler</string>
-								<key>ru</key>
-								<string>Отменить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7274,10 +6543,6 @@
 							<dict>
 								<key>en</key>
 								<string>Cancel</string>
-								<key>fr</key>
-								<string>Annuler</string>
-								<key>ru</key>
-								<string>Отменить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7301,10 +6566,6 @@
 							<dict>
 								<key>en</key>
 								<string>Cancel</string>
-								<key>fr</key>
-								<string>Annuler</string>
-								<key>ru</key>
-								<string>Отменить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7328,10 +6589,6 @@
 							<dict>
 								<key>en</key>
 								<string>Cancel</string>
-								<key>fr</key>
-								<string>Annuler</string>
-								<key>ru</key>
-								<string>Отменить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7355,10 +6612,6 @@
 							<dict>
 								<key>en</key>
 								<string>Start</string>
-								<key>fr</key>
-								<string>Démarrer</string>
-								<key>ru</key>
-								<string>Начать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7382,10 +6635,6 @@
 							<dict>
 								<key>en</key>
 								<string>Start</string>
-								<key>fr</key>
-								<string>Démarrer</string>
-								<key>ru</key>
-								<string>Начать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7409,10 +6658,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7436,10 +6681,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Назад</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7509,10 +6750,6 @@
 							<dict>
 								<key>en</key>
 								<string>Decline</string>
-								<key>fr</key>
-								<string>Refuser</string>
-								<key>ru</key>
-								<string>Отклонить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7536,10 +6773,6 @@
 							<dict>
 								<key>en</key>
 								<string>Accept</string>
-								<key>fr</key>
-								<string>Accepter</string>
-								<key>ru</key>
-								<string>Принять</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7563,10 +6796,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's name</string>
-								<key>fr</key>
-								<string>Nom du contact</string>
-								<key>ru</key>
-								<string>Имя контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7613,10 +6842,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's avatar</string>
-								<key>fr</key>
-								<string>Avatar du contact</string>
-								<key>ru</key>
-								<string>Аватар контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7640,10 +6865,6 @@
 							<dict>
 								<key>en</key>
 								<string>Incoming call</string>
-								<key>fr</key>
-								<string>Appel entrant</string>
-								<key>ru</key>
-								<string>Входящий контакт</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7667,10 +6888,6 @@
 							<dict>
 								<key>en</key>
 								<string>Incoming call</string>
-								<key>fr</key>
-								<string>Appel entrant</string>
-								<key>ru</key>
-								<string>Входящий контакт</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7694,10 +6911,6 @@
 							<dict>
 								<key>en</key>
 								<string>Accept</string>
-								<key>fr</key>
-								<string>Accepter</string>
-								<key>ru</key>
-								<string>Принять</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7721,10 +6934,6 @@
 							<dict>
 								<key>en</key>
 								<string>Decline</string>
-								<key>fr</key>
-								<string>Refuser</string>
-								<key>ru</key>
-								<string>Отклонить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7748,10 +6957,6 @@
 							<dict>
 								<key>en</key>
 								<string>Incoming call</string>
-								<key>fr</key>
-								<string>Appel entrant</string>
-								<key>ru</key>
-								<string>Входящий звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7775,10 +6980,6 @@
 							<dict>
 								<key>en</key>
 								<string>Incoming call</string>
-								<key>fr</key>
-								<string>Appel entrant</string>
-								<key>ru</key>
-								<string>Входящий звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7802,10 +7003,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's name</string>
-								<key>fr</key>
-								<string>Nom du contact</string>
-								<key>ru</key>
-								<string>Имя контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7852,10 +7049,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's avatar</string>
-								<key>fr</key>
-								<string>Avatar du contact</string>
-								<key>ru</key>
-								<string>Аватар контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7952,10 +7145,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Клавиатура</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -7979,10 +7168,6 @@
 							<dict>
 								<key>en</key>
 								<string>Hangup</string>
-								<key>fr</key>
-								<string>Raccrocher</string>
-								<key>ru</key>
-								<string>Повесить трубку</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8006,10 +7191,6 @@
 							<dict>
 								<key>en</key>
 								<string>Pause</string>
-								<key>fr</key>
-								<string>Pause</string>
-								<key>ru</key>
-								<string>Пауза</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8033,10 +7214,6 @@
 							<dict>
 								<key>en</key>
 								<string>Speaker</string>
-								<key>fr</key>
-								<string>Haut parleur</string>
-								<key>ru</key>
-								<string>Динамик</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8060,10 +7237,6 @@
 							<dict>
 								<key>en</key>
 								<string>Speaker</string>
-								<key>fr</key>
-								<string>Haut parleur</string>
-								<key>ru</key>
-								<string>Динамик</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8087,10 +7260,6 @@
 							<dict>
 								<key>en</key>
 								<string>Options</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8114,10 +7283,6 @@
 							<dict>
 								<key>en</key>
 								<string>Options</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8141,10 +7306,6 @@
 							<dict>
 								<key>en</key>
 								<string>Micro</string>
-								<key>fr</key>
-								<string>Micro</string>
-								<key>ru</key>
-								<string>Микрофон</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8168,10 +7329,6 @@
 							<dict>
 								<key>en</key>
 								<string>Micro</string>
-								<key>fr</key>
-								<string>Micro</string>
-								<key>ru</key>
-								<string>Микрофон</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8195,10 +7352,6 @@
 							<dict>
 								<key>en</key>
 								<string>Video</string>
-								<key>fr</key>
-								<string>Vidéo</string>
-								<key>ru</key>
-								<string>Видео</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8222,10 +7375,6 @@
 							<dict>
 								<key>en</key>
 								<string>Video</string>
-								<key>fr</key>
-								<string>Vidéo</string>
-								<key>ru</key>
-								<string>Видео</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8249,10 +7398,6 @@
 							<dict>
 								<key>en</key>
 								<string>Start conference</string>
-								<key>fr</key>
-								<string>Démarrer une conférence</string>
-								<key>ru</key>
-								<string>Начать конференцию</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8276,10 +7421,6 @@
 							<dict>
 								<key>en</key>
 								<string>Star</string>
-								<key>fr</key>
-								<string>Étoile</string>
-								<key>ru</key>
-								<string>Звёздочка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8302,8 +7443,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>6</string>
-								<key>fr</key>
 								<string>6</string>
 							</dict>
 							<key>snapshots</key>
@@ -8328,8 +7467,6 @@
 							<dict>
 								<key>en</key>
 								<string>0</string>
-								<key>fr</key>
-								<string>0</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8353,10 +7490,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sharp</string>
-								<key>fr</key>
-								<string>Dièse</string>
-								<key>ru</key>
-								<string>Решётка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8379,8 +7512,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>9</string>
-								<key>fr</key>
 								<string>9</string>
 							</dict>
 							<key>snapshots</key>
@@ -8405,8 +7536,6 @@
 							<dict>
 								<key>en</key>
 								<string>8</string>
-								<key>fr</key>
-								<string>8</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8429,8 +7558,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>7</string>
-								<key>fr</key>
 								<string>7</string>
 							</dict>
 							<key>snapshots</key>
@@ -8455,8 +7582,6 @@
 							<dict>
 								<key>en</key>
 								<string>4</string>
-								<key>fr</key>
-								<string>4</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8479,8 +7604,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>5</string>
-								<key>fr</key>
 								<string>5</string>
 							</dict>
 							<key>snapshots</key>
@@ -8505,8 +7628,6 @@
 							<dict>
 								<key>en</key>
 								<string>3</string>
-								<key>fr</key>
-								<string>3</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8529,8 +7650,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>2</string>
-								<key>fr</key>
 								<string>2</string>
 							</dict>
 							<key>snapshots</key>
@@ -8555,8 +7674,6 @@
 							<dict>
 								<key>en</key>
 								<string>1</string>
-								<key>fr</key>
-								<string>1</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8580,10 +7697,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add call</string>
-								<key>fr</key>
-								<string>Ajouter un appel</string>
-								<key>ru</key>
-								<string>Добавить звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8607,10 +7720,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add call</string>
-								<key>fr</key>
-								<string>Ajouter un appel</string>
-								<key>ru</key>
-								<string>Добавить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8634,10 +7743,6 @@
 							<dict>
 								<key>en</key>
 								<string>Transfer call</string>
-								<key>fr</key>
-								<string>Transferer l'appel</string>
-								<key>ru</key>
-								<string>Перевести звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8661,10 +7766,6 @@
 							<dict>
 								<key>en</key>
 								<string>Transfer</string>
-								<key>fr</key>
-								<string>Transfert</string>
-								<key>ru</key>
-								<string>Перевести</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8688,10 +7789,6 @@
 							<dict>
 								<key>en</key>
 								<string>Options</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настр.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8715,10 +7812,6 @@
 							<dict>
 								<key>en</key>
 								<string>Speaker</string>
-								<key>fr</key>
-								<string>Haut parleur</string>
-								<key>ru</key>
-								<string>Динамик</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8742,10 +7835,6 @@
 							<dict>
 								<key>en</key>
 								<string>Micro</string>
-								<key>fr</key>
-								<string>Micro</string>
-								<key>ru</key>
-								<string>Мик.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8769,10 +7858,6 @@
 							<dict>
 								<key>en</key>
 								<string>Video</string>
-								<key>fr</key>
-								<string>Vidéo</string>
-								<key>ru</key>
-								<string>Видео</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8796,10 +7881,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add call</string>
-								<key>fr</key>
-								<string>Ajouter appel</string>
-								<key>ru</key>
-								<string>Добавить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -8823,10 +7904,6 @@
 							<dict>
 								<key>en</key>
 								<string>Transfer</string>
-								<key>fr</key>
-								<string>Transfert</string>
-								<key>ru</key>
-								<string>Перевести</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9065,8 +8142,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add call</string>
-								<key>fr</key>
-								<string>Ajouter un appel</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9132,10 +8207,6 @@
 							<dict>
 								<key>en</key>
 								<string>Back</string>
-								<key>fr</key>
-								<string>Retour</string>
-								<key>ru</key>
-								<string>Клавиатура</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9159,10 +8230,6 @@
 							<dict>
 								<key>en</key>
 								<string>Hangup</string>
-								<key>fr</key>
-								<string>Raccrocher</string>
-								<key>ru</key>
-								<string>Повесить трубку</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9186,10 +8253,6 @@
 							<dict>
 								<key>en</key>
 								<string>Start conference</string>
-								<key>fr</key>
-								<string>Démarrer une conférence</string>
-								<key>ru</key>
-								<string>Начать конференцию</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9213,10 +8276,6 @@
 							<dict>
 								<key>en</key>
 								<string>Pause</string>
-								<key>fr</key>
-								<string>Pause</string>
-								<key>ru</key>
-								<string>Пауза</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9240,10 +8299,6 @@
 							<dict>
 								<key>en</key>
 								<string>Options</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9267,10 +8322,6 @@
 							<dict>
 								<key>en</key>
 								<string>Options</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9294,10 +8345,6 @@
 							<dict>
 								<key>en</key>
 								<string>Speaker</string>
-								<key>fr</key>
-								<string>Haut parleur</string>
-								<key>ru</key>
-								<string>Динамик</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9321,10 +8368,6 @@
 							<dict>
 								<key>en</key>
 								<string>Speaker</string>
-								<key>fr</key>
-								<string>Haut parleur</string>
-								<key>ru</key>
-								<string>Haut parleur</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9348,10 +8391,6 @@
 							<dict>
 								<key>en</key>
 								<string>Speaker</string>
-								<key>fr</key>
-								<string>Haut parleur</string>
-								<key>ru</key>
-								<string>Динамик</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9375,10 +8414,6 @@
 							<dict>
 								<key>en</key>
 								<string>Micro</string>
-								<key>fr</key>
-								<string>Micro</string>
-								<key>ru</key>
-								<string>Микрофон</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9402,10 +8437,6 @@
 							<dict>
 								<key>en</key>
 								<string>Micro</string>
-								<key>fr</key>
-								<string>Micro</string>
-								<key>ru</key>
-								<string>Микрофон</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9429,10 +8460,6 @@
 							<dict>
 								<key>en</key>
 								<string>Video</string>
-								<key>fr</key>
-								<string>Vidéo</string>
-								<key>ru</key>
-								<string>Видео</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9456,10 +8483,6 @@
 							<dict>
 								<key>en</key>
 								<string>Video</string>
-								<key>fr</key>
-								<string>Vidéo</string>
-								<key>ru</key>
-								<string>Видео</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9482,8 +8505,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>1</string>
-								<key>fr</key>
 								<string>1</string>
 							</dict>
 							<key>snapshots</key>
@@ -9508,8 +8529,6 @@
 							<dict>
 								<key>en</key>
 								<string>2</string>
-								<key>fr</key>
-								<string>2</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9532,8 +8551,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>3</string>
-								<key>fr</key>
 								<string>3</string>
 							</dict>
 							<key>snapshots</key>
@@ -9558,8 +8575,6 @@
 							<dict>
 								<key>en</key>
 								<string>4</string>
-								<key>fr</key>
-								<string>4</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9582,8 +8597,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>5</string>
-								<key>fr</key>
 								<string>5</string>
 							</dict>
 							<key>snapshots</key>
@@ -9608,8 +8621,6 @@
 							<dict>
 								<key>en</key>
 								<string>6</string>
-								<key>fr</key>
-								<string>6</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9632,8 +8643,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>7</string>
-								<key>fr</key>
 								<string>7</string>
 							</dict>
 							<key>snapshots</key>
@@ -9658,8 +8667,6 @@
 							<dict>
 								<key>en</key>
 								<string>8</string>
-								<key>fr</key>
-								<string>8</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9682,8 +8689,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>9</string>
-								<key>fr</key>
 								<string>9</string>
 							</dict>
 							<key>snapshots</key>
@@ -9708,10 +8713,6 @@
 							<dict>
 								<key>en</key>
 								<string>Star</string>
-								<key>fr</key>
-								<string>Étoile</string>
-								<key>ru</key>
-								<string>Звёздочка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9734,8 +8735,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>0</string>
-								<key>fr</key>
 								<string>0</string>
 							</dict>
 							<key>snapshots</key>
@@ -9760,10 +8759,6 @@
 							<dict>
 								<key>en</key>
 								<string>Sharp</string>
-								<key>fr</key>
-								<string>Dièse</string>
-								<key>ru</key>
-								<string>Решётка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9787,10 +8782,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add call</string>
-								<key>fr</key>
-								<string>Ajouter un appel</string>
-								<key>ru</key>
-								<string>Добавить звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9814,10 +8805,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add call</string>
-								<key>fr</key>
-								<string>Ajouter appel</string>
-								<key>ru</key>
-								<string>Добавить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9841,10 +8828,6 @@
 							<dict>
 								<key>en</key>
 								<string>Transfer call</string>
-								<key>fr</key>
-								<string>Transferer l'appel</string>
-								<key>ru</key>
-								<string>Перевести звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9868,10 +8851,6 @@
 							<dict>
 								<key>en</key>
 								<string>Transfer</string>
-								<key>fr</key>
-								<string>Transfert</string>
-								<key>ru</key>
-								<string>Перевести</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9895,10 +8874,6 @@
 							<dict>
 								<key>en</key>
 								<string>Options</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9922,10 +8897,6 @@
 							<dict>
 								<key>en</key>
 								<string>Video</string>
-								<key>fr</key>
-								<string>Vidéo</string>
-								<key>ru</key>
-								<string>Видео</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9949,10 +8920,6 @@
 							<dict>
 								<key>en</key>
 								<string>Micro</string>
-								<key>fr</key>
-								<string>Micro</string>
-								<key>ru</key>
-								<string>Микрофон</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -9976,10 +8943,6 @@
 							<dict>
 								<key>en</key>
 								<string>Speaker</string>
-								<key>fr</key>
-								<string>Haut parleur</string>
-								<key>ru</key>
-								<string>Haut parleur</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10003,10 +8966,6 @@
 							<dict>
 								<key>en</key>
 								<string>Speaker</string>
-								<key>fr</key>
-								<string>Haut parleur</string>
-								<key>ru</key>
-								<string>Динамик</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10030,10 +8989,6 @@
 							<dict>
 								<key>en</key>
 								<string>Add call</string>
-								<key>fr</key>
-								<string>Ajouter appel</string>
-								<key>ru</key>
-								<string>Добавить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10057,10 +9012,6 @@
 							<dict>
 								<key>en</key>
 								<string>Transfer</string>
-								<key>fr</key>
-								<string>Transfert</string>
-								<key>ru</key>
-								<string>Перевести</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10368,10 +9319,6 @@
 							<dict>
 								<key>en</key>
 								<string>Pause</string>
-								<key>fr</key>
-								<string>Pause</string>
-								<key>ru</key>
-								<string>Пауза</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10395,10 +9342,6 @@
 							<dict>
 								<key>en</key>
 								<string>Conference</string>
-								<key>fr</key>
-								<string>Conférence</string>
-								<key>ru</key>
-								<string>Конференция</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10422,10 +9365,6 @@
 							<dict>
 								<key>en</key>
 								<string>Conference</string>
-								<key>fr</key>
-								<string>Conférence</string>
-								<key>ru</key>
-								<string>Конференция</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10454,8 +9393,6 @@
 							<dict>
 								<key>en</key>
 								<string>Conference</string>
-								<key>fr</key>
-								<string>Conférence</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10525,10 +9462,6 @@
 							<dict>
 								<key>en</key>
 								<string>Remove</string>
-								<key>fr</key>
-								<string>Supprimer</string>
-								<key>ru</key>
-								<string>Удалить Контакт</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10552,10 +9485,6 @@
 							<dict>
 								<key>en</key>
 								<string>Remove Contact</string>
-								<key>fr</key>
-								<string>Supprimer le Contact</string>
-								<key>ru</key>
-								<string>Удалить Контакт</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10625,10 +9554,6 @@
 							<dict>
 								<key>en</key>
 								<string>Chat</string>
-								<key>fr</key>
-								<string>Chat</string>
-								<key>ru</key>
-								<string>Чат</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10652,10 +9577,6 @@
 							<dict>
 								<key>en</key>
 								<string>Chat</string>
-								<key>fr</key>
-								<string>Chat</string>
-								<key>ru</key>
-								<string>Чат</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10679,10 +9600,6 @@
 							<dict>
 								<key>en</key>
 								<string>History</string>
-								<key>fr</key>
-								<string>Historique</string>
-								<key>ru</key>
-								<string>История</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10706,10 +9623,6 @@
 							<dict>
 								<key>en</key>
 								<string>History</string>
-								<key>fr</key>
-								<string>Historique</string>
-								<key>ru</key>
-								<string>История</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10733,10 +9646,6 @@
 							<dict>
 								<key>en</key>
 								<string>Dialer</string>
-								<key>fr</key>
-								<string>Clavier</string>
-								<key>ru</key>
-								<string>Клавиатура</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10760,10 +9669,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contacts</string>
-								<key>fr</key>
-								<string>Contacts</string>
-								<key>ru</key>
-								<string>Контакты</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10787,10 +9692,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contacts</string>
-								<key>fr</key>
-								<string>Contacts</string>
-								<key>ru</key>
-								<string>Контакт.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10814,10 +9715,6 @@
 							<dict>
 								<key>en</key>
 								<string>Settings</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10841,10 +9738,6 @@
 							<dict>
 								<key>en</key>
 								<string>Settings</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настр.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10868,10 +9761,6 @@
 							<dict>
 								<key>en</key>
 								<string>Missed call(s)</string>
-								<key>fr</key>
-								<string>Appel(s) manqué(s)</string>
-								<key>ru</key>
-								<string>Пропущенные звонки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -10918,10 +9807,6 @@
 							<dict>
 								<key>en</key>
 								<string>Missed message(s)</string>
-								<key>fr</key>
-								<string>Message(s) manqué(s)</string>
-								<key>ru</key>
-								<string>Пропущенные сообщения</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11012,10 +9897,6 @@
 							<dict>
 								<key>en</key>
 								<string>Dialer</string>
-								<key>fr</key>
-								<string>Clavier</string>
-								<key>ru</key>
-								<string>Клавиатура</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11039,10 +9920,6 @@
 							<dict>
 								<key>en</key>
 								<string>Chat</string>
-								<key>fr</key>
-								<string>Chat</string>
-								<key>ru</key>
-								<string>Чат</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11066,10 +9943,6 @@
 							<dict>
 								<key>en</key>
 								<string>Chat</string>
-								<key>fr</key>
-								<string>Chat</string>
-								<key>ru</key>
-								<string>Чат</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11093,10 +9966,6 @@
 							<dict>
 								<key>en</key>
 								<string>History</string>
-								<key>fr</key>
-								<string>Historique</string>
-								<key>ru</key>
-								<string>История</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11120,10 +9989,6 @@
 							<dict>
 								<key>en</key>
 								<string>History</string>
-								<key>fr</key>
-								<string>Historique</string>
-								<key>ru</key>
-								<string>История</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11147,10 +10012,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contacts</string>
-								<key>fr</key>
-								<string>Contacts</string>
-								<key>ru</key>
-								<string>Контакты</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11174,10 +10035,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contacts</string>
-								<key>fr</key>
-								<string>Contacts</string>
-								<key>ru</key>
-								<string>Контакты</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11201,10 +10058,6 @@
 							<dict>
 								<key>en</key>
 								<string>Settings</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11228,10 +10081,6 @@
 							<dict>
 								<key>en</key>
 								<string>Settings</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11255,10 +10104,6 @@
 							<dict>
 								<key>en</key>
 								<string>Missed call(s)</string>
-								<key>fr</key>
-								<string>Appel(s) manqué(s)</string>
-								<key>ru</key>
-								<string>Пропущенные звонки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11305,10 +10150,6 @@
 							<dict>
 								<key>en</key>
 								<string>Missed message(s)</string>
-								<key>fr</key>
-								<string>Message(s) manqué(s)</string>
-								<key>ru</key>
-								<string>Пропущенные сообщения</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11355,10 +10196,6 @@
 							<dict>
 								<key>en</key>
 								<string>Settings</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11382,10 +10219,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contacts</string>
-								<key>fr</key>
-								<string>Contacts</string>
-								<key>ru</key>
-								<string>Контакты</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11409,10 +10242,6 @@
 							<dict>
 								<key>en</key>
 								<string>History</string>
-								<key>fr</key>
-								<string>Historique</string>
-								<key>ru</key>
-								<string>История</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11436,10 +10265,6 @@
 							<dict>
 								<key>en</key>
 								<string>Chat</string>
-								<key>fr</key>
-								<string>Chat</string>
-								<key>ru</key>
-								<string>Чат</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11515,8 +10340,6 @@
 							<dict>
 								<key>en</key>
 								<string>Settings</string>
-								<key>fr</key>
-								<string>Options</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11542,8 +10365,6 @@
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>Contacts</string>
-								<key>fr</key>
 								<string>Contacts</string>
 							</dict>
 							<key>snapshots</key>
@@ -11621,8 +10442,6 @@
 							<dict>
 								<key>en</key>
 								<string>Dialer</string>
-								<key>fr</key>
-								<string>Clavier</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11690,10 +10509,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's name</string>
-								<key>fr</key>
-								<string>Nom du contact</string>
-								<key>ru</key>
-								<string>Имя контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11740,10 +10555,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's avatar</string>
-								<key>fr</key>
-								<string>Avatar du contact</string>
-								<key>ru</key>
-								<string>Аватар контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11813,10 +10624,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's name</string>
-								<key>fr</key>
-								<string>Nom du contact</string>
-								<key>ru</key>
-								<string>Имя контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11863,10 +10670,6 @@
 							<dict>
 								<key>en</key>
 								<string>Call state</string>
-								<key>fr</key>
-								<string>État de l'appel</string>
-								<key>ru</key>
-								<string>Статус звонка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11890,10 +10693,6 @@
 							<dict>
 								<key>en</key>
 								<string>Duration</string>
-								<key>fr</key>
-								<string>Durée</string>
-								<key>ru</key>
-								<string>Продолжительность</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11940,10 +10739,6 @@
 							<dict>
 								<key>en</key>
 								<string>Contact's avatar</string>
-								<key>fr</key>
-								<string>Avatar du contact</string>
-								<key>ru</key>
-								<string>Аватар контакта</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11967,10 +10762,6 @@
 							<dict>
 								<key>en</key>
 								<string>Expand</string>
-								<key>fr</key>
-								<string>Agrandir</string>
-								<key>ru</key>
-								<string>Развернуть</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -11994,10 +10785,6 @@
 							<dict>
 								<key>en</key>
 								<string>Pause</string>
-								<key>fr</key>
-								<string>Pause</string>
-								<key>ru</key>
-								<string>Пауза</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12021,10 +10808,6 @@
 							<dict>
 								<key>en</key>
 								<string>Remove</string>
-								<key>fr</key>
-								<string>Supprimer</string>
-								<key>ru</key>
-								<string>Удалить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12048,10 +10831,6 @@
 							<dict>
 								<key>en</key>
 								<string>Audio codec</string>
-								<key>fr</key>
-								<string>Codec audio</string>
-								<key>ru</key>
-								<string>Аудио кодек</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12098,10 +10877,6 @@
 							<dict>
 								<key>en</key>
 								<string>Codec:</string>
-								<key>fr</key>
-								<string>Codec:</string>
-								<key>ru</key>
-								<string>Кодек:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12125,10 +10900,6 @@
 							<dict>
 								<key>en</key>
 								<string>Audio upload bandwidth</string>
-								<key>fr</key>
-								<string>Bande passante montante de l'audio</string>
-								<key>ru</key>
-								<string>Скорость загрузки аудио потока</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12175,10 +10946,6 @@
 							<dict>
 								<key>en</key>
 								<string>Upload bandwidth:</string>
-								<key>fr</key>
-								<string>Débit montant:</string>
-								<key>ru</key>
-								<string>Скорость закачки:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12202,10 +10969,6 @@
 							<dict>
 								<key>en</key>
 								<string>Download bandwidth:</string>
-								<key>fr</key>
-								<string>Débit descendant:</string>
-								<key>ru</key>
-								<string>Скорость скачивания:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12229,10 +10992,6 @@
 							<dict>
 								<key>en</key>
 								<string>Video upload bandwidth</string>
-								<key>fr</key>
-								<string>Bande passante montante de la vidéo</string>
-								<key>ru</key>
-								<string>Скорость скачивания аудио потока</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12279,10 +11038,6 @@
 							<dict>
 								<key>en</key>
 								<string>Audio section</string>
-								<key>fr</key>
-								<string>Section audio</string>
-								<key>ru</key>
-								<string>Аудио настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12306,10 +11061,6 @@
 							<dict>
 								<key>en</key>
 								<string>Audio</string>
-								<key>fr</key>
-								<string>Audio</string>
-								<key>ru</key>
-								<string>Аудио</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12333,10 +11084,6 @@
 							<dict>
 								<key>en</key>
 								<string>Audio ICE connectivity state</string>
-								<key>fr</key>
-								<string>État de la connectivité ICE de la audio</string>
-								<key>ru</key>
-								<string>Аудио статус подключения ICE</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12383,10 +11130,6 @@
 							<dict>
 								<key>en</key>
 								<string>ICE connectivity:</string>
-								<key>fr</key>
-								<string>Connectivité ICE:</string>
-								<key>ru</key>
-								<string>Подключение ICE:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12410,10 +11153,6 @@
 							<dict>
 								<key>en</key>
 								<string>Video section</string>
-								<key>fr</key>
-								<string>Section vidéo</string>
-								<key>ru</key>
-								<string>Видео настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12437,10 +11176,6 @@
 							<dict>
 								<key>en</key>
 								<string>Video</string>
-								<key>fr</key>
-								<string>Vidéo</string>
-								<key>ru</key>
-								<string>Видео</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12464,10 +11199,6 @@
 							<dict>
 								<key>en</key>
 								<string>Codec:</string>
-								<key>fr</key>
-								<string>Codec:</string>
-								<key>ru</key>
-								<string>Кодек:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12491,10 +11222,6 @@
 							<dict>
 								<key>en</key>
 								<string>Video codec</string>
-								<key>fr</key>
-								<string>Codec vidéo</string>
-								<key>ru</key>
-								<string>Видео кодек</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12541,10 +11268,6 @@
 							<dict>
 								<key>en</key>
 								<string>Upload bandwidth:</string>
-								<key>fr</key>
-								<string>Débit montant:</string>
-								<key>ru</key>
-								<string>Скорость закачки:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12568,10 +11291,6 @@
 							<dict>
 								<key>en</key>
 								<string>Video upload bandwidth</string>
-								<key>fr</key>
-								<string>Bande passante montante de la vidéo</string>
-								<key>ru</key>
-								<string>Скорость загрузки видео потока</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12618,10 +11337,6 @@
 							<dict>
 								<key>en</key>
 								<string>Audio download bandwidth</string>
-								<key>fr</key>
-								<string>Bande passante descendante de l'audio</string>
-								<key>ru</key>
-								<string>Скорость скачивания видео потока</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12668,10 +11383,6 @@
 							<dict>
 								<key>en</key>
 								<string>Download bandwidth:</string>
-								<key>fr</key>
-								<string>Débit descendant:</string>
-								<key>ru</key>
-								<string>Скорость скачивания:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12695,10 +11406,6 @@
 							<dict>
 								<key>en</key>
 								<string>ICE connectivity:</string>
-								<key>fr</key>
-								<string>Connectivité ICE:</string>
-								<key>ru</key>
-								<string>Подключение ICE:</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12722,10 +11429,6 @@
 							<dict>
 								<key>en</key>
 								<string>Video ICE connectivity state</string>
-								<key>fr</key>
-								<string>État de la connectivité ICE de la vidéo</string>
-								<key>ru</key>
-								<string>Видео статус подключения ICE</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12845,10 +11548,6 @@
 							<dict>
 								<key>en</key>
 								<string> (Aborted)</string>
-								<key>fr</key>
-								<string> (Annulé)</string>
-								<key>ru</key>
-								<string> (Прервано)</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12872,10 +11571,6 @@
 							<dict>
 								<key>en</key>
 								<string> (Declined)</string>
-								<key>fr</key>
-								<string> (Refusé)</string>
-								<key>ru</key>
-								<string> (Запрещено)</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12899,10 +11594,6 @@
 							<dict>
 								<key>en</key>
 								<string> (Missed)</string>
-								<key>fr</key>
-								<string> (Manqué)</string>
-								<key>ru</key>
-								<string> (Отсутствует)</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12928,12 +11619,6 @@ Reason was: %@</string>
 								<key>en</key>
 								<string>%1$@
 Reason was: %2$@</string>
-								<key>fr</key>
-								<string>%1$@
-La cause était: %2$@</string>
-								<key>ru</key>
-								<string>%1$@
-По причине: %2$@</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12957,10 +11642,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>'%@' not registered</string>
-								<key>fr</key>
-								<string>'%@' n'est pas enregistré</string>
-								<key>ru</key>
-								<string>'%@' не зарегистрирован</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -12984,10 +11665,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>'%@' would like to enable video</string>
-								<key>fr</key>
-								<string>'%@' voudrait activer la video</string>
-								<key>ru</key>
-								<string>'%@' хотел бы включить видео</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13011,10 +11688,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>About</string>
-								<key>fr</key>
-								<string>À propos</string>
-								<key>ru</key>
-								<string>О программе</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13038,10 +11711,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Accept</string>
-								<key>fr</key>
-								<string>Accepter</string>
-								<key>ru</key>
-								<string>Принять</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13065,10 +11734,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Account creation issue</string>
-								<key>fr</key>
-								<string>Problème de création de compte</string>
-								<key>ru</key>
-								<string>Ошибка при создании учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13092,10 +11757,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Account validation issue</string>
-								<key>fr</key>
-								<string>Problème de validation du compte</string>
-								<key>ru</key>
-								<string>Ошибка при проверке учётной записи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13119,10 +11780,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Address book</string>
-								<key>fr</key>
-								<string>Annuaire</string>
-								<key>ru</key>
-								<string>Адресная книга</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13146,10 +11803,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Alert</string>
-								<key>fr</key>
-								<string>Alerte</string>
-								<key>ru</key>
-								<string>Предупреждение</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13173,10 +11826,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Answer</string>
-								<key>fr</key>
-								<string>Répondre</string>
-								<key>ru</key>
-								<string>Ответить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13200,10 +11849,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Average</string>
-								<key>fr</key>
-								<string>Moyen</string>
-								<key>ru</key>
-								<string>Средний</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13227,10 +11872,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Bad credentials, check your account settings</string>
-								<key>fr</key>
-								<string>Erreur d'authenfication, vérifiez la configuration du compte</string>
-								<key>ru</key>
-								<string>Имя пользователя/пароль неверны, проверьте Ваши настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13254,10 +11895,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Battery is running low. Stop video ?</string>
-								<key>fr</key>
-								<string>La batterie est faible. Voulez vous stoppez la vidéo?</string>
-								<key>ru</key>
-								<string>Батарея разряжена, остановить видео ?</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13281,10 +11918,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Call failed</string>
-								<key>fr</key>
-								<string>Échec de l'appel</string>
-								<key>ru</key>
-								<string>Звонок не удался</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13308,10 +11941,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Camera</string>
-								<key>fr</key>
-								<string>Appareil photo</string>
-								<key>ru</key>
-								<string>Камера</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13335,10 +11964,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Can't create the account. Please try again.</string>
-								<key>fr</key>
-								<string>Ne peux pas créer le compte. Veuillez réessayer.</string>
-								<key>ru</key>
-								<string>Невозможно создать учётную запись. Пожалуйста попробуйте ещё.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13362,10 +11987,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Cancel</string>
-								<key>fr</key>
-								<string>Annuler</string>
-								<key>ru</key>
-								<string>Отмена</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13389,10 +12010,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Cannot call %@</string>
-								<key>fr</key>
-								<string>Ne peux pas appeler %@</string>
-								<key>ru</key>
-								<string>Невозможно позвонить %@</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13416,10 +12033,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Cannot make call</string>
-								<key>fr</key>
-								<string>Appel impossible</string>
-								<key>ru</key>
-								<string>Невозможно совершить звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13443,10 +12056,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Cannot transfer file from remote contact</string>
-								<key>fr</key>
-								<string>Impossible de transferer depuis le destinataire</string>
-								<key>ru</key>
-								<string>Невозможно принять файл от Вашего собеседника</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13470,10 +12079,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Cannot transfer file to remote contact</string>
-								<key>fr</key>
-								<string>Impossible de transferer au destinataire</string>
-								<key>ru</key>
-								<string>Невозможно передать файл Вашему собеседнику</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13497,10 +12102,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Cannot write image to photo library</string>
-								<key>fr</key>
-								<string>Impossible d'enregistrer l'image dans l'album photo</string>
-								<key>ru</key>
-								<string>Невозможно записать картинку в библиотеку фотографий</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13524,10 +12125,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Check error(s)</string>
-								<key>fr</key>
-								<string>Vérification erreur(s)</string>
-								<key>ru</key>
-								<string>Проверьте ошибку(и)</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13551,10 +12148,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Check issue</string>
-								<key>fr</key>
-								<string>Problème de vérification</string>
-								<key>ru</key>
-								<string>Проверьте ошибку</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13578,10 +12171,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Choose the image size</string>
-								<key>fr</key>
-								<string>Choisissez la taille de l'image</string>
-								<key>ru</key>
-								<string>Выберите размер изображения</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13605,10 +12194,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Communication issue</string>
-								<key>fr</key>
-								<string>Problème de communication</string>
-								<key>ru</key>
-								<string>Ошибка связи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13632,10 +12217,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Communication issue (%@)</string>
-								<key>fr</key>
-								<string>Problème de communication (%@)</string>
-								<key>ru</key>
-								<string>Ошибка связи (%@)</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13661,12 +12242,6 @@ La cause était: %2$@</string>
 								<key>en</key>
 								<string>Confirm the following SAS with the peer:
 %s</string>
-								<key>fr</key>
-								<string>Confirmer le SAS suivant avec l'interlocuteur:
-%s</string>
-								<key>ru</key>
-								<string>Подтвердите SAS собеседника:
-%s</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13690,10 +12265,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Continue</string>
-								<key>fr</key>
-								<string>Continuer</string>
-								<key>ru</key>
-								<string>Продолжить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13717,10 +12288,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Continue video</string>
-								<key>fr</key>
-								<string>Continuer la vidéo</string>
-								<key>ru</key>
-								<string>Продолжить видео</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13744,10 +12311,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Decline</string>
-								<key>fr</key>
-								<string>Refuser</string>
-								<key>ru</key>
-								<string>Отказать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13771,10 +12334,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Direct connection</string>
-								<key>fr</key>
-								<string>Connexion directe</string>
-								<key>ru</key>
-								<string>Прямое соединение</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13798,10 +12357,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Dismiss</string>
-								<key>fr</key>
-								<string>Valider</string>
-								<key>ru</key>
-								<string>Убрать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13825,10 +12380,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Either configure a SIP proxy server from settings prior to place a call or use a valid SIP address (I.E sip:john@example.net)</string>
-								<key>fr</key>
-								<string>Veuillez configurer un serveur proxy SIP dans les options ou entrez une addresse SIP avant de faire un appel (I.E sip:john@example.net)</string>
-								<key>ru</key>
-								<string>Либо укажите SIP прокси сервер в настройках перед звонком, либо используйте адрес SIP в правильном формате (например sip:john@example.net)</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13852,10 +12403,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Either configure a SIP proxy server from settings prior to send a message or use a valid SIP address (I.E sip:john@example.net)</string>
-								<key>fr</key>
-								<string>Veuillez configurer un serveur proxy SIP dans les options ou entrez une addresse SIP avant d'envoyer un message (I.E sip:john@example.net)</string>
-								<key>ru</key>
-								<string>Либо укажите SIP прокси сервер в настройках перед отсылкой сообщения, либо используйте адрес SIP в правильном формате (например sip:john@example.net)</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13879,10 +12426,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Enter your password</string>
-								<key>fr</key>
-								<string>Entre votre mot de passe</string>
-								<key>ru</key>
-								<string>Введите пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13906,10 +12449,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Enter your username</string>
-								<key>fr</key>
-								<string>Entrez votre nom d'utilisateur</string>
-								<key>ru</key>
-								<string>Введите имя пользователя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13933,10 +12472,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Failed</string>
-								<key>fr</key>
-								<string>Échec</string>
-								<key>ru</key>
-								<string>Не удалось</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -13960,10 +12495,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>First name</string>
-								<key>fr</key>
-								<string>Prénom</string>
-								<key>ru</key>
-								<string>Имя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14033,10 +12564,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Incoming call from %@</string>
-								<key>fr</key>
-								<string>Appel entrant de %@</string>
-								<key>ru</key>
-								<string>Входящий звонок от %@</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14060,10 +12587,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Incoming message from %@</string>
-								<key>fr</key>
-								<string>Message entrant de %@</string>
-								<key>ru</key>
-								<string>Входящее сообщение от %@</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14087,10 +12610,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>In progress</string>
-								<key>fr</key>
-								<string>En cours</string>
-								<key>ru</key>
-								<string>В процессе</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14114,10 +12633,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Incoming call</string>
-								<key>fr</key>
-								<string>Appel entrant</string>
-								<key>ru</key>
-								<string>Входящий звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14141,10 +12656,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Invalid SIP address</string>
-								<key>fr</key>
-								<string>Adresse SIP invalide</string>
-								<key>ru</key>
-								<string>Неверный адрес SIP</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14168,10 +12679,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Last name</string>
-								<key>fr</key>
-								<string>Nom</string>
-								<key>ru</key>
-								<string>Фамилия</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14195,10 +12702,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Low bandwidth</string>
-								<key>fr</key>
-								<string>Bande passante faible</string>
-								<key>ru</key>
-								<string>Низкая сорость подключения</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14222,10 +12725,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Maximum</string>
-								<key>fr</key>
-								<string>Maximum</string>
-								<key>ru</key>
-								<string>Максимум</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14249,10 +12748,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Minimum</string>
-								<key>fr</key>
-								<string>Minimum</string>
-								<key>ru</key>
-								<string>Минимум</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14276,10 +12771,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>NAT(s) connection</string>
-								<key>fr</key>
-								<string>Connexion par NAT</string>
-								<key>ru</key>
-								<string>Соединение(я) NAT</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14303,10 +12794,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Network down</string>
-								<key>fr</key>
-								<string>Aucun réseau</string>
-								<key>ru</key>
-								<string>Нет сети</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14330,10 +12817,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Network Error</string>
-								<key>fr</key>
-								<string>Erreur réseau</string>
-								<key>ru</key>
-								<string>Ошибка сети</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14357,10 +12840,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>No codec</string>
-								<key>fr</key>
-								<string>Aucun codec</string>
-								<key>ru</key>
-								<string>Нет кодека</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14384,10 +12863,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>No microphone</string>
-								<key>fr</key>
-								<string>Aucun microphone</string>
-								<key>ru</key>
-								<string>Нет микрофона</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14411,10 +12886,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>No SIP account configured</string>
-								<key>fr</key>
-								<string>Aucun compte SIP configuré</string>
-								<key>ru</key>
-								<string>Не настроена учётная запись SIP</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14438,10 +12909,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Not activated</string>
-								<key>fr</key>
-								<string>Pas activée</string>
-								<key>ru</key>
-								<string>Не активировано</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14465,10 +12932,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Not registered</string>
-								<key>fr</key>
-								<string>Non enregistré</string>
-								<key>ru</key>
-								<string>Не зарегистрировано</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14492,10 +12955,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Ok</string>
-								<key>fr</key>
-								<string>Ok</string>
-								<key>ru</key>
-								<string>Ок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14519,10 +12978,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Outgoing call</string>
-								<key>fr</key>
-								<string>Appel sortant</string>
-								<key>ru</key>
-								<string>Исходящий звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14546,10 +13001,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Phone number</string>
-								<key>fr</key>
-								<string>Numéro de téléphone</string>
-								<key>ru</key>
-								<string>Номер телефона</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14573,10 +13024,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Phone numbers</string>
-								<key>fr</key>
-								<string>Numéros de téléphone</string>
-								<key>ru</key>
-								<string>Телефонные номера</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14600,10 +13047,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Photo library</string>
-								<key>fr</key>
-								<string>Album photos</string>
-								<key>ru</key>
-								<string>Библиотека фотографий</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14628,12 +13071,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Please enter a domain.
-</string>
-								<key>fr</key>
-								<string>Entrez un nom de domaine.
-</string>
-								<key>ru</key>
-								<string>Пожалуйста введите сервер.
 </string>
 							</dict>
 							<key>snapshots</key>
@@ -14660,12 +13097,6 @@ La cause était: %2$@</string>
 								<key>en</key>
 								<string>Please enter a username.
 </string>
-								<key>fr</key>
-								<string>Entrez un nom d'utilisateur.
-</string>
-								<key>ru</key>
-								<string>Пожалуйста введите имя пользователя.
-</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14689,10 +13120,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Please make sure your device is connected to the internet and double check your SIP account configuration in the settings.</string>
-								<key>fr</key>
-								<string>Veuillez vérifier que votre appareil est connecté à internet et revérifier la configuration de votre compte dans les options.</string>
-								<key>ru</key>
-								<string>Пожалуйста убедитесь что Ваше устройство подключено к сети и перепроверьте настройки учётной записи SIP в настройках.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14716,10 +13143,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Please terminate GSM call</string>
-								<key>fr</key>
-								<string>Veuillez terminer l'appel GSM</string>
-								<key>ru</key>
-								<string>Пожалуйста прервите звонок в сети GSM</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14743,10 +13166,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Registered</string>
-								<key>fr</key>
-								<string>Enregistré</string>
-								<key>ru</key>
-								<string>Зарегистирован</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14770,10 +13189,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Registration failed</string>
-								<key>fr</key>
-								<string>Enregistrement échoué</string>
-								<key>ru</key>
-								<string>Ошибка регистрации</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14797,10 +13212,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Registration failure</string>
-								<key>fr</key>
-								<string>Échec de l'enregistrement</string>
-								<key>ru</key>
-								<string>Ошибка регистрации</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14824,10 +13235,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Registration in progress</string>
-								<key>fr</key>
-								<string>Enregistrement en cours</string>
-								<key>ru</key>
-								<string>Идёт регистрация</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14851,10 +13258,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Relay connection</string>
-								<key>fr</key>
-								<string>Connexion relayée</string>
-								<key>ru</key>
-								<string>Ретранслируемое соединение</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14878,10 +13281,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Remove</string>
-								<key>fr</key>
-								<string>Supprimer</string>
-								<key>ru</key>
-								<string>Убрать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14905,10 +13304,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Remove trust in the peer?</string>
-								<key>fr</key>
-								<string>Supprimer la confiance dans l'interlocuteur?</string>
-								<key>ru</key>
-								<string>Перестать доверять собеседнику?</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14932,10 +13327,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Select picture source</string>
-								<key>fr</key>
-								<string>Selectionner une source d'image</string>
-								<key>ru</key>
-								<string>Выбрать источник изображения</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14959,10 +13350,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Settings</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -14986,10 +13373,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Show</string>
-								<key>fr</key>
-								<string>Afficher</string>
-								<key>ru</key>
-								<string>Показать</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15013,10 +13396,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>SIP address</string>
-								<key>fr</key>
-								<string>Adresse SIP</string>
-								<key>ru</key>
-								<string>адрес SIP</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15040,10 +13419,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>SIP addresses</string>
-								<key>fr</key>
-								<string>Adresses SIP</string>
-								<key>ru</key>
-								<string>адреса SIP</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15067,10 +13442,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>SIP server unreachable</string>
-								<key>fr</key>
-								<string>Le serveur SIP est injoignable</string>
-								<key>ru</key>
-								<string>сервер SIP недоступен</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15094,10 +13465,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Stop video</string>
-								<key>fr</key>
-								<string>Arrêter la video</string>
-								<key>ru</key>
-								<string>Остановить видео</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15122,11 +13489,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>The email address is invalid.
-</string>
-								<key>fr</key>
-								<string>Cette adresse email est invalide.</string>
-								<key>ru</key>
-								<string>Недопустимы адрес электронной почты.
 </string>
 							</dict>
 							<key>snapshots</key>
@@ -15153,11 +13515,6 @@ La cause était: %2$@</string>
 								<key>en</key>
 								<string>The password is too short (minimum %d characters).
 </string>
-								<key>fr</key>
-								<string>Le mode de passe est trop court (minimum %d caractères).</string>
-								<key>ru</key>
-								<string>Слишком короткий пароль (минимум %d знаков).
-</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15182,11 +13539,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>The passwords are different.
-</string>
-								<key>fr</key>
-								<string>Les mots de passe sont différents.</string>
-								<key>ru</key>
-								<string>Введённые пароли отличаются.
 </string>
 							</dict>
 							<key>snapshots</key>
@@ -15213,11 +13565,6 @@ La cause était: %2$@</string>
 								<key>en</key>
 								<string>The email address is too short (minimum %d characters).
 </string>
-								<key>fr</key>
-								<string>L'adresse email est trop courte (minimum %d caractères).</string>
-								<key>ru</key>
-								<string>Слишком короткое имя пользователя (минимум %d знаков).
-</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15241,10 +13588,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>There is no network connection available, enable WIFI or WWAN prior to place a call</string>
-								<key>fr</key>
-								<string>Il n'y a aucune connexion réseau disponible, activer le WIFI ou le WWAN avant de faire un appel</string>
-								<key>ru</key>
-								<string>Нет сети, подключите WIFI или WWAN перед тем как звонить</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15268,10 +13611,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Transfer error</string>
-								<key>fr</key>
-								<string>Erreur de transfert</string>
-								<key>ru</key>
-								<string>Ошибка передачи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15295,10 +13634,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Unknown</string>
-								<key>fr</key>
-								<string>Inconnu</string>
-								<key>ru</key>
-								<string>Неизвестен</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15322,10 +13657,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Unknown error</string>
-								<key>fr</key>
-								<string>Erreur inconnue</string>
-								<key>ru</key>
-								<string>Неизвестная ошибка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15349,10 +13680,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Username already exists</string>
-								<key>fr</key>
-								<string>Le nom d'utilisateur existe déjà</string>
-								<key>ru</key>
-								<string>Имя пользователя уже используется</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15376,10 +13703,6 @@ La cause était: %2$@</string>
 							<dict>
 								<key>en</key>
 								<string>Video cannot be activated because of low bandwidth condition, only audio is available</string>
-								<key>fr</key>
-								<string>L'appel video ne peut pas aboutir car les conditions réseaux sont inssufisantent. </string>
-								<key>ru</key>
-								<string>Видео не может быть активировано из-за низкой скорости подключения, доступно только аудио</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15405,12 +13728,6 @@ Toggle the application in Settings &gt; Privacy &gt; Contacts</string>
 								<key>en</key>
 								<string>You must authorize the application to have access to address book.
 Toggle the application in Settings &gt; Privacy &gt; Contacts</string>
-								<key>fr</key>
-								<string>Vous devez autoriser l'application à accéder à l'annuaire.
-Activer l'application dans Réglages &gt; Confidentialité &gt; Contacts</string>
-								<key>ru</key>
-								<string>Вам нужно разрешить программе пользоваться адресной книгой.
-Пожалуйста переключите в  Settings &gt; Privacy &gt; Contacts</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15434,10 +13751,6 @@ Activer l'application dans Réglages &gt; Confidentialité &gt; Contacts</string
 							<dict>
 								<key>en</key>
 								<string>You need to plug a microphone to your device to use this application.</string>
-								<key>fr</key>
-								<string>Vous devez brancher votre micro pour pouvoir utiliser l'application.</string>
-								<key>ru</key>
-								<string>Вам нужно подключить микрофон чтобы пользоваться приложением.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15461,10 +13774,6 @@ Activer l'application dans Réglages &gt; Confidentialité &gt; Contacts</string
 							<dict>
 								<key>en</key>
 								<string>Your account is not validate yet.</string>
-								<key>fr</key>
-								<string>Votre compte n'est pas encore validé.</string>
-								<key>ru</key>
-								<string>Ваша учётная запись ещё не подтверждена.</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15487,8 +13796,6 @@ Activer l'application dans Réglages &gt; Confidentialité &gt; Contacts</string
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>© 2013 DYL</string>
-								<key>fr</key>
 								<string>© 2013 DYL</string>
 							</dict>
 							<key>snapshots</key>
@@ -15544,8 +13851,6 @@ Activer l'application dans Réglages &gt; Confidentialité &gt; Contacts</string
 							<dict>
 								<key>en</key>
 								<string>'%@' not registered to Service</string>
-								<key>fr</key>
-								<string>'%@' n'est pas enregistré</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15569,8 +13874,6 @@ Activer l'application dans Réglages &gt; Confidentialité &gt; Contacts</string
 							<dict>
 								<key>en</key>
 								<string>No SIP account defined</string>
-								<key>fr</key>
-								<string>Aucun compte SIP défini</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15596,9 +13899,6 @@ Reason was: %s</string>
 								<key>en</key>
 								<string>%1$@
 Reason was: %2$s</string>
-								<key>fr</key>
-								<string>%1$@
-Raison: %2$s</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15622,8 +13922,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>'%@' not registered to Service</string>
-								<key>fr</key>
-								<string>'%@' n'est pas enregistré</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15647,8 +13945,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Cannot transfert  file from remote pary</string>
-								<key>fr</key>
-								<string>Impossible de transferer depuis destinataire</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15672,8 +13968,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Cannot transfert file from remote pary</string>
-								<key>fr</key>
-								<string>Impossible de transferer depuis destinataire</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15697,8 +13991,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Cannot transfert file to remote pary</string>
-								<key>fr</key>
-								<string>Impossible de transferer au destinataire</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15722,8 +14014,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>It seems you have not configured any proxy server from settings</string>
-								<key>fr</key>
-								<string>Il semble qu'il n'y est pas de serveur SIP configuré</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15747,8 +14037,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Never remind</string>
-								<key>fr</key>
-								<string>Ne pas me rappeler</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15772,8 +14060,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Tranfer error</string>
-								<key>fr</key>
-								<string>Erreur de transfert</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15797,8 +14083,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Incoming file stored to your photo library</string>
-								<key>fr</key>
-								<string>Fichier entrant stocké</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15822,8 +14106,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Photo library</string>
-								<key>fr</key>
-								<string>Photos</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15847,8 +14129,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Camera</string>
-								<key>fr</key>
-								<string>Appareil photo</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15872,8 +14152,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Cancel</string>
-								<key>fr</key>
-								<string>Annuler</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15897,8 +14175,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Cannot transfer file from remote contact</string>
-								<key>fr</key>
-								<string>Impossible de transferer depuis le destinataire</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15922,8 +14198,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Cannot transfer file to remote contact</string>
-								<key>fr</key>
-								<string>Impossible de transferer au destinataire</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15947,8 +14221,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Cannot write image to photo library</string>
-								<key>fr</key>
-								<string>Impossible d'enregistrer l'image dans l'album photo</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15972,8 +14244,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Ignore</string>
-								<key>fr</key>
-								<string>Ignoner</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -15997,8 +14267,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Image sent</string>
-								<key>fr</key>
-								<string>Image envoyé</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16022,8 +14290,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Incoming file</string>
-								<key>fr</key>
-								<string>Fichier entrant</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16047,8 +14313,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Select picture source</string>
-								<key>fr</key>
-								<string>Selectionner une source d'image</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16072,8 +14336,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Transfer error</string>
-								<key>fr</key>
-								<string>Erreur de transfert</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16097,8 +14359,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Warning</string>
-								<key>fr</key>
-								<string>Attention</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16122,8 +14382,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>No SIP account defined</string>
-								<key>fr</key>
-								<string>Aucun compte SIP défini</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16147,8 +14405,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Ignore</string>
-								<key>fr</key>
-								<string>Ignoner</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16172,8 +14428,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Incoming message from %@</string>
-								<key>fr</key>
-								<string>Message entrant de %@</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16197,8 +14451,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Image sent</string>
-								<key>fr</key>
-								<string>Image envoyé</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16222,8 +14474,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Incoming file</string>
-								<key>fr</key>
-								<string>Fichier entrant</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16247,8 +14497,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Warning</string>
-								<key>fr</key>
-								<string>Attention</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16272,8 +14520,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Choose the compression</string>
-								<key>fr</key>
-								<string>Choisissez la compression</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16320,8 +14566,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>OK</string>
-								<key>fr</key>
-								<string>OK</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16347,9 +14591,6 @@ Raison: %2$s</string>
 								<key>en</key>
 								<string>Please enter a domain.
 </string>
-								<key>fr</key>
-								<string>Entrez un nom de domaine.
-</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16373,8 +14614,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Settings</string>
-								<key>fr</key>
-								<string>Options</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16421,8 +14660,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>You miss %@ call</string>
-								<key>fr</key>
-								<string>Appel manqué de %@</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16513,10 +14750,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>SIP account</string>
-								<key>fr</key>
-								<string>Compte SIP</string>
-								<key>ru</key>
-								<string>Учётная запись SIP</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16540,10 +14773,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Run assistant</string>
-								<key>fr</key>
-								<string>Assistant</string>
-								<key>ru</key>
-								<string>Помощник</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16567,10 +14796,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>User name</string>
-								<key>fr</key>
-								<string>Nom d'utilisateur</string>
-								<key>ru</key>
-								<string>Имя пользователя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16594,10 +14819,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Password</string>
-								<key>fr</key>
-								<string>Mot de passe</string>
-								<key>ru</key>
-								<string>Пароль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16621,10 +14842,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Domain</string>
-								<key>fr</key>
-								<string>Domaine</string>
-								<key>ru</key>
-								<string>Сервер</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16648,10 +14865,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Proxy</string>
-								<key>fr</key>
-								<string>Proxy</string>
-								<key>ru</key>
-								<string>Прокси</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16675,10 +14888,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Outbound proxy</string>
-								<key>fr</key>
-								<string>Proxy de sortie</string>
-								<key>ru</key>
-								<string>Исходящий прокси</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16702,10 +14911,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Settings</string>
-								<key>fr</key>
-								<string>Options</string>
-								<key>ru</key>
-								<string>Настройки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16729,10 +14934,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Enable video</string>
-								<key>fr</key>
-								<string>Activer vidéo</string>
-								<key>ru</key>
-								<string>Разрешить видео</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16756,10 +14957,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Audio</string>
-								<key>fr</key>
-								<string>Audio</string>
-								<key>ru</key>
-								<string>Аудио</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16783,10 +14980,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Video</string>
-								<key>fr</key>
-								<string>Vidéo</string>
-								<key>ru</key>
-								<string>Видео</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16810,10 +15003,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Call</string>
-								<key>fr</key>
-								<string>Appel</string>
-								<key>ru</key>
-								<string>Звонок</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16837,10 +15026,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Network</string>
-								<key>fr</key>
-								<string>Réseau</string>
-								<key>ru</key>
-								<string>Сеть</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16864,10 +15049,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Advanced</string>
-								<key>fr</key>
-								<string>Avancées</string>
-								<key>ru</key>
-								<string>Дополнительный</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16911,10 +15092,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>About</string>
-								<key>fr</key>
-								<string>À Propos</string>
-								<key>ru</key>
-								<string>О программе</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -16938,10 +15115,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Quit</string>
-								<key>fr</key>
-								<string>Quitter</string>
-								<key>ru</key>
-								<string>Выход</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17156,10 +15329,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Debug</string>
-								<key>fr</key>
-								<string>Debogue</string>
-								<key>ru</key>
-								<string>Отладка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17183,10 +15352,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Console</string>
-								<key>fr</key>
-								<string>Console</string>
-								<key>ru</key>
-								<string>Консоль</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17230,10 +15395,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Animations</string>
-								<key>fr</key>
-								<string>Animations</string>
-								<key>ru</key>
-								<string>Анимации</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17257,10 +15418,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Rotation</string>
-								<key>fr</key>
-								<string>Rotation</string>
-								<key>ru</key>
-								<string>Поворот</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17284,10 +15441,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Background mode</string>
-								<key>fr</key>
-								<string>Mode tâche de fond</string>
-								<key>ru</key>
-								<string>Фоновый режим</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17311,10 +15464,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Start at boot</string>
-								<key>fr</key>
-								<string>Démarrage automatique</string>
-								<key>ru</key>
-								<string>Запускаться с системой</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17361,10 +15510,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Expire</string>
-								<key>fr</key>
-								<string>Expiration</string>
-								<key>ru</key>
-								<string>Окончание</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17388,10 +15533,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Primary account</string>
-								<key>fr</key>
-								<string>Compte principal</string>
-								<key>ru</key>
-								<string>Основная учётная запись</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17415,10 +15556,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Display name</string>
-								<key>fr</key>
-								<string>Nom d'affichage</string>
-								<key>ru</key>
-								<string>Отображаемое имя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17442,10 +15579,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Sharing server</string>
-								<key>fr</key>
-								<string>Serveur de partage</string>
-								<key>ru</key>
-								<string>Общий сервер</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17469,10 +15602,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Username</string>
-								<key>fr</key>
-								<string>Nom d'utilisateur</string>
-								<key>ru</key>
-								<string>Имя пользователя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17496,10 +15625,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Automatic</string>
-								<key>fr</key>
-								<string>Automatique</string>
-								<key>ru</key>
-								<string>Автоматически</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17523,10 +15648,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Portrait</string>
-								<key>fr</key>
-								<string>Portrait</string>
-								<key>ru</key>
-								<string>Портретный</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17550,10 +15671,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Landscape</string>
-								<key>fr</key>
-								<string>Paysage</string>
-								<key>ru</key>
-								<string>Альбомный</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17621,10 +15738,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Codecs</string>
-								<key>fr</key>
-								<string>Codecs</string>
-								<key>ru</key>
-								<string>Кодеки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17901,10 +16014,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Advanced</string>
-								<key>fr</key>
-								<string>Avancés</string>
-								<key>ru</key>
-								<string>Дополнительные</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17928,10 +16037,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Playback gain</string>
-								<key>fr</key>
-								<string>Gain sortie</string>
-								<key>ru</key>
-								<string>Усиление воспроизведения</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -17955,10 +16060,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Microphone gain</string>
-								<key>fr</key>
-								<string>Gain microphone</string>
-								<key>ru</key>
-								<string>Усиление микрофона</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18026,10 +16127,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Prefix</string>
-								<key>fr</key>
-								<string>Préfixe</string>
-								<key>ru</key>
-								<string>Префикс</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18053,10 +16150,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Substitue + by 00</string>
-								<key>fr</key>
-								<string>Remplacer + par 00</string>
-								<key>ru</key>
-								<string>Заменять + на 00</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18080,10 +16173,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Send inband DTMFs</string>
-								<key>fr</key>
-								<string>Envoyer des DTMFs dans le flux</string>
-								<key>ru</key>
-								<string>Посылать DTMFs</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18107,10 +16196,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Send SIP INFO DTMFs</string>
-								<key>fr</key>
-								<string>Envoyer des DTMFs en SIP INFO</string>
-								<key>ru</key>
-								<string>Посылать SIP INFO DTMF(ы)</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18134,10 +16219,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Incoming call timeout</string>
-								<key>fr</key>
-								<string>Durée max. sonnerie</string>
-								<key>ru</key>
-								<string>Время ожидания входящего звонка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18161,10 +16242,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>In call timeout</string>
-								<key>fr</key>
-								<string>Durée max. appel</string>
-								<key>ru</key>
-								<string>Время ожидания звонка</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18280,10 +16357,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Automatically start</string>
-								<key>fr</key>
-								<string>Démarrage automatique</string>
-								<key>ru</key>
-								<string>Запускаться автоматически</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18307,10 +16380,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Automatically accept</string>
-								<key>fr</key>
-								<string>Acceptation automatique</string>
-								<key>ru</key>
-								<string>Принимать автоматически</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18334,10 +16403,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Show self view</string>
-								<key>fr</key>
-								<string>Se voir</string>
-								<key>ru</key>
-								<string>Показывать себя</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18361,10 +16426,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Show preview</string>
-								<key>fr</key>
-								<string>Activer la prévisualisation</string>
-								<key>ru</key>
-								<string>Предварительный просмотр</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18388,10 +16449,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Codecs</string>
-								<key>fr</key>
-								<string>Codecs</string>
-								<key>ru</key>
-								<string>Кодеки</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18490,8 +16547,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Automatically start video</string>
-								<key>fr</key>
-								<string>Démarrage automatique de la vidéo</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18518,8 +16573,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Automatically accept video</string>
-								<key>fr</key>
-								<string>Acceptation automatique</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18585,10 +16638,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Wifi only</string>
-								<key>fr</key>
-								<string>Uniquement Wifi</string>
-								<key>ru</key>
-								<string>Только Wifi</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18612,10 +16661,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Edge optimization</string>
-								<key>fr</key>
-								<string>Optimisation Edge</string>
-								<key>ru</key>
-								<string>Оптимизация Edge</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18639,10 +16684,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Stun Server</string>
-								<key>fr</key>
-								<string>Serveur Stun</string>
-								<key>ru</key>
-								<string>Stun сервер</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18665,8 +16706,6 @@ Raison: %2$s</string>
 							<key>localizations</key>
 							<dict>
 								<key>en</key>
-								<string>ICE</string>
-								<key>fr</key>
 								<string>ICE</string>
 							</dict>
 							<key>snapshots</key>
@@ -18691,10 +16730,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Random Port</string>
-								<key>fr</key>
-								<string>Port Aléatoire</string>
-								<key>ru</key>
-								<string>Случайный порт</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18718,10 +16753,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Port</string>
-								<key>fr</key>
-								<string>Port</string>
-								<key>ru</key>
-								<string>Порт</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18745,10 +16776,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Audio Port(s)</string>
-								<key>fr</key>
-								<string>Port(s) Audio</string>
-								<key>ru</key>
-								<string>Аудио Порт(ы)</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18772,10 +16799,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Video Port(s)</string>
-								<key>fr</key>
-								<string>Port(s) Vidéo</string>
-								<key>ru</key>
-								<string>Видео Порт(ы)</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18799,10 +16822,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Transport</string>
-								<key>fr</key>
-								<string>Transport</string>
-								<key>ru</key>
-								<string>Транспорт</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18826,10 +16845,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Media Encryption</string>
-								<key>fr</key>
-								<string>Chiffrement</string>
-								<key>ru</key>
-								<string>Шифрование потока</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18853,10 +16868,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Push Notification</string>
-								<key>fr</key>
-								<string>Push Notification</string>
-								<key>ru</key>
-								<string>Серверные уведомления</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -18949,10 +16960,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>None</string>
-								<key>fr</key>
-								<string>Aucun</string>
-								<key>ru</key>
-								<string>Aucun</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -19022,10 +17029,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Limits</string>
-								<key>fr</key>
-								<string>Limites</string>
-								<key>ru</key>
-								<string>Ограничения</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -19049,10 +17052,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Upload bandwidth</string>
-								<key>fr</key>
-								<string>Débit montant</string>
-								<key>ru</key>
-								<string>Полоса отдачи</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -19076,10 +17075,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Download bandwidth</string>
-								<key>fr</key>
-								<string>Débit descendant</string>
-								<key>ru</key>
-								<string>Полоса скачивания</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -19175,8 +17170,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Stun server</string>
-								<key>fr</key>
-								<string>Serveur Stun</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -19200,8 +17193,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Audio Port</string>
-								<key>fr</key>
-								<string>Port Audio</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -19225,8 +17216,6 @@ Raison: %2$s</string>
 							<dict>
 								<key>en</key>
 								<string>Video Port</string>
-								<key>fr</key>
-								<string>Port Vidéo</string>
 							</dict>
 							<key>snapshots</key>
 							<dict/>
@@ -19258,8 +17247,6 @@ Raison: %2$s</string>
 	<key>languages</key>
 	<array>
 		<string>en</string>
-		<string>fr</string>
-		<string>ru</string>
 	</array>
 	<key>preferences</key>
 	<dict>
