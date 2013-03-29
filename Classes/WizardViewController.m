@@ -425,6 +425,25 @@ static UICompositeViewDescription *compositeDescription = nil;
 	linphone_core_add_auth_info([LinphoneManager getLc], info);
 }
 
+- (void)configureCodecs: (const MSList *)codecs {
+    LinphoneCore *lc = [LinphoneManager getLc];
+ 	const MSList *elem = codecs;
+	for(;elem != NULL; elem = elem->next) {
+		PayloadType *pt = (PayloadType*)elem->data;
+        if ((strcmp(pt->mime_type, "PCMU") == 0) || (strcmp(pt->mime_type, "VP8") == 0)) {
+            linphone_core_enable_payload_type(lc, pt, true);
+        } else {
+            linphone_core_enable_payload_type(lc, pt, false);
+        }
+    }
+}
+
+- (void)setCodecsConfig {
+    LinphoneCore *lc = [LinphoneManager getLc];
+    [self configureCodecs: linphone_core_get_audio_codecs(lc)];
+    [self configureCodecs: linphone_core_get_video_codecs(lc)];
+}
+
 - (NSString*)identityFromUsername:(NSString*)username {
     char normalizedUserName[256];
     LinphoneAddress* linphoneAddress = linphone_address_new("sip:user@domain.com");
@@ -579,6 +598,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else {
         [self.waitView setHidden:false];
         [self addProxyConfig:username password:password domain:domain server:nil];
+        [self setCodecsConfig];
     }
 }
 
@@ -616,6 +636,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self addProxyConfig:username password:password
                       domain:[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"]
                       server:[[LinphoneManager instance] lpConfigStringForKey:@"proxy" forSection:@"wizard"]];
+        [self setCodecsConfig];
     }
 }
 
@@ -777,9 +798,10 @@ static UICompositeViewDescription *compositeDescription = nil;
              if([response object] == [NSNumber numberWithInt:1]) {
                  NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
                  NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
-                [self addProxyConfig:username password:password
+                 [self addProxyConfig:username password:password
                               domain:[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"]
                               server:[[LinphoneManager instance] lpConfigStringForKey:@"proxy" forSection:@"wizard"]];
+                 [self setCodecsConfig];
              } else {
                  UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account validation issue",nil)
                                                                      message:NSLocalizedString(@"Your account is not validate yet.", nil)
