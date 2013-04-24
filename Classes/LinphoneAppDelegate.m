@@ -171,11 +171,15 @@
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     [self startApplication];
     if([LinphoneManager isLcReady]) {
-        if([[url scheme] isEqualToString:@"sip"]) {
+        if([[url scheme] isEqualToString:@"ring"]) {
             // Go to ChatRoom view
             DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
             if(controller != nil) {
-                [controller setAddress:[url absoluteString]];
+                NSString *address = [[url absoluteString] substringFromIndex:[[url scheme] length] + 1];
+                if ([address hasPrefix:@"//"]) {
+                    address = [address substringFromIndex:2];
+                }
+                [controller setAddress:address];
             }
         }
     }

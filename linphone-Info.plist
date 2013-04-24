@@ -49,12 +49,12 @@
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleURLIconFile</key>
-			<string>linphone_icon_72@2x</string>
+			<string>ringmail_icon_57@2x</string>
 			<key>CFBundleURLName</key>
-			<string>org.linphone.phone</string>
+			<string>com.ringmail.phone</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>sip</string>
+				<string>ring</string>
 			</array>
 		</dict>
 	</array>
