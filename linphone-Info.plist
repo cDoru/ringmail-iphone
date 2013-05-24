@@ -11,9 +11,7 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>ringmail_icon_57.png</string>
-		<string>linphone_icon_72.png</string>
 		<string>ringmail_icon_57@2x.png</string>
-		<string>ringmail_icon_72@2x.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -22,9 +20,7 @@
 			<key>CFBundleIconFiles</key>
 			<array>
 				<string>ringmail_icon_57.png</string>
-				<string>linphone_icon_72.png</string>
 				<string>ringmail_icon_57@2x.png</string>
-				<string>ringmail_icon_72@2x.png</string>
 			</array>
 		</dict>
 	</dict>
