@@ -440,11 +440,11 @@
 }
 
 - (IBAction)onOptionsClick:(id)sender {
-    if([optionsView isHidden]) {
+/*    if([optionsView isHidden]) {
         [self showOptions:[[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"]];
     } else {
         [self hideOptions:[[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"]];
-    }
+    } */
 }
 
 - (IBAction)onConferenceClick:(id)sender {

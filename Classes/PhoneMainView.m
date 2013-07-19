@@ -385,6 +385,16 @@ static PhoneMainView* phoneMainViewInstance=nil;
     return trans;
 }
 
++ (CATransition*)getChangeTransition {
+    CATransition* trans = [CATransition animation];
+    [trans setType:kCATransitionMoveIn];
+    [trans setDuration:0.35];
+    [trans setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [trans setSubtype:kCATransitionFromTop];
+    
+    return trans;
+}
+
 + (CATransition*)getTransition:(UICompositeViewDescription *)old new:(UICompositeViewDescription *)new {
     bool left = false;
     
@@ -453,13 +463,14 @@ static PhoneMainView* phoneMainViewInstance=nil;
     [LinphoneLogger logc:LinphoneLoggerLog format:"PhoneMainView: Change current view to %@", [view name]];
     
     if(force || ![view equal: currentView]) {
-        if(transition == nil)
+        /* if(transition == nil)
             transition = [PhoneMainView getTransition:currentView new:view];
         if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
             [mainViewController setViewTransition:transition];
         } else {
             [mainViewController setViewTransition:nil];
-        }
+        } */
+        [mainViewController setViewTransition:nil];
         [mainViewController changeView:view];
         currentView = view;
     } 

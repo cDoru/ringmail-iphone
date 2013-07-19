@@ -240,6 +240,30 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     }
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+	// create the parent view that will hold header Label
+	UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 22.0)];
+    customView.backgroundColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.0];
+	
+	// create the button object
+	UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+	headerLabel.backgroundColor = [UIColor clearColor];
+	headerLabel.opaque = NO;
+	headerLabel.textColor = [UIColor blackColor];
+	headerLabel.highlightedTextColor = [UIColor blackColor];
+	headerLabel.font = [UIFont boldSystemFontOfSize:18];
+	headerLabel.frame = CGRectMake(15.0, 0.0, 305.0, 22.0);
+    
+	// If you want to align the header text as centered
+	// headerLabel.frame = CGRectMake(150.0, 0.0, 300.0, 44.0);
+    
+	headerLabel.text = [addressBookMap keyAtIndex: section]; // i.e. array element
+	[customView addSubview:headerLabel];
+    
+	return customView;
+}
+
 
 #pragma mark - UITableViewDelegate Functions
 

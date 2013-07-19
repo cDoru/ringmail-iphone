@@ -139,7 +139,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *dialerButtonLandscape = (UIButton*) [landscapeView viewWithTag:[dialerButton tag]];
         // Set selected+over background: IB lack !
-        [dialerButton setBackgroundImage:[UIImage imageNamed:@"dialer_selected.png"]
+        [dialerButton setBackgroundImage:[UIImage imageNamed:@"ringmail_default.png"]
                                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
         // Set selected+over background: IB lack !
@@ -152,7 +152,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *settingsButtonLandscape = (UIButton*) [landscapeView viewWithTag:[settingsButton tag]];
         // Set selected+over background: IB lack !
-        [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings_selected.png"]
+        [settingsButton setBackgroundImage:[UIImage imageNamed:@"directory_selected.png"]
                                   forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
         // Set selected+over background: IB lack !
