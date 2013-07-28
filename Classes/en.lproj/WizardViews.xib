@@ -260,7 +260,6 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{33, 269}, {255, 50}}</string>
 						<reference key="NSSuperview" ref="361414027"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
@@ -523,7 +522,6 @@
 						<int key="NSvFlags">287</int>
 						<string key="NSFrame">{{32, 395}, {255, 50}}</string>
 						<reference key="NSSuperview" ref="183617546"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
@@ -687,7 +685,6 @@
 						<int key="NSvFlags">287</int>
 						<string key="NSFrame">{{32, 330}, {255, 50}}</string>
 						<reference key="NSSuperview" ref="101753691"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
@@ -1016,7 +1013,6 @@
 						<int key="NSvFlags">287</int>
 						<string key="NSFrame">{{32, 330}, {255, 50}}</string>
 						<reference key="NSSuperview" ref="611643284"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">

@@ -558,7 +558,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)createAccount:(NSString*)identity password:(NSString*)password email:(NSString*)email username:(NSString*)username phone:(NSString*)phone name:(NSString*)name{
     NSString *useragent = [LinphoneManager getUserAgent];
-    NSString *contacts = [self contactsToJSON];
+    NSString *contacts = NULL;
+    if ([FastAddressBook isAuthorized])
+    {
+        [self contactsToJSON];
+    }
+    else
+    {
+        contacts = @"{\"contacts\":[]}";
+    }
     [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC create_account_with_useragent %@ %@ %@ %@ %@ %@", email, password, useragent, username, phone, contacts];
     
     NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
@@ -570,6 +578,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [manager spawnConnectionWithXMLRPCRequest: request delegate: self];
     
     [request release];
+    [contacts release];
     [waitView setHidden:false];
 }
 

@@ -144,6 +144,20 @@
 		7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7066FC0B13E830E400EFC6DC /* libvpx.a */; };
 		70E542F313E147E3002BA2C0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F213E147E3002BA2C0 /* OpenGLES.framework */; };
 		70E542F513E147EB002BA2C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E542F413E147EB002BA2C0 /* QuartzCore.framework */; };
+		C402CEB31795F1AC00236255 /* dialer_alt_over.png in Resources */ = {isa = PBXBuildFile; fileRef = C402CEB21795F1AC00236255 /* dialer_alt_over.png */; };
+		C40CD7F517839AFB00E35C91 /* ringmail_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7F217839AFB00E35C91 /* ringmail_default.png */; };
+		C40CD7F617839AFB00E35C91 /* ringmail_over.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7F317839AFB00E35C91 /* ringmail_over.png */; };
+		C40CD7F717839AFB00E35C91 /* ringmail_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7F417839AFB00E35C91 /* ringmail_selected.png */; };
+		C40CD7FB17839BD700E35C91 /* directory_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7F817839BD700E35C91 /* directory_default.png */; };
+		C40CD7FC17839BD700E35C91 /* directory_over.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7F917839BD700E35C91 /* directory_over.png */; };
+		C40CD7FD17839BD700E35C91 /* directory_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7FA17839BD700E35C91 /* directory_selected.png */; };
+		C4283DEA1799B3DD00268244 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = C4283DE91799B3DD00268244 /* gear.png */; };
+		C4283DEF1799B64900268244 /* DirectoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4283DED1799B64900268244 /* DirectoryViewController.xib */; };
+		C4283DF31799B6EC00268244 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4283DF21799B6EC00268244 /* DirectoryViewController.m */; };
+		C4283DF61799C34300268244 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4283DF51799C34300268244 /* CoreLocation.framework */; };
+		C4C2D9CC17A1C9F0006D87C4 /* grey_wash_wall_@2X.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4C2D9CA17A1C9F0006D87C4 /* grey_wash_wall_@2X.jpg */; };
+		C4C2D9CD17A1C9F0006D87C4 /* grey_wash_wall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4C2D9CB17A1C9F0006D87C4 /* grey_wash_wall.jpg */; };
+		C4CB6F7C179C55A2009B70E8 /* ContactSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CB6F7B179C55A1009B70E8 /* ContactSyncManager.m */; };
 		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C90FAA7A15AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
 		C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C8253F15AE204D00D493FA /* options_add_disabled.png */; };
@@ -1296,6 +1310,22 @@
 		70E542F213E147E3002BA2C0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		70E542F413E147EB002BA2C0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* linphone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "linphone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		C402CEB21795F1AC00236255 /* dialer_alt_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dialer_alt_over.png; path = Resources/dialer_alt_over.png; sourceTree = "<group>"; };
+		C40CD7F217839AFB00E35C91 /* ringmail_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_default.png; path = Resources/ringmail_default.png; sourceTree = "<group>"; };
+		C40CD7F317839AFB00E35C91 /* ringmail_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_over.png; path = Resources/ringmail_over.png; sourceTree = "<group>"; };
+		C40CD7F417839AFB00E35C91 /* ringmail_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ringmail_selected.png; path = Resources/ringmail_selected.png; sourceTree = "<group>"; };
+		C40CD7F817839BD700E35C91 /* directory_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = directory_default.png; path = Resources/directory_default.png; sourceTree = "<group>"; };
+		C40CD7F917839BD700E35C91 /* directory_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = directory_over.png; path = Resources/directory_over.png; sourceTree = "<group>"; };
+		C40CD7FA17839BD700E35C91 /* directory_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = directory_selected.png; path = Resources/directory_selected.png; sourceTree = "<group>"; };
+		C4283DE91799B3DD00268244 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gear.png; path = Resources/gear.png; sourceTree = "<group>"; };
+		C4283DEE1799B64900268244 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DirectoryViewController.xib; sourceTree = "<group>"; };
+		C4283DF21799B6EC00268244 /* DirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryViewController.m; sourceTree = "<group>"; };
+		C4283DF41799B6FC00268244 /* DirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryViewController.h; sourceTree = "<group>"; };
+		C4283DF51799C34300268244 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C4C2D9CA17A1C9F0006D87C4 /* grey_wash_wall_@2X.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "grey_wash_wall_@2X.jpg"; path = "Resources/grey_wash_wall_@2X.jpg"; sourceTree = "<group>"; };
+		C4C2D9CB17A1C9F0006D87C4 /* grey_wash_wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = grey_wash_wall.jpg; path = Resources/grey_wash_wall.jpg; sourceTree = "<group>"; };
+		C4CB6F7A179C55A1009B70E8 /* ContactSyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncManager.h; sourceTree = "<group>"; };
+		C4CB6F7B179C55A1009B70E8 /* ContactSyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncManager.m; sourceTree = "<group>"; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
 		C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailsViewController.m; sourceTree = "<group>"; };
 		C9B3A6FD15B485DB006F52EE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Utils/Utils.h; sourceTree = "<group>"; };
@@ -1987,6 +2017,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4283DF61799C34300268244 /* CoreLocation.framework in Frameworks */,
 				D30562151671DC4900C97967 /* libNinePatch.a in Frameworks */,
 				D30562161671DC4900C97967 /* libXMLRPC.a in Frameworks */,
 				22B5F03510CE6B2F00777D97 /* AddressBook.framework in Frameworks */,
@@ -2130,6 +2161,9 @@
 				22F2508C107141E100AC9B3F /* DialerViewController.m */,
 				D38187C415FE345B00C3EDCA /* DialerViewController.xib */,
 				D38187C815FE345F00C3EDCA /* DialerViewController~ipad.xib */,
+				C4283DF41799B6FC00268244 /* DirectoryViewController.h */,
+				C4283DF21799B6EC00268244 /* DirectoryViewController.m */,
+				C4283DED1799B64900268244 /* DirectoryViewController.xib */,
 				2218A92212FBE1340088A667 /* FirstLoginViewController.h */,
 				2218A92312FBE1340088A667 /* FirstLoginViewController.m */,
 				D38187CC15FE346400C3EDCA /* FirstLoginViewController.xib */,
@@ -2180,6 +2214,8 @@
 				D38187E015FE348A00C3EDCA /* WizardViewController.xib */,
 				D3D5126E160B3AD400946DF8 /* WizardViewController~ipad.xib */,
 				D3D5126A160B3A8E00946DF8 /* WizardViews.xib */,
+				C4CB6F7A179C55A1009B70E8 /* ContactSyncManager.h */,
+				C4CB6F7B179C55A1009B70E8 /* ContactSyncManager.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2547,6 +2583,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				C4283DF51799C34300268244 /* CoreLocation.framework */,
 				2258633C11410BAC00C5A737 /* README */,
 				22276E8013C73D3100210156 /* libavcodec.a */,
 				22276E8113C73D3100210156 /* libavutil.a */,
@@ -2621,6 +2658,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C4C2D9CA17A1C9F0006D87C4 /* grey_wash_wall_@2X.jpg */,
+				C4C2D9CB17A1C9F0006D87C4 /* grey_wash_wall.jpg */,
+				C4283DE91799B3DD00268244 /* gear.png */,
 				D3F83F741582253100336684 /* accept_default.png */,
 				D3D52A751614495300DEB00A /* accept_default_landscape~ipad.png */,
 				D3D52A761614495300DEB00A /* accept_default~ipad.png */,
@@ -2801,6 +2841,7 @@
 				D3A74E7F15C69392001500B9 /* dialer_alt_over~ipad.png */,
 				D38327ED1580FE3A00FA0D23 /* dialer_default.png */,
 				D38327EE1580FE3A00FA0D23 /* dialer_over.png */,
+				C402CEB21795F1AC00236255 /* dialer_alt_over.png */,
 				D3C2814A15A2D38D0098AA42 /* dialer_selected.png */,
 				D35E9208160CAA1F0023116B /* field_background.9.png */,
 				D35E91E9160CA0BD0023116B /* field_background.9@2x.png */,
@@ -2992,8 +3033,14 @@
 				D3A74E9F15C69392001500B9 /* settings_over~ipad.png */,
 				D38327F01580FE3A00FA0D23 /* settings_selected.png */,
 				D3A74EA015C69392001500B9 /* settings_selected_landscape~ipad.png */,
+				C40CD7F817839BD700E35C91 /* directory_default.png */,
+				C40CD7F917839BD700E35C91 /* directory_over.png */,
+				C40CD7FA17839BD700E35C91 /* directory_selected.png */,
 				D3A74EA115C69392001500B9 /* settings_selected~ipad.png */,
 				D350F21315A43D3400149E54 /* setup_back_default.png */,
+				C40CD7F217839AFB00E35C91 /* ringmail_default.png */,
+				C40CD7F317839AFB00E35C91 /* ringmail_over.png */,
+				C40CD7F417839AFB00E35C91 /* ringmail_selected.png */,
 				D3F5F984160B1A0800D3DA1A /* setup_back_default_landscape~ipad.png */,
 				D3F5F985160B1A0800D3DA1A /* setup_back_default~ipad.png */,
 				D3A8BB7815A6CC3200F96BE5 /* setup_back_disabled.png */,
@@ -3332,7 +3379,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "linphone" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -3721,6 +3768,17 @@
 				152F0C7416A70C250089B0B7 /* ringmail_splashscreen-568h@2x.png in Resources */,
 				152F0C7516A70C250089B0B7 /* ringmail_splashscreen.png in Resources */,
 				152F0C7616A70C250089B0B7 /* ringmail_splashscreen@2x.png in Resources */,
+				C40CD7F517839AFB00E35C91 /* ringmail_default.png in Resources */,
+				C40CD7F617839AFB00E35C91 /* ringmail_over.png in Resources */,
+				C40CD7F717839AFB00E35C91 /* ringmail_selected.png in Resources */,
+				C40CD7FB17839BD700E35C91 /* directory_default.png in Resources */,
+				C40CD7FC17839BD700E35C91 /* directory_over.png in Resources */,
+				C40CD7FD17839BD700E35C91 /* directory_selected.png in Resources */,
+				C402CEB31795F1AC00236255 /* dialer_alt_over.png in Resources */,
+				C4283DEA1799B3DD00268244 /* gear.png in Resources */,
+				C4283DEF1799B64900268244 /* DirectoryViewController.xib in Resources */,
+				C4C2D9CC17A1C9F0006D87C4 /* grey_wash_wall_@2X.jpg in Resources */,
+				C4C2D9CD17A1C9F0006D87C4 /* grey_wash_wall.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4184,6 +4242,8 @@
 				D35E91F8160CA4FF0023116B /* UILinphoneButton.m in Sources */,
 				D306459E1611EC2A00BB571E /* UILoadingImageView.m in Sources */,
 				D37E3ECD1619C27A0087659A /* CAAnimation+Blocks.m in Sources */,
+				C4283DF31799B6EC00268244 /* DirectoryViewController.m in Sources */,
+				C4CB6F7C179C55A2009B70E8 /* ContactSyncManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4319,6 +4379,14 @@
 				FD979F30169E84670022A8B4 /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		C4283DED1799B64900268244 /* DirectoryViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4283DEE1799B64900268244 /* en */,
+			);
+			name = DirectoryViewController.xib;
 			sourceTree = "<group>";
 		};
 		D37EE11016035793003608A6 /* ImageViewController.xib */ = {
@@ -4626,15 +4694,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DYL, LLC";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "946E39AE-2382-4152-A923-5501235C7853";
 				SDKROOT = iphoneos;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4864,15 +4937,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "946E39AE-2382-4152-A923-5501235C7853";
 				SDKROOT = iphoneos;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4930,15 +5008,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DYL, LLC";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
-				PROVISIONING_PROFILE = "B73B6C05-BDA1-4903-B240-AACD024716B5";
+				PROVISIONING_PROFILE = "946E39AE-2382-4152-A923-5501235C7853";
 				SDKROOT = iphoneos;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4997,15 +5080,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DYL, LLC";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Frager (D6BYWMD2B3)";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
-				PROVISIONING_PROFILE = "B73B6C05-BDA1-4903-B240-AACD024716B5";
+				PROVISIONING_PROFILE = "946E39AE-2382-4152-A923-5501235C7853";
 				SDKROOT = iphoneos;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				TARGETED_DEVICE_FAMILY = "1,2";

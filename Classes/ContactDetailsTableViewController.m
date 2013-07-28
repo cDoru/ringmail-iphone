@@ -446,6 +446,11 @@ static const int contactSections[ContactSections_MAX] = {ContactSections_None, C
     [self addEntry:[self tableView] section:i animated:FALSE value:address];
 }
 
+- (void)addPhoneField:(NSString*)address {
+    int i = 0;
+    while(i < ContactSections_MAX && contactSections[i] != ContactSections_Number) ++i;
+    [self addEntry:[self tableView] section:i animated:FALSE value:address];
+}
 
 #pragma mark - UITableViewDataSource Functions
 

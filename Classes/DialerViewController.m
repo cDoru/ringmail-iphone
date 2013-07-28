@@ -325,6 +325,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
+- (IBAction)onSettingsClick:(id)event {
+    [[PhoneMainView instance] changeCurrentView:[SettingsViewController compositeViewDescription]];
+}
+
 - (IBAction)onBackClick: (id) event {
     [[PhoneMainView instance] changeCurrentView:[InCallViewController compositeViewDescription]];
 }

@@ -32,7 +32,7 @@ static NSString * const kDisappearAnimation = @"disappear";
 @synthesize historyButton;
 @synthesize contactsButton;
 @synthesize dialerButton;
-@synthesize settingsButton;
+@synthesize directoryButton;
 @synthesize chatButton;
 @synthesize historyNotificationView;
 @synthesize historyNotificationLabel;
@@ -51,7 +51,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     [historyButton release];
     [contactsButton release];
     [dialerButton release];
-    [settingsButton release];
+    [directoryButton release];
     [chatButton release];
     [historyNotificationView release];
     [historyNotificationLabel release];
@@ -150,17 +150,17 @@ static NSString * const kDisappearAnimation = @"disappear";
         [LinphoneUtils buttonFixStatesForTabs:dialerButtonLandscape];
     }
     {
-        UIButton *settingsButtonLandscape = (UIButton*) [landscapeView viewWithTag:[settingsButton tag]];
+        UIButton *directoryButtonLandscape = (UIButton*) [landscapeView viewWithTag:[directoryButton tag]];
         // Set selected+over background: IB lack !
-        [settingsButton setBackgroundImage:[UIImage imageNamed:@"directory_selected.png"]
+        [directoryButton setBackgroundImage:[UIImage imageNamed:@"directory_selected.png"]
                                   forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
         // Set selected+over background: IB lack !
-        [settingsButtonLandscape setBackgroundImage:[UIImage imageNamed:@"settings_selected_landscape.png"]
+        [directoryButtonLandscape setBackgroundImage:[UIImage imageNamed:@"settings_selected_landscape.png"]
                                        forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
-        [LinphoneUtils buttonFixStatesForTabs:settingsButton];
-        [LinphoneUtils buttonFixStatesForTabs:settingsButtonLandscape];
+        [LinphoneUtils buttonFixStatesForTabs:directoryButton];
+        [LinphoneUtils buttonFixStatesForTabs:directoryButtonLandscape];
     }
     
     {
@@ -378,10 +378,10 @@ static NSString * const kDisappearAnimation = @"disappear";
     } else {
         dialerButton.selected = FALSE;
     }
-    if([view equal:[SettingsViewController compositeViewDescription]]) {
-        settingsButton.selected = TRUE;
+    if([view equal:[DirectoryViewController compositeViewDescription]]) {
+        directoryButton.selected = TRUE;
     } else {
-        settingsButton.selected = FALSE;
+        directoryButton.selected = FALSE;
     }
     if([view equal:[ChatViewController compositeViewDescription]]) {
         chatButton.selected = TRUE;
@@ -409,14 +409,17 @@ static NSString * const kDisappearAnimation = @"disappear";
     [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
 }
 
-- (IBAction)onSettingsClick:(id)event {
+/* - (IBAction)onSettingsClick:(id)event {
     [[PhoneMainView instance] changeCurrentView:[SettingsViewController compositeViewDescription]];
-}
+} */
 
 - (IBAction)onChatClick:(id)event {
     [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
 }
 
+- (IBAction)onDirectoryClick:(id)event {
+    [[PhoneMainView instance] changeCurrentView:[DirectoryViewController compositeViewDescription]];
+}
 
 #pragma mark - TPMultiLayoutViewController Functions
 

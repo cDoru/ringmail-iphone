@@ -600,7 +600,8 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 		UILocalNotification* notif = [[[UILocalNotification alloc] init] autorelease];
 		if (notif) {
 			notif.repeatInterval = 0;
-			notif.alertBody = [NSString  stringWithFormat:NSLocalizedString(@"IM_MSG",nil), address];
+			//notif.alertBody = [NSString  stringWithFormat:NSLocalizedString(@"IM_MSG",nil), address];
+            notif.alertBody = [NSString stringWithFormat:@"%@:\n%@", address, chat.message];
 			notif.alertAction = NSLocalizedString(@"Show", nil);
 			notif.soundName = @"msg.caf";
 			notif.userInfo = [NSDictionary dictionaryWithObject:[chat remoteContact] forKey:@"chat"];
