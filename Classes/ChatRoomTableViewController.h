@@ -20,6 +20,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ChatModel.h"
+#import "UIBubbleTableView.h"
+#import "UIBubbleTableViewDataSource.h"
 
 @protocol ChatRoomDelegate <NSObject>
 
@@ -29,6 +31,7 @@
 @end
 
 @interface ChatRoomTableViewController : UITableViewController {
+    IBOutlet UIBubbleTableView *bubbleTable;
 @private
     NSMutableArray *data;
 }

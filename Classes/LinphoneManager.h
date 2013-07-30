@@ -32,6 +32,9 @@
 #import "FastAddressBook.h"
 #import "Utils.h"
 
+#import "ASIHTTPRequest.h"
+#import "ASIHTTPRequestDelegate.h"
+
 #include "linphonecore.h"
 
 extern const char *const LINPHONERC_APPLICATION_KEY;
@@ -88,7 +91,7 @@ typedef struct _LinphoneManagerSounds {
     SystemSoundID message;
 } LinphoneManagerSounds;
 
-@interface LinphoneManager : NSObject <AVAudioSessionDelegate> {
+@interface LinphoneManager : NSObject <AVAudioSessionDelegate,ASIHTTPRequestDelegate> {
 @protected
 	SCNetworkReachabilityRef proxyReachability;
     
@@ -100,6 +103,7 @@ typedef struct _LinphoneManagerSounds {
 	UIBackgroundTaskIdentifier pausedCallBgTask;
 	UIBackgroundTaskIdentifier incallBgTask;
 	CTCallCenter* mCallCenter;
+    NSMutableDictionary *chatDownloads;
     
 @public
     CallContext currentCallContextBeforeGoingBackground;

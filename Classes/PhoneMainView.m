@@ -626,4 +626,6 @@ static PhoneMainView* phoneMainViewInstance=nil;
     linphone_core_terminate_call([LinphoneManager getLc], call);
 }
 
+
+
 @end

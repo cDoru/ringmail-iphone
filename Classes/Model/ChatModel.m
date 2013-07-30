@@ -30,6 +30,7 @@
 @synthesize time;
 @synthesize read;
 @synthesize state;
+@synthesize indexPath;
 
 #pragma mark - Lifecycle Functions
 
@@ -57,6 +58,10 @@
     [time release];
     [read release];
     [state release];
+    if (indexPath != nil)
+    {
+        [indexPath release];
+    }
     [super dealloc];
 }
 
@@ -66,9 +71,9 @@
 }
 
 - (BOOL)isInternalImage {
-    return [message hasPrefix:@"assets-library:"];
+//    return [message hasPrefix:@"assets-library:"];
+    return [message hasPrefix:@"file:"];
 }
-
 
 #pragma mark - CRUD Functions
 

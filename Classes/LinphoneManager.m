@@ -239,6 +239,7 @@ struct codec_name_pref_table codec_pref_table[]={
         [self copyDefaultSettings];
         pendindCallIdFromRemoteNotif = [[NSMutableArray alloc] init ];
         photoLibrary = [[ALAssetsLibrary alloc] init];
+        chatDownloads = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -260,6 +261,7 @@ struct codec_name_pref_table codec_pref_table[]={
 		[LinphoneLogger logc:LinphoneLoggerError format:"cannot un register route change handler [%ld]", lStatus];
 	}
     
+    [chatDownloads release];
     [photoLibrary release];
 	[pendindCallIdFromRemoteNotif release];
     [super dealloc];
@@ -564,8 +566,16 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
     ChatModel *chat = [[ChatModel alloc] init];
     [chat setLocalContact:@""];
     [chat setRemoteContact:[NSString stringWithUTF8String:fromStr]];
+    bool image = 0;
+    NSString* imgurl = @"";
     if (linphone_chat_message_get_external_body_url(msg)) {
-		[chat setMessage:[NSString stringWithUTF8String:linphone_chat_message_get_external_body_url(msg)]];
+        CFUUIDRef theUniqueString = CFUUIDCreate(NULL);
+        CFStringRef string = CFUUIDCreateString(NULL, theUniqueString);
+        CFRelease(theUniqueString);
+        [chat setMessage:[NSString stringWithFormat:@"file:%@.png", (NSString*)string]];
+        CFRelease(string);
+        imgurl = [NSString stringWithUTF8String:linphone_chat_message_get_external_body_url(msg)];
+        image = 1;
 	} else {
 		[chat setMessage:[NSString stringWithUTF8String:linphone_chat_message_get_text(msg)]];
     }
@@ -573,12 +583,29 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
     [chat setTime:[NSDate date]];
     [chat setRead:[NSNumber numberWithInt:0]];
     [chat create];
-    
+
     ms_free(fromStr);
     
-    
+    if (image)
+    {
+        NSURL *url = [NSURL URLWithString:imgurl];
+        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+        [chatDownloads setObject:chat forKey:url];
+        [LinphoneLogger logc:LinphoneLoggerLog format:"Download Image: %@ -> %@", imgurl, chat.message];
+        [request setDelegate:self];
+        [request startAsynchronous];
+    }
+    else
+    {
+        [self notifyMessageReceived:chat];
+    }
+}
+
+- (void) notifyMessageReceived:(ChatModel*)chat
+{
+    [LinphoneLogger logc:LinphoneLoggerLog format:"Chat Notify: %@", chat.message];
     if ([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]
-		&& [UIApplication sharedApplication].applicationState !=  UIApplicationStateActive) {
+		&& [UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
         
         NSString* address = [chat remoteContact];
         NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:address];
@@ -601,20 +628,25 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 		if (notif) {
 			notif.repeatInterval = 0;
 			//notif.alertBody = [NSString  stringWithFormat:NSLocalizedString(@"IM_MSG",nil), address];
-            notif.alertBody = [NSString stringWithFormat:@"%@:\n%@", address, chat.message];
-			notif.alertAction = NSLocalizedString(@"Show", nil);
+            if ([chat isInternalImage])
+            {
+                notif.alertBody = [NSString stringWithFormat:@"%@: Image\n", address];
+            }
+            else
+            {
+                notif.alertBody = [NSString stringWithFormat:@"%@:\n%@", address, chat.message];
+            }
+            notif.alertAction = NSLocalizedString(@"Show", nil);
 			notif.soundName = @"msg.caf";
 			notif.userInfo = [NSDictionary dictionaryWithObject:[chat remoteContact] forKey:@"chat"];
-			
-			
 			[[UIApplication sharedApplication] presentLocalNotificationNow:notif];
 		}
 	}
-    
+
     // Post event
     NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
-							[NSValue valueWithPointer:room], @"room", 
-							[NSValue valueWithPointer:linphone_chat_message_get_from(msg)], @"from",
+							//room, @"room",
+							//from, @"from",
 							chat.message, @"message", 
 							chat, @"chat",
                            nil];
@@ -1462,4 +1494,30 @@ static void audioRouteChangeListenerCallback (
 		}
 	} //else nop, keep call in paused state
 }
+
+#pragma mark - ASIHTTPRequestDelegate Functions
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    ChatModel* chat = (ChatModel*)[chatDownloads objectForKey:[request url]];
+    [chatDownloads removeObjectForKey:[request url]];
+    [LinphoneLogger logc:LinphoneLoggerLog format:"Download OK: %@ -> %@", [request url], chat.message];
+    NSData *imagedata = [request responseData];
+    UIImage *image = [UIImage imageWithData:imagedata];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documents = [paths objectAtIndex:0];
+    NSString *file = chat.message;
+    NSString *file2 = [file copy];
+    file2 = [file substringFromIndex:5];
+    NSString *finalPath = [documents stringByAppendingPathComponent:file2];
+    [UIImagePNGRepresentation(image) writeToFile:finalPath atomically:YES];
+    [self notifyMessageReceived:chat];
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    [LinphoneLogger logc:LinphoneLoggerLog format:"Download Failed: %@ Error: %@", [request url], [request error]];
+}
+
+
 @end

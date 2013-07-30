@@ -18,10 +18,11 @@
  */ 
 
 #import <Foundation/Foundation.h>
-
+#import "NSBubbleData.h"
 
 @interface ChatModel : NSObject {
     @private
+    NSIndexPath *indexPath;
     NSNumber *chatId;
     NSString *localContact;
     NSString *remoteContact;
@@ -40,6 +41,7 @@
 @property (copy) NSDate *time;
 @property (copy) NSNumber *read;
 @property (copy) NSNumber *state;
+@property (copy) NSIndexPath *indexPath;
 
 - (BOOL)isExternalImage;
 - (BOOL)isInternalImage;

@@ -35,9 +35,8 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 - (void)initContactsTableViewController {
     addressBookMap  = [[OrderedDictionary alloc] init];
     avatarMap = [[NSMutableDictionary alloc] init];
-    
-    addressBook = ABAddressBookCreate();
-	
+    NSError *error = nil;
+    addressBook = ABAddressBookCreateWithOptions(NULL, (CFErrorRef *)&error);
     ABAddressBookRegisterExternalChangeCallback(addressBook, sync_address_book, self);
 }
 
@@ -244,10 +243,12 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 {
 	// create the parent view that will hold header Label
 	UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 22.0)];
+    [customView autorelease];
     customView.backgroundColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.0];
 	
 	// create the button object
 	UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [headerLabel autorelease];
 	headerLabel.backgroundColor = [UIColor clearColor];
 	headerLabel.opaque = NO;
 	headerLabel.textColor = [UIColor blackColor];

@@ -21,23 +21,30 @@
 
 #import "UIToggleButton.h"
 #import "UICompositeViewController.h"
-#import "ChatRoomTableViewController.h"
 #import "HPGrowingTextView.h"
 #import "ChatModel.h"
 #import "ImagePickerViewController.h"
 #import "ImageSharing.h"
 #import "OrderedDictionary.h"
+#import "UIBubbleTableView.h"
+#import "UIBubbleTableViewDataSource.h"
+#import "NSBubbleData.h"
+
+#import "ChatRoomTableViewController.h"
 
 #include "linphonecore.h"
 
-@interface ChatRoomViewController : UIViewController<HPGrowingTextViewDelegate, UICompositeViewDelegate, ImagePickerDelegate, ImageSharingDelegate, ChatRoomDelegate> {
+
+@interface ChatRoomViewController : UIViewController<HPGrowingTextViewDelegate, UICompositeViewDelegate, ImagePickerDelegate, ImageSharingDelegate, ChatRoomDelegate, UIBubbleTableViewDataSource> {
     LinphoneChatRoom *chatRoom;
     ImageSharing *imageSharing;
     OrderedDictionary *imageQualities;
     BOOL scrollOnGrowingEnabled;
+    NSMutableArray *chatData;
 }
 
-@property (nonatomic, retain) IBOutlet ChatRoomTableViewController* tableController;
+//@property (nonatomic, retain) IBOutlet ChatRoomTableViewController* tableController;
+@property (nonatomic, retain) IBOutlet UIBubbleTableView *bubbleTable;
 @property (nonatomic, retain) IBOutlet UIToggleButton *editButton;
 @property (nonatomic, retain) IBOutlet HPGrowingTextView* messageField;
 @property (nonatomic, retain) IBOutlet UIButton* sendButton;
@@ -64,5 +71,8 @@
 - (IBAction)onPictureClick:(id)event;
 - (IBAction)onTransferCancelClick:(id)event;
 - (IBAction)onListTap:(id)sender;
+
+- (void)addChatEntry:(ChatModel*)chat;
+- (void)updateChatEntry:(ChatModel*)chat;
 
 @end

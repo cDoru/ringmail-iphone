@@ -29,17 +29,22 @@
 #pragma mark - Lifecycle Functions
 
 - (id)init {
-    loaded = 0;
-    return [super initWithNibName:@"DirectoryViewController" bundle:[NSBundle mainBundle]];
+    self = [super initWithNibName:@"DirectoryViewController" bundle:[NSBundle mainBundle]];
+    if (self != nil)
+    {
+        loaded = 0;
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    }
+    return self;
 }
 
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
     [webview release];
     [locationManager release];
-    
     [super dealloc];
 }
 
@@ -52,9 +57,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+
     [locationManager startUpdatingLocation];
 }
 
@@ -92,7 +95,6 @@ CLLocationManager *locationManager;
 - (void) discardLocationManager
 {
     locationManager.delegate = nil;
-    [locationManager release];
 }
 
 - (void) locationManagerDone
@@ -122,6 +124,7 @@ CLLocationManager *locationManager;
             {
                 const char *username = linphone_address_get_username(addr);
                 login = [[NSString alloc] initWithCString:username encoding:[NSString defaultCStringEncoding]];
+                [login autorelease];
                 linphone_address_destroy(addr);
                 {
                     LinphoneAuthInfo *ai;
@@ -129,6 +132,7 @@ CLLocationManager *locationManager;
                     if (elem && (ai=(LinphoneAuthInfo*)elem->data)){
                         const char *pass = linphone_auth_info_get_passwd(ai);
                         password = [[NSString alloc] initWithCString:pass encoding:[NSString defaultCStringEncoding]];
+                        [password autorelease];
                     }
                 }
             }
@@ -137,8 +141,6 @@ CLLocationManager *locationManager;
         if (login && password)
         {
             [fullURL appendFormat:@"&l=%@&p=%@", [self URLEncodedString_ch:login], [self URLEncodedString_ch:password]];
-            [login release];
-            [password release];
         }
         if (longitude && latitude)
         {

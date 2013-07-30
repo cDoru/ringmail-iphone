@@ -62,7 +62,7 @@
         [data release];
     }
     data = [[ChatModel listMessages:remoteAddress] retain];
-    [[self tableView] reloadData];
+    [bubbleTable reloadData];
     [self scrollToLastUnread:false];
 }
 
@@ -71,11 +71,11 @@
         [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot add entry: null data"];
         return;
     }
-    [self.tableView beginUpdates];
+    [bubbleTable beginUpdates];
     int pos = [data count];
     [data insertObject:chat atIndex:pos];
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:pos inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView endUpdates];
+    [bubbleTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:pos inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [bubbleTable endUpdates];
 }
 
 - (void)updateChatEntry:(ChatModel*)chat {
@@ -88,17 +88,17 @@
 		[LinphoneLogger logc:LinphoneLoggerWarning format:"chat entries diesn not exixt"];
 		return;
 	}
-	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:FALSE];; //just reload
+	[bubbleTable reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:FALSE]; //just reload
 	return;
 }
 
 - (void)scrollToBottom:(BOOL)animated {
-    CGSize size = [self.tableView contentSize];
-    CGRect bounds = [self.tableView bounds];
+    CGSize size = [bubbleTable contentSize];
+    CGRect bounds = [bubbleTable bounds];
     bounds.origin.y = size.height - bounds.size.height;
     
-    [self.tableView.layer removeAllAnimations];
-    [self.tableView scrollRectToVisible:bounds animated:animated];
+    [bubbleTable.layer removeAllAnimations];
+    [bubbleTable scrollRectToVisible:bounds animated:animated];
 }
 
 - (void)scrollToLastUnread:(BOOL)animated {
@@ -123,8 +123,8 @@
     
     // Scroll to unread
     if(index >= 0) {
-        [self.tableView.layer removeAllAnimations];
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] 
+        [bubbleTable.layer removeAllAnimations];
+        [bubbleTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] 
                               atScrollPosition:UITableViewScrollPositionTop
                                       animated:animated];
     }
@@ -143,7 +143,7 @@
 
 #pragma mark - UITableViewDataSource Functions
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
@@ -161,12 +161,12 @@
     [cell setChat:[data objectAtIndex:[indexPath row]]];
     [cell setChatRoomDelegate:chatRoomDelegate];
     return cell;
-}
+}*/
 
 
 #pragma mark - UITableViewDelegate Functions
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath  {
+/*- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath  {
     if(editingStyle == UITableViewCellEditingStyleDelete) {
         [tableView beginUpdates];
         ChatModel *chat = [data objectAtIndex:[indexPath row]];
@@ -188,6 +188,18 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     ChatModel *chat = [data objectAtIndex:[indexPath row]];
     return [UIChatRoomCell height:chat width:[self.view frame].size.width];
+}*/
+
+#pragma mark - UIBubbleTableViewDataSource implementation
+
+- (NSInteger)rowsForBubbleTable:(UIBubbleTableView *)tableView
+{
+    return [data count];
+}
+
+- (NSBubbleData *)bubbleTableView:(UIBubbleTableView *)tableView dataForRow:(NSInteger)row
+{
+    return [data objectAtIndex:row];
 }
 
 @end

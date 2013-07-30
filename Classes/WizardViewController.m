@@ -553,6 +553,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSDictionary *final = @{ @"contacts":contactsArray };
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:final options:0 error:nil];
     NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [result autorelease];
     return result;
 }
 
@@ -561,7 +562,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *contacts = NULL;
     if ([FastAddressBook isAuthorized])
     {
-        [self contactsToJSON];
+        contacts = [self contactsToJSON];
     }
     else
     {
@@ -578,7 +579,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [manager spawnConnectionWithXMLRPCRequest: request delegate: self];
     
     [request release];
-    [contacts release];
     [waitView setHidden:false];
 }
 

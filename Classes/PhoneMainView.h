@@ -49,6 +49,7 @@
     NSMutableArray *viewStack;
     NSMutableArray *inhibitedEvents;
     NSTimer *batteryTimer;
+
 }
 
 @property (nonatomic, retain) IBOutlet UICompositeViewController *mainViewController;

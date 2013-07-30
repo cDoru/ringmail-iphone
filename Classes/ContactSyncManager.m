@@ -62,14 +62,14 @@
 
 -(NSMutableDictionary *) getAddressBookStats
 {
-    NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *result = [[[NSMutableDictionary alloc] init] autorelease];
     NSString *lastMod = NULL;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     [dateFormatter setLocale:enUSPOSIXLocale];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
     [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
-    NSDate *maxDate = NULL;
+    CFDateRef maxDate = NULL;
     int counter = 0;
     for (id person in contacts)
     {
@@ -77,9 +77,13 @@
         CFDateRef modDate = ABRecordCopyValue((ABRecordRef)person, kABPersonModificationDateProperty);
         if (maxDate)
         {
-            if ([maxDate compare:(NSDate*) modDate] == NSOrderedAscending)
+            if ([(NSDate*)maxDate compare:(NSDate*) modDate] == NSOrderedAscending)
             {
-                maxDate = (NSDate*)modDate;
+                if (maxDate)
+                {
+                    CFRelease(maxDate);
+                }
+                maxDate = modDate;
             }
             else
             {
@@ -88,14 +92,13 @@
         }
         else
         {
-            maxDate = (NSDate*)modDate;
+            maxDate = modDate;
         }
-
     }
     if (maxDate)
     {
-        lastMod = [dateFormatter stringFromDate: maxDate];
-        [maxDate release];
+        lastMod = [dateFormatter stringFromDate:(NSDate*)maxDate];
+        CFRelease(maxDate);
     }
     else
     {
@@ -104,7 +107,6 @@
     [result setObject:lastMod forKey:@"ts_update"];
     [dateFormatter release];
     [enUSPOSIXLocale release];
-    [lastMod release];
     NSString *count = [NSString stringWithFormat:@"%i", counter];
     [result setObject:count forKey:@"count"];
     return result;
@@ -188,6 +190,7 @@
     NSDictionary *final = @{ @"contacts":contactsArray, @"login":login, @"password":pass };
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:final options:0 error:nil];
     NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [result autorelease];
     return result;
 }
 
@@ -205,7 +208,6 @@
         [self processResponse:xmlrpc request:request];
     }
     [request release];
-    [result release];
 }
 
 - (void)processResponse:(XMLRPCResponse *)response request:(XMLRPCRequest *)request {

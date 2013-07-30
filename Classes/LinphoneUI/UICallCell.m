@@ -498,7 +498,7 @@
     if(parentTable) {
        NSIndexPath *index= [parentTable indexPathForCell:self];
         if(index != nil) {
-            [parentTable reloadRowsAtIndexPaths:[[NSArray alloc] initWithObjects:index, nil] withRowAnimation:false];
+            [parentTable reloadRowsAtIndexPaths:[NSArray arrayWithObjects:index, nil] withRowAnimation:false];
         }
     }
 }
