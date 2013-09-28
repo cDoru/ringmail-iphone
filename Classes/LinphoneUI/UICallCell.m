@@ -272,11 +272,11 @@
 #pragma mark - Static Functions
 
 + (int)getMaximizedHeight {
-    return 280;
+    return 200;
 }
 
 + (int)getMinimizedHeight {
-    return 54;
+    return 72;
 }
 
 + (void)adaptSize:(UILabel*)label field:(UIView*)field {
@@ -401,7 +401,8 @@
         [stateImage setHidden:true];
         [pauseButton setHidden:true];
         [removeButton setHidden:false];
-        [headerBackgroundImage setImage:[UIImage imageNamed:@"cell_conference.png"]];
+        //[headerBackgroundImage setImage:[UIImage imageNamed:@"cell_conference.png"]];
+        [headerBackgroundImage setImage:[UIImage imageNamed:@"cell_call_first.png"]];
     }
     
     int duration = linphone_call_get_duration(call);
@@ -507,10 +508,10 @@
 #pragma mark - Action Functions
 
 - (IBAction)doHeaderClick:(id)sender {
-    if(data) {
+    /*if(data) {
         data->minimize = !data->minimize;
         [self selfUpdate];
-    }
+    }*/
 }
 
 - (IBAction)doRemoveClick:(id)sender {

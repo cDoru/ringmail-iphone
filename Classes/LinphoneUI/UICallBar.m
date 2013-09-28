@@ -262,7 +262,7 @@
         [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot update call bar: Linphone core not ready"];
         return;
     }
-    LinphoneCore* lc = [LinphoneManager getLc]; 
+//    LinphoneCore* lc = [LinphoneManager getLc];
 
     [speakerButton update];
     [microButton update];
@@ -272,7 +272,8 @@
     
     
     // Show Pause/Conference button following call count
-    if(linphone_core_get_calls_nb(lc) > 1) {
+    // DISABLED Conferencing (It is too flaky)
+/*    if(linphone_core_get_calls_nb(lc) > 1) {
         if(![pauseButton isHidden]) {
             [pauseButton setHidden:true];
             [conferenceButton setHidden:false];
@@ -305,7 +306,7 @@
         [optionsTransferButton setEnabled:FALSE];
     } else {
         [optionsTransferButton setEnabled:TRUE];
-    }
+    } */
     
     switch(state) {
         LinphoneCallEnd:

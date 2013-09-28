@@ -138,10 +138,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     bubbleTable.bubbleDataSource = self;
     bubbleTable.snapInterval = 120;
     bubbleTable.showAvatars = NO;
-
     
-//    [tableController.tableView addGestureRecognizer:listTapGestureRecognizer];
-//    [listTapGestureRecognizer setEnabled:FALSE];
+    chatView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gplaypattern.png"]];
+
+    [bubbleTable addGestureRecognizer:listTapGestureRecognizer];
+    [listTapGestureRecognizer setEnabled:FALSE];
     
 //    [tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
 //    [tableController.tableView setBackgroundView:nil];
@@ -460,40 +461,83 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
 }
 
 - (void)saveAndSend:(UIImage*)image url:(NSURL*)url {
-    if(url == nil) {
-        [waitView setHidden:FALSE];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [[LinphoneManager instance].photoLibrary writeImageToSavedPhotosAlbum:image.CGImage
-                                                                      orientation:(ALAssetOrientation)[image imageOrientation]
-                                                                  completionBlock:^(NSURL *assetURL, NSError *error){
-                                                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                                                          [waitView setHidden:TRUE];
-                                                                          if (error) {
-                                                                              [LinphoneLogger log:LinphoneLoggerError format:@"Cannot save image data downloaded [%@]", [error localizedDescription]];
-                                                                              
-                                                                              UIAlertView* errorAlert = [UIAlertView alloc];
-                                                                              [errorAlert	initWithTitle:NSLocalizedString(@"Transfer error", nil)
-                                                                                                message:NSLocalizedString(@"Cannot write image to photo library", nil)
-                                                                                               delegate:nil
-                                                                                      cancelButtonTitle:NSLocalizedString(@"Ok",nil)
-                                                                                      otherButtonTitles:nil ,nil];
-                                                                              [errorAlert show];
-                                                                              [errorAlert release];
-                                                                              return;
-                                                                          }
-                                                                          [LinphoneLogger log:LinphoneLoggerLog format:@"Image saved to [%@]", [assetURL absoluteString]];
-                                                                          [self chatRoomStartImageUpload:image url:assetURL];
-                                                                      });
-                                                                  }];
-        });
-    } else {
-        [self chatRoomStartImageUpload:image url:url];
-    }
+    [waitView setHidden:FALSE];
+    CGSize maxsize = CGSizeMake(1600.0f, 1600.0f);
+    
+    [LinphoneLogger log:LinphoneLoggerError format:@"saveAndSend URL:%@", [url absoluteString]];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if(url == nil)
+        { // Needs to be stored
+            UIImage *tmpImage = [ImageHelper fixOrientation:image];
+            UIImage *finalImage = [ImageHelper restrictImage:tmpImage toSize:maxsize];
+            NSURL *finalUrl = [self storeImage:finalImage];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [waitView setHidden:TRUE];
+                [self chatRoomStartImageUpload:finalImage url:finalUrl];
+            });
+        }
+        else
+        { // Already in assets
+            [[LinphoneManager instance].photoLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
+                ALAssetRepresentation* representation = [asset defaultRepresentation];
+                UIImage *assetImage = [UIImage imageWithCGImage:[representation fullResolutionImage]
+                                                     scale:representation.scale
+                                               orientation:(UIImageOrientation)representation.orientation];
+                assetImage = [UIImage decodedImageWithImage:assetImage];
+                UIImage *tmpImage = [ImageHelper fixOrientation:assetImage];
+                UIImage *finalImage = [ImageHelper restrictImage:tmpImage toSize:maxsize];
+                NSURL *finalUrl = [self storeImage:finalImage];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [waitView setHidden:TRUE];
+                    [self chatRoomStartImageUpload:finalImage url:finalUrl];
+                });
+            } failureBlock:^(NSError *error) {
+                [LinphoneLogger log:LinphoneLoggerError format:@"Can't read image"];
+            }];
+        }
+    });
 }
 
-- (void)chooseImageQuality:(UIImage*)image url:(NSURL*)url {
+- (NSURL*)storeImage:(UIImage*)image
+{
+    CFUUIDRef theUniqueString = CFUUIDCreate(NULL);
+    CFStringRef string = CFUUIDCreateString(NULL, theUniqueString);
+    CFRelease(theUniqueString);
+    NSString *file = [NSString stringWithFormat:@"file:%@", (NSString*)string];
+    [LinphoneLogger log:LinphoneLoggerError format:@"Storing Image: %@", file];
+    CFRelease(string);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documents = [paths objectAtIndex:0];
+    NSString *file2 = [file copy];
+    file2 = [file substringFromIndex:5];
+    NSString *finalPath = [documents stringByAppendingPathComponent:file2];
+    [UIImageJPEGRepresentation(image, 0.9) writeToFile:[finalPath stringByAppendingString:@".jpg"] atomically:YES];
+    // Write small jpg image
+    CGSize size = image.size;
+    if (size.width > 220)
+    {
+        size.height /= (size.width / 220);
+        size.width = 220;
+    }
+    UIImage *smallImage = [ImageHelper restrictImage:image toSize:size];
+    [UIImageJPEGRepresentation(smallImage, 1.0) writeToFile:[finalPath stringByAppendingString:@"_t.jpg"] atomically:YES];
+    NSURL *url = [NSURL URLWithString:file];
+    return url;
+}
+
+- (void)confirmImageSend:(UIImage*)image url:(NSURL*)url {
+    DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"About to send image:", nil)];
+    [sheet addButtonWithTitle:@"Send Image" block:^(){
+        [self saveAndSend:image url:url];
+    }];
+    [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) block:nil];
+    [sheet showInView:[PhoneMainView instance].view];
+}
+
+/* - (void)chooseImageQuality:(UIImage*)image url:(NSURL*)url {
     [waitView setHidden:FALSE];
-    
+ 
     DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"Choose the image size", nil)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //UIImage *image = [original_image normalizedImage];
@@ -513,8 +557,7 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
             [sheet showInView:[PhoneMainView instance].view];
         });
     });
-}
-
+}*/
 
 #pragma mark - Event Functions
 
@@ -795,7 +838,8 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
     }
     
     NSURL *url = [info valueForKey:UIImagePickerControllerReferenceURL];
-    [self chooseImageQuality:image url:url];
+    [self confirmImageSend:image url:url];
+    //[self chooseImageQuality:image url:url];
 }
 
 
@@ -819,16 +863,16 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
     }
     
     // Move header view
-    {
+    /*{
         CGRect headerFrame = [headerView frame];
         headerFrame.origin.y = 0;
         [headerView setFrame:headerFrame];
-    }
+    }*/
     
     // Resize & Move table view
     {
         CGRect tableFrame = [bubbleTable frame];
-        tableFrame.origin.y = [headerView frame].origin.y + [headerView frame].size.height;
+        //tableFrame.origin.y = [headerView frame].origin.y + [headerView frame].size.height;
         double diff = tableFrame.size.height;
         tableFrame.size.height = [messageView frame].origin.y - tableFrame.origin.y;
         diff = tableFrame.size.height - diff;
@@ -875,16 +919,16 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
     }
 
     // Move header view
-    {
+    /*{
         CGRect headerFrame = [headerView frame];
         headerFrame.origin.y = -headerFrame.size.height;
         [headerView setFrame:headerFrame];
-    }
+    }*/
     
     // Resize & Move table view
     {
         CGRect tableFrame = [bubbleTable frame];
-        tableFrame.origin.y = [headerView frame].origin.y + [headerView frame].size.height;
+        //tableFrame.origin.y = [headerView frame].origin.y + [headerView frame].size.height;
         tableFrame.size.height = [messageView frame].origin.y - tableFrame.origin.y;
         [bubbleTable setFrame:tableFrame];
     }

@@ -220,10 +220,16 @@ enum TableSection {
     [cell setData:[self addCallData:call]];
     
     // Update cell
+    int count = [InCallTableViewController callCount:lc];
     if ([indexPath section] == CallSection && [indexPath row] == 0 && linphone_core_get_conference_size(lc) == 0) {
         [cell setFirstCell:true];
+
     } else {
         [cell setFirstCell:false];
+    }
+    if (count > 1)
+    {
+        cell.data->minimize = true;
     }
     [cell setCurrentCall:(currentCall == call)];
     [cell setConferenceCell:inConference];

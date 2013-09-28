@@ -22,13 +22,7 @@
 #import "ChatModel.h"
 #import "UIBubbleTableView.h"
 #import "UIBubbleTableViewDataSource.h"
-
-@protocol ChatRoomDelegate <NSObject>
-
-- (BOOL)chatRoomStartImageDownload:(NSURL*)url userInfo:(id)userInfo;
-- (BOOL)chatRoomStartImageUpload:(UIImage*)image url:(NSURL*)url;
-
-@end
+#import "ChatRoomDelegate.h"
 
 @interface ChatRoomTableViewController : UITableViewController {
     IBOutlet UIBubbleTableView *bubbleTable;

@@ -20,6 +20,8 @@
 @synthesize view = _view;
 @synthesize insets = _insets;
 @synthesize avatar = _avatar;
+@synthesize mode = _mode;
+@synthesize chat = _chat;
 
 #pragma mark - Lifecycle
 
@@ -30,6 +32,7 @@
 	_date = nil;
     [_view release];
     _view = nil;
+    [_chat release];
     
     self.avatar = nil;
 
@@ -39,8 +42,8 @@
 
 #pragma mark - Text bubble
 
-const UIEdgeInsets textInsetsMine = {5, 10, 11, 17};
-const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
+const UIEdgeInsets textInsetsMine = {5, 10, 11, 19};
+const UIEdgeInsets textInsetsSomeone = {5, 19, 11, 10};
 
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
@@ -53,8 +56,8 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
 
 - (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
-    UIFont *font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
-    CGSize size = [(text ? text : @"") sizeWithFont:font constrainedToSize:CGSizeMake(220, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+    UIFont *font = [UIFont systemFontOfSize:16.0f];
+    CGSize size = [(text ? text : @"") sizeWithFont:font constrainedToSize:CGSizeMake(260, 9999) lineBreakMode:NSLineBreakByWordWrapping];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     label.numberOfLines = 0;
@@ -68,13 +71,13 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
 #endif
     
     UIEdgeInsets insets = (type == BubbleTypeMine ? textInsetsMine : textInsetsSomeone);
-    return [self initWithView:label date:date type:type insets:insets];
+    return [self initWithView:label date:date type:type mode:BubbleModeText insets:insets];
 }
 
 #pragma mark - Image bubble
 
-const UIEdgeInsets imageInsetsMine = {11, 13, 16, 22};
-const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
+const UIEdgeInsets imageInsetsMine = {7, 9, 12, 18};
+const UIEdgeInsets imageInsetsSomeone = {7, 18, 12, 9};
 
 + (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type
 {
@@ -94,10 +97,9 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
         size.width = 220;
     }
     
-    
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     imageView.image = image;
-    imageView.layer.cornerRadius = 5.0;
+    //imageView.layer.cornerRadius = 5.0;
     imageView.layer.masksToBounds = YES;
 
     
@@ -106,7 +108,7 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 #endif
     
     UIEdgeInsets insets = (type == BubbleTypeMine ? imageInsetsMine : imageInsetsSomeone);
-    return [self initWithView:imageView date:date type:type insets:insets];       
+    return [self initWithView:imageView date:date type:type mode:BubbleModeImage insets:insets];
 }
 
 #pragma mark - Custom view bubble
@@ -114,13 +116,13 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 + (id)dataWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets
 {
 #if !__has_feature(objc_arc)
-    return [[[NSBubbleData alloc] initWithView:view date:date type:type insets:insets] autorelease];
+    return [[[NSBubbleData alloc] initWithView:view date:date type:type mode:BubbleModeCustom insets:insets] autorelease];
 #else
-    return [[NSBubbleData alloc] initWithView:view date:date type:type insets:insets];
+    return [[NSBubbleData alloc] initWithView:view date:date type:type mode:BubbleModeCustom insets:insets];
 #endif    
 }
 
-- (id)initWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets  
+- (id)initWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type mode:(NSBubbleMode)mode insets:(UIEdgeInsets)insets
 {
     self = [super init];
     if (self)
@@ -133,6 +135,7 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
         _date = date;
 #endif
         _type = type;
+        _mode = mode;
         _insets = insets;
     }
     return self;

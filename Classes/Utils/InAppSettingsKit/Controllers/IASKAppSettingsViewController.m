@@ -192,7 +192,7 @@ CGRect IASKCGRectSwap(CGRect rect);
 		[buttonItem release];
 	} 
 	if (!self.title) {
-		self.title = NSLocalizedString(@"Settings", @"");
+		self.title = NSLocalizedString(@"RingMail", @"");
 	}
 	
 	if ([self.settingsStore isKindOfClass:[IASKSettingsStoreUserDefaults class]]) {

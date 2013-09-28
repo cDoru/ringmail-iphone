@@ -18,6 +18,7 @@
 @property (nonatomic, retain) UIImageView *bubbleImage;
 @property (nonatomic, retain) UIImageView *avatarImage;
 
+
 - (void) setupInternalData;
 
 @end
@@ -117,6 +118,19 @@
     }
 
     self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom);
+}
+
+-(void)setLongPressRecognizer:(UILongPressGestureRecognizer *)newLongPressRecognizer {
+    if (_longPressRecognizer != newLongPressRecognizer) {
+        if (_longPressRecognizer != nil) {
+            [self removeGestureRecognizer:_longPressRecognizer];            
+        }
+        if (newLongPressRecognizer != nil) {            
+            [self addGestureRecognizer:newLongPressRecognizer];      
+        }
+        _longPressRecognizer = newLongPressRecognizer;        
+    }
+    
 }
 
 @end

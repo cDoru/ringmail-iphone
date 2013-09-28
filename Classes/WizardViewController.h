@@ -26,6 +26,7 @@
     UITextField *activeTextField;
     UIView *currentView;
     NSMutableArray *historyViews;
+    int regAttempts;
 }
 
 @property (nonatomic, retain) IBOutlet UIScrollView *contentView;

@@ -30,6 +30,7 @@
 #import "LinphoneManager.h"
 #import "LinphoneCoreSettingsStore.h"
 #import "ChatModel.h"
+#import "PhoneMainView.h"
 
 #include "linphonecore_utils.h"
 #include "lpconfig.h"
@@ -106,6 +107,7 @@ extern  void libmsbcg729_init();
 @synthesize logs;
 @synthesize speakerEnabled;
 @synthesize photoLibrary;
+@synthesize commandURL;
 
 struct codec_name_pref_table{
     const char *name;
@@ -527,7 +529,7 @@ static void linphone_iphone_call_state(LinphoneCore *lc, LinphoneCall* call, Lin
 }
 
 
-#pragma mark - Transfert State Functions
+#pragma mark - Transfer State Functions
 
 static void linphone_iphone_transfer_state_changed(LinphoneCore* lc, LinphoneCall* call, LinphoneCallState state) {
 }
@@ -562,6 +564,39 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
     if(fromStr == NULL)
         return;
     
+    // Check for RingMail command
+    if (linphone_chat_message_get_external_body_url(msg)) {
+        NSString* checkcmd = [NSString stringWithUTF8String:linphone_chat_message_get_external_body_url(msg)];
+        if ([checkcmd isEqualToString:@"command"])
+        {
+            NSString* ringcmd = [NSString stringWithUTF8String:linphone_chat_message_get_text(msg)];
+            [LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Command: %@", ringcmd];
+            if ([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]
+                && [UIApplication sharedApplication].applicationState != UIApplicationStateActive)
+            {
+                // Create a new notification
+                UILocalNotification* notif = [[[UILocalNotification alloc] init] autorelease];
+                if (notif)
+                {
+                    notif.repeatInterval = 0;
+                    notif.alertBody = @"RingMail Event";
+                    notif.alertAction = NSLocalizedString(@"Show", nil);
+                    notif.soundName = @"msg.caf";
+                    notif.userInfo = [NSDictionary dictionaryWithObject:ringcmd forKey:@"command"];
+                    [[UIApplication sharedApplication] presentLocalNotificationNow:notif];
+                }
+            }
+            else
+            {
+                NSURL *url = [NSURL URLWithString:ringcmd];
+                [[UIApplication sharedApplication] openURL:url];
+            }
+            //[[LinphoneManager instance] setCommandURL:ringcmd];
+            //[[PhoneMainView instance] changeCurrentView:[DirectoryViewController compositeViewDescription]];
+            return;
+        }
+    }
+    
     // Save message in database
     ChatModel *chat = [[ChatModel alloc] init];
     [chat setLocalContact:@""];
@@ -572,7 +607,7 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
         CFUUIDRef theUniqueString = CFUUIDCreate(NULL);
         CFStringRef string = CFUUIDCreateString(NULL, theUniqueString);
         CFRelease(theUniqueString);
-        [chat setMessage:[NSString stringWithFormat:@"file:%@.png", (NSString*)string]];
+        [chat setMessage:[NSString stringWithFormat:@"file:%@", (NSString*)string]];
         CFRelease(string);
         imgurl = [NSString stringWithUTF8String:linphone_chat_message_get_external_body_url(msg)];
         image = 1;
@@ -1510,7 +1545,16 @@ static void audioRouteChangeListenerCallback (
     NSString *file2 = [file copy];
     file2 = [file substringFromIndex:5];
     NSString *finalPath = [documents stringByAppendingPathComponent:file2];
-    [UIImagePNGRepresentation(image) writeToFile:finalPath atomically:YES];
+    [imagedata writeToFile:[finalPath stringByAppendingString:@".jpg"] atomically:YES];
+    // Write small jpg image
+    CGSize size = image.size;
+    if (size.width > 220)
+    {
+        size.height /= (size.width / 220);
+        size.width = 220;
+    }
+    UIImage *smallImage = [ImageHelper restrictImage:image toSize:size];
+    [UIImageJPEGRepresentation(smallImage, 1.0) writeToFile:[finalPath stringByAppendingString:@"_t.jpg"] atomically:YES];
     [self notifyMessageReceived:chat];
 }
 

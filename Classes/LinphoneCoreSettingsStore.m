@@ -12,7 +12,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       
  *  GNU General Public License for more details.                
  *                                                                      
- *  You should have received a copy of the GNU General Public License   
+ *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software         
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */  
@@ -466,8 +466,8 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	
 	BOOL account_changed;
 	
-	account_changed=[self valueChangedForKey:@"username_preference"] 
-				|| [self valueChangedForKey:@"password_preference"] 
+	account_changed=[self valueChangedForKey:@"password_preference"];
+	/*			|| [self valueChangedForKey:@"username_preference"]
 				|| [self valueChangedForKey:@"domain_preference"] 
                 || [self valueChangedForKey:@"expire_preference"] 
 				|| [self valueChangedForKey:@"proxy_preference"]
@@ -477,7 +477,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
                 || [self valueChangedForKey:@"random_port_preference"]
 				|| [self valueChangedForKey:@"prefix_preference"]
 				|| [self valueChangedForKey:@"substitute_+_by_00_preference"]
-                || [self valueChangedForKey:@"pushnotification_preference"];
+                || [self valueChangedForKey:@"pushnotification_preference"]; */
 	
 	if (account_changed)
 		[self synchronizeAccount];

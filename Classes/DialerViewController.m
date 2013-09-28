@@ -61,7 +61,15 @@
 #pragma mark - Lifecycle Functions
 
 - (id)init {
-    self = [super initWithNibName:@"DialerViewController" bundle:[NSBundle mainBundle]];
+    if (IS_IPHONE && IS_IPHONE_5)
+    {
+        self = [super initWithNibName:@"DialerViewController_iPhone5" bundle:[NSBundle mainBundle]];
+    }
+    else
+    {
+        self = [super initWithNibName:@"DialerViewController" bundle:[NSBundle mainBundle]];
+    }
+    
     if(self) {
         self->transferMode = FALSE;
     }
@@ -249,7 +257,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark -
 
 - (void)callUpdate:(LinphoneCall*)call state:(LinphoneCallState)state {
-    if([LinphoneManager isLcReady]) {
+    /*if([LinphoneManager isLcReady]) {
         LinphoneCore *lc = [LinphoneManager getLc];
         if(linphone_core_get_calls_nb(lc) > 0) {
             if(transferMode) {
@@ -269,7 +277,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [addContactButton setHidden:false];
             [transferButton setHidden:true];
         }
-    }
+    }*/
 }
 
 - (void)setAddress:(NSString*) address {
@@ -289,6 +297,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     if(contact) {
         displayName = [FastAddressBook getContactDisplayName:contact];
     }
+    [self setAddress:@""];
     [self call:address displayName:displayName];
 }
 

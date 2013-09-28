@@ -18,7 +18,6 @@
  */ 
 
 #import <Foundation/Foundation.h>
-#import "NSBubbleData.h"
 
 @interface ChatModel : NSObject {
     @private

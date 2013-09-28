@@ -6,35 +6,9 @@
 	<array>
 		<dict>
 			<key>Title</key>
-			<string>SIP account</string>
+			<string>RingMail Account</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>Key</key>
-			<string>wizard_button</string>
-			<key>Title</key>
-			<string>Wizard</string>
-			<key>Type</key>
-			<string>IASKButtonSpecifier</string>
-		</dict>
-		<dict>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-			<key>DefaultValue</key>
-			<string></string>
-			<key>IsSecure</key>
-			<false/>
-			<key>Key</key>
-			<string>username_preference</string>
-			<key>KeyboardType</key>
-			<string>Alphabet</string>
-			<key>Title</key>
-			<string>User name</string>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
 		</dict>
 		<dict>
 			<key>AutocapitalizationType</key>
@@ -55,66 +29,26 @@
 			<string>PSTextFieldSpecifier</string>
 		</dict>
 		<dict>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-			<key>DefaultValue</key>
-			<string></string>
-			<key>IsSecure</key>
-			<false/>
-			<key>Key</key>
-			<string>domain_preference</string>
-			<key>KeyboardType</key>
-			<string>URL</string>
-			<key>Title</key>
-			<string>Domain</string>
 			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Invite to RingMail</string>
 		</dict>
 		<dict>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-			<key>DefaultValue</key>
-			<string></string>
-			<key>IsSecure</key>
-			<false/>
-			<key>Key</key>
-			<string>proxy_preference</string>
-			<key>KeyboardType</key>
-			<string>URL</string>
-			<key>Title</key>
-			<string>Proxy</string>
 			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-		</dict>
-		<dict>
-			<key>DefaultValue</key>
-			<false/>
-			<key>Key</key>
-			<string>outbound_proxy_preference</string>
+			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
-			<string>Outbound proxy</string>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
+			<string>Share on Facebook</string>
+			<key>Key</key>
+			<string>share_facebook</string>
+			<key>IASKCellImage</key>
+			<string>tiny_facebook.png</string>
 		</dict>
 		<dict>
 			<key>Title</key>
 			<string>Settings</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Enable video</string>
-			<key>Key</key>
-			<string>enable_video_preference</string>
-			<key>DefaultValue</key>
-			<true/>
 		</dict>
 		<dict>
 			<key>Key</key>
@@ -165,6 +99,20 @@
 			<string>Advanced</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Logout</string>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string>wizard_button</string>
+			<key>Title</key>
+			<string>Wizard</string>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
 		</dict>
 		<dict>
 			<key>Title</key>

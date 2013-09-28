@@ -109,10 +109,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [HistoryDetailsViewController adaptSize:dateHeaderLabel field:dateLabel];
-    [HistoryDetailsViewController adaptSize:durationHeaderLabel field:durationLabel];
-    [HistoryDetailsViewController adaptSize:typeHeaderLabel field:typeLabel];
-    [HistoryDetailsViewController adaptSize:plainAddressHeaderLabel field:plainAddressLabel];
+    //[HistoryDetailsViewController adaptSize:dateHeaderLabel field:dateLabel];
+    //[HistoryDetailsViewController adaptSize:durationHeaderLabel field:durationLabel];
+    //[HistoryDetailsViewController adaptSize:typeHeaderLabel field:typeLabel];
+    //[HistoryDetailsViewController adaptSize:plainAddressHeaderLabel field:plainAddressLabel];
     [callButton.titleLabel setAdjustsFontSizeToFitWidth:TRUE]; // Auto shrink: IB lack!
     [messageButton.titleLabel setAdjustsFontSizeToFitWidth:TRUE]; // Auto shrink: IB lack!
 }

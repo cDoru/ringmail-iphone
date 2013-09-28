@@ -16,6 +16,9 @@
 #import "ChatModel.h"
 #import "LinphoneManager.h"
 #import "UILinphone.h"
+#import "Utils.h"
+#import "PhoneMainView.h"
+
 #import <AssetsLibrary/ALAsset.h>
 #import <AssetsLibrary/ALAssetRepresentation.h>
 

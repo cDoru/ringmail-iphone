@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -61,7 +61,7 @@
 							<object class="IBUIButton" id="174033966">
 								<reference key="NSNextResponder" ref="852221244"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrameSize">{160, 44}</string>
+								<string key="NSFrame">{{9, 7}, {83, 29}}</string>
 								<reference key="NSSuperview" ref="852221244"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1001279594"/>
@@ -74,45 +74,46 @@
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIAdjustsImageWhenHighlighted">NO</bool>
-								<double key="IBUITitleEdgeInsets.top">18</double>
+								<double key="IBUITitleEdgeInsets.top">0.0</double>
 								<double key="IBUITitleEdgeInsets.bottom">0.0</double>
-								<double key="IBUITitleEdgeInsets.left">0.0</double>
+								<double key="IBUITitleEdgeInsets.left">20</double>
 								<double key="IBUITitleEdgeInsets.right">0.0</double>
-								<string key="IBUINormalTitle">New discussion</string>
-								<object class="NSColor" key="IBUIHighlightedTitleColor" id="855304610">
-									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MCAwIDAAA</bytes>
+								<string key="IBUINormalTitle">Chat</string>
+								<object class="NSColor" key="IBUIHighlightedTitleColor" id="609335794">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MAA</bytes>
 								</object>
-								<object class="NSColor" key="IBUINormalTitleColor">
-									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MC4zNTY4NjI3NDUxIDAuMzk2MDc4NDMxNCAwLjQzNTI5NDExNzYAA</bytes>
+								<object class="NSColor" key="IBUISelectedTitleColor" id="543828123">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MQA</bytes>
 								</object>
+								<reference key="IBUINormalTitleColor" ref="609335794"/>
 								<object class="NSColor" key="IBUINormalTitleShadowColor" id="378691752">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
 								</object>
 								<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">chat_add_over.png</string>
+									<string key="NSResourceName">chat_contact_over.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">chat_add_default.png</string>
+									<string key="NSResourceName">chat_contact_default.png</string>
 								</object>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="11710199">
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">1</int>
-									<double key="pointSize">14</double>
+									<double key="pointSize">18</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="663617070">
+								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica</string>
-									<double key="NSSize">14</double>
+									<double key="NSSize">18</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
 							<object class="IBUIButton" id="1001279594">
 								<reference key="NSNextResponder" ref="852221244"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{160, 0}, {160, 44}}</string>
+								<string key="NSFrame">{{269, 7}, {43, 29}}</string>
 								<reference key="NSSuperview" ref="852221244"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="585481821"/>
@@ -125,36 +126,37 @@
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIAdjustsImageWhenHighlighted">NO</bool>
-								<double key="IBUITitleEdgeInsets.top">25</double>
-								<double key="IBUITitleEdgeInsets.bottom">0.0</double>
-								<double key="IBUITitleEdgeInsets.left">0.0</double>
-								<double key="IBUITitleEdgeInsets.right">0.0</double>
-								<string key="IBUISelectedTitle">Ok</string>
+								<double key="IBUIImageEdgeInsets.top">0.0</double>
+								<double key="IBUIImageEdgeInsets.bottom">0.0</double>
+								<double key="IBUIImageEdgeInsets.left">0.0</double>
+								<double key="IBUIImageEdgeInsets.right">8</double>
+								<string key="IBUISelectedTitle">OK</string>
 								<string key="IBUINormalTitle">Edit</string>
-								<reference key="IBUIHighlightedTitleColor" ref="855304610"/>
-								<object class="NSColor" key="IBUISelectedTitleColor">
+								<object class="NSColor" key="IBUIHighlightedTitleColor">
 									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MC41MjU0OTAyMjQ0IDAuNzk2MDc4NDQzNSAwLjA1NDkwMTk2MTI0AA</bytes>
+									<bytes key="NSRGB">MCAwIDAAA</bytes>
 								</object>
-								<object class="NSColor" key="IBUINormalTitleColor" id="543828123">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MQA</bytes>
-								</object>
+								<reference key="IBUISelectedTitleColor" ref="609335794"/>
+								<reference key="IBUINormalTitleColor" ref="609335794"/>
 								<reference key="IBUINormalTitleShadowColor" ref="378691752"/>
-								<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage">
+								<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage" id="527644491">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">chat_edit_over.png</string>
 								</object>
-								<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">chat_ok_default.png</string>
-								</object>
+								<reference key="IBUISelectedBackgroundImage" ref="527644491"/>
 								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">chat_edit_default.png</string>
 								</object>
-								<reference key="IBUIFontDescription" ref="11710199"/>
-								<reference key="IBUIFont" ref="663617070"/>
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
+									<int key="type">1</int>
+									<double key="pointSize">14</double>
+								</object>
+								<object class="NSFont" key="IBUIFont">
+									<string key="NSName">Helvetica</string>
+									<double key="NSSize">14</double>
+									<int key="NSfFlags">16</int>
+								</object>
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 44}</string>
@@ -174,9 +176,10 @@
 					<object class="IBUITableView" id="69932958">
 						<reference key="NSNextResponder" ref="1010501960"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 79}, {320, 381}}</string>
+						<string key="NSFrame">{{0, 79}, {320, 382}}</string>
 						<reference key="NSSuperview" ref="1010501960"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="543828123"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -204,7 +207,7 @@
 					<object class="IBUITextField" id="585481821">
 						<reference key="NSNextResponder" ref="1010501960"/>
 						<int key="NSvFlags">290</int>
-						<string key="NSFrame">{{2, 44}, {316, 35}}</string>
+						<string key="NSFrame">{{4, 46}, {312, 31}}</string>
 						<reference key="NSSuperview" ref="1010501960"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="69932958"/>
@@ -221,7 +224,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
-						<string key="IBUIPlaceholder">To:</string>
+						<string key="IBUIPlaceholder"> Message To:</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -450,7 +453,7 @@
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.CustomClassName">UIToggleButton</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="1" key="9.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
+				<real value="2" key="9.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
 				<real value="2" key="9.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
@@ -552,11 +555,10 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="chat_add_default.png">{320, 92}</string>
-			<string key="chat_add_over.png">{320, 92}</string>
-			<string key="chat_edit_default.png">{320, 81}</string>
-			<string key="chat_edit_over.png">{320, 81}</string>
-			<string key="chat_ok_default.png">{320, 92}</string>
+			<string key="chat_contact_default.png">{166, 59}</string>
+			<string key="chat_contact_over.png">{166, 59}</string>
+			<string key="chat_edit_default.png">{86, 59}</string>
+			<string key="chat_edit_over.png">{86, 59}</string>
 			<string key="field_background.png">{542, 88}</string>
 			<string key="toolsbar_background.png">{5, 88}</string>
 		</dictionary>

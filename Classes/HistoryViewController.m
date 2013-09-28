@@ -122,7 +122,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self changeView: History_All];
     
     // Set selected+over background: IB lack !
-    [editButton setBackgroundImage:[UIImage imageNamed:@"history_ok_over.png"]
+    [editButton setBackgroundImage:[UIImage imageNamed:@"chat_edit_over.png"]
                           forState:(UIControlStateHighlighted | UIControlStateSelected)];
     
     [LinphoneUtils buttonFixStates:editButton];

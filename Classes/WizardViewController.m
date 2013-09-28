@@ -208,6 +208,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [LinphoneLogger logc:LinphoneLoggerError format:"cannot set transport"];
     }
     
+    [[LinphoneManager instance] lpConfigSetBool:TRUE forKey:@"debugenable_preference"];
     [[LinphoneManager instance] lpConfigSetString:@"" forKey:@"sharing_server_preference"];
     [[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"ice_preference"];
     [[LinphoneManager instance] lpConfigSetString:@"" forKey:@"stun_preference"];
@@ -432,7 +433,14 @@ static UICompositeViewDescription *compositeDescription = nil;
  	const MSList *elem = codecs;
 	for(;elem != NULL; elem = elem->next) {
 		PayloadType *pt = (PayloadType*)elem->data;
-        if ((strcmp(pt->mime_type, "PCMU") == 0) || (strcmp(pt->mime_type, "VP8") == 0)) {
+        if (
+            (strcmp(pt->mime_type, "PCMU") == 0) ||
+            (strcmp(pt->mime_type, "G722") == 0) ||
+            (strcmp(pt->mime_type, "speex") == 0) ||
+            (strcmp(pt->mime_type, "iLBC") == 0) ||
+            (strcmp(pt->mime_type, "SILK") == 0) ||
+            (strcmp(pt->mime_type, "VP8") == 0)
+        ) {
             linphone_core_enable_payload_type(lc, pt, true);
         } else {
             linphone_core_enable_payload_type(lc, pt, false);
@@ -710,11 +718,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     int password_length = [[LinphoneManager instance] lpConfigIntForKey:@"password_length" forSection:@"wizard"];
 
     if ([username length] < username_length) {
-        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"The username is too short (minimum %d characters).\n", nil), username_length]];
+        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"The login is too short (minimum %d characters).\n", nil), username_length]];
     }
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @".+@.+\\.[A-Za-z]{2}[A-Za-z]*"];
     if(![emailTest evaluateWithObject:username]) {
-        [errors appendString:NSLocalizedString(@"The email is invalid.\n", nil)];
+        [errors appendString:NSLocalizedString(@"The login is invalid.\n", nil)];
     }
     
     if ([password length] < password_length) {
@@ -735,6 +743,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                       domain:[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"]
                       server:[[LinphoneManager instance] lpConfigStringForKey:@"proxy" forSection:@"wizard"]];
         [self setCodecsConfig];
+        regAttempts = 1;
     }
 }
 
@@ -786,7 +795,26 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - Event Functions
 
 - (void)registrationUpdateEvent:(NSNotification*)notif {
-    [self registrationUpdate:[[notif.userInfo objectForKey: @"state"] intValue]];
+    int state = [[notif.userInfo objectForKey: @"state"] intValue];
+    /*if (state == LinphoneRegistrationFailed)
+    {
+        if ([[notif.userInfo objectForKey: @"message"] isEqualToString:@"no response timeout"])
+        {
+            if (++regAttempts < 10) // Try 10 times to connect because of slow SSL
+            {
+                [LinphoneLogger log:LinphoneLoggerLog format:@"RETRY REGISTRATION ATTEMPT: %d", regAttempts];
+                NSString *username = [WizardViewController findTextField:ViewElement_Email  view:contentView].text;
+                NSString *password = [WizardViewController findTextField:ViewElement_Password  view:contentView].text;
+                [self clearProxyConfig];
+                [self addProxyConfig:username password:password
+                              domain:[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"]
+                              server:[[LinphoneManager instance] lpConfigStringForKey:@"proxy" forSection:@"wizard"]];
+                [self setCodecsConfig];
+                return;
+            }
+        }
+    }*/
+    [self registrationUpdate:state];
 }
 
 

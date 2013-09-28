@@ -34,6 +34,7 @@
 
 #import "ASIHTTPRequest.h"
 #import "ASIHTTPRequestDelegate.h"
+#import "ImageHelper.h"
 
 #include "linphonecore.h"
 
@@ -169,6 +170,7 @@ typedef struct _LinphoneManagerSounds {
 @property (readonly) NSMutableArray *logs;
 @property (nonatomic, assign) BOOL speakerEnabled;
 @property (readonly) ALAssetsLibrary *photoLibrary;
+@property (nonatomic, retain) NSString *commandURL;
 
 @end
 

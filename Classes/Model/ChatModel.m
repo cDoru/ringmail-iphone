@@ -200,10 +200,40 @@
     }
     
     sqlite3_finalize(sqlStatement);
+    
+    
+    // Delete images
+    if ([self isInternalImage])
+    {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documents = [paths objectAtIndex:0];
+        NSString *file = message;
+        NSString *file2 = [file copy];
+        file2 = [file substringFromIndex:5];
+        NSString *finalPath = [documents stringByAppendingPathComponent:file2];
+        NSFileManager *fileMgr = [NSFileManager defaultManager];
+        NSError *error;
+        if ([fileMgr removeItemAtPath:[finalPath stringByAppendingString:@".jpg"] error:&error] != YES)
+        {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Error deleting file %@.jpg: %@", finalPath, [error localizedDescription]];
+        }
+        else
+        {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Deleted file %@.jpg", finalPath];
+        }
+        if ([fileMgr removeItemAtPath:[finalPath stringByAppendingString:@"_t.jpg"] error:&error] != YES)
+        {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Error deleting file %@_t.jpg: %@", finalPath, [error localizedDescription]];
+        }
+        else
+        {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Deleted file %@_t.jpg", finalPath];
+        }
+    }
 }
 
 
-#pragma mark - 
+#pragma mark -
 
 + (NSMutableArray *)listConversations {
     NSMutableArray *array = [NSMutableArray array];
@@ -273,7 +303,13 @@
 }
 
 + (void)removeConversation:(NSString *)contact {
-    sqlite3* database = [[LinphoneManager instance] database];
+    NSArray *msgs = [self listMessages:contact];
+    for (id chat in msgs)
+    {
+        [chat delete];
+    }
+    
+/*    sqlite3* database = [[LinphoneManager instance] database];
     if(database == NULL) {
         [LinphoneLogger logc:LinphoneLoggerError format:"Database not ready"];
         return;
@@ -295,7 +331,7 @@
         return;
     }
     
-    sqlite3_finalize(sqlStatement);
+    sqlite3_finalize(sqlStatement); */
 }
 
 + (int)unreadMessages {

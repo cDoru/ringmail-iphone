@@ -239,7 +239,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+/*- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
 	// create the parent view that will hold header Label
 	UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 22.0)];
@@ -263,7 +263,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 	[customView addSubview:headerLabel];
     
 	return customView;
-}
+}*/
 
 
 #pragma mark - UITableViewDelegate Functions

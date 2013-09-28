@@ -30,10 +30,11 @@
 #import "UIBubbleTableViewDataSource.h"
 #import "NSBubbleData.h"
 
-#import "ChatRoomTableViewController.h"
+#import "ChatRoomDelegate.h"
 
 #include "linphonecore.h"
 
+#import "ImageHelper.h"
 
 @interface ChatRoomViewController : UIViewController<HPGrowingTextViewDelegate, UICompositeViewDelegate, ImagePickerDelegate, ImageSharingDelegate, ChatRoomDelegate, UIBubbleTableViewDataSource> {
     LinphoneChatRoom *chatRoom;

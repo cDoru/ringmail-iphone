@@ -75,7 +75,7 @@ static const int contactSections[ContactSections_MAX] = {ContactSections_None, C
 - (void)initContactDetailsTableViewController {
     dataCache = [[NSMutableArray alloc] init];
     labelArray = [[NSMutableArray alloc] initWithObjects:
-                  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"],
+                  //[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"],
                   [NSString stringWithString:(NSString*)kABPersonPhoneMobileLabel], 
                   [NSString stringWithString:(NSString*)kABPersonPhoneIPhoneLabel],
                   [NSString stringWithString:(NSString*)kABPersonPhoneMainLabel], nil];

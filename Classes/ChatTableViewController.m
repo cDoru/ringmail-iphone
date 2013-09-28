@@ -75,7 +75,7 @@
         // Background View
         UACellBackgroundView *selectedBackgroundView = [[[UACellBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
         cell.selectedBackgroundView = selectedBackgroundView;
-        [selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
+        [selectedBackgroundView setBackgroundColor:[UIColor colorWithRed:0.337 green:0.737 blue:0.969 alpha:1.0]];
     }
     
     [cell setChat:[data objectAtIndex:[indexPath row]]];

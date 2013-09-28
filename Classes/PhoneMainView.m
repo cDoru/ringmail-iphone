@@ -219,9 +219,9 @@ static PhoneMainView* phoneMainViewInstance=nil;
 		NSString* lErrorMessage = nil;
         LinphoneReason reason = linphone_proxy_config_get_error(cfg);
 		if (reason == LinphoneReasonBadCredentials) {
-			lErrorMessage = NSLocalizedString(@"Bad credentials, check your account settings", nil);
+			lErrorMessage = NSLocalizedString(@"Wrong login or password", nil);
 		} else if (reason == LinphoneReasonNoResponse) {
-			lErrorMessage = NSLocalizedString(@"SIP server unreachable", nil);
+			lErrorMessage = NSLocalizedString(@"Server unreachable", nil);
 		} else {
             lErrorMessage = NSLocalizedString(@"Unknown error", nil);
         }
@@ -290,10 +290,15 @@ static PhoneMainView* phoneMainViewInstance=nil;
         {
             if (canHideInCallView) {
                 // Go to dialer view
-                DialerViewController *controller = DYNAMIC_CAST([self changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
-                if(controller != nil) {
-                    [controller setAddress:@""];
-                    [controller setTransferMode:FALSE];
+                
+                // Check if view is still in-call view
+                if([[self currentView] equal:[InCallViewController compositeViewDescription]])
+                {
+                    DialerViewController *controller = DYNAMIC_CAST([self changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
+                    if(controller != nil) {
+                        [controller setAddress:@""];
+                        [controller setTransferMode:FALSE];
+                    }
                 }
             } else {
                 [self changeCurrentView:[InCallViewController compositeViewDescription]];

@@ -241,11 +241,11 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     [super viewDidLoad];
     
     // Set selected+over background: IB lack !
-    [editButton setBackgroundImage:[UIImage imageNamed:@"contact_ok_over.png"]
+    [editButton setBackgroundImage:[UIImage imageNamed:@"chat_edit_over.png"]
                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
     
     // Set selected+disabled background: IB lack !
-    [editButton setBackgroundImage:[UIImage imageNamed:@"contact_ok_disabled.png"]
+    [editButton setBackgroundImage:[UIImage imageNamed:@"chat_edit_over.png"]
                 forState:(UIControlStateDisabled | UIControlStateSelected)];
     
     [LinphoneUtils buttonFixStates:editButton];

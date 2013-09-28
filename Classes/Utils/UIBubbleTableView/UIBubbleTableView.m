@@ -158,42 +158,6 @@
 
 #pragma mark - Bubble Data
 
-/*- (void) loadBubbleImages:(ChatModel*)chat
-{
-    NSBubbleType dir;
-    if([chat.direction intValue]) // Incoming
-    {
-        dir = BubbleTypeSomeoneElse;
-    }
-    else
-    {
-        dir = BubbleTypeMine;       
-    }
-    if ([chat isExternalImage])
-    {
-    }
-    else if ([chat isInternalImage])
-    {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Begin Loading: %@", chat.message];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^(void) {
-            [[LinphoneManager instance].photoLibrary assetForURL:[NSURL URLWithString:[chat message]] resultBlock:^(ALAsset *asset) {                
-                ALAssetRepresentation* representation = [asset defaultRepresentation];
-                UIImage *image = [UIImage imageWithCGImage:[representation fullResolutionImage]
-                                                     scale:representation.scale
-                                               orientation:(UIImageOrientation)representation.orientation];
-                image = [UIImage decodedImageWithImage:image];
-                NSBubbleData* bubble = [NSBubbleData dataWithImage:image date:chat.time type:dir];
-                [LinphoneLogger logc:LinphoneLoggerWarning format:"Done Loading: %@", chat.message];
-                NSArray* data = [NSArray arrayWithObjects:[chat indexPath], bubble, nil];
-                [self performSelectorOnMainThread:@selector(updateBubbleData:) withObject:data waitUntilDone:YES];
-                //[self updateBubble:[chat indexPath] bubbleData:bubble];
-            } failureBlock:^(NSError *error) {
-                [LinphoneLogger log:LinphoneLoggerError format:@"Can't read image"];
-            }];
-        });
-    }
-}*/
-
 - (NSBubbleData *)makeBubbleData:(ChatModel*)chat indexPath:(NSIndexPath*)path
 {
     [chat setIndexPath:path];
@@ -215,7 +179,7 @@
         NSString *file2 = [file copy];
         file2 = [file substringFromIndex:5];
         NSString *finalPath = [documents stringByAppendingPathComponent:file2];
-        UIImage *image = [UIImage imageWithContentsOfFile:finalPath];
+        UIImage *image = [UIImage imageWithContentsOfFile:[finalPath stringByAppendingString:@"_t.jpg"]];
         bubble = [NSBubbleData dataWithImage:image date:chat.time type:dir];
     }
     else
@@ -223,6 +187,7 @@
         bubble = [NSBubbleData dataWithText:chat.message date:chat.time type:dir];
     }
     bubble.avatar = nil;
+    bubble.chat = chat;
     [LinphoneLogger logc:LinphoneLoggerWarning format:"Chat Bubble: %@", chat.message];
     return bubble;
 }
@@ -304,21 +269,42 @@
     cell.data = data;
     cell.showAvatar = self.showAvatars;
     
+    if (cell.data.mode == BubbleModeImage)
+    {
+        if (cell.longPressRecognizer == nil)
+        {
+            UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+            cell.longPressRecognizer = longPressRecognizer;  
+        }
+    }    
+    else {
+        
+        cell.longPressRecognizer = nil;        
+    }    
     return cell;
 }
 
-/*-(void) updateBubbleData:(NSArray*)data
-{
-    [self updateBubble:(NSIndexPath*)[data objectAtIndex:0] bubbleData:(NSBubbleData*)[data objectAtIndex:1]];
-}
+#pragma mark - Handling long presses
 
--(void) updateBubble:(NSIndexPath *)indexPath bubbleData:(NSBubbleData*)newBubble
+-(void)handleLongPress:(UILongPressGestureRecognizer*)longPressRecognizer
 {
-    [[self.bubbleSection objectAtIndex:indexPath.section] replaceObjectAtIndex:(indexPath.row - 1) withObject:newBubble];
-    NSArray *paths = [NSArray arrayWithObject:indexPath];
-    [self beginUpdates];
-    [self reloadRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationRight];
-    [self endUpdates];
-}*/
+    if (longPressRecognizer.state == UIGestureRecognizerStateBegan)
+    {
+        UIBubbleTableViewCell *cell = (UIBubbleTableViewCell*)longPressRecognizer.view;
+        [LinphoneLogger logc:LinphoneLoggerWarning format:"Image Pressed: %@", cell.data.chat.message];
+        
+        ImageViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ImageViewController compositeViewDescription] push:TRUE], ImageViewController);
+        if(controller != nil) {
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documents = [paths objectAtIndex:0];
+            NSString *file = cell.data.chat.message;
+            NSString *file2 = [file copy];
+            file2 = [file substringFromIndex:5];
+            NSString *finalPath = [documents stringByAppendingPathComponent:file2];
+            UIImage *image = [UIImage imageWithContentsOfFile:[finalPath stringByAppendingString:@".jpg"]];
+            [controller setImage:image];
+        }
+    }
+}
 
 @end

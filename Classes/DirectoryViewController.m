@@ -57,7 +57,18 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+/*    NSString* commandURL = [[LinphoneManager instance] commandURL];
+    if (commandURL)
+    {
+        if ([commandURL length] > 0)
+        {
+            NSURL *url = [NSURL URLWithString:commandURL];
+            NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+            [webview loadRequest:requestObj];
+            [[LinphoneManager instance] setCommandURL:@""];
+            return;
+        }
+    } */
     [locationManager startUpdatingLocation];
 }
 
