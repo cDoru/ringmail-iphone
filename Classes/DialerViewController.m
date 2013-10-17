@@ -25,6 +25,7 @@
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "Utils.h"
+#import "SMRotaryWheel.h"
 
 #include "linphonecore.h"
 
@@ -57,6 +58,7 @@
 @synthesize backgroundView;
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
+@synthesize rotationView;
 
 #pragma mark - Lifecycle Functions
 
@@ -100,6 +102,7 @@
     
     [videoPreview release];
     [videoCameraSwitch release];
+    [rotationView release];
     
     // Remove all observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -202,6 +205,13 @@ static UICompositeViewDescription *compositeDescription = nil;
             [videoCameraSwitch setHidden:FALSE];
         }
     }
+    
+    SMRotaryWheel *wheel = [[SMRotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 310, 310)
+                                                    andDelegate:self
+                                                   withSections:8];
+    
+    wheel.center = [rotationView convertPoint:rotationView.center fromView:rotationView.superview];
+    [rotationView addSubview:wheel];
 }
 
 - (void)viewDidUnload {
@@ -318,6 +328,12 @@ static UICompositeViewDescription *compositeDescription = nil;
         [addressField resignFirstResponder];
     } 
     return YES;
+}
+
+#pragma mark - SMRotaryWheel Functions
+
+- (void)wheelDidChangeValue:(NSString *)newValue {
+    return;
 }
 
 
