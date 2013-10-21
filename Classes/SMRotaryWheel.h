@@ -24,13 +24,8 @@
 @property int totalSpin;
 @property int lastRotate;
 @property int lastLeft;
-@property int totalItems;
-@property (nonatomic, retain) NSMutableArray *contacts;
-@property (nonatomic, retain) NSMutableArray *avatarMap;
-
 
 - (id) initWithFrame:(CGRect)frame andDelegate:(id)del withSections:(int)sectionsNumber;
+- (void) updateAll;
 
 @end
-
-//wheel	SMRotaryWheel *	0x125d6380	0x125d6380

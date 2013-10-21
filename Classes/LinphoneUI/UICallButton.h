@@ -24,5 +24,6 @@
 }
 
 @property (nonatomic, retain) IBOutlet UITextField* addressField;
+@property (nonatomic, retain) NSString* hiddenAddress;
 
 @end

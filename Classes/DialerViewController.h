@@ -26,7 +26,7 @@
 #import "UICallButton.h"
 #import "UITransferButton.h"
 #import "UIDigitButton.h"
-#import "SMRotaryPRotocol.h"
+#import "SMRotaryProtocol.h"
 
 @interface DialerViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, SMRotaryProtocol> {
 }
@@ -61,9 +61,11 @@
 @property (nonatomic, retain) IBOutlet UIView* videoPreview;
 @property (nonatomic, retain) IBOutlet UICamSwitch* videoCameraSwitch;
 @property (nonatomic, retain) IBOutlet UIView* rotationView;
+@property (nonatomic, retain) SMRotaryWheel *wheel;
 
 - (IBAction)onAddContactClick: (id) event;
 - (IBAction)onBackClick: (id) event;
 - (IBAction)onAddressChange: (id)sender;
+- (IBAction)onAddressClick: (id)sender;
 
 @end

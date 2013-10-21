@@ -6,6 +6,7 @@
 //
 //
 
+#import "Utils.h"
 #import "SMRotaryImage.h"
 
 @implementation SMRotaryImage
@@ -19,13 +20,31 @@
         self.backgroundColor = [UIColor clearColor];
         UIImageView *im = [[UIImageView alloc] initWithImage:[self roundedImageWithImage:[UIImage imageNamed:@"avatar_unknown_small.png"]]];
         self.avatar = im;
-        im.frame = CGRectMake(15, 15, 70, 70);
+        
+        UILabel *name;
+        if (IS_IPHONE && IS_IPHONE_5)
+        {
+            im.frame = CGRectMake(15, 15, 70, 70);
+            name = [[UILabel alloc] initWithFrame:CGRectMake(15, 85, 70, 15)];
+        }
+        else
+        {
+            im.frame = CGRectMake(0, 0, 54, 54);
+            name = [[UILabel alloc] initWithFrame:CGRectMake(0, 54, 54, 13)];
+        }
         [self addSubview:im];
-        UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(15, 85, 70, 15)];
         name.textAlignment = NSTextAlignmentCenter;
         name.text = [NSString stringWithFormat:@""];
         name.backgroundColor = [UIColor clearColor];
-        name.font = [UIFont systemFontOfSize:13.0f];
+        if (IS_IPHONE && IS_IPHONE_5)
+        {
+            name.font = [UIFont systemFontOfSize:13.0f];
+            
+        }
+        else
+        {
+            name.font = [UIFont systemFontOfSize:11.0f];
+        }
         name.adjustsFontSizeToFitWidth = YES;
         self.label = name;
         [self addSubview:name];

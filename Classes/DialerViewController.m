@@ -59,6 +59,7 @@
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
 @synthesize rotationView;
+@synthesize wheel;
 
 #pragma mark - Lifecycle Functions
 
@@ -74,6 +75,9 @@
     
     if(self) {
         self->transferMode = FALSE;
+        [callButton setHiddenAddress:@""];
+        
+        wheel = nil;
     }
     return self;
 }
@@ -103,6 +107,7 @@
     [videoPreview release];
     [videoCameraSwitch release];
     [rotationView release];
+
     
     // Remove all observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -165,6 +170,15 @@ static UICompositeViewDescription *compositeDescription = nil;
             }
         }
     }
+    
+    if ([[LinphoneManager instance] reloadWheels])
+    {
+        if (wheel)
+        {
+            [wheel updateAll];
+        }
+        [[LinphoneManager instance] setReloadWheels:NO];
+    }
 } 
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -205,17 +219,21 @@ static UICompositeViewDescription *compositeDescription = nil;
             [videoCameraSwitch setHidden:FALSE];
         }
     }
-    
-    SMRotaryWheel *wheel = [[SMRotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 310, 310)
-                                                    andDelegate:self
-                                                   withSections:8];
+
+    wheel = [[SMRotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 310, 310)
+                                     andDelegate:self
+                                    withSections:8];
     
     wheel.center = [rotationView convertPoint:rotationView.center fromView:rotationView.superview];
     [rotationView addSubview:wheel];
+    
+    [self setAddress:@""];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+    
+    [wheel release];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -239,7 +257,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     [videoPreview setFrame:frame];
 }
-
 
 #pragma mark - Event Functions
 
@@ -332,7 +349,22 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 #pragma mark - SMRotaryWheel Functions
 
-- (void)wheelDidChangeValue:(NSString *)newValue {
+- (void)wheelDidChangeValue:(NSDictionary *)newValue {
+    if (newValue)
+    {
+        ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContactById:[newValue objectForKey:@"id"]];
+        if (contact)
+        {
+            NSString* displayName = [FastAddressBook getContactDisplayName:contact];
+            [self setAddress:displayName];
+            [callButton setHiddenAddress:[FastAddressBook getPrimaryTarget:contact]];
+            NSLog(@"Selected: %@", displayName);
+        }
+    }
+    else
+    {
+        NSLog(@"Blank Value");
+    }
     return;
 }
 
@@ -371,6 +403,15 @@ static UICompositeViewDescription *compositeDescription = nil;
         [callButton setEnabled:FALSE];
         [addCallButton setEnabled:FALSE];
         [transferButton setEnabled:FALSE];
+    }
+}
+
+- (IBAction)onAddressClick: (id)sender {
+    NSLog(@"Address Click");
+    if ([[callButton hiddenAddress] length] > 0 && [[addressField text] length] > 0)
+    {
+        [self setAddress:@""];
+        [callButton setHiddenAddress:@""];
     }
 }
 

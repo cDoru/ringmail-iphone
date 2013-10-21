@@ -108,6 +108,7 @@ extern  void libmsbcg729_init();
 @synthesize speakerEnabled;
 @synthesize photoLibrary;
 @synthesize commandURL;
+@synthesize reloadWheels;
 
 struct codec_name_pref_table{
     const char *name;

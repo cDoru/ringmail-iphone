@@ -140,6 +140,8 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     } else {
         [LinphoneLogger logc:LinphoneLoggerLog format:"Save AddressBook: Success!"];
     }
+    [[[LinphoneManager instance] fastAddressBook] loadData];
+    [[LinphoneManager instance] setReloadWheels:YES];
 }
 
 - (void)newContact {

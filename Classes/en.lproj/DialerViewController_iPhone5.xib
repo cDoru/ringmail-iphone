@@ -11,7 +11,7 @@
                 <outlet property="addContactButton" destination="222" id="225"/>
                 <outlet property="addressField" destination="4" id="205"/>
                 <outlet property="backButton" destination="183" id="254"/>
-                <outlet property="callButton" destination="224" id="231"/>
+                <outlet property="callButton" destination="nlL-Yk-fEf" id="jbb-rG-9cE"/>
                 <outlet property="eightButton" destination="35" id="204"/>
                 <outlet property="eraseButton" destination="185" id="202"/>
                 <outlet property="fiveButton" destination="31" id="195"/>
@@ -53,6 +53,7 @@
                             <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL"/>
                             <connections>
                                 <action selector="onAddressChange:" destination="-1" eventType="editingChanged" id="208"/>
+                                <action selector="onAddressClick:" destination="-1" eventType="editingDidBegin" id="gCJ-I8-dfJ"/>
                                 <outlet property="delegate" destination="-1" id="190"/>
                             </connections>
                         </textField>
@@ -73,7 +74,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.19215686274509802" green="0.25490196078431371" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" id="180" userLabel="pad">
                     <rect key="frame" x="0.0" y="52" width="320" height="376"/>
@@ -239,7 +240,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="182" userLabel="toolBar">
+                <view hidden="YES" contentMode="scaleToFill" id="182" userLabel="toolBar">
                     <rect key="frame" x="0.0" y="428" width="320" height="66"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <subviews>
@@ -259,25 +260,6 @@
                             <state key="highlighted" image="back_over.png"/>
                             <connections>
                                 <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="233"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="224" userLabel="callButton" customClass="UICallButton">
-                            <rect key="frame" x="66" y="10" width="190" height="42"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Call"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                            <state key="normal" title="Call" backgroundImage="call_default.png">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="call_disabled.png">
-                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="call_disabled.png">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="235"/>
                             </connections>
                         </button>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="184" userLabel="addCallButton" customClass="UICallButton">
@@ -342,7 +324,47 @@
                 <view contentMode="scaleToFill" id="93m-bF-qj7" userLabel="rotationView">
                     <rect key="frame" x="0.0" y="50" width="320" height="335"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="h52-ch-jNE" userLabel="callButtons">
+                            <rect key="frame" x="100" y="108" width="120" height="120"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nlL-Yk-fEf" userLabel="buttonCall" customClass="UICallButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                    <inset key="contentEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="Call" backgroundImage="center_circle_01.png">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="disabled">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" backgroundImage="center_circle_sel_01.png"/>
+                                    <connections>
+                                        <outlet property="addressField" destination="4" id="icq-nf-ba2"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T3z-K1-Jji" userLabel="buttonText">
+                                    <rect key="frame" x="0.0" y="60" width="120" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                    <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
+                                    <state key="normal" title="Text" backgroundImage="center_circle_02.png">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="disabled">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" backgroundImage="center_circle_sel_02.png"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </view>
             </subviews>
@@ -361,9 +383,11 @@
         <image name="backspace_default.png" width="124" height="132"/>
         <image name="backspace_over.png" width="124" height="132"/>
         <image name="call_background.png" width="392" height="132"/>
-        <image name="call_default.png" width="368" height="72"/>
-        <image name="call_disabled.png" width="368" height="72"/>
-        <image name="dialer_address_background.png" width="640" height="104"/>
+        <image name="center_circle_01.png" width="240" height="120"/>
+        <image name="center_circle_02.png" width="240" height="120"/>
+        <image name="center_circle_sel_01.png" width="240" height="120"/>
+        <image name="center_circle_sel_02.png" width="240" height="120"/>
+        <image name="dialer_address_background.png" width="640" height="102"/>
         <image name="gear.png" width="80" height="104"/>
         <image name="numpad_eight_default.png" width="151" height="148"/>
         <image name="numpad_eight_over.png" width="151" height="148"/>

@@ -25,7 +25,7 @@
 @implementation UICallButton
 
 @synthesize addressField;
-
+@synthesize hiddenAddress;
 
 #pragma mark - Lifecycle Functions
 
@@ -69,9 +69,20 @@
 - (void)touchUp:(id) sender {
     NSString *address = [addressField text];
     NSString *displayName = nil;
-    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-    if(contact) {
-        displayName = [FastAddressBook getContactDisplayName:contact];
+    if ([hiddenAddress length] != 0)
+    {
+        displayName = [NSString stringWithString:address];
+        address = [NSString stringWithString:hiddenAddress];
+        NSLog(@"Hidden Address: '%@'", address);
+        [self setHiddenAddress:@""];
+    }
+    else
+    {
+        ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+        if (contact)
+        {
+            displayName = [FastAddressBook getContactDisplayName:contact];
+        }
     }
     [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
 }

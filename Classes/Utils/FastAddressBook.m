@@ -56,6 +56,12 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     } 
 }
 
+- (ABRecordRef)getContactById:(NSNumber*)itemId {
+    @synchronized (addressBookMap){
+        return (ABRecordRef)[addressBookIds objectForKey:itemId];
+    }
+}
+
 + (BOOL)isSipURI:(NSString*)address {
     return [address hasPrefix:@"sip:"];
 }
@@ -113,7 +119,8 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 - (FastAddressBook*)init {
     if ((self = [super init]) != nil) {
         addressBookMap  = [[NSMutableDictionary alloc] init];
-        addressBook = nil;
+        addressBookIds  = [[NSMutableDictionary alloc] init];
+        addressBookWheels  = [[NSMutableDictionary alloc] init];
         [self reload];
     }
     return self;
@@ -150,9 +157,16 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     ABAddressBookRevert(addressBook);
     @synchronized (addressBookMap) {
         [addressBookMap removeAllObjects];
+        [addressBookWheels removeAllObjects];
         
         NSArray *lContacts = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
         for (id lPerson in lContacts) {
+            // Ids
+            {
+                NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)lPerson)];
+                [addressBookIds setObject:lPerson forKey:recordId];
+            }
+            
             // Phone
             {
                 ABMultiValueRef lMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonPhoneProperty);
@@ -201,6 +215,8 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
             }
         }
         CFRelease(lContacts);
+        // RingMail
+        [self setupWheelContacts];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneAddressBookUpdate object:self];
 }
@@ -214,7 +230,128 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
     ABAddressBookUnregisterExternalChangeCallback(addressBook, sync_address_book, self);
     CFRelease(addressBook);
     [addressBookMap release];
+    [addressBookIds release];
+    [addressBookWheels release];
     [super dealloc];
+}
+
+#pragma mark - RingMail
+
++ (NSString *) getPrimaryTarget:(ABRecordRef)contact {
+    NSString *res = nil;
+    if (contact)
+    {
+        ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)contact, kABPersonEmailProperty);
+        if (emailMap)
+        {
+            CFStringRef valueRef = ABMultiValueCopyValueAtIndex(emailMap, 0);
+            if (valueRef)
+            {
+                res = (NSString *)valueRef;
+                CFRelease(valueRef);
+            }
+            CFRelease(emailMap);
+        }
+        if (! res)
+        {
+            ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)contact, kABPersonPhoneProperty);
+            if (phoneMap)
+            {
+                CFStringRef valueRef = ABMultiValueCopyValueAtIndex(phoneMap, 0);
+                if (valueRef)
+                {
+                    res = (NSString *)valueRef;
+                    CFRelease(valueRef);
+                }
+                CFRelease(phoneMap);
+            }
+        }
+    }
+    if (! res)
+    {
+        res = @"";
+    }
+    return res;
+}
+
+- (NSMutableArray*) getWheel:(NSString*)name
+{
+    return [addressBookWheels objectForKey:name];
+}
+
+- (void) setupWheelContacts
+{
+    NSLog(@"Setup Wheel Contacts");
+    ABAddressBookRef addressBookList = ABAddressBookCreateWithOptions(NULL, nil);
+    NSArray *contactList = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookList);
+    NSMutableArray* contacts = [NSMutableArray arrayWithCapacity:[contactList count]];
+    for (id person in contactList)
+    {
+        CFStringRef lFirstName = ABRecordCopyValue((ABRecordRef)person, kABPersonFirstNameProperty);
+        CFStringRef lLocalizedFirstName = (lFirstName != nil) ? ABAddressBookCopyLocalizedLabel(lFirstName) : nil;
+        if(lLocalizedFirstName != nil)
+        {
+            NSString *shortName = [NSString stringWithString:(NSString *)lLocalizedFirstName];
+            NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)person)];
+            NSMutableDictionary *ctItem = [NSMutableDictionary dictionaryWithObjectsAndKeys:shortName, @"name", recordId, @"id", nil];
+            [contacts addObject:ctItem];
+            UIImage* image = [FastAddressBook getContactImage:person thumbnail:true];
+            if(image != nil) {
+                [ctItem setObject:[self imageWithAlpha:image] forKey:@"img"];
+            }
+            //else {
+            //    [self.avatarMap addObject:[UIImage imageNamed:@"avatar_unknown_small.png"]];
+            //}
+            CFRelease(lLocalizedFirstName);
+        }
+        if(lFirstName != nil)
+        {
+            CFRelease(lFirstName);
+        }
+    }
+    [addressBookWheels setObject:contacts forKey:@"contacts"];
+    CFRelease(contactList);
+}
+
+- (UIImage *)imageWithAlpha:(UIImage *)img
+{
+    if ([self hasAlpha:img]) {
+        return img;
+    }
+    
+    CGFloat scale = MAX(img.scale, 1.0f);
+    CGImageRef imageRef = img.CGImage;
+    size_t width = CGImageGetWidth(imageRef)*scale;
+    size_t height = CGImageGetHeight(imageRef)*scale;
+    
+    // The bitsPerComponent and bitmapInfo values are hard-coded to prevent an "unsupported parameter combination" error
+    CGContextRef offscreenContext = CGBitmapContextCreate(NULL,
+                                                          width,
+                                                          height,
+                                                          8,
+                                                          0,
+                                                          CGImageGetColorSpace(imageRef),
+                                                          kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    
+    // Draw the image into the context and retrieve the new image, which will now have an alpha layer
+    CGContextDrawImage(offscreenContext, CGRectMake(0, 0, width, height), imageRef);
+    CGImageRef imageRefWithAlpha = CGBitmapContextCreateImage(offscreenContext);
+    UIImage *imageWithAlpha = [UIImage imageWithCGImage:imageRefWithAlpha scale:img.scale orientation:UIImageOrientationUp];
+    
+    // Clean up
+    CGContextRelease(offscreenContext);
+    CGImageRelease(imageRefWithAlpha);
+    
+    return imageWithAlpha;
+}
+
+- (BOOL)hasAlpha:(UIImage *)img
+{
+    CGImageAlphaInfo alpha = CGImageGetAlphaInfo(img.CGImage);
+    return (alpha == kCGImageAlphaFirst ||
+            alpha == kCGImageAlphaLast ||
+            alpha == kCGImageAlphaPremultipliedFirst ||
+            alpha == kCGImageAlphaPremultipliedLast);
 }
 
 @end

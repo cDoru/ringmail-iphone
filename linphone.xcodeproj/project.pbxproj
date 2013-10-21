@@ -125,7 +125,6 @@
 		22E5B0AF133B5EA20044EA25 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E5B0AD133B5EA20044EA25 /* libssl.a */; };
 		22E5B0B0133B5EA20044EA25 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E5B0AE133B5EA20044EA25 /* libcrypto.a */; };
 		22F2508E107141E100AC9B3F /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F2508C107141E100AC9B3F /* DialerViewController.m */; };
-		22F254811073D99800AC9B3F /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340751961506459A00B89C47 /* CoreTelephony.framework */; };
 		34075199150645A300B89C47 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340751961506459A00B89C47 /* CoreTelephony.framework */; };
@@ -197,6 +196,11 @@
 		C4569CC117C5805F00ABBBF7 /* send_btn_over.png in Resources */ = {isa = PBXBuildFile; fileRef = C4569CBF17C5805F00ABBBF7 /* send_btn_over.png */; };
 		C4569CC217C5805F00ABBBF7 /* send_btn_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C4569CC017C5805F00ABBBF7 /* send_btn_default.png */; };
 		C4569CC417C6938300ABBBF7 /* tiny_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = C4569CC317C6938300ABBBF7 /* tiny_facebook.png */; };
+		C459863018125495008DEEF9 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = C459862F18125495008DEEF9 /* ringback.wav */; };
+		C46C7D551813128E008973A1 /* center_circle_01.png in Resources */ = {isa = PBXBuildFile; fileRef = C46C7D531813128E008973A1 /* center_circle_01.png */; };
+		C46C7D561813128E008973A1 /* center_circle_02.png in Resources */ = {isa = PBXBuildFile; fileRef = C46C7D541813128E008973A1 /* center_circle_02.png */; };
+		C46C7D5918131938008973A1 /* center_circle_sel_01.png in Resources */ = {isa = PBXBuildFile; fileRef = C46C7D5718131938008973A1 /* center_circle_sel_01.png */; };
+		C46C7D5A18131938008973A1 /* center_circle_sel_02.png in Resources */ = {isa = PBXBuildFile; fileRef = C46C7D5818131938008973A1 /* center_circle_sel_02.png */; };
 		C46F008517A9E2BB00A631C5 /* ImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F008417A9E2BB00A631C5 /* ImageHelper.m */; };
 		C479D9B817A70F4800A24601 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = C479D9B617A70F4800A24601 /* OpenUDID.m */; };
 		C479D9BB17A7183300A24601 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C479D9BA17A7183300A24601 /* libz.1.dylib */; };
@@ -556,7 +560,6 @@
 		D34BD6EB15C13DB70070C209 /* pause_on_default_landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C31A2115BD8DED008ED271 /* pause_on_default_landscape.png */; };
 		D34BD6EC15C13DB70070C209 /* pause_on_over.png in Resources */ = {isa = PBXBuildFile; fileRef = D36C43E8158F3F7E0048BA40 /* pause_on_over.png */; };
 		D34BD6ED15C13DB70070C209 /* pause_on_over_landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C31A2215BD8DED008ED271 /* pause_on_over_landscape.png */; };
-		D34BD6EE15C13DB70070C209 /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
 		D34BD6EF15C13DB70070C209 /* rootca.pem in Resources */ = {isa = PBXBuildFile; fileRef = 70571E1913FABCB000CDD3C2 /* rootca.pem */; };
 		D34BD6F015C13DB70070C209 /* security_ko.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D6A3A5159B0EFE005F692C /* security_ko.png */; };
 		D34BD6F115C13DB70070C209 /* security_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D6A3A7159B0EFE005F692C /* security_ok.png */; };
@@ -1375,7 +1378,6 @@
 		22E5B0AE133B5EA20044EA25 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "liblinphone-sdk/apple-darwin/lib/libcrypto.a"; sourceTree = "<group>"; };
 		22F2508B107141E100AC9B3F /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
 		22F2508C107141E100AC9B3F /* DialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DialerViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		22F254801073D99800AC9B3F /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringback.wav; path = Resources/ringback.wav; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* linphone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linphone_Prefix.pch; sourceTree = "<group>"; };
@@ -1455,6 +1457,11 @@
 		C4569CBF17C5805F00ABBBF7 /* send_btn_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = send_btn_over.png; path = Resources/send_btn_over.png; sourceTree = "<group>"; };
 		C4569CC017C5805F00ABBBF7 /* send_btn_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = send_btn_default.png; path = Resources/send_btn_default.png; sourceTree = "<group>"; };
 		C4569CC317C6938300ABBBF7 /* tiny_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tiny_facebook.png; path = Resources/tiny_facebook.png; sourceTree = "<group>"; };
+		C459862F18125495008DEEF9 /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ringback.wav; path = Resources/ringback.wav; sourceTree = "<group>"; };
+		C46C7D531813128E008973A1 /* center_circle_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = center_circle_01.png; path = Resources/center_circle_01.png; sourceTree = "<group>"; };
+		C46C7D541813128E008973A1 /* center_circle_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = center_circle_02.png; path = Resources/center_circle_02.png; sourceTree = "<group>"; };
+		C46C7D5718131938008973A1 /* center_circle_sel_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = center_circle_sel_01.png; path = Resources/center_circle_sel_01.png; sourceTree = "<group>"; };
+		C46C7D5818131938008973A1 /* center_circle_sel_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = center_circle_sel_02.png; path = Resources/center_circle_sel_02.png; sourceTree = "<group>"; };
 		C46F008317A9E2BB00A631C5 /* ImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHelper.h; sourceTree = "<group>"; };
 		C46F008417A9E2BB00A631C5 /* ImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHelper.m; sourceTree = "<group>"; };
 		C479D9B517A70F4800A24601 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
@@ -2868,6 +2875,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C46C7D531813128E008973A1 /* center_circle_01.png */,
+				C46C7D541813128E008973A1 /* center_circle_02.png */,
+				C46C7D5718131938008973A1 /* center_circle_sel_01.png */,
+				C46C7D5818131938008973A1 /* center_circle_sel_02.png */,
 				C48D29E317FBEAED00F6E76A /* bg.png */,
 				C48D29E417FBEAED00F6E76A /* centerButton.png */,
 				C48D29E517FBEAED00F6E76A /* icon0.png */,
@@ -3289,7 +3300,7 @@
 				D3A74E9B15C69392001500B9 /* pause_on_over~ipad.png */,
 				2242E312125235120061DDCE /* ring.caf */,
 				2237D4081084D7A9001383EE /* ring.wav */,
-				22F254801073D99800AC9B3F /* ringback.wav */,
+				C459862F18125495008DEEF9 /* ringback.wav */,
 				15A333C216A4577A001DFCED /* ringmail_icon_57.png */,
 				15A333C316A4577A001DFCED /* ringmail_icon_57@2x.png */,
 				15A333C416A4577A001DFCED /* ringmail_logo.png */,
@@ -3806,7 +3817,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22F254811073D99800AC9B3F /* ringback.wav in Resources */,
 				2237D4091084D7A9001383EE /* ring.wav in Resources */,
 				22E0A823111C44E100B04932 /* ConsoleViewController.xib in Resources */,
 				225CB2FA11ABB76400628906 /* linphone-banner.png in Resources */,
@@ -3866,6 +3876,7 @@
 				D3F83F601582223B00336684 /* numpad_seven_default.png in Resources */,
 				D3F83F621582223B00336684 /* numpad_seven_over.png in Resources */,
 				D3F83F641582223B00336684 /* numpad_eight_default.png in Resources */,
+				C459863018125495008DEEF9 /* ringback.wav in Resources */,
 				D3F83F661582223B00336684 /* numpad_eight_over.png in Resources */,
 				D3F83F681582223B00336684 /* numpad_nine_default.png in Resources */,
 				D3F83F6A1582223B00336684 /* numpad_nine_over.png in Resources */,
@@ -4114,6 +4125,7 @@
 				D3866C2A1608CA1600830F95 /* image_back_over.png in Resources */,
 				D3F5F8F71609A86700D3DA1A /* chat_cancel_default.png in Resources */,
 				D3F5F8F91609A86700D3DA1A /* chat_cancel_over.png in Resources */,
+				C46C7D5918131938008973A1 /* center_circle_sel_01.png in Resources */,
 				D3F5F8FB1609A86700D3DA1A /* chat_photo_default.png in Resources */,
 				D3F5F8FD1609A86700D3DA1A /* chat_photo_disabled.png in Resources */,
 				D3F5F8FF1609A86700D3DA1A /* chat_photo_over.png in Resources */,
@@ -4127,6 +4139,7 @@
 				D3328646160B5BC300E6435D /* dialer_alt_disabled_landscape.png in Resources */,
 				D332864A160B5BC300E6435D /* dialer_alt_disabled.png in Resources */,
 				D35E91EA160CA0BD0023116B /* field_background.9@2x.png in Resources */,
+				C46C7D551813128E008973A1 /* center_circle_01.png in Resources */,
 				D35E91EE160CA0C70023116B /* button_background_default.9@2x.png in Resources */,
 				D35E91F0160CA0C70023116B /* button_background_over.9@2x.png in Resources */,
 				D35E9209160CAA1F0023116B /* field_background.9.png in Resources */,
@@ -4153,6 +4166,7 @@
 				C40CD7FB17839BD700E35C91 /* directory_default.png in Resources */,
 				C40CD7FC17839BD700E35C91 /* directory_over.png in Resources */,
 				C40CD7FD17839BD700E35C91 /* directory_selected.png in Resources */,
+				C46C7D561813128E008973A1 /* center_circle_02.png in Resources */,
 				C4283DEA1799B3DD00268244 /* gear.png in Resources */,
 				C4283DEF1799B64900268244 /* DirectoryViewController.xib in Resources */,
 				C4C2D9CC17A1C9F0006D87C4 /* grey_wash_wall_@2X.jpg in Resources */,
@@ -4205,6 +4219,7 @@
 				C4569CC117C5805F00ABBBF7 /* send_btn_over.png in Resources */,
 				C4569CC217C5805F00ABBBF7 /* send_btn_default.png in Resources */,
 				C4569CC417C6938300ABBBF7 /* tiny_facebook.png in Resources */,
+				C46C7D5A18131938008973A1 /* center_circle_sel_02.png in Resources */,
 				C433113217C69EF5006F6834 /* add_contact_over4.png in Resources */,
 				C433113417C69F2A006F6834 /* backspace_over4.png in Resources */,
 				C433113717C6C12B006F6834 /* button_large_default.png in Resources */,
@@ -4450,7 +4465,6 @@
 				D34BD6EB15C13DB70070C209 /* pause_on_default_landscape.png in Resources */,
 				D34BD6EC15C13DB70070C209 /* pause_on_over.png in Resources */,
 				D34BD6ED15C13DB70070C209 /* pause_on_over_landscape.png in Resources */,
-				D34BD6EE15C13DB70070C209 /* ringback.wav in Resources */,
 				D34BD6EF15C13DB70070C209 /* rootca.pem in Resources */,
 				D34BD6F015C13DB70070C209 /* security_ko.png in Resources */,
 				D34BD6F115C13DB70070C209 /* security_ok.png in Resources */,
@@ -5148,6 +5162,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ringmail;
+				SDKROOT = iphoneos6.1;
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -5225,6 +5240,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ringmail;
+				SDKROOT = iphoneos6.1;
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -5472,6 +5488,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ringmail;
+				SDKROOT = iphoneos6.1;
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -5549,6 +5566,7 @@
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ringmail;
+				SDKROOT = iphoneos6.1;
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

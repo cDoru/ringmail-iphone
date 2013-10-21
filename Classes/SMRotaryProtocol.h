@@ -10,6 +10,6 @@
 
 @protocol SMRotaryProtocol <NSObject>
 
-- (void) wheelDidChangeValue:(NSString *)newValue;
+- (void) wheelDidChangeValue:(NSDictionary *)newValue;
 
 @end

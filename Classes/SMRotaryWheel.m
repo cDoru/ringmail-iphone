@@ -10,6 +10,8 @@
 #import <AddressBook/AddressBook.h>
 #import "FastAddressBook.h"
 #import "SMCLove.h"
+#import "Utils.h"
+#import "LinphoneManager.h"
 
 @interface SMRotaryWheel()
     - (void) drawWheel;
@@ -17,7 +19,7 @@
     - (void) buildClovesEven;
     - (void) buildClovesOdd;
     - (UIImageView *) getCloveByValue:(int)value;
-    - (NSString *) getCloveName:(int)position;
+    - (NSDictionary *) getCloveName:(int)position;
 @end
 
 static float deltaAngle;
@@ -26,25 +28,25 @@ static float maxAlphavalue = 1.0;
 
 @implementation SMRotaryWheel
 
-@synthesize delegate, container, numberOfSections, startTransform, cloves, cloveImages, currentValue, totalRotate, lastRotate, totalSpin, lastLeft, totalItems, contacts;
+@synthesize delegate, container, numberOfSections, startTransform, cloves, cloveImages, currentValue, totalRotate, lastRotate, totalSpin, lastLeft;
 
-- (id) initWithFrame:(CGRect)frame andDelegate:(id)del withSections:(int)sectionsNumber {
+- (id) initWithFrame:(CGRect)frame andDelegate:(id)del withSections:(int)sectionsNumber
+{
     
     if ((self = [super initWithFrame:frame]))
     {
         self.currentValue = 0;
         self.totalSpin = 0;
-        self.totalItems = 20;
         self.numberOfSections = sectionsNumber;
         self.delegate = del;
-        [self setupContacts];
         [self drawWheel];
 	}
     return self;
 }
 
-- (void) setupContacts
+/*- (void) setupContacts
 {
+
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
     NSArray *contactList = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
     self.contacts = [NSMutableArray arrayWithCapacity:[contactList count]];
@@ -55,7 +57,10 @@ static float maxAlphavalue = 1.0;
         CFStringRef lLocalizedFirstName = (lFirstName != nil) ? ABAddressBookCopyLocalizedLabel(lFirstName) : nil;
         if(lLocalizedFirstName != nil)
         {
-            [self.contacts addObject:[NSString stringWithString:(NSString *)lLocalizedFirstName]];
+            NSString *shortName = [NSString stringWithString:(NSString *)lLocalizedFirstName];
+            NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)person)];
+            NSDictionary *ctItem = [NSDictionary dictionaryWithObjectsAndKeys:shortName, @"name", recordId, @"id", nil];
+            [self.contacts addObject:ctItem];
             UIImage* image = [FastAddressBook getContactImage:person thumbnail:true];
             if(image != nil) {
                 [self.avatarMap addObject:[self imageWithAlpha:image]];
@@ -72,57 +77,26 @@ static float maxAlphavalue = 1.0;
     CFRelease(contactList);
     CFRelease(addressBook);
     self.totalItems = [self.contacts count];
-}
-
-- (BOOL)hasAlpha:(UIImage *)img
-{
-    CGImageAlphaInfo alpha = CGImageGetAlphaInfo(img.CGImage);
-    return (alpha == kCGImageAlphaFirst ||
-            alpha == kCGImageAlphaLast ||
-            alpha == kCGImageAlphaPremultipliedFirst ||
-            alpha == kCGImageAlphaPremultipliedLast);
-}
-
-- (UIImage *)imageWithAlpha:(UIImage *)img
-{
-    if ([self hasAlpha:img]) {
-        return img;
-    }
-    
-    CGFloat scale = MAX(img.scale, 1.0f);
-    CGImageRef imageRef = img.CGImage;
-    size_t width = CGImageGetWidth(imageRef)*scale;
-    size_t height = CGImageGetHeight(imageRef)*scale;
-    
-    // The bitsPerComponent and bitmapInfo values are hard-coded to prevent an "unsupported parameter combination" error
-    CGContextRef offscreenContext = CGBitmapContextCreate(NULL,
-                                                          width,
-                                                          height,
-                                                          8,
-                                                          0,
-                                                          CGImageGetColorSpace(imageRef),
-                                                          kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
-    
-    // Draw the image into the context and retrieve the new image, which will now have an alpha layer
-    CGContextDrawImage(offscreenContext, CGRectMake(0, 0, width, height), imageRef);
-    CGImageRef imageRefWithAlpha = CGBitmapContextCreateImage(offscreenContext);
-    UIImage *imageWithAlpha = [UIImage imageWithCGImage:imageRefWithAlpha scale:img.scale orientation:UIImageOrientationUp];
-    
-    // Clean up
-    CGContextRelease(offscreenContext);
-    CGImageRelease(imageRefWithAlpha);
-    
-    return imageWithAlpha;
-}
+}*/
 
 - (void) drawWheel {
     container = [[UIView alloc] initWithFrame:self.frame];	
     CGFloat angleSize = 2 * M_PI / numberOfSections;
     self.cloveImages = [NSMutableArray arrayWithCapacity:numberOfSections];
+    NSMutableArray *contacts = [[[LinphoneManager instance] fastAddressBook] getWheel:@"contacts"];
     for (int i = 0; i < numberOfSections; i++)
     {
         //UIImageView *im = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"segment.png"]];
-        UIView *im = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 190, 160)];
+        UIView *im;
+        if (IS_IPHONE && IS_IPHONE_5)
+        {
+            im = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 190, 160)];
+        }
+        else
+        {
+            im = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 140, 110)];
+        }
+        
         im.backgroundColor = [UIColor clearColor];
         //im.text = [NSString stringWithFormat:@"%i", i];
         im.layer.anchorPoint = CGPointMake(1.0f, 0.5f);
@@ -135,8 +109,25 @@ static float maxAlphavalue = 1.0;
         {
             im.alpha = maxAlphavalue;
         }
-        SMRotaryImage *cloveImage = [[SMRotaryImage alloc] initWithFrame:CGRectMake(20, 30, 100, 100) angle:(angleSize * i * -1)];
-        [cloveImage updateItem:i newText:[self.contacts objectAtIndex:i] newImage:[self.avatarMap objectAtIndex:i]];
+        SMRotaryImage *cloveImage;
+        if (IS_IPHONE && IS_IPHONE_5)
+        {
+            cloveImage = [[SMRotaryImage alloc] initWithFrame:CGRectMake(20, 30, 100, 100) angle:(angleSize * i * -1)];
+        }
+        else
+        {
+            cloveImage = [[SMRotaryImage alloc] initWithFrame:CGRectMake(20, 28, 54, 54) angle:(angleSize * i * -1)];
+        }
+        if ([contacts count] > i)
+        {
+            NSDictionary *itemData = [contacts objectAtIndex:i];
+            UIImage* img = [itemData objectForKey:@"img"];
+            if (img == nil)
+            {
+                img = [UIImage imageNamed:@"avatar_unknown_small.png"];
+            }
+            [cloveImage updateItem:i newText:[itemData objectForKey:@"name"] newImage:img];
+        }
         [self.cloveImages addObject:cloveImage];
         [im addSubview:cloveImage];
         [container addSubview:im];
@@ -147,11 +138,7 @@ static float maxAlphavalue = 1.0;
     //UIImageView *bg = [[UIImageView alloc] initWithFrame:self.frame];
     //bg.image = [UIImage imageNamed:@"bg.png"];
     //[self addSubview:bg];
-    UIImageView *mask = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 58, 58)];
-    mask.image = [UIImage imageNamed:@"centerButton.png"];
-    mask.center = self.center;
-    mask.center = CGPointMake(mask.center.x, mask.center.y+3);
-    [self addSubview:mask];
+    
     if (numberOfSections % 2 == 0)
     {
         [self buildClovesEven];
@@ -160,7 +147,40 @@ static float maxAlphavalue = 1.0;
     {
         [self buildClovesOdd];
     }
-    [self.delegate wheelDidChangeValue:[self getCloveName:currentValue]];
+    //[self.delegate wheelDidChangeValue:[self getCloveName:currentValue]];
+}
+
+- (void) updateAll {
+    NSLog(@"*** UPDATE ALL ***");
+    NSMutableArray *contacts = [[[LinphoneManager instance] fastAddressBook] getWheel:@"contacts"];
+    for (int i = 0; i < numberOfSections; i++)
+    {
+        SMRotaryImage *item = [self.cloveImages objectAtIndex:i];
+        int cur = item.imgNum;
+        NSDictionary *itemData = [contacts objectAtIndex:cur];
+        UIImage* img = [itemData objectForKey:@"img"];
+        if (img == nil)
+        {
+            img = [UIImage imageNamed:@"avatar_unknown_small.png"];
+        }
+        [item updateItem:cur newText:[itemData objectForKey:@"name"] newImage:img];
+    }
+    container.userInteractionEnabled = NO;
+    [self addSubview:container];
+    self.cloves = [NSMutableArray arrayWithCapacity:numberOfSections];
+    //UIImageView *bg = [[UIImageView alloc] initWithFrame:self.frame];
+    //bg.image = [UIImage imageNamed:@"bg.png"];
+    //[self addSubview:bg];
+    
+    if (numberOfSections % 2 == 0)
+    {
+        [self buildClovesEven];
+    }
+    else
+    {
+        [self buildClovesOdd];
+    }
+    //[self.delegate wheelDidChangeValue:[self getCloveName:currentValue]];
 }
 
 - (UIImageView *) getCloveByValue:(int)value {
@@ -229,6 +249,24 @@ static float maxAlphavalue = 1.0;
 	return sqrt(dx*dx + dy*dy);
 }
 
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *hitView = [super hitTest:point withEvent:event];
+    if (hitView == self)
+    {
+        float dist = [self calculateDistanceFromCenter:point];
+        if (dist < 80 || dist > 160)
+        {
+            return nil;
+        }
+        else
+        {
+            return hitView;
+        }
+    }
+    return hitView;
+}
+
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CGPoint touchPoint = [touch locationInView:self];
@@ -263,6 +301,8 @@ static float maxAlphavalue = 1.0;
 - (void) updateItem:(int)pos newId:(int)newId
 {
     SMRotaryImage *item = [self.cloveImages objectAtIndex:pos];
+    NSMutableArray *contacts = [[[LinphoneManager instance] fastAddressBook] getWheel:@"contacts"];
+    int totalItems = [contacts count];
     int cur = item.imgNum;
     int apply = newId % totalItems;
     if (apply < 0)
@@ -271,7 +311,13 @@ static float maxAlphavalue = 1.0;
     }
     if (cur != newId)
     {
-        [item updateItem:apply newText:[self.contacts objectAtIndex:apply] newImage:[self.avatarMap objectAtIndex:apply]];
+        NSDictionary *itemData = [contacts objectAtIndex:apply];
+        UIImage* img = [itemData objectForKey:@"img"];
+        if (img == nil)
+        {
+            img = [UIImage imageNamed:@"avatar_unknown_small.png"];
+        }
+        [item updateItem:apply newText:[itemData objectForKey:@"name"] newImage:img];
     }
 }
 
@@ -446,58 +492,31 @@ static float maxAlphavalue = 1.0;
     im.alpha = maxAlphavalue;
     
     [self updateSpin:-newVal newLeft:currentValue];
-    
     [self.delegate wheelDidChangeValue:[self getCloveName:currentValue]];
 }
 
-- (NSString *) getCloveName:(int)position {
-    
-    NSString *res = @"";
-    
-    switch (position) {
-        case 0:
-            res = @"Circles";
-            break;
-            
-        case 1:
-            res = @"Flower";
-            break;
-            
-        case 2:
-            res = @"Monster";
-            break;
-            
-        case 3:
-            res = @"Person";
-            break;
-            
-        case 4:
-            res = @"Smile";
-            break;
-            
-        case 5:
-            res = @"Sun";
-            break;
-            
-        case 6:
-            res = @"Swirl";
-            break;
-            
-        case 7:
-            res = @"3 circles";
-            break;
-            
-        case 8:
-            res = @"Triangle";
-            break;
-            
-        default:
-            break;
+- (NSDictionary *) getCloveName:(int)position
+{
+    NSMutableArray *contacts = [[[LinphoneManager instance] fastAddressBook] getWheel:@"contacts"];
+    int totalItems = [contacts count];
+    int topValue = currentValue + 2;
+    if (topValue >= numberOfSections)
+    {
+        topValue = topValue - numberOfSections;
     }
-    
-    return res;
+    SMRotaryImage *item = [self.cloveImages objectAtIndex:topValue];
+    int cur = item.imgNum;
+    int apply = cur % totalItems;
+    if (apply < 0)
+    {
+        apply = totalItems + apply;
+    }
+    if (totalItems > apply)
+    {
+        NSDictionary *itemData = [contacts objectAtIndex:apply];
+        return itemData;
+    }
+    return nil;
 }
-
-
 
 @end
