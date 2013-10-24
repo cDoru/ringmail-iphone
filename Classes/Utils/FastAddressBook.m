@@ -1,4 +1,4 @@
-/* FastAddressBook.h
+ /* FastAddressBook.h
  *
  * Copyright (C) 2011  Belledonne Comunications, Grenoble, France
  *
@@ -19,6 +19,7 @@
 
 #import "FastAddressBook.h"
 #import "LinphoneManager.h"
+#import "FavoritesModel.h"
 
 @implementation FastAddressBook
 
@@ -122,6 +123,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
         addressBookIds  = [[NSMutableDictionary alloc] init];
         addressBookWheels  = [[NSMutableDictionary alloc] init];
         [self reload];
+        [self setupWheelContacts];
     }
     return self;
 }
@@ -215,8 +217,6 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
             }
         }
         CFRelease(lContacts);
-        // RingMail
-        [self setupWheelContacts];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneAddressBookUpdate object:self];
 }
@@ -285,6 +285,7 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
     ABAddressBookRef addressBookList = ABAddressBookCreateWithOptions(NULL, nil);
     NSArray *contactList = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookList);
     NSMutableArray* contacts = [NSMutableArray arrayWithCapacity:[contactList count]];
+    NSMutableDictionary* contactLookup = [NSMutableDictionary dictionaryWithCapacity:[contactList count]];
     for (id person in contactList)
     {
         CFStringRef lFirstName = ABRecordCopyValue((ABRecordRef)person, kABPersonFirstNameProperty);
@@ -295,6 +296,7 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
             NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)person)];
             NSMutableDictionary *ctItem = [NSMutableDictionary dictionaryWithObjectsAndKeys:shortName, @"name", recordId, @"id", nil];
             [contacts addObject:ctItem];
+            [contactLookup setObject:ctItem forKey:recordId];
             UIImage* image = [FastAddressBook getContactImage:person thumbnail:true];
             if(image != nil) {
                 [ctItem setObject:[self imageWithAlpha:image] forKey:@"img"];
@@ -309,8 +311,44 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
             CFRelease(lFirstName);
         }
     }
-    [addressBookWheels setObject:contacts forKey:@"contacts"];
+    // sort contacts
+    NSArray *sortedContacts = [contacts sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSString *first = [(NSMutableDictionary*)a objectForKey:@"name"];
+        NSString *second = [(NSMutableDictionary*)b objectForKey:@"name"];
+        return [first compare:second];
+    }];
+    [addressBookWheels setObject:[NSMutableArray arrayWithArray:sortedContacts] forKey:@"contacts"];
+
     CFRelease(contactList);
+    
+    NSLog(@"Setup Wheel Favorites");
+    NSMutableArray* favorites = [FavoritesModel getFavorites];
+    NSMutableArray* favList = [NSMutableArray arrayWithCapacity:[favorites count]];
+    for (id favId in favorites)
+    {
+        NSNumber* fav = (NSNumber*)favId;
+        NSMutableDictionary* ctItem = [contactLookup objectForKey:fav];
+        if (ctItem != nil)
+        {
+            [favList addObject:ctItem];
+        }
+    }
+    // sort favorites
+    NSArray *sortedFavorites = [favList sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSString *first = [(NSMutableDictionary*)a objectForKey:@"name"];
+        NSString *second = [(NSMutableDictionary*)b objectForKey:@"name"];
+        return [first compare:second];
+    }];
+    NSMutableArray *favArray = [NSMutableArray arrayWithArray:sortedFavorites];
+    int favCount = [favArray count];
+    if (favCount < 8)
+    {
+        for (int i = 0; i < (8 - favCount); i++)
+        {
+            [favArray addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"", @"name", nil]];
+        }
+    }
+    [addressBookWheels setObject:favArray forKey:@"favorites"];
 }
 
 - (UIImage *)imageWithAlpha:(UIImage *)img

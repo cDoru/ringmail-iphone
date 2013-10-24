@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "UIImage+Alpha.h"
 
 @interface SMRotaryImage : UIView
 
@@ -15,7 +16,7 @@
 - (void) beginTracking;
 - (void) rotate:(CGFloat)angle;
 - (void) finalRotate:(CGFloat)angle;
-- (UIImage *)roundedImageWithImage:(UIImage *)image;
++ (UIImage *)roundedImageWithImage:(UIImage *)image;
 - (void) updateItem:(int)newId newText:(NSString *)newText newImage:(UIImage *)newImage;
 
 @property CGAffineTransform imgTransform;

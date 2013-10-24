@@ -77,7 +77,7 @@
     CGFloat y = 0;
     
     // Adjusting the x coordinate for avatar
-    if (self.showAvatar)
+    if (self.showAvatar && type == BubbleTypeSomeoneElse)
     {
         [self.avatarImage removeFromSuperview];
 #if !__has_feature(objc_arc)
@@ -85,10 +85,10 @@
 #else
         self.avatarImage = [[UIImageView alloc] initWithImage:(self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"])];
 #endif
-        self.avatarImage.layer.cornerRadius = 9.0;
+        //self.avatarImage.layer.cornerRadius = 9.0;
         self.avatarImage.layer.masksToBounds = YES;
-        self.avatarImage.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
-        self.avatarImage.layer.borderWidth = 1.0;
+        //self.avatarImage.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
+        //self.avatarImage.layer.borderWidth = 1.0;
         
         CGFloat avatarX = (type == BubbleTypeSomeoneElse) ? 2 : self.frame.size.width - 52;
         CGFloat avatarY = self.frame.size.height - 50;

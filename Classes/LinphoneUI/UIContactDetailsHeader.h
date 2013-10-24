@@ -22,6 +22,7 @@
 
 #import "ImagePickerViewController.h"
 #import "ContactDetailsDelegate.h"
+#import "SMRotaryImage.h"
 
 @interface UIContactDetailsHeader : UIViewController<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, ImagePickerDelegate> {
     @private
@@ -38,6 +39,7 @@
 @property (nonatomic, retain) IBOutlet UIView *editView;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) IBOutlet id<ContactDetailsDelegate> contactDetailsDelegate;
+@property (nonatomic, retain) IBOutlet UISwitch *favSwitch;
 
 @property(nonatomic,getter=isEditing) BOOL editing;
 

@@ -26,6 +26,7 @@
 #import "PhoneMainView.h"
 #import "Utils.h"
 #import "SMRotaryWheel.h"
+#import "ContactsTableViewController.h"
 
 #include "linphonecore.h"
 
@@ -58,8 +59,13 @@
 @synthesize backgroundView;
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
-@synthesize rotationView;
+@synthesize contactsView;
+@synthesize favRotationView;
+@synthesize padView;
 @synthesize wheel;
+@synthesize favWheel;
+@synthesize tableController;
+@synthesize tableView;
 
 #pragma mark - Lifecycle Functions
 
@@ -106,8 +112,9 @@
     
     [videoPreview release];
     [videoCameraSwitch release];
-    [rotationView release];
-
+    [contactsView release];
+    [favRotationView release];
+    [padView release];
     
     // Remove all observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -177,9 +184,18 @@ static UICompositeViewDescription *compositeDescription = nil;
         {
             [wheel updateAll];
         }
+        if (favWheel)
+        {
+            [favWheel updateAll];
+        }
         [[LinphoneManager instance] setReloadWheels:NO];
     }
-} 
+
+
+    [tableController loadData];
+    [tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
+    [tableController.tableView setBackgroundView:nil]; // Can't do it in Xib: issue with ios4
+}
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -219,13 +235,110 @@ static UICompositeViewDescription *compositeDescription = nil;
             [videoCameraSwitch setHidden:FALSE];
         }
     }
-
-    wheel = [[SMRotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 310, 310)
-                                     andDelegate:self
-                                    withSections:8];
     
-    wheel.center = [rotationView convertPoint:rotationView.center fromView:rotationView.superview];
-    [rotationView addSubview:wheel];
+    [tableController setDelegate:self];
+    
+    favWheel = [[SMRotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 310, 310)
+                                     andDelegate:self
+                                    withSections:8
+                                    withName:@"favorites"];
+    
+    favWheel.center = [favRotationView convertPoint:favRotationView.center fromView:favRotationView.superview];
+    [favRotationView addSubview:favWheel];
+    
+    NSArray *itemArray = [NSArray arrayWithObjects: @"Contacts", @"Favorites", @"Dialpad", nil];
+    
+    SVSegmentedControl* segmentedControl = [[SVSegmentedControl alloc] initWithSectionTitles:itemArray];
+    segmentedControl.frame = CGRectMake(20, 415, 280, 40);
+    segmentedControl.backgroundTintColor = [UIColor clearColor];
+    segmentedControl.cornerRadius = 10;
+    segmentedControl.thumb.tintColor = [UIColor colorWithRed:49.0 / 256.0 green:69.0 / 256.0 blue:113.0 / 256.0 alpha:1];
+    segmentedControl.thumb.shouldCastShadow = NO;
+    currentPanel = 0;
+    currentView = contactsView;
+    segmentedControl.changeHandler = ^(NSUInteger newIndex) {
+        if (currentPanel != newIndex)
+        {
+            NSLog(@"Changed from: %d to: %d", currentPanel, newIndex);
+            if (newIndex == 0)
+            {
+                CATransition* viewTransition = [CATransition animation];
+                [viewTransition setType:kCATransitionPush];
+                [viewTransition setDuration:0.5];
+                [viewTransition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+                [viewTransition setSubtype:kCATransitionFromLeft];
+                [currentView.layer removeAnimationForKey:@"transition"];
+                [currentView.layer addAnimation:viewTransition forKey:@"transition"];
+                currentView.hidden = YES;
+                CATransition* viewTransition2 = [CATransition animation];
+                [viewTransition2 setType:kCATransitionPush];
+                [viewTransition2 setDuration:0.5];
+                [viewTransition2 setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+                [viewTransition setSubtype:kCATransitionFromRight];
+                [contactsView.layer removeAnimationForKey:@"transition"];
+                [contactsView.layer addAnimation:viewTransition2 forKey:@"transition"];
+                contactsView.hidden = NO;
+                currentView = contactsView;
+            }
+            else if (newIndex == 1)
+            {
+                CATransition* viewTransition = [CATransition animation];
+                [viewTransition setType:kCATransitionPush];
+                [viewTransition setDuration:0.5];
+                [viewTransition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+                if (currentPanel == 2)
+                {
+                    [viewTransition setSubtype:kCATransitionFromLeft];
+                }
+                else if (currentPanel == 0)
+                {
+                    [viewTransition setSubtype:kCATransitionFromRight];
+                }
+                [currentView.layer removeAnimationForKey:@"transition"];
+                [currentView.layer addAnimation:viewTransition forKey:@"transition"];
+                currentView.hidden = YES;
+                CATransition* viewTransition2 = [CATransition animation];
+                [viewTransition2 setType:kCATransitionPush];
+                [viewTransition2 setDuration:0.5];
+                [viewTransition2 setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+                if (currentPanel == 2)
+                {
+                    [viewTransition2 setSubtype:kCATransitionFromRight];
+                }
+                else if (currentPanel == 0)
+                {
+                    [viewTransition2 setSubtype:kCATransitionFromLeft];
+                }
+                [favRotationView.layer removeAnimationForKey:@"transition"];
+                [favRotationView.layer addAnimation:viewTransition forKey:@"transition"];
+                favRotationView.hidden = NO;
+                currentView = favRotationView;
+            }
+            else if (newIndex == 2)
+            {
+                CATransition* viewTransition = [CATransition animation];
+                [viewTransition setType:kCATransitionPush];
+                [viewTransition setDuration:0.5];
+                [viewTransition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+                [viewTransition setSubtype:kCATransitionFromRight];
+                [currentView.layer removeAnimationForKey:@"transition"];
+                [currentView.layer addAnimation:viewTransition forKey:@"transition"];
+                currentView.hidden = YES;
+                CATransition* viewTransition2 = [CATransition animation];
+                [viewTransition2 setType:kCATransitionPush];
+                [viewTransition2 setDuration:0.5];
+                [viewTransition2 setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+                [viewTransition2 setSubtype:kCATransitionFromLeft];
+                [padView.layer removeAnimationForKey:@"transition"];
+                [padView.layer addAnimation:viewTransition forKey:@"transition"];
+                padView.hidden = NO;
+                currentView = padView;
+            }
+            currentPanel = newIndex;
+        }
+        // respond to index change
+    };
+	[self.view addSubview:segmentedControl];
     
     [self setAddress:@""];
 }
@@ -352,20 +465,41 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)wheelDidChangeValue:(NSDictionary *)newValue {
     if (newValue)
     {
-        ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContactById:[newValue objectForKey:@"id"]];
-        if (contact)
+        NSNumber *contactId = [newValue objectForKey:@"id"];
+        if (contactId != nil)
         {
-            NSString* displayName = [FastAddressBook getContactDisplayName:contact];
-            [self setAddress:displayName];
-            [callButton setHiddenAddress:[FastAddressBook getPrimaryTarget:contact]];
-            NSLog(@"Selected: %@", displayName);
+            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContactById:contactId];
+            if (contact)
+            {
+                NSString* displayName = [FastAddressBook getContactDisplayName:contact];
+                [self setAddress:displayName];
+                [callButton setHiddenAddress:[FastAddressBook getPrimaryTarget:contact]];
+                NSLog(@"Selected: %@", displayName);
+            }
+        }
+        else
+        {
+            NSLog(@"Blank Value 1");
         }
     }
     else
     {
-        NSLog(@"Blank Value");
+        NSLog(@"Blank Value 2");
     }
     return;
+}
+
+#pragma mark - ContactSelectProtocol Functions
+
+- (void)contactSelected:(ABRecordRef)contact
+{
+    if (contact)
+    {
+        NSString* displayName = [FastAddressBook getContactDisplayName:contact];
+        [self setAddress:displayName];
+        [callButton setHiddenAddress:[FastAddressBook getPrimaryTarget:contact]];
+        NSLog(@"Selected: %@", displayName);
+    }
 }
 
 

@@ -30,6 +30,7 @@
 #import "LinphoneManager.h"
 #import "LinphoneCoreSettingsStore.h"
 #import "ChatModel.h"
+#import "FavoritesModel.h"
 #import "PhoneMainView.h"
 
 #include "linphonecore_utils.h"
@@ -274,10 +275,10 @@ struct codec_name_pref_table codec_pref_table[]={
 #pragma mark - Database Functions
 
 - (void)openDatabase {
-    NSString *databasePath = [LinphoneManager documentFile:@"chat_database.sqlite"];
+    NSString *databasePath = [LinphoneManager documentFile:@"database.sqlite"];
 	NSFileManager *filemgr = [NSFileManager defaultManager];
 	//[filemgr removeItemAtPath:databasePath error:nil];
-	BOOL firstInstall= ![filemgr fileExistsAtPath: databasePath ];
+	BOOL firstInstall= ![filemgr fileExistsAtPath: databasePath];
     
 	if(sqlite3_open([databasePath UTF8String], &database) != SQLITE_OK) {
         [LinphoneLogger log:LinphoneLoggerError format:@"Can't open \"%@\" sqlite3 database.", databasePath];
@@ -292,6 +293,12 @@ struct codec_name_pref_table codec_pref_table[]={
 			if (sqlite3_exec(database, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
 				[LinphoneLogger logc:LinphoneLoggerError format:"Can't create table error[%s] ", errMsg];
 			}
+        
+        const char *sql_stmt2 = "CREATE TABLE favorites (id INTEGER PRIMARY KEY)";
+        
+        if (sqlite3_exec(database, sql_stmt2, NULL, NULL, &errMsg) != SQLITE_OK) {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Can't create table error[%s] ", errMsg];
+        }
 	}
 	
 	[filemgr release];

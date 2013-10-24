@@ -25,6 +25,7 @@
 #import <NinePatch.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "Utils.h"
+#import "SMRotaryImage.h"
 
 @implementation ChatRoomViewController
 
@@ -137,7 +138,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     bubbleTable.bubbleDataSource = self;
     bubbleTable.snapInterval = 120;
-    bubbleTable.showAvatars = NO;
+    bubbleTable.showAvatars = YES;
     
     chatView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gplaypattern.png"]];
 
@@ -403,7 +404,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     if(image == nil) {
         image = [UIImage imageNamed:@"avatar_unknown_small.png"];
     }
-    [avatarImage setImage:image];
+    avatarImage = [SMRotaryImage roundedImageWithImage:image];
     
     linphone_address_destroy(linphoneAddress);
 }

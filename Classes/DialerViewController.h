@@ -27,8 +27,13 @@
 #import "UITransferButton.h"
 #import "UIDigitButton.h"
 #import "SMRotaryProtocol.h"
+#import "SVSegmentedControl.h"
+#import "ContactsTableViewController.h"
+#import "ContactSelectProtocol.h"
 
-@interface DialerViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, SMRotaryProtocol> {
+@interface DialerViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, SMRotaryProtocol, ContactSelectProtocol> {
+    NSUInteger currentPanel;
+    UIView* currentView;
 }
 
 - (void)setAddress:(NSString*)address;
@@ -60,8 +65,13 @@
 @property (nonatomic, retain) IBOutlet UIView* backgroundView;
 @property (nonatomic, retain) IBOutlet UIView* videoPreview;
 @property (nonatomic, retain) IBOutlet UICamSwitch* videoCameraSwitch;
-@property (nonatomic, retain) IBOutlet UIView* rotationView;
+@property (nonatomic, retain) IBOutlet UIView* contactsView;
+@property (nonatomic, retain) IBOutlet UIView* favRotationView;
+@property (nonatomic, retain) IBOutlet UIView* padView;
 @property (nonatomic, retain) SMRotaryWheel *wheel;
+@property (nonatomic, retain) SMRotaryWheel *favWheel;
+@property (nonatomic, retain) IBOutlet ContactsTableViewController* tableController;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 - (IBAction)onAddContactClick: (id) event;
 - (IBAction)onBackClick: (id) event;

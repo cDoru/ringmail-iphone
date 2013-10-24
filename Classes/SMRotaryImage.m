@@ -18,7 +18,7 @@
     {
         self.imgNum = -1;
         self.backgroundColor = [UIColor clearColor];
-        UIImageView *im = [[UIImageView alloc] initWithImage:[self roundedImageWithImage:[UIImage imageNamed:@"avatar_unknown_small.png"]]];
+        UIImageView *im = [[UIImageView alloc] initWithImage:[SMRotaryImage roundedImageWithImage:[UIImage imageNamed:@"avatar_unknown_small.png"]]];
         self.avatar = im;
         
         UILabel *name;
@@ -58,7 +58,7 @@
     self.imgNum = newId;
     //self.label.text = [NSString stringWithFormat:@"Label %i", self.imgNum];
     self.label.text = newText;
-    self.avatar.image = [self roundedImageWithImage:newImage];
+    self.avatar.image = [SMRotaryImage roundedImageWithImage:newImage];
 }
 
 - (void) beginTracking
@@ -77,8 +77,9 @@
     self.transform = t;
 }
 
-- (UIImage *) roundedImageWithImage:(UIImage *)image
++ (UIImage *) roundedImageWithImage:(UIImage *)image
 {
+    image = [image imageWithAlpha];
     CGContextRef cx = CGBitmapContextCreate(NULL, image.size.width, image.size.height, CGImageGetBitsPerComponent(image.CGImage), 0, CGImageGetColorSpace(image.CGImage), CGImageGetBitmapInfo(image.CGImage));
     
     CGContextBeginPath(cx);

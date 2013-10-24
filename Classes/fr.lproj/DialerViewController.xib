@@ -334,7 +334,7 @@
         <image name="call_default.png" width="368" height="72"/>
         <image name="call_disabled.png" width="368" height="72"/>
         <image name="call_over.png" width="378" height="72"/>
-        <image name="dialer_address_background.png" width="640" height="104"/>
+        <image name="dialer_address_background.png" width="640" height="102"/>
         <image name="numpad_eight_default.png" width="151" height="148"/>
         <image name="numpad_eight_over.png" width="151" height="148"/>
         <image name="numpad_five_default.png" width="151" height="148"/>

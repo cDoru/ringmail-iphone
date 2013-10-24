@@ -37,6 +37,7 @@
 - (ABRecordRef)getContactById:(NSNumber*)itemId;
 - (void)reload;
 - (void)loadData;
+- (void)setupWheelContacts;
 + (BOOL)isAuthorized;
 + (NSString*)appendCountryCodeIfPossible:(NSString*)number;
 + (NSString*)normalizePhoneNumber:(NSString*)number;

@@ -24,11 +24,13 @@
 #import "UACellBackgroundView.h"
 #import "UILinphone.h"
 #import "Utils.h"
+#import "SMRotaryImage.h"
 
 @implementation ContactsTableViewController
 
-static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void *context);
+@synthesize delegate;
 
+static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void *context);
 
 #pragma mark - Lifecycle Functions
 
@@ -38,6 +40,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     NSError *error = nil;
     addressBook = ABAddressBookCreateWithOptions(NULL, (CFErrorRef *)&error);
     ABAddressBookRegisterExternalChangeCallback(addressBook, sync_address_book, self);
+    delegate = nil;
 }
 
 - (id)init {
@@ -214,7 +217,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     if(image == nil) {
         image = [UIImage imageNamed:@"avatar_unknown_small.png"];
     }
-    [[cell avatarImage] setImage:image];
+    [[cell avatarImage] setImage:[SMRotaryImage roundedImageWithImage:image]];
     
     [cell setContact: contact];
     return cell;
@@ -228,30 +231,37 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     OrderedDictionary *subDic = [addressBookMap objectForKey: [addressBookMap keyAtIndex: [indexPath section]]]; 
     ABRecordRef lPerson = [subDic objectForKey: [subDic keyAtIndex:[indexPath row]]];
     
-    // Go to Contact details view
-    ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
-    if(controller != nil) {
-        if([ContactSelection getSelectionMode] != ContactSelectionModeEdit) {
-            [controller setContact:lPerson];
-        } else {
-            [controller editContact:lPerson address:[ContactSelection getAddAddress]];
+    if (delegate == nil)
+    {
+        // Go to Contact details view
+        ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
+        if(controller != nil) {
+            if([ContactSelection getSelectionMode] != ContactSelectionModeEdit) {
+                [controller setContact:lPerson];
+            } else {
+                [controller editContact:lPerson address:[ContactSelection getAddAddress]];
+            }
         }
+    }
+    else
+    {
+        [delegate contactSelected:lPerson];
     }
 }
 
-/*- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
 	// create the parent view that will hold header Label
 	UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 22.0)];
     [customView autorelease];
-    customView.backgroundColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.0];
+    customView.backgroundColor = [UIColor colorWithRed:(49/255.0) green:(65/255.0) blue:(113/255.0) alpha:1];
 	
 	// create the button object
 	UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [headerLabel autorelease];
 	headerLabel.backgroundColor = [UIColor clearColor];
 	headerLabel.opaque = NO;
-	headerLabel.textColor = [UIColor blackColor];
+	headerLabel.textColor = [UIColor whiteColor];
 	headerLabel.highlightedTextColor = [UIColor blackColor];
 	headerLabel.font = [UIFont boldSystemFontOfSize:18];
 	headerLabel.frame = CGRectMake(15.0, 0.0, 305.0, 22.0);
@@ -263,7 +273,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 	[customView addSubview:headerLabel];
     
 	return customView;
-}*/
+}
 
 
 #pragma mark - UITableViewDelegate Functions

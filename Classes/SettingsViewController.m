@@ -454,6 +454,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     navigationController.view.frame = self.view.frame;
     [navigationController pushViewController:settingsController animated:FALSE];
+    
+    
+    settingsController.navigationController.navigationBar.translucent = NO;
     [self.view addSubview: navigationController.view];
 }
 

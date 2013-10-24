@@ -172,6 +172,8 @@
 #endif
                                  nil];
 	[[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    
+    //[[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 	
     if ([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]
 		&& [UIApplication sharedApplication].applicationState ==  UIApplicationStateBackground

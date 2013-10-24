@@ -19,13 +19,15 @@
 @property CGAffineTransform startTransform;
 @property (nonatomic, retain) NSMutableArray *cloves;
 @property (nonatomic, retain) NSMutableArray *cloveImages;
+@property (nonatomic, retain) NSMutableArray *spinContacts;
 @property int currentValue;
 @property CGFloat totalRotate;
 @property int totalSpin;
 @property int lastRotate;
 @property int lastLeft;
+@property (nonatomic, retain) NSString *name;
 
-- (id) initWithFrame:(CGRect)frame andDelegate:(id)del withSections:(int)sectionsNumber;
+- (id) initWithFrame:(CGRect)frame andDelegate:(id)del withSections:(int)sectionsNumber withName:(NSString *)contactsName;
 - (void) updateAll;
 
 @end

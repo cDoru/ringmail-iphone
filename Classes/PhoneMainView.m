@@ -468,13 +468,13 @@ static PhoneMainView* phoneMainViewInstance=nil;
     [LinphoneLogger logc:LinphoneLoggerLog format:"PhoneMainView: Change current view to %@", [view name]];
     
     if(force || ![view equal: currentView]) {
-        /* if(transition == nil)
+        if(transition == nil)
             transition = [PhoneMainView getTransition:currentView new:view];
         if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
             [mainViewController setViewTransition:transition];
         } else {
             [mainViewController setViewTransition:nil];
-        } */
+        }
         [mainViewController setViewTransition:nil];
         [mainViewController changeView:view];
         currentView = view;

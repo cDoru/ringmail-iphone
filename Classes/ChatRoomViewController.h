@@ -50,13 +50,13 @@
 @property (nonatomic, retain) IBOutlet HPGrowingTextView* messageField;
 @property (nonatomic, retain) IBOutlet UIButton* sendButton;
 @property (nonatomic, retain) IBOutlet UILabel *addressLabel;
-@property (nonatomic, retain) IBOutlet UIImageView *avatarImage;
 @property (nonatomic, retain) IBOutlet UIView *headerView;
 @property (nonatomic, retain) IBOutlet UIView *chatView;
 @property (nonatomic, retain) IBOutlet UIView *messageView;
 @property (nonatomic, retain) IBOutlet UIImageView *messageBackgroundImage;
 @property (nonatomic, retain) IBOutlet UIImageView *transferBackgroundImage;
 @property (nonatomic, retain) IBOutlet UITapGestureRecognizer *listTapGestureRecognizer;
+@property (nonatomic, retain) UIImage *avatarImage;
 
 @property (nonatomic, copy) NSString *remoteAddress;
 @property (nonatomic, retain) IBOutlet UIButton* pictureButton;

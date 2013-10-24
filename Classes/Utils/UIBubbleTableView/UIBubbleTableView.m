@@ -12,6 +12,7 @@
 #import "NSBubbleData.h"
 #import "UIBubbleHeaderTableViewCell.h"
 #import "UIBubbleTypingTableViewCell.h"
+#import "ChatRoomViewController.h"
 
 @interface UIBubbleTableView ()
 
@@ -186,7 +187,14 @@
     {
         bubble = [NSBubbleData dataWithText:chat.message date:chat.time type:dir];
     }
-    bubble.avatar = nil;
+    if([chat.direction intValue]) // Incoming
+    {
+        bubble.avatar = [(ChatRoomViewController*)self.bubbleDataSource avatarImage];
+    }
+    else
+    {
+        bubble.avatar = nil;
+    }
     bubble.chat = chat;
     [LinphoneLogger logc:LinphoneLoggerWarning format:"Chat Bubble: %@", chat.message];
     return bubble;

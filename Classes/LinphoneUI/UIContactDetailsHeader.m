@@ -24,6 +24,7 @@
 #import "UILinphone.h"
 #import "PhoneMainView.h"
 #import "DTActionSheet.h"
+#import "FavoritesModel.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
 
@@ -36,6 +37,7 @@
 @synthesize editView;
 @synthesize tableView;
 @synthesize contactDetailsDelegate;
+@synthesize favSwitch;
 
 #pragma mark - Lifecycle Functions
 
@@ -80,6 +82,8 @@
     
     [propertyList release];
     
+    [favSwitch release];
+    
     [super dealloc];
 }
 
@@ -93,6 +97,7 @@
     [normalView setAlpha:1.0f];
     [editView setAlpha:0.0f];
     [tableView setEditing:TRUE animated:false];
+    [favSwitch addTarget:self action:@selector(onFavSwitchChange:) forControlEvents:UIControlEventValueChanged];
 }
 
 
@@ -127,13 +132,16 @@
         if(image == nil) {
             image = [UIImage imageNamed:@"avatar_unknown_small.png"];
         }
-        [avatarImage setImage:image];
+        [avatarImage setImage:[SMRotaryImage roundedImageWithImage:image]];
     }
     
     // Contact label
     {
         [addressLabel setText:[FastAddressBook getContactDisplayName:contact]];
     }
+    
+    NSNumber *fav = [NSNumber numberWithInteger:ABRecordGetRecordID(contact)];
+    favSwitch.on = [FavoritesModel isFavorite:fav];
     
     [tableView reloadData];
 }
@@ -142,7 +150,7 @@
     if(editing) {
         return 160.0f;
     } else {
-        return 80.0f;
+        return 160.0f;
     }
 }
 
@@ -285,6 +293,22 @@
         
         [sheet showInView:[PhoneMainView instance].view];
     }
+}
+
+- (void) onFavSwitchChange:(id)event {
+    NSNumber *fav = [NSNumber numberWithInteger:ABRecordGetRecordID(contact)];
+    if ([favSwitch isOn])
+    {
+        [FavoritesModel addFavorite:fav];
+    }
+    else
+    {
+        [FavoritesModel removeFavorite:fav];
+    }
+    FastAddressBook* book = [[LinphoneManager instance] fastAddressBook];
+    [book loadData];
+    [book setupWheelContacts];
+    [[LinphoneManager instance] setReloadWheels:YES];
 }
 
 
