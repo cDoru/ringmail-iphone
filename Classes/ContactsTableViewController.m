@@ -217,7 +217,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     if(image == nil) {
         image = [UIImage imageNamed:@"avatar_unknown_small.png"];
     }
-    [[cell avatarImage] setImage:[SMRotaryImage roundedImageWithImage:image]];
+    [[cell avatarImage] setImage:image];
     
     [cell setContact: contact];
     return cell;
@@ -254,7 +254,8 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 	// create the parent view that will hold header Label
 	UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 22.0)];
     [customView autorelease];
-    customView.backgroundColor = [UIColor colorWithRed:(49/255.0) green:(65/255.0) blue:(113/255.0) alpha:1];
+
+    customView.backgroundColor = [UIColor colorWithRed:58/255.0f green:137/255.0f blue:201/255.0f alpha:1.0f];
 	
 	// create the button object
 	UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];

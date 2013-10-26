@@ -20,7 +20,7 @@
 #import <AVFoundation/AVAudioSession.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-#import "DialerViewController.h"
+#import "DialpadViewController.h"
 #import "IncallViewController.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
@@ -31,55 +31,81 @@
 #include "linphonecore.h"
 
 
-@implementation DialerViewController
+@implementation DialpadViewController
 
 @synthesize transferMode;
 
 @synthesize addressField;
+@synthesize addContactButton;
+@synthesize backButton;
+@synthesize addCallButton;
+@synthesize transferButton;
 @synthesize callButton;
-@synthesize textButton;
+@synthesize eraseButton;
+
+@synthesize oneButton;
+@synthesize twoButton;
+@synthesize threeButton;
+@synthesize fourButton;
+@synthesize fiveButton;
+@synthesize sixButton;
+@synthesize sevenButton;
+@synthesize eightButton;
+@synthesize nineButton;
+@synthesize starButton;
+@synthesize zeroButton;
+@synthesize sharpButton;
 
 @synthesize backgroundView;
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
-@synthesize favRotationView;
-@synthesize wheel;
-@synthesize favWheel;
-@synthesize contactButton;
-@synthesize currentContact;
+@synthesize padView;
+
 
 #pragma mark - Lifecycle Functions
 
 - (id)init {
     if (IS_IPHONE && IS_IPHONE_5)
     {
-        self = [super initWithNibName:@"DialerViewController_iPhone5" bundle:[NSBundle mainBundle]];
+        self = [super initWithNibName:@"DialpadViewController_iPhone5" bundle:[NSBundle mainBundle]];
     }
     else
     {
-        self = [super initWithNibName:@"DialerViewController" bundle:[NSBundle mainBundle]];
+        self = [super initWithNibName:@"DialpadViewController" bundle:[NSBundle mainBundle]];
     }
     
     if(self) {
         self->transferMode = FALSE;
         [callButton setHiddenAddress:@""];
-        //TODO
-        //[textButton setHiddenAddress:@""];
-        
-        wheel = nil;
-        currentContact = nil;
     }
     return self;
 }
 
 - (void)dealloc {
 	[addressField release];
+    [addContactButton release];
+    [backButton release];
+    [eraseButton release];
 	[callButton release];
-    [textButton release];
+    [addCallButton release];
+    [transferButton release];
+    
+	[oneButton release];
+	[twoButton release];
+	[threeButton release];
+	[fourButton release];
+	[fiveButton release];
+	[sixButton release];
+	[sevenButton release];
+	[eightButton release];
+	[nineButton release];
+	[starButton release];
+	[zeroButton release];
+	[sharpButton release];
     
     [videoPreview release];
     [videoCameraSwitch release];
-    [favRotationView release];
+    [padView release];
     
     // Remove all observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -94,8 +120,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
-        compositeDescription = [[UICompositeViewDescription alloc] init:@"Dialer" 
-                                                                content:@"DialerViewController" 
+        compositeDescription = [[UICompositeViewDescription alloc] init:@"Dialpad"
+                                                                content:@"DialpadViewController"
                                                                stateBar:@"UIStateBar" 
                                                         stateBarEnabled:true 
                                                                  tabBar:@"UIMainBar" 
@@ -142,19 +168,6 @@ static UICompositeViewDescription *compositeDescription = nil;
             }
         }
     }
-    
-    if ([[LinphoneManager instance] reloadWheels])
-    {
-        if (wheel)
-        {
-            [wheel updateAll];
-        }
-        if (favWheel)
-        {
-            [favWheel updateAll];
-        }
-        [[LinphoneManager instance] setReloadWheels:NO];
-    }
 
 }
 
@@ -175,6 +188,19 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+	[zeroButton    setDigit:'0'];
+	[oneButton     setDigit:'1'];
+	[twoButton     setDigit:'2'];
+	[threeButton   setDigit:'3'];
+	[fourButton    setDigit:'4'];
+	[fiveButton    setDigit:'5'];
+	[sixButton     setDigit:'6'];
+	[sevenButton   setDigit:'7'];
+	[eightButton   setDigit:'8'];
+	[nineButton    setDigit:'9'];
+	[starButton    setDigit:'*'];
+	[sharpButton   setDigit:'#'];
+    
     [addressField setAdjustsFontSizeToFitWidth:TRUE]; // Not put it in IB: issue with placeholder size
     
     if([LinphoneManager runningOnIpad]) {
@@ -183,24 +209,13 @@ static UICompositeViewDescription *compositeDescription = nil;
             [videoCameraSwitch setHidden:FALSE];
         }
     }
-    
-    favWheel = [[SMRotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 310, 310)
-                                     andDelegate:self
-                                    withSections:8
-                                    withName:@"favorites"];
-    
-    favWheel.center = [favRotationView convertPoint:favRotationView.center fromView:favRotationView.superview];
-    [favRotationView addSubview:favWheel];
-    
-    [contactButton setImage:[UIImage imageNamed:@"avatar_unknown_small.png"] forState:UIControlStateNormal];
+
     
     [self setAddress:@""];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    
-    [wheel release];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -314,57 +329,41 @@ static UICompositeViewDescription *compositeDescription = nil;
     return YES;
 }
 
-#pragma mark - SMRotaryWheel Functions
-
-- (void)wheelDidChangeValue:(NSDictionary *)newValue {
-    if (newValue)
-    {
-        NSNumber *contactId = [newValue objectForKey:@"id"];
-        if (contactId != nil)
-        {
-            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContactById:contactId];
-            if (contact)
-            {
-                NSString* displayName = [FastAddressBook getContactDisplayName:contact];
-                //NSLog(@"Selected: %@", displayName);
-                [self setAddress:displayName];
-                [callButton setHiddenAddress:[FastAddressBook getPrimaryTarget:contact]];
-                //[textButton setHiddenAddress:[FastAddressBook getPrimaryTarget:contact]];
-                currentContact = contact;
-                UIImage* image = [FastAddressBook getContactImage:contact thumbnail:true];
-                if (image == nil)
-                {
-                    image = [UIImage imageNamed:@"avatar_unknown_small.png"];
-                }
-                [contactButton setImage:[SMRotaryImage roundedImageWithImage:image] forState:UIControlStateNormal];
-            }
-        }
-        else
-        {
-            NSLog(@"Blank Value 1");
-        }
-    }
-    else
-    {
-        NSLog(@"Blank Value 2");
-    }
-    return;
-}
 
 #pragma mark - Action Functions
 
+- (IBAction)onAddContactClick: (id) event {
+    [ContactSelection setSelectionMode:ContactSelectionModeEdit];
+    [ContactSelection setAddAddress:[addressField text]];
+    [ContactSelection setSipFilter:FALSE];
+    [ContactSelection setEmailFilter:FALSE];
+    ContactsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription] push:TRUE], ContactsViewController);
+    if(controller != nil) {
+        
+    }
+}
 
 - (IBAction)onSettingsClick:(id)event {
     [[PhoneMainView instance] changeCurrentView:[SettingsViewController compositeViewDescription]];
 }
 
+- (IBAction)onBackClick: (id) event {
+    [[PhoneMainView instance] changeCurrentView:[InCallViewController compositeViewDescription]];
+}
+
 - (IBAction)onAddressChange: (id)sender {
     if([[addressField text] length] > 0) {
+        [addContactButton setEnabled:TRUE];
+        [eraseButton setEnabled:TRUE];
         [callButton setEnabled:TRUE];
-        [textButton setEnabled:TRUE];
+        [addCallButton setEnabled:TRUE];
+        [transferButton setEnabled:TRUE];
     } else {
+        [addContactButton setEnabled:FALSE];
+        [eraseButton setEnabled:FALSE];
         [callButton setEnabled:FALSE];
-        [textButton setEnabled:FALSE];
+        [addCallButton setEnabled:FALSE];
+        [transferButton setEnabled:FALSE];
     }
 }
 
@@ -374,25 +373,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     {
         [self setAddress:@""];
         [callButton setHiddenAddress:@""];
-        [contactButton setImage:[UIImage imageNamed:@"avatar_unknown_small.png"] forState:UIControlStateNormal];
-        currentContact = nil;
-    }
-}
-
-
-- (IBAction)onContactClick: (id)sender {
-// Go to Contact details view
-    if (currentContact == nil)
-    {
-        return;
-    }
-    ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
-    if(controller != nil) {
-        if([ContactSelection getSelectionMode] != ContactSelectionModeEdit) {
-            [controller setContact:currentContact];
-        } else {
-            [controller editContact:currentContact address:[ContactSelection getAddAddress]];
-        }
     }
 }
 

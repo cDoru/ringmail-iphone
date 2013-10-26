@@ -23,6 +23,7 @@
 #import "UILinphone.h"
 #import "LinphoneManager.h"
 #import "FastAddressBook.h"
+#import "SMRotaryImage.h"
 
 @implementation UICallCellData
 
@@ -372,7 +373,7 @@
     [pauseButton setType:UIPauseButtonType_Call call:call];
     
     [addressLabel setText:data.address];
-    [avatarImage setImage:data.image];
+    [avatarImage setImage:[SMRotaryImage roundedImageWithImage:data.image]];
     
     LinphoneCallState state = linphone_call_get_state(call);
     if(!conferenceCell) {

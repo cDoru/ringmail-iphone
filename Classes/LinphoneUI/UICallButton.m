@@ -68,6 +68,7 @@
 
 - (void)touchUp:(id) sender {
     NSString *address = [addressField text];
+    NSLog(@"Dial: '%@'", address);
     NSString *displayName = nil;
     if ([hiddenAddress length] != 0)
     {

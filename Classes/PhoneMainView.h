@@ -28,6 +28,7 @@
 #import "ChatRoomViewController.h"
 #import "ChatViewController.h"
 #import "DialerViewController.h"
+#import "DialpadViewController.h"
 #import "DirectoryViewController.h"
 #import "ContactsViewController.h"
 #import "ContactDetailsViewController.h"

@@ -22,10 +22,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="23"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView hidden="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" id="12" userLabel="background">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="23"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
                 <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="led_disconnected.png" id="5" userLabel="registrationStateImage">
                     <rect key="frame" x="6" y="7" width="10" height="10"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -70,7 +66,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.19215686269999999" green="0.25490196079999999" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.1058823529" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
         </view>
         <view contentMode="scaleToFill" id="19" userLabel="Landscape View">
             <rect key="frame" x="0.0" y="0.0" width="480" height="23"/>

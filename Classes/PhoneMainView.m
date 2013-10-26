@@ -403,29 +403,32 @@ static PhoneMainView* phoneMainViewInstance=nil;
 + (CATransition*)getTransition:(UICompositeViewDescription *)old new:(UICompositeViewDescription *)new {
     bool left = false;
     
-    if([old equal:[ChatViewController compositeViewDescription]]) {
-        if([new equal:[ContactsViewController compositeViewDescription]] ||
+    if([old equal:[DialpadViewController compositeViewDescription]]) {
+        if([new equal:[ChatViewController compositeViewDescription]] ||
            [new equal:[DialerViewController compositeViewDescription]] ||
-           [new equal:[SettingsViewController compositeViewDescription]] ||
-           [new equal:[HistoryViewController compositeViewDescription]]) {
-            left = true;
-        }
-    } else if([old equal:[SettingsViewController compositeViewDescription]]) {
-        if([new equal:[DialerViewController compositeViewDescription]] ||
            [new equal:[ContactsViewController compositeViewDescription]] ||
            [new equal:[HistoryViewController compositeViewDescription]]) {
             left = true;
         }
-    } else if([old equal:[DialerViewController compositeViewDescription]]) {
-        if([new equal:[ContactsViewController compositeViewDescription]] ||
+    } else if([old equal:[ContactsViewController compositeViewDescription]]) {
+        if(
+           [new equal:[ChatViewController compositeViewDescription]] ||
+           [new equal:[DialerViewController compositeViewDescription]] ||
            [new equal:[HistoryViewController compositeViewDescription]]) {
             left = true;
         }
-    } else if([old equal:[ContactsViewController compositeViewDescription]]) {
-        if([new equal:[HistoryViewController compositeViewDescription]]) {
+    } else if([old equal:[DialerViewController compositeViewDescription]]) {
+        if([new equal:[ChatViewController compositeViewDescription]] ||
+           [new equal:[HistoryViewController compositeViewDescription]]) {
+            left = true;
+        }
+    } else if([old equal:[HistoryViewController compositeViewDescription]]) {
+        if([new equal:[ChatViewController compositeViewDescription]]) {
             left = true;
         }
     } 
+    
+    NSLog(@"Get Transition Left: %d", left);
     
     if(left) {
         return [PhoneMainView getBackwardTransition];
@@ -471,11 +474,12 @@ static PhoneMainView* phoneMainViewInstance=nil;
         if(transition == nil)
             transition = [PhoneMainView getTransition:currentView new:view];
         if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
+            NSLog(@"Set Transition");
             [mainViewController setViewTransition:transition];
         } else {
             [mainViewController setViewTransition:nil];
         }
-        [mainViewController setViewTransition:nil];
+        //[mainViewController setViewTransition:nil];
         [mainViewController changeView:view];
         currentView = view;
     } 

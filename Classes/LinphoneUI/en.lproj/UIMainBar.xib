@@ -25,7 +25,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view hidden="YES" opaque="NO" autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" id="4" userLabel="mask">
+                <view hidden="YES" autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" id="4" userLabel="mask">
                     <rect key="frame" x="0.0" y="8" width="320" height="51"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="1" blue="0.090924573910000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -37,16 +37,16 @@
                     <accessibility key="accessibilityConfiguration" label="Chat"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Chat" backgroundImage="chat_default.png">
+                    <state key="normal" title="Chats" backgroundImage="chat_default.png">
                         <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="chat_selected.png">
-                        <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="selected" backgroundImage="chat_default.png">
+                        <color key="titleColor" red="0.22745098039215686" green="0.53725490196078429" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="chat_selected.png">
-                        <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="highlighted" backgroundImage="chat_default.png">
+                        <color key="titleColor" red="0.2274509804" green="0.53725490200000003" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -60,16 +60,15 @@
                     <accessibility key="accessibilityConfiguration" label="History"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Calls" backgroundImage="history_default.png">
+                    <state key="normal" title="History" backgroundImage="history_default.png">
                         <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="history_selected.png">
-                        <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="selected" backgroundImage="history_default.png">
+                        <color key="titleColor" red="0.22745098039215686" green="0.53725490196078429" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
-                    <state key="highlighted" backgroundImage="history_selected.png">
-                        <color key="titleColor" red="0.35686274509999999" green="0.39607843139999999" blue="0.43529411759999997" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="highlighted" backgroundImage="history_default.png">
+                        <color key="titleColor" red="0.2274509804" green="0.53725490200000003" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="onHistoryClick:" destination="-1" eventType="touchUpInside" id="22"/>
@@ -82,16 +81,16 @@
                     <accessibility key="accessibilityConfiguration" label="Dialer"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="RingMail" backgroundImage="ringmail_default.png">
+                    <state key="normal" title="Favorites" backgroundImage="ringmail_default.png">
                         <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="ringmail_selected.png">
-                        <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="selected" backgroundImage="ringmail_default.png">
+                        <color key="titleColor" red="0.22745098039215686" green="0.53725490196078429" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="ringmail_selected.png">
-                        <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="highlighted" backgroundImage="ringmail_default.png">
+                        <color key="titleColor" red="0.2274509804" green="0.53725490200000003" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -109,12 +108,12 @@
                         <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="contacts_selected.png">
-                        <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="selected" backgroundImage="contacts_default.png">
+                        <color key="titleColor" red="0.22745098039215686" green="0.53725490196078429" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="contacts_selected.png">
-                        <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="highlighted" backgroundImage="contacts_default.png">
+                        <color key="titleColor" red="0.2274509804" green="0.53725490200000003" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -128,16 +127,16 @@
                     <accessibility key="accessibilityConfiguration" label="Settings"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Directory" backgroundImage="directory_default.png">
+                    <state key="normal" title="Dialpad" backgroundImage="directory_default.png">
                         <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="directory_selected.png">
-                        <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="selected" backgroundImage="directory_default.png">
+                        <color key="titleColor" red="0.22745098039215686" green="0.53725490196078429" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="directory_selected.png">
-                        <color key="titleColor" red="0.43921568630000002" green="0.44705882349999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="highlighted" backgroundImage="directory_default.png">
+                        <color key="titleColor" red="0.2274509804" green="0.53725490200000003" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -197,15 +196,10 @@
     </objects>
     <resources>
         <image name="chat_default.png" width="128" height="102"/>
-        <image name="chat_selected.png" width="128" height="102"/>
         <image name="contacts_default.png" width="128" height="102"/>
-        <image name="contacts_selected.png" width="128" height="102"/>
         <image name="directory_default.png" width="128" height="102"/>
-        <image name="directory_selected.png" width="128" height="102"/>
         <image name="history_default.png" width="128" height="102"/>
         <image name="history_notification.png" width="43" height="43"/>
-        <image name="history_selected.png" width="128" height="102"/>
         <image name="ringmail_default.png" width="128" height="102"/>
-        <image name="ringmail_selected.png" width="128" height="102"/>
     </resources>
 </document>

@@ -152,6 +152,8 @@
 		C40CD7FB17839BD700E35C91 /* directory_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7F817839BD700E35C91 /* directory_default.png */; };
 		C40CD7FC17839BD700E35C91 /* directory_over.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7F917839BD700E35C91 /* directory_over.png */; };
 		C40CD7FD17839BD700E35C91 /* directory_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7FA17839BD700E35C91 /* directory_selected.png */; };
+		C4137DFC181C285B00827A3F /* dialer_call_button_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = C4137DFA181C285B00827A3F /* dialer_call_button_sel.png */; };
+		C4137DFD181C285B00827A3F /* dialer_call_button.png in Resources */ = {isa = PBXBuildFile; fileRef = C4137DFB181C285B00827A3F /* dialer_call_button.png */; };
 		C4283DEA1799B3DD00268244 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = C4283DE91799B3DD00268244 /* gear.png */; };
 		C4283DEF1799B64900268244 /* DirectoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4283DED1799B64900268244 /* DirectoryViewController.xib */; };
 		C4283DF31799B6EC00268244 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4283DF21799B6EC00268244 /* DirectoryViewController.m */; };
@@ -208,6 +210,9 @@
 		C46C7D5918131938008973A1 /* center_circle_sel_01.png in Resources */ = {isa = PBXBuildFile; fileRef = C46C7D5718131938008973A1 /* center_circle_sel_01.png */; };
 		C46C7D5A18131938008973A1 /* center_circle_sel_02.png in Resources */ = {isa = PBXBuildFile; fileRef = C46C7D5818131938008973A1 /* center_circle_sel_02.png */; };
 		C46F008517A9E2BB00A631C5 /* ImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C46F008417A9E2BB00A631C5 /* ImageHelper.m */; };
+		C4701077181B4801005FDEE2 /* DialpadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4701076181B4801005FDEE2 /* DialpadViewController.m */; };
+		C470107A181B481F005FDEE2 /* DialpadViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4701078181B481F005FDEE2 /* DialpadViewController_iPhone5.xib */; };
+		C470107D181B4840005FDEE2 /* DialpadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C470107B181B4840005FDEE2 /* DialpadViewController.xib */; };
 		C479D9B817A70F4800A24601 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = C479D9B617A70F4800A24601 /* OpenUDID.m */; };
 		C479D9BB17A7183300A24601 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C479D9BA17A7183300A24601 /* libz.1.dylib */; };
 		C479D9D417A7187600A24601 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = C479D9BE17A7187600A24601 /* ASIAuthenticationDialog.m */; };
@@ -1417,6 +1422,8 @@
 		C40CD7F817839BD700E35C91 /* directory_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = directory_default.png; path = Resources/directory_default.png; sourceTree = "<group>"; };
 		C40CD7F917839BD700E35C91 /* directory_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = directory_over.png; path = Resources/directory_over.png; sourceTree = "<group>"; };
 		C40CD7FA17839BD700E35C91 /* directory_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = directory_selected.png; path = Resources/directory_selected.png; sourceTree = "<group>"; };
+		C4137DFA181C285B00827A3F /* dialer_call_button_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dialer_call_button_sel.png; path = Resources/dialer_call_button_sel.png; sourceTree = "<group>"; };
+		C4137DFB181C285B00827A3F /* dialer_call_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dialer_call_button.png; path = Resources/dialer_call_button.png; sourceTree = "<group>"; };
 		C41E6EA61818DEBE005FEC01 /* ContactSelectProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactSelectProtocol.h; sourceTree = "<group>"; };
 		C4283DE91799B3DD00268244 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gear.png; path = Resources/gear.png; sourceTree = "<group>"; };
 		C4283DEE1799B64900268244 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DirectoryViewController.xib; sourceTree = "<group>"; };
@@ -1480,6 +1487,10 @@
 		C46C7D5818131938008973A1 /* center_circle_sel_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = center_circle_sel_02.png; path = Resources/center_circle_sel_02.png; sourceTree = "<group>"; };
 		C46F008317A9E2BB00A631C5 /* ImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHelper.h; sourceTree = "<group>"; };
 		C46F008417A9E2BB00A631C5 /* ImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHelper.m; sourceTree = "<group>"; };
+		C4701075181B47F6005FDEE2 /* DialpadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialpadViewController.h; sourceTree = "<group>"; };
+		C4701076181B4801005FDEE2 /* DialpadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialpadViewController.m; sourceTree = "<group>"; };
+		C4701079181B481F005FDEE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DialpadViewController_iPhone5.xib; sourceTree = "<group>"; };
+		C470107C181B4840005FDEE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DialpadViewController.xib; sourceTree = "<group>"; };
 		C479D9B517A70F4800A24601 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		C479D9B617A70F4800A24601 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		C479D9BA17A7183300A24601 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
@@ -2381,6 +2392,10 @@
 				D35497FB15875372000081D8 /* ContactsViewController.h */,
 				D35497FC15875372000081D8 /* ContactsViewController.m */,
 				D38187C015FE342800C3EDCA /* ContactsViewController.xib */,
+				C4701075181B47F6005FDEE2 /* DialpadViewController.h */,
+				C4701076181B4801005FDEE2 /* DialpadViewController.m */,
+				C4701078181B481F005FDEE2 /* DialpadViewController_iPhone5.xib */,
+				C470107B181B4840005FDEE2 /* DialpadViewController.xib */,
 				C48D29DC17FBE91400F6E76A /* SMRotaryWheel.h */,
 				C48D29DD17FBE91400F6E76A /* SMRotaryWheel.m */,
 				C48D29F91800792C00F6E76A /* SMRotaryImage.h */,
@@ -2892,6 +2907,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C4137DFA181C285B00827A3F /* dialer_call_button_sel.png */,
+				C4137DFB181C285B00827A3F /* dialer_call_button.png */,
 				C455CEAA1817574500618FA8 /* circle_top.png */,
 				C455CEA61817531700618FA8 /* center_rounded_01.png */,
 				C455CEA71817531700618FA8 /* center_rounded_02.png */,
@@ -3940,6 +3957,7 @@
 				D3ED3E9E15872EF1006C0DE4 /* history_edit_over.png in Resources */,
 				D3ED3EA015872EF1006C0DE4 /* history_missed_selected.png in Resources */,
 				D3ED3EA215872EF1006C0DE4 /* history_missed_default.png in Resources */,
+				C470107D181B4840005FDEE2 /* DialpadViewController.xib in Resources */,
 				C48D29F717FBEAED00F6E76A /* icon7.png in Resources */,
 				D38187D115FE346B00C3EDCA /* HistoryViewController.xib in Resources */,
 				D38187BD15FE342800C3EDCA /* ContactsViewController.xib in Resources */,
@@ -4051,6 +4069,7 @@
 				D38187AD15FE340100C3EDCA /* ChatRoomViewController.xib in Resources */,
 				D3F795DD15A5831C0077328B /* chat_back_default.png in Resources */,
 				D3F795DF15A5831C0077328B /* chat_back_over.png in Resources */,
+				C470107A181B481F005FDEE2 /* DialpadViewController_iPhone5.xib in Resources */,
 				D3B9A3E115A58C450096EA4E /* chat_ok_default.png in Resources */,
 				D3B9A3E315A58C450096EA4E /* chat_ok_over.png in Resources */,
 				D3B9A3E515A58C450096EA4E /* chat_send_default.png in Resources */,
@@ -4222,6 +4241,7 @@
 				C4EEAB1117B70DF100AC4114 /* wild_oliva_@2X.png in Resources */,
 				C4EEAB1217B70DF100AC4114 /* wild_oliva.png in Resources */,
 				C47A205317C3D43B0072048D /* DialerViewController_iPhone5.xib in Resources */,
+				C4137DFD181C285B00827A3F /* dialer_call_button.png in Resources */,
 				C47A205517C3DE5F0072048D /* call_background.png in Resources */,
 				C4569C9D17C5407500ABBBF7 /* numpad4_eight_default.png in Resources */,
 				C4569C9E17C5407500ABBBF7 /* numpad4_eight_over.png in Resources */,
@@ -4255,6 +4275,7 @@
 				C4569CBC17C5589A00ABBBF7 /* profile_icon.png in Resources */,
 				C4569CBE17C57BE500ABBBF7 /* chat_name_background.png in Resources */,
 				C4569CC117C5805F00ABBBF7 /* send_btn_over.png in Resources */,
+				C4137DFC181C285B00827A3F /* dialer_call_button_sel.png in Resources */,
 				C4569CC217C5805F00ABBBF7 /* send_btn_default.png in Resources */,
 				C4569CC417C6938300ABBBF7 /* tiny_facebook.png in Resources */,
 				C46C7D5A18131938008973A1 /* center_circle_sel_02.png in Resources */,
@@ -4720,6 +4741,7 @@
 				D3807FFE15C2894A005BE9BC /* IASKSlider.m in Sources */,
 				D380800015C2894A005BE9BC /* IASKSwitch.m in Sources */,
 				D380800215C2894A005BE9BC /* IASKTextField.m in Sources */,
+				C4701077181B4801005FDEE2 /* DialpadViewController.m in Sources */,
 				D380800515C28A7A005BE9BC /* UILinphone.m in Sources */,
 				D380801315C299D0005BE9BC /* ColorSpaceUtilites.m in Sources */,
 				D378AB2A15DCDB4A0098505D /* ImagePickerViewController.m in Sources */,
@@ -4896,6 +4918,22 @@
 				C4283DEE1799B64900268244 /* en */,
 			);
 			name = DirectoryViewController.xib;
+			sourceTree = "<group>";
+		};
+		C4701078181B481F005FDEE2 /* DialpadViewController_iPhone5.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4701079181B481F005FDEE2 /* en */,
+			);
+			name = DialpadViewController_iPhone5.xib;
+			sourceTree = "<group>";
+		};
+		C470107B181B4840005FDEE2 /* DialpadViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C470107C181B4840005FDEE2 /* en */,
+			);
+			name = DialpadViewController.xib;
 			sourceTree = "<group>";
 		};
 		C47A205117C3D43B0072048D /* DialerViewController_iPhone5.xib */ = {

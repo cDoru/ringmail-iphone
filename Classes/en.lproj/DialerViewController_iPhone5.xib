@@ -7,30 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DialerViewController">
             <connections>
-                <outlet property="addCallButton" destination="184" id="227"/>
-                <outlet property="addContactButton" destination="41D-bT-vDA" id="hWF-oT-Pbm"/>
                 <outlet property="addressField" destination="4" id="205"/>
-                <outlet property="backButton" destination="183" id="254"/>
-                <outlet property="contactsView" destination="93m-bF-qj7" id="42a-oT-ag0"/>
-                <outlet property="eightButton" destination="pBI-7d-ogF" id="UHw-yz-Dfz"/>
-                <outlet property="eraseButton" destination="P1M-Au-0Vh" id="GW2-cD-HhC"/>
+                <outlet property="callButton" destination="5C9-bI-7or" id="33F-eD-51C"/>
+                <outlet property="contactButton" destination="TsS-6V-ikQ" id="7N3-bf-lmZ"/>
                 <outlet property="favRotationView" destination="9Ao-xc-PJK" id="yQb-F3-KKq"/>
-                <outlet property="fiveButton" destination="yit-82-U9i" id="jxY-4n-PRP"/>
-                <outlet property="fourButton" destination="mcZ-cG-JbO" id="sI4-mz-PY4"/>
-                <outlet property="nineButton" destination="fEb-xo-gRf" id="9wT-7M-D6S"/>
-                <outlet property="oneButton" destination="id3-9u-Kiw" id="g6s-6Y-1rR"/>
-                <outlet property="padView" destination="aBU-rz-mDb" id="vTx-Cg-hPt"/>
-                <outlet property="sevenButton" destination="x2t-KQ-SBd" id="zq3-j3-8hL"/>
-                <outlet property="sharpButton" destination="3pL-ir-E8c" id="pYY-Kw-ggY"/>
-                <outlet property="sixButton" destination="dtm-j5-KaN" id="c8t-yd-FdV"/>
-                <outlet property="starButton" destination="BY7-Rc-eqb" id="n3Q-Pm-BcH"/>
-                <outlet property="tableController" destination="lTI-Hr-pOb" id="LlQ-lA-Kf3"/>
-                <outlet property="tableView" destination="ufS-Xg-HMQ" id="0bT-ai-91j"/>
-                <outlet property="threeButton" destination="dte-k7-VWm" id="lqo-tk-qa4"/>
-                <outlet property="transferButton" destination="236" id="253"/>
-                <outlet property="twoButton" destination="OTw-2q-vtm" id="OLF-i5-7Rh"/>
+                <outlet property="textButton" destination="ehB-TO-5ue" id="gqo-Z0-BkX"/>
                 <outlet property="view" destination="171" id="176"/>
-                <outlet property="zeroButton" destination="0yg-Z9-8gt" id="wOq-MF-nH1"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -76,286 +58,20 @@
                                 <action selector="onSettingsClick:" destination="-1" eventType="touchUpInside" id="256"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TsS-6V-ikQ" userLabel="contactButton">
+                            <rect key="frame" x="4" y="11" width="32" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onContactClick:" destination="-1" eventType="touchUpInside" id="354-fl-6e9"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.19215686274509802" green="0.25490196078431371" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" id="aBU-rz-mDb" userLabel="padView">
-                    <rect key="frame" x="0.0" y="72" width="320" height="350"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="id3-9u-Kiw" userLabel="1" customClass="UIDigitButton">
-                            <rect key="frame" x="27" y="3" width="76" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.40000001000000002" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                            <accessibility key="accessibilityConfiguration" label="1"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" image="numpad4_one_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="numpad4_one_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="MFs-K2-juT"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OTw-2q-vtm" userLabel="2" customClass="UIDigitButton">
-                            <rect key="frame" x="122" y="3" width="76" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="2"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" image="numpad4_two_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="numpad4_two_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="dVb-oL-far"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dte-k7-VWm" userLabel="3" customClass="UIDigitButton">
-                            <rect key="frame" x="217" y="3" width="76" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="3"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" image="numpad4_three_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="numpad4_three_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="tNg-Ok-XzZ"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mcZ-cG-JbO" userLabel="4" customClass="UIDigitButton">
-                            <rect key="frame" x="27" y="72" width="76" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="4"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" image="numpad4_four_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="numpad4_four_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="0bY-tT-X4p"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yit-82-U9i" userLabel="5" customClass="UIDigitButton">
-                            <rect key="frame" x="122" y="72" width="76" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="5"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" image="numpad4_five_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="numpad4_five_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="cyl-UG-xFW"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dtm-j5-KaN" userLabel="6" customClass="UIDigitButton">
-                            <rect key="frame" x="217" y="72" width="76" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="6"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" image="numpad4_six_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="numpad_six_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="nQu-JR-LQc"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="x2t-KQ-SBd" userLabel="7" customClass="UIDigitButton">
-                            <rect key="frame" x="27" y="141" width="76" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="7"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" image="numpad4_seven_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="numpad4_seven_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="6Yv-Y9-g82"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pBI-7d-ogF" userLabel="8" customClass="UIDigitButton">
-                            <rect key="frame" x="122" y="141" width="76" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="8"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" image="numpad4_eight_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="numpad4_eight_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="kNN-vM-NTP"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fEb-xo-gRf" userLabel="9" customClass="UIDigitButton">
-                            <rect key="frame" x="217" y="141" width="76" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="9"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" image="numpad4_nine_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="numpad4_nine_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="9lJ-Cf-kau"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BY7-Rc-eqb" userLabel="*" customClass="UIDigitButton">
-                            <rect key="frame" x="27" y="210" width="76" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Star"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" image="numpad4_star_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="numpad4_star_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="6Vs-wN-Lmu"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0yg-Z9-8gt" userLabel="0" customClass="UIDigitButton">
-                            <rect key="frame" x="122" y="210" width="76" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="0"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" image="numpad4_zero_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="numpad4_zero_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="HI2-Vg-i0F"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3pL-ir-E8c" userLabel="#" customClass="UIDigitButton">
-                            <rect key="frame" x="217" y="210" width="76" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Sharp"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                            <state key="normal" image="numpad4_sharp_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted" image="numpad4_sharp_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="E3M-Rf-WtW"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1uA-sw-a8N" userLabel="dialpadCall">
-                            <rect key="frame" x="74" y="288" width="171" height="51"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                            <state key="normal" title="Call"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="P1M-Au-0Vh" userLabel="dialpadDelete" customClass="UIEraseButton">
-                            <rect key="frame" x="245" y="288" width="75" height="51"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
-                            <state key="normal" title="x">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="bgt-BC-Z0V"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="41D-bT-vDA" userLabel="dialpadAdd">
-                            <rect key="frame" x="0.0" y="288" width="74" height="51"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
-                            <state key="normal" title="+">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onAddContactClick:" destination="-1" eventType="touchUpInside" id="pLY-92-BPe"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
-                <view hidden="YES" contentMode="scaleToFill" id="182" userLabel="toolBar">
-                    <rect key="frame" x="0.0" y="428" width="320" height="66"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="call_background.png" id="257" userLabel="background">
-                            <rect key="frame" x="64" y="0.0" width="196" height="66"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="183" userLabel="backButton">
-                            <rect key="frame" x="0.0" y="0.0" width="106" height="69"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Back"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" image="back_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" image="back_disabled.png"/>
-                            <state key="highlighted" image="back_over.png"/>
-                            <connections>
-                                <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="233"/>
-                            </connections>
-                        </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="184" userLabel="addCallButton" customClass="UICallButton">
-                            <rect key="frame" x="106" y="0.0" width="108" height="69"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Add call"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" image="add_call_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" image="add_call_disabled.png"/>
-                            <state key="highlighted" image="add_call_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="234"/>
-                            </connections>
-                        </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="236" userLabel="transferButton" customClass="UITransferButton">
-                            <rect key="frame" x="106" y="0.0" width="108" height="69"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Transfer call"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" image="transfer_call_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" image="transfer_call_disabled.png"/>
-                            <state key="highlighted" image="transfer_call_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="237"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="222" userLabel="addContactButton">
-                            <rect key="frame" x="0.0" y="0.0" width="64" height="66"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Add to contact"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" image="add_contact_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" image="add_contact_over.png"/>
-                            <state key="highlighted" image="add_contact_over.png"/>
-                            <connections>
-                                <action selector="onAddContactClick:" destination="-1" eventType="touchUpInside" id="230"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="185" userLabel="backspaceButton" customClass="UIEraseButton">
-                            <rect key="frame" x="260" y="0.0" width="64" height="66"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Backspace"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" image="backspace_default.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" image="backspace_over.png"/>
-                            <state key="highlighted" image="backspace_over.png"/>
-                            <connections>
-                                <outlet property="addressField" destination="4" id="252"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                </view>
-                <view hidden="YES" contentMode="scaleToFill" id="9Ao-xc-PJK" userLabel="favRotationView">
+                <view contentMode="scaleToFill" id="9Ao-xc-PJK" userLabel="favRotationView">
                     <rect key="frame" x="0.0" y="52" width="320" height="350"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -376,10 +92,15 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="disabled">
+                                    <state key="disabled" backgroundImage="center_circle_sel_01.png">
                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="highlighted" backgroundImage="center_circle_sel_01.png"/>
+                                    <state key="highlighted" backgroundImage="center_circle_sel_01.png">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <outlet property="addressField" destination="4" id="M0U-ge-HR1"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ehB-TO-5ue" userLabel="buttonText">
                                     <rect key="frame" x="0.0" y="60" width="120" height="60"/>
@@ -390,10 +111,12 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="disabled">
+                                    <state key="disabled" backgroundImage="center_circle_sel_02.png">
                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="highlighted" backgroundImage="center_circle_sel_02.png"/>
+                                    <state key="highlighted" backgroundImage="center_circle_sel_02.png">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -402,100 +125,19 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </view>
-                <view contentMode="scaleToFill" id="93m-bF-qj7" userLabel="contactsView">
-                    <rect key="frame" x="0.0" y="52" width="320" height="350"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="23" sectionFooterHeight="22" id="ufS-Xg-HMQ" userLabel="tableView">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <outlet property="dataSource" destination="lTI-Hr-pOb" id="gcT-lK-IrC"/>
-                                <outlet property="delegate" destination="lTI-Hr-pOb" id="opd-Uf-rp1"/>
-                            </connections>
-                        </tableView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q6i-S0-oa3">
-                            <rect key="frame" x="0.0" y="300" width="160" height="50"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="Button">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="O5a-SY-NAP">
-                            <rect key="frame" x="160" y="300" width="160" height="50"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="Button">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </view>
-        <tableViewController id="lTI-Hr-pOb" userLabel="tableController" customClass="ContactsTableViewController">
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
-            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <connections>
-                <outlet property="view" destination="ufS-Xg-HMQ" id="ZD1-aO-F8K"/>
-            </connections>
-        </tableViewController>
     </objects>
     <resources>
-        <image name="add_call_default.png" width="214" height="138"/>
-        <image name="add_call_disabled.png" width="214" height="138"/>
-        <image name="add_call_over.png" width="214" height="138"/>
-        <image name="add_contact_default.png" width="124" height="132"/>
-        <image name="add_contact_over.png" width="124" height="132"/>
-        <image name="back_default.png" width="214" height="135"/>
-        <image name="back_disabled.png" width="214" height="135"/>
-        <image name="back_over.png" width="214" height="135"/>
-        <image name="backspace_default.png" width="124" height="132"/>
-        <image name="backspace_over.png" width="124" height="132"/>
-        <image name="call_background.png" width="392" height="132"/>
         <image name="center_circle_01.png" width="120" height="60"/>
         <image name="center_circle_02.png" width="120" height="60"/>
-        <image name="center_circle_sel_01.png" width="240" height="120"/>
-        <image name="center_circle_sel_02.png" width="240" height="120"/>
+        <image name="center_circle_sel_01.png" width="120" height="60"/>
+        <image name="center_circle_sel_01.png" width="120" height="60"/>
+        <image name="center_circle_sel_02.png" width="120" height="60"/>
+        <image name="center_circle_sel_02.png" width="120" height="60"/>
         <image name="circle_top.png" width="640" height="356"/>
         <image name="dialer_address_background.png" width="640" height="102"/>
         <image name="gear.png" width="80" height="104"/>
-        <image name="numpad4_eight_default.png" width="151" height="129"/>
-        <image name="numpad4_eight_over.png" width="151" height="129"/>
-        <image name="numpad4_five_default.png" width="151" height="129"/>
-        <image name="numpad4_five_over.png" width="151" height="129"/>
-        <image name="numpad4_four_default.png" width="151" height="129"/>
-        <image name="numpad4_four_over.png" width="151" height="129"/>
-        <image name="numpad4_nine_default.png" width="151" height="129"/>
-        <image name="numpad4_nine_over.png" width="151" height="129"/>
-        <image name="numpad4_one_default.png" width="151" height="129"/>
-        <image name="numpad4_one_over.png" width="151" height="129"/>
-        <image name="numpad4_seven_default.png" width="151" height="129"/>
-        <image name="numpad4_seven_over.png" width="151" height="129"/>
-        <image name="numpad4_sharp_default.png" width="151" height="129"/>
-        <image name="numpad4_sharp_over.png" width="151" height="129"/>
-        <image name="numpad4_six_default.png" width="151" height="129"/>
-        <image name="numpad4_star_default.png" width="151" height="129"/>
-        <image name="numpad4_star_over.png" width="151" height="129"/>
-        <image name="numpad4_three_default.png" width="151" height="129"/>
-        <image name="numpad4_three_over.png" width="151" height="129"/>
-        <image name="numpad4_two_default.png" width="151" height="129"/>
-        <image name="numpad4_two_over.png" width="151" height="129"/>
-        <image name="numpad4_zero_default.png" width="151" height="129"/>
-        <image name="numpad4_zero_over.png" width="151" height="129"/>
-        <image name="numpad_six_over.png" width="151" height="148"/>
-        <image name="transfer_call_default.png" width="214" height="138"/>
-        <image name="transfer_call_disabled.png" width="214" height="138"/>
-        <image name="transfer_call_over.png" width="214" height="138"/>
     </resources>
 </document>

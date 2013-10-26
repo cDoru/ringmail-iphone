@@ -301,7 +301,7 @@
         }
     }
 
-    // Disable transfert in conference
+    // Disable transfer in conference
     if(linphone_core_get_current_call(lc) == NULL) {
         [optionsTransferButton setEnabled:FALSE];
     } else {

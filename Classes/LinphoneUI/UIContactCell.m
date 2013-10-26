@@ -20,6 +20,7 @@
 #import "UIContactCell.h"
 #import "Utils.h"
 #import "FastAddressBook.h"
+#import "FavoritesModel.h"
 
 @implementation UIContactCell
 
@@ -109,6 +110,21 @@
         CFRelease(lLocalizedFirstName);
     if(lFirstName != nil)
         CFRelease(lFirstName);
+    
+    // RingMail - Check for favorite
+    NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)];
+    BOOL fav = [FavoritesModel isFavorite:recordId];
+    NSLog(@"Favorite? %@ %d", recordId, fav);
+    if (fav)
+    {
+        firstNameLabel.font = [UIFont boldSystemFontOfSize:15.0];
+        lastNameLabel.font = [UIFont boldSystemFontOfSize:15.0];
+    }
+    else
+    {
+        firstNameLabel.font = [UIFont systemFontOfSize:15.0];
+        lastNameLabel.font = [UIFont systemFontOfSize:15.0];
+    }
 }
 
 - (void)layoutSubviews {
