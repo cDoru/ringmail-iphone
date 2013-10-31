@@ -25,6 +25,7 @@
 #import "UILinphone.h"
 #import "Utils.h"
 #import "SMRotaryImage.h"
+#import "RemoteModel.h"
 
 @implementation ContactsTableViewController
 
@@ -37,6 +38,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 - (void)initContactsTableViewController {
     addressBookMap  = [[OrderedDictionary alloc] init];
     avatarMap = [[NSMutableDictionary alloc] init];
+    ringMailMap = [[NSMutableDictionary alloc] init];
     NSError *error = nil;
     addressBook = ABAddressBookCreateWithOptions(NULL, (CFErrorRef *)&error);
     ABAddressBookRegisterExternalChangeCallback(addressBook, sync_address_book, self);
@@ -64,6 +66,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     CFRelease(addressBook);
     [addressBookMap release];
     [avatarMap release];
+    [ringMailMap release];
     [super dealloc];
 }
 
@@ -152,6 +155,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
             }
         }
         if (lContacts) CFRelease(lContacts);
+        [RemoteModel getRingMailContacts:ringMailMap];
     }
     [self.tableView reloadData];
 }
@@ -203,13 +207,14 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     
     // Cached avatar
     UIImage *image = nil;
-    id data = [avatarMap objectForKey:[NSNumber numberWithInt: ABRecordGetRecordID(contact)]];
+    NSNumber *contactId = [NSNumber numberWithInt: ABRecordGetRecordID(contact)];
+    id data = [avatarMap objectForKey:contactId];
     if(data == nil) {
         image = [FastAddressBook getContactImage:contact thumbnail:true];
         if(image != nil) {
-            [avatarMap setObject:image forKey:[NSNumber numberWithInt: ABRecordGetRecordID(contact)]];
+            [avatarMap setObject:image forKey:contactId];
         } else {
-            [avatarMap setObject:[NSNull null] forKey:[NSNumber numberWithInt: ABRecordGetRecordID(contact)]];
+            [avatarMap setObject:[NSNull null] forKey:contactId];
         }
     } else if(data != [NSNull null]) {
         image = data;
@@ -219,6 +224,15 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     }
     [[cell avatarImage] setImage:image];
     
+    NSNumber* recId = [ringMailMap objectForKey:contactId];
+    if (recId != nil)
+    {
+        [cell setHasRingMail:TRUE];
+    }
+    else
+    {
+        [cell setHasRingMail:FALSE];
+    }
     [cell setContact: contact];
     return cell;
 }

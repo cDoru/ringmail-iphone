@@ -18,7 +18,6 @@
                 <outlet property="fourButton" destination="30" id="194"/>
                 <outlet property="nineButton" destination="36" id="200"/>
                 <outlet property="oneButton" destination="38" id="191"/>
-                <outlet property="rotationView" destination="HHi-ZI-8FA" id="frW-aG-THH"/>
                 <outlet property="sevenButton" destination="34" id="197"/>
                 <outlet property="sharpButton" destination="41" id="232"/>
                 <outlet property="sixButton" destination="33" id="196"/>
@@ -75,7 +74,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" id="180" userLabel="pad">
+                <view contentMode="scaleToFill" id="180" userLabel="pad">
                     <rect key="frame" x="0.0" y="52" width="320" height="271"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -338,12 +337,6 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                </view>
-                <view contentMode="scaleToFill" id="HHi-ZI-8FA" userLabel="rotationView">
-                    <rect key="frame" x="0.0" y="52" width="320" height="271"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

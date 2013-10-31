@@ -27,7 +27,9 @@
 @synthesize firstNameLabel;
 @synthesize lastNameLabel;
 @synthesize avatarImage;
+@synthesize ringMailLogo;
 @synthesize contact;
+@synthesize hasRingMail;
 
 
 #pragma mark - Lifecycle Functions
@@ -56,7 +58,8 @@
 
 #pragma mark - Property Functions
 
-- (void)setContact:(ABRecordRef)acontact {
+- (void)setContact:(ABRecordRef)acontact
+{
     contact = acontact;
     [self update];
 }
@@ -114,7 +117,7 @@
     // RingMail - Check for favorite
     NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)];
     BOOL fav = [FavoritesModel isFavorite:recordId];
-    NSLog(@"Favorite? %@ %d", recordId, fav);
+    //NSLog(@"Favorite? %@ %d", recordId, fav);
     if (fav)
     {
         firstNameLabel.font = [UIFont boldSystemFontOfSize:15.0];
@@ -124,6 +127,15 @@
     {
         firstNameLabel.font = [UIFont systemFontOfSize:15.0];
         lastNameLabel.font = [UIFont systemFontOfSize:15.0];
+    }
+    
+    if (hasRingMail)
+    {
+        [ringMailLogo setHidden:FALSE];
+    }
+    else
+    {
+        [ringMailLogo setHidden:TRUE];
     }
 }
 

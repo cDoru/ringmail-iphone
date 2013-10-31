@@ -133,8 +133,6 @@
         <image name="center_circle_01.png" width="120" height="60"/>
         <image name="center_circle_02.png" width="120" height="60"/>
         <image name="center_circle_sel_01.png" width="120" height="60"/>
-        <image name="center_circle_sel_01.png" width="120" height="60"/>
-        <image name="center_circle_sel_02.png" width="120" height="60"/>
         <image name="center_circle_sel_02.png" width="120" height="60"/>
         <image name="circle_top.png" width="640" height="356"/>
         <image name="dialer_address_background.png" width="640" height="102"/>

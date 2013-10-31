@@ -143,6 +143,7 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^{
                 ContactSyncManager* sync = [[ContactSyncManager alloc] init];
                 [sync syncContacts:login password:password];
+                [sync getRemoteData:nil login:login password:password];
                 [sync release];
                 [login release];
                 [password release];

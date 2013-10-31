@@ -132,6 +132,7 @@ struct codec_name_pref_table codec_pref_table[]={
 	{ "mp4v-es", 90000, @"mp4v-es_preference"},
 	{ "h264", 90000, @"h264_preference"},
 	{ "vp8", 90000, @"vp8_preference"},
+    { "opus", 48000, @"opus_preference"},
 	{ NULL,0,Nil }
 };
 
@@ -299,6 +300,19 @@ struct codec_name_pref_table codec_pref_table[]={
         if (sqlite3_exec(database, sql_stmt2, NULL, NULL, &errMsg) != SQLITE_OK) {
             [LinphoneLogger logc:LinphoneLoggerError format:"Can't create table error[%s] ", errMsg];
         }
+        
+        const char *sql_stmt3 = "CREATE TABLE remote_data (id INTEGER PRIMARY KEY, tsUpdated NUMERIC, primaryUri TEXT NOT NULL, ringMailUser INTEGER)";
+        
+        if (sqlite3_exec(database, sql_stmt3, NULL, NULL, &errMsg) != SQLITE_OK) {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Can't create table error[%s] ", errMsg];
+        }
+        
+        const char *sql_stmt4 = "CREATE INDEX tsUpdated_1 ON remote_data (tsUpdated)";
+        
+        if (sqlite3_exec(database, sql_stmt4, NULL, NULL, &errMsg) != SQLITE_OK) {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Can't create index error[%s] ", errMsg];
+        }
+        
 	}
 	
 	[filemgr release];
@@ -842,9 +856,9 @@ void networkReachabilityCallBack(SCNetworkReachabilityRef target, SCNetworkReach
 
 static LinphoneCoreVTable linphonec_vtable = {
 	.show =NULL,
-	.call_state_changed =(LinphoneCallStateCb)linphone_iphone_call_state,
+	.call_state_changed =(LinphoneCoreCallStateChangedCb)linphone_iphone_call_state,
 	.registration_state_changed = linphone_iphone_registration_state,
-	.notify_recv = NULL,
+	.notify_presence_recv = NULL,
 	.new_subscription_request = NULL,
 	.auth_info_requested = NULL,
 	.display_status = linphone_iphone_display_status,

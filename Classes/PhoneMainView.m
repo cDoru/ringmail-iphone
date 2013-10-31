@@ -220,11 +220,11 @@ static PhoneMainView* phoneMainViewInstance=nil;
         LinphoneReason reason = linphone_proxy_config_get_error(cfg);
 		if (reason == LinphoneReasonBadCredentials) {
 			lErrorMessage = NSLocalizedString(@"Wrong login or password", nil);
-		} else if (reason == LinphoneReasonNoResponse) {
+		}/* else if (reason == LinphoneReasonNoResponse) {
 			lErrorMessage = NSLocalizedString(@"Server unreachable", nil);
 		} else {
             lErrorMessage = NSLocalizedString(@"Unknown error", nil);
-        }
+        }*/
 		
 		if (lErrorMessage != nil && linphone_proxy_config_get_error(cfg) != LinphoneReasonNoResponse) { 
             //do not report network connection issue on registration

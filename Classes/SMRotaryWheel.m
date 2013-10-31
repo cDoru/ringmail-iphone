@@ -54,15 +54,7 @@ static float maxAlphavalue = 1.0;
     for (int i = 0; i < numberOfSections; i++)
     {
         //UIImageView *im = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"segment.png"]];
-        UIView *im;
-        if (IS_IPHONE && IS_IPHONE_5)
-        {
-            im = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 190, 160)];
-        }
-        else
-        {
-            im = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 140, 110)];
-        }
+        UIView *im = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 190, 160)];
         
         im.backgroundColor = [UIColor clearColor];
         //im.text = [NSString stringWithFormat:@"%i", i];
@@ -76,15 +68,7 @@ static float maxAlphavalue = 1.0;
         {
             im.alpha = maxAlphavalue;
         }
-        SMRotaryImage *cloveImage;
-        if (IS_IPHONE && IS_IPHONE_5)
-        {
-            cloveImage = [[SMRotaryImage alloc] initWithFrame:CGRectMake(20, 30, 100, 100) angle:(angleSize * i * -1)];
-        }
-        else
-        {
-            cloveImage = [[SMRotaryImage alloc] initWithFrame:CGRectMake(20, 28, 54, 54) angle:(angleSize * i * -1)];
-        }
+        SMRotaryImage *cloveImage = [[SMRotaryImage alloc] initWithFrame:CGRectMake(20, 30, 100, 100) angle:(angleSize * i * -1)];
         if ([contacts count] > i)
         {
             NSDictionary *itemData = [contacts objectAtIndex:i];

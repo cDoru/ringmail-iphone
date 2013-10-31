@@ -15,6 +15,8 @@
 #import <XMLRPCConnectionManager.h>
 #import <XMLRPCResponse.h>
 #import <XMLRPCRequest.h>
+#import "JSONKit.h"
+#import "RemoteModel.h"
 
 @implementation ContactSyncManager
 
@@ -210,6 +212,31 @@
     [request release];
 }
 
+- (void)getRemoteData:(NSArray *)contactIds login:(NSString*) username password:(NSString*) password
+{
+    if (contactIds == nil)
+    {
+        contactIds = [NSArray array];
+    }
+    NSMutableDictionary *reqstruct = [NSMutableDictionary dictionary];
+    [reqstruct setObject:username forKey:@"login"];
+    [reqstruct setObject:password forKey:@"password"];
+    [reqstruct setObject:contactIds forKey:@"contacts"];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqstruct options:0 error:nil];
+    NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC get_remote_data %@", result];
+    NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
+    XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
+    [request setMethod: @"get_remote_data" withParameters:[NSArray arrayWithObjects:result, nil]];
+    NSError* error = nil;
+    XMLRPCResponse *xmlrpc = [XMLRPCConnection sendSynchronousXMLRPCRequest:request error:&error];
+    if (xmlrpc != nil)
+    {
+        [self processResponse:xmlrpc request:request];
+    }
+    [request release];
+}
+
 - (void)processResponse:(XMLRPCResponse *)response request:(XMLRPCRequest *)request {
     [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC %@: %@", [request method], [response body]];
     if ([response isFault]) {
@@ -223,6 +250,30 @@
             else
             {
                 [LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Contact Not Changed"];
+            }
+        }
+        else if([[request method] isEqualToString:@"get_remote_data"]) {
+            NSString *jsonResult = [response object];
+            [LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Data: %@", jsonResult];
+            NSArray *result = [jsonResult objectFromJSONString];
+            [LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Object: %@", result];
+            for (id remoteData in result)
+            {
+                RemoteModel *rmod = [[RemoteModel alloc] init];
+                [rmod setContactId:[(NSDictionary *)remoteData objectForKey:@"id"]];
+                [rmod setTsUpdated:[NSDate date]];
+                [rmod setPrimaryUri:[(NSDictionary *)remoteData objectForKey:@"uri"]];
+                [rmod setRingMailUser:[(NSDictionary *)remoteData objectForKey:@"reg"]];
+                if ([RemoteModel hasContactId:[rmod contactId]])
+                {
+                    [rmod update];
+                    NSLog(@"Updated Remote: %@", [rmod contactId]);
+                }
+                else
+                {
+                    [rmod create];
+                    NSLog(@"Created Remote: %@", [rmod contactId]);
+                }
             }
         }
     }
