@@ -40,6 +40,8 @@
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) IBOutlet id<ContactDetailsDelegate> contactDetailsDelegate;
 @property (nonatomic, retain) IBOutlet UISwitch *favSwitch;
+@property (nonatomic, retain) IBOutlet UIView *ringMailView;
+@property (nonatomic, retain) IBOutlet UIView *inviteView;
 
 @property(nonatomic,getter=isEditing) BOOL editing;
 

@@ -29,6 +29,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView *ringMailLogo;
 @property (nonatomic, assign) ABRecordRef contact;
 @property (nonatomic, assign) BOOL hasRingMail;
+@property (nonatomic, assign) BOOL hasFavorite;
 
 - (id)initWithIdentifier:(NSString*)identifier;
 

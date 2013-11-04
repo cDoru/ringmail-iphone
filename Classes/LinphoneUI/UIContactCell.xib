@@ -39,7 +39,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_logo_small.png" id="eCu-X9-BNx" userLabel="ringMailLogo">
-                    <rect key="frame" x="247" y="0.0" width="47" height="44"/>
+                    <rect key="frame" x="248" y="1" width="42" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
@@ -47,6 +47,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ringmail_logo_small.png" width="322" height="323"/>
+        <image name="ringmail_logo_small.png" width="84" height="84"/>
     </resources>
 </document>

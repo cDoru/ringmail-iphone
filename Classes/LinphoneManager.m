@@ -30,7 +30,6 @@
 #import "LinphoneManager.h"
 #import "LinphoneCoreSettingsStore.h"
 #import "ChatModel.h"
-#import "FavoritesModel.h"
 #import "PhoneMainView.h"
 
 #include "linphonecore_utils.h"

@@ -154,6 +154,30 @@
 
 }
 
++ (void)deleteAll {
+    sqlite3* database = [[LinphoneManager instance] database];
+    if(database == NULL) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Database not ready"];
+        return;
+    }
+    
+    const char *sql = "DELETE FROM remote_data";
+    sqlite3_stmt *sqlStatement;
+    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
+        return;
+    }
+    
+    if (sqlite3_step(sqlStatement) != SQLITE_DONE) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Error during execution of query: %s (%s)", sql, sqlite3_errmsg(database)];
+        sqlite3_finalize(sqlStatement);
+        return;
+    }
+    
+    sqlite3_finalize(sqlStatement);
+    
+}
+
 +(BOOL)hasContactId:(NSNumber *)num
 {
     BOOL found = NO;
@@ -165,6 +189,47 @@
     }
     
     const char *sql = "SELECT COUNT(id) FROM remote_data WHERE id=@ID";
+    sqlite3_stmt *sqlStatement;
+    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Can't execute the query: %s (%s)", sql, sqlite3_errmsg(database)];
+        return found;
+    }
+    
+    // Prepare statement
+    sqlite3_bind_int(sqlStatement, 1, [num intValue]);
+    
+    int err;
+    err = sqlite3_step(sqlStatement);
+    if (err == SQLITE_ROW)
+    {
+        NSNumber* res = [NSNumber numberWithInt:sqlite3_column_int(sqlStatement, 0)];
+        if ([res intValue] > 0)
+        {
+            found = YES;
+        }
+    }
+    else
+    {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Error during execution of query: %s (%s)", sql, sqlite3_errmsg(database)];
+        return found;
+    }
+    
+    sqlite3_finalize(sqlStatement);
+    
+    return found;
+}
+
++(BOOL)hasRingMail:(NSNumber *)num
+{
+    BOOL found = NO;
+    
+    sqlite3* database = [[LinphoneManager instance] database];
+    if(database == NULL) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Database not ready"];
+        return found;
+    }
+    
+    const char *sql = "SELECT COUNT(id) FROM remote_data WHERE id=@ID AND ringMailUser=1";
     sqlite3_stmt *sqlStatement;
     if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
         [LinphoneLogger logc:LinphoneLoggerError format:"Can't execute the query: %s (%s)", sql, sqlite3_errmsg(database)];
@@ -209,6 +274,8 @@
         [LinphoneLogger logc:LinphoneLoggerError format:"Can't execute the query: %s (%s)", sql, sqlite3_errmsg(database)];
         return;
     }
+    
+    [dict removeAllObjects];
     
     int err;
     while ((err = sqlite3_step(sqlStatement)) == SQLITE_ROW) {

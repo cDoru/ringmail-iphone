@@ -428,7 +428,7 @@ static PhoneMainView* phoneMainViewInstance=nil;
         }
     } 
     
-    NSLog(@"Get Transition Left: %d", left);
+    //NSLog(@"Get Transition Left: %d", left);
     
     if(left) {
         return [PhoneMainView getBackwardTransition];
@@ -471,15 +471,15 @@ static PhoneMainView* phoneMainViewInstance=nil;
     [LinphoneLogger logc:LinphoneLoggerLog format:"PhoneMainView: Change current view to %@", [view name]];
     
     if(force || ![view equal: currentView]) {
-        if(transition == nil)
-            transition = [PhoneMainView getTransition:currentView new:view];
+        /*if(transition == nil)
+            transition = [PhoneMainView getTransition:currentView new:view]; */
         if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
-            NSLog(@"Set Transition");
+            //NSLog(@"Set Transition");
             [mainViewController setViewTransition:transition];
         } else {
             [mainViewController setViewTransition:nil];
         }
-        //[mainViewController setViewTransition:nil];
+        [mainViewController setViewTransition:nil];
         [mainViewController changeView:view];
         currentView = view;
     } 

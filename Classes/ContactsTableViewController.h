@@ -29,6 +29,7 @@
     NSMutableDictionary* avatarMap;
     ABAddressBookRef addressBook;
     NSMutableDictionary* ringMailMap;
+    NSMutableDictionary* favMap;
 }
 
 @property (nonatomic, assign) id <ContactSelectProtocol> delegate;

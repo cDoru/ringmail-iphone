@@ -30,7 +30,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="0.0" minY="18" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="7" minY="7" maxX="8" maxY="8"/>
-                            <state key="normal" title="Add" image="chat_photo_default.png">
+                            <state key="normal" image="chat_photo_default.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="highlighted" image="chat_photo_over.png">
@@ -57,6 +57,36 @@
                             <connections>
                                 <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="89"/>
                             </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rr2-zA-8sV" userLabel="favButton">
+                            <rect key="frame" x="70" y="7" width="60" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Favorites" backgroundImage="left_btn_default.png">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WdV-8s-pA6" userLabel="allButton">
+                            <rect key="frame" x="130" y="7" width="60" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="All" backgroundImage="middle_btn_selected.png">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7tx-ZK-kAf" userLabel="ringMailButton">
+                            <rect key="frame" x="190" y="7" width="60" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="RingMail" backgroundImage="right_btn_default.png">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.10588235294117647" green="0.19607843137254902" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
@@ -91,7 +121,10 @@
     <resources>
         <image name="chat_back_default.png" width="87" height="59"/>
         <image name="chat_back_over.png" width="87" height="59"/>
-        <image name="chat_photo_default.png" width="58" height="58"/>
-        <image name="chat_photo_over.png" width="58" height="58"/>
+        <image name="chat_photo_default.png" width="29" height="29"/>
+        <image name="chat_photo_over.png" width="29" height="29"/>
+        <image name="left_btn_default.png" width="120" height="61"/>
+        <image name="middle_btn_selected.png" width="120" height="61"/>
+        <image name="right_btn_default.png" width="120" height="61"/>
     </resources>
 </document>

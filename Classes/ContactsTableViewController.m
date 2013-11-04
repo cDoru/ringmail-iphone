@@ -26,6 +26,7 @@
 #import "Utils.h"
 #import "SMRotaryImage.h"
 #import "RemoteModel.h"
+#import "FavoritesModel.h"
 
 @implementation ContactsTableViewController
 
@@ -39,6 +40,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     addressBookMap  = [[OrderedDictionary alloc] init];
     avatarMap = [[NSMutableDictionary alloc] init];
     ringMailMap = [[NSMutableDictionary alloc] init];
+    favMap = [[NSMutableDictionary alloc] init];
     NSError *error = nil;
     addressBook = ABAddressBookCreateWithOptions(NULL, (CFErrorRef *)&error);
     ABAddressBookRegisterExternalChangeCallback(addressBook, sync_address_book, self);
@@ -67,6 +69,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     [addressBookMap release];
     [avatarMap release];
     [ringMailMap release];
+    [favMap release];
     [super dealloc];
 }
 
@@ -156,6 +159,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
         }
         if (lContacts) CFRelease(lContacts);
         [RemoteModel getRingMailContacts:ringMailMap];
+        [FavoritesModel getFavoriteContacts:favMap];
     }
     [self.tableView reloadData];
 }
@@ -232,6 +236,15 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     else
     {
         [cell setHasRingMail:FALSE];
+    }
+    NSNumber* favId = [favMap objectForKey:contactId];
+    if (favId != nil)
+    {
+        [cell setHasFavorite:TRUE];
+    }
+    else
+    {
+        [cell setHasFavorite:FALSE];
     }
     [cell setContact: contact];
     return cell;

@@ -25,7 +25,9 @@
 + (RemoteModel*)read:(NSNumber*)id;
 - (void)update;
 - (void)delete;
++ (void)deleteAll;
 + (BOOL)hasContactId:(NSNumber *)num;
++ (BOOL)hasRingMail:(NSNumber *)num;
 + (void)getRingMailContacts:(NSMutableDictionary *)dict;
 
 @end

@@ -25,6 +25,7 @@
 #import "PhoneMainView.h"
 #import "DTActionSheet.h"
 #import "FavoritesModel.h"
+#import "RemoteModel.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
 
@@ -38,6 +39,8 @@
 @synthesize tableView;
 @synthesize contactDetailsDelegate;
 @synthesize favSwitch;
+@synthesize ringMailView;
+@synthesize inviteView;
 
 #pragma mark - Lifecycle Functions
 
@@ -83,6 +86,8 @@
     [propertyList release];
     
     [favSwitch release];
+    [inviteView release];
+    [ringMailView release];
     
     [super dealloc];
 }
@@ -140,9 +145,19 @@
         [addressLabel setText:[FastAddressBook getContactDisplayName:contact]];
     }
     
-    NSNumber *fav = [NSNumber numberWithInteger:ABRecordGetRecordID(contact)];
-    favSwitch.on = [FavoritesModel isFavorite:fav];
+    NSNumber *contactId = [NSNumber numberWithInteger:ABRecordGetRecordID(contact)];
+    favSwitch.on = [FavoritesModel isFavorite:contactId];
     
+    if ([RemoteModel hasContactId:contactId])
+    {
+        ringMailView.hidden = NO;
+        inviteView.hidden = YES;
+    }
+    else
+    {
+        ringMailView.hidden = YES;
+        inviteView.hidden = NO;
+    }
     [tableView reloadData];
 }
 
@@ -150,7 +165,7 @@
     if(editing) {
         return 160.0f;
     } else {
-        return 160.0f;
+        return 210.0f;
     }
 }
 

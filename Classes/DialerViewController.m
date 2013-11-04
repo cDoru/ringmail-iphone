@@ -27,6 +27,7 @@
 #import "Utils.h"
 #import "SMRotaryWheel.h"
 #import "ContactsTableViewController.h"
+#import "RemoteModel.h"
 
 #include "linphonecore.h"
 
@@ -47,6 +48,8 @@
 @synthesize favWheel;
 @synthesize contactButton;
 @synthesize currentContact;
+@synthesize inviteButton;
+@synthesize ringMailImage;
 
 #pragma mark - Lifecycle Functions
 
@@ -80,6 +83,9 @@
     [videoPreview release];
     [videoCameraSwitch release];
     [favRotationView release];
+    
+    [inviteButton release];
+    [ringMailImage release];
     
     // Remove all observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -337,16 +343,26 @@ static UICompositeViewDescription *compositeDescription = nil;
                     image = [UIImage imageNamed:@"avatar_unknown_small.png"];
                 }
                 [contactButton setImage:[SMRotaryImage roundedImageWithImage:image] forState:UIControlStateNormal];
+                if ([RemoteModel hasRingMail:contactId])
+                {
+                    ringMailImage.hidden = NO;
+                    inviteButton.hidden = YES;
+                }
+                else
+                {
+                    ringMailImage.hidden = YES;
+                    inviteButton.hidden = NO;
+                }
             }
         }
         else
         {
-            NSLog(@"Blank Value 1");
+            //NSLog(@"Blank Value 1");
         }
     }
     else
     {
-        NSLog(@"Blank Value 2");
+        //NSLog(@"Blank Value 2");
     }
     return;
 }
@@ -376,6 +392,8 @@ static UICompositeViewDescription *compositeDescription = nil;
         [callButton setHiddenAddress:@""];
         [contactButton setImage:[UIImage imageNamed:@"avatar_unknown_small.png"] forState:UIControlStateNormal];
         currentContact = nil;
+        ringMailImage.hidden = YES;
+        inviteButton.hidden = YES;
     }
 }
 

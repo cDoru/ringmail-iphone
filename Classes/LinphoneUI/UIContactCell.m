@@ -30,7 +30,7 @@
 @synthesize ringMailLogo;
 @synthesize contact;
 @synthesize hasRingMail;
-
+@synthesize hasFavorite;
 
 #pragma mark - Lifecycle Functions
 
@@ -114,11 +114,7 @@
     if(lFirstName != nil)
         CFRelease(lFirstName);
     
-    // RingMail - Check for favorite
-    NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)];
-    BOOL fav = [FavoritesModel isFavorite:recordId];
-    //NSLog(@"Favorite? %@ %d", recordId, fav);
-    if (fav)
+    if (hasFavorite)
     {
         firstNameLabel.font = [UIFont boldSystemFontOfSize:15.0];
         lastNameLabel.font = [UIFont boldSystemFontOfSize:15.0];

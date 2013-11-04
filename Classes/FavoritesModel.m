@@ -138,4 +138,37 @@
     return array;
 }
 
++ (void)getFavoriteContacts:(NSMutableDictionary *)dict
+{
+    sqlite3* database = [[LinphoneManager instance] database];
+    if(database == NULL) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Database not ready"];
+        return;
+    }
+    
+    const char *sql = "SELECT id FROM favorites";
+    sqlite3_stmt *sqlStatement;
+    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Can't execute the query: %s (%s)", sql, sqlite3_errmsg(database)];
+        return;
+    }
+    
+    [dict removeAllObjects];
+    
+    int err;
+    while ((err = sqlite3_step(sqlStatement)) == SQLITE_ROW) {
+        NSNumber* ringId = [NSNumber numberWithInt:sqlite3_column_int(sqlStatement, 0)];
+        [dict setObject:ringId forKey:ringId];
+    }
+    
+    if (err != SQLITE_DONE) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Error during execution of query: %s (%s)", sql, sqlite3_errmsg(database)];
+        return;
+    }
+    
+    sqlite3_finalize(sqlStatement);
+    
+    return;
+}
+
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1072" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -11,14 +11,16 @@
                 <outlet property="avatarImage" destination="6" id="9"/>
                 <outlet property="editView" destination="13" id="16"/>
                 <outlet property="favSwitch" destination="hvI-Kz-OdE" id="Rkt-lW-sUt"/>
+                <outlet property="inviteView" destination="cR4-6Z-lD9" id="In1-FX-NbK"/>
                 <outlet property="normalView" destination="12" id="17"/>
+                <outlet property="ringMailView" destination="bIZ-88-aqy" id="tNX-WK-Juq"/>
                 <outlet property="tableView" destination="15" id="20"/>
                 <outlet property="view" destination="4" id="5"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="4">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="210"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="avatar_unknown_small.png" id="6" userLabel="avatarImage">
@@ -45,17 +47,62 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" id="12" userLabel="normalView">
-                    <rect key="frame" x="101" y="0.0" width="219" height="80"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="210"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Contact1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="8" userLabel="addressLabel">
-                            <rect key="frame" x="0.0" y="27" width="210" height="42"/>
+                            <rect key="frame" x="101" y="27" width="311" height="42"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Contact's name"/>
                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kjV-qS-CBN" userLabel="callButton">
+                            <rect key="frame" x="10" y="159" width="144" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.2274509817" green="0.53725492949999998" blue="0.78823530669999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <state key="normal" title="Call"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XYa-pP-zXe" userLabel="chatButton">
+                            <rect key="frame" x="166" y="159" width="144" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.2274509817" green="0.53725492949999998" blue="0.78823530669999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <state key="normal" title="Chat"/>
+                        </button>
+                        <view contentMode="scaleToFill" id="cR4-6Z-lD9" userLabel="inviteView">
+                            <rect key="frame" x="101" y="0.0" width="219" height="150"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="y6R-Jw-baE" userLabel="inviteButton">
+                                    <rect key="frame" x="-9" y="66" width="176" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <state key="normal" title=" Invite To RingMail" image="chat_photo_over.png">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                        </view>
+                        <view hidden="YES" contentMode="scaleToFill" id="bIZ-88-aqy" userLabel="ringMailView">
+                            <rect key="frame" x="94" y="0.0" width="219" height="150"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_logo_small.png" id="7OI-Qg-7ss" userLabel="ringMailLogo">
+                                    <rect key="frame" x="0.0" y="66" width="44" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </imageView>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RingMail" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="11G-8L-v82" userLabel="ringMailLabel">
+                                    <rect key="frame" x="33" y="77" width="80" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -91,5 +138,7 @@
     </objects>
     <resources>
         <image name="avatar_unknown_small.png" width="131" height="131"/>
+        <image name="chat_photo_over.png" width="29" height="29"/>
+        <image name="ringmail_logo_small.png" width="44" height="44"/>
     </resources>
 </document>

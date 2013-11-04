@@ -254,9 +254,10 @@
         }
         else if([[request method] isEqualToString:@"get_remote_data"]) {
             NSString *jsonResult = [response object];
-            [LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Data: %@", jsonResult];
+            //[LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Data: %@", jsonResult];
             NSArray *result = [jsonResult objectFromJSONString];
             [LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Object: %@", result];
+            [RemoteModel deleteAll];
             for (id remoteData in result)
             {
                 RemoteModel *rmod = [[RemoteModel alloc] init];
