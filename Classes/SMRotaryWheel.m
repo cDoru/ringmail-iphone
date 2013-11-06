@@ -46,7 +46,7 @@ static float maxAlphavalue = 1.0;
 }
 
 - (void) drawWheel {
-    NSLog(@"Draw Wheel");
+    //NSLog(@"Draw Wheel");
     container = [[UIView alloc] initWithFrame:self.frame];	
     CGFloat angleSize = 2 * M_PI / numberOfSections;
     self.cloveImages = [NSMutableArray arrayWithCapacity:numberOfSections];

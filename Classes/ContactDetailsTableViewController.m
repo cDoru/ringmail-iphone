@@ -186,11 +186,11 @@ static const int contactSections[ContactSections_MAX] = {ContactSections_None, C
         if(lMap) {
             for(int i = 0; i < ABMultiValueGetCount(lMap); ++i) {
                 ABMultiValueIdentifier identifier = ABMultiValueGetIdentifierAtIndex(lMap, i);
-                CFDictionaryRef lDict = ABMultiValueCopyValueAtIndex(lMap, i);
+                //CFDictionaryRef lDict = ABMultiValueCopyValueAtIndex(lMap, i);
                 Entry *entry = [[Entry alloc] initWithData:identifier];
                 [subArray addObject: entry];
                 [entry release];
-                CFRelease(lDict);
+                //CFRelease(lDict);
             }
             CFRelease(lMap);
         }

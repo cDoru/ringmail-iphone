@@ -20,6 +20,7 @@
 #import "FastAddressBook.h"
 #import "LinphoneManager.h"
 #import "FavoritesModel.h"
+#import "NBPhoneNumberUtil.h"
 
 @implementation FastAddressBook
 
@@ -158,6 +159,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 - (void)loadData {
     ABAddressBookRevert(addressBook);
     @synchronized (addressBookMap) {
+        [addressBookIds removeAllObjects];
         [addressBookMap removeAllObjects];
         [addressBookWheels removeAllObjects];
         
@@ -175,20 +177,40 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                 if(lMap) {
                     for (int i=0; i<ABMultiValueGetCount(lMap); i++) {
                         CFStringRef lValue = ABMultiValueCopyValueAtIndex(lMap, i);
-                        CFStringRef lLabel = ABMultiValueCopyLabelAtIndex(lMap, i);
-                        CFStringRef lLocalizedLabel = ABAddressBookCopyLocalizedLabel(lLabel);
-                        NSString* lNormalizedKey = [FastAddressBook normalizePhoneNumber:(NSString*)lValue];
-                        [addressBookMap setObject:lPerson forKey:lNormalizedKey];
+                        //CFStringRef lLabel = ABMultiValueCopyLabelAtIndex(lMap, i);
+                        //CFStringRef lLocalizedLabel = ABAddressBookCopyLocalizedLabel(lLabel);
+                        //NSString* lNormalizedKey = [FastAddressBook normalizePhoneNumber:(NSString*)lValue];
+                        NSString* lNormalizedKey = [FastAddressBook e164number:(NSString*)lValue];
+                        if (lNormalizedKey != nil)
+                        {
+                            [addressBookMap setObject:lPerson forKey:lNormalizedKey];
+                        }
                         CFRelease(lValue);
-                        if (lLabel) CFRelease(lLabel);
-                        if (lLocalizedLabel) CFRelease(lLocalizedLabel);
+                        //if (lLabel) CFRelease(lLabel);
+                        //if (lLocalizedLabel) CFRelease(lLocalizedLabel);
+                    }
+                    CFRelease(lMap);
+                }
+            }
+            
+            // Email
+            {
+                
+                ABMultiValueRef lMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonEmailProperty);
+                if(lMap) {
+                    for(int i = 0; i < ABMultiValueGetCount(lMap); i++) {
+                        CFStringRef valueRef = ABMultiValueCopyValueAtIndex(lMap, i);
+                        if (valueRef) {
+                            [addressBookMap setObject:lPerson forKey:(NSString *)valueRef];
+                            CFRelease(valueRef);
+                        }
                     }
                     CFRelease(lMap);
                 }
             }
             
             // SIP
-            {
+            /*{
                 ABMultiValueRef lMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonInstantMessageProperty);
                 if(lMap) {
                     for(int i = 0; i < ABMultiValueGetCount(lMap); ++i) {
@@ -214,9 +236,10 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                     }
                     CFRelease(lMap);   
                 }
-            }
+            }*/
         }
         CFRelease(lContacts);
+        NSLog(@"Contact Map: %@", [addressBookMap allKeys]);
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneAddressBookUpdate object:self];
 }
@@ -284,44 +307,34 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
     NSLog(@"Setup Wheel Contacts");
     ABAddressBookRef addressBookList = ABAddressBookCreateWithOptions(NULL, nil);
     NSArray *contactList = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookList);
-    NSMutableArray* contacts = [NSMutableArray arrayWithCapacity:[contactList count]];
     NSMutableDictionary* contactLookup = [NSMutableDictionary dictionaryWithCapacity:[contactList count]];
     for (id person in contactList)
     {
         CFStringRef lFirstName = ABRecordCopyValue((ABRecordRef)person, kABPersonFirstNameProperty);
         CFStringRef lLocalizedFirstName = (lFirstName != nil) ? ABAddressBookCopyLocalizedLabel(lFirstName) : nil;
+        NSString *shortName = nil;
         if(lLocalizedFirstName != nil)
         {
-            NSString *shortName = [NSString stringWithString:(NSString *)lLocalizedFirstName];
+            shortName = [NSString stringWithString:(NSString *)lLocalizedFirstName];
+            CFRelease(lLocalizedFirstName);
+        }
+        if(shortName != nil)
+        {
             NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)person)];
             NSMutableDictionary *ctItem = [NSMutableDictionary dictionaryWithObjectsAndKeys:shortName, @"name", recordId, @"id", nil];
-            [contacts addObject:ctItem];
             [contactLookup setObject:ctItem forKey:recordId];
             UIImage* image = [FastAddressBook getContactImage:person thumbnail:true];
             if(image != nil) {
                 [ctItem setObject:[self imageWithAlpha:image] forKey:@"img"];
             }
-            //else {
-            //    [self.avatarMap addObject:[UIImage imageNamed:@"avatar_unknown_small.png"]];
-            //}
-            CFRelease(lLocalizedFirstName);
         }
         if(lFirstName != nil)
         {
             CFRelease(lFirstName);
         }
     }
-    // sort contacts
-    NSArray *sortedContacts = [contacts sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        NSString *first = [(NSMutableDictionary*)a objectForKey:@"name"];
-        NSString *second = [(NSMutableDictionary*)b objectForKey:@"name"];
-        return [first compare:second];
-    }];
-    [addressBookWheels setObject:[NSMutableArray arrayWithArray:sortedContacts] forKey:@"contacts"];
-
     CFRelease(contactList);
-    
-    NSLog(@"Setup Wheel Favorites");
+
     NSMutableArray* favorites = [FavoritesModel getFavorites];
     NSMutableArray* favList = [NSMutableArray arrayWithCapacity:[favorites count]];
     for (id favId in favorites)
@@ -390,6 +403,23 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
             alpha == kCGImageAlphaLast ||
             alpha == kCGImageAlphaPremultipliedFirst ||
             alpha == kCGImageAlphaPremultipliedLast);
+}
+
++ (NSString *)e164number:(NSString *)numberIn
+{
+    NBPhoneNumberUtil *phoneUtil = [NBPhoneNumberUtil sharedInstance];
+    NSError *aError = nil;
+    NSString *numberOut = nil;
+    NBPhoneNumber *myNumber = [phoneUtil parse:numberIn defaultRegion:@"US" error:&aError];
+    if (aError == nil)
+    {
+        numberOut = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&aError];
+    }
+    if (aError != nil)
+    {
+        NSLog(@"PhoneNumberUtil Error: %@", [aError localizedDescription]);
+    }
+    return numberOut;
 }
 
 @end

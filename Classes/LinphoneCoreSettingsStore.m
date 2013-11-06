@@ -340,16 +340,18 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
     //clear existing proxy config
     linphone_core_clear_proxy_config(lc);
 	if (username && [username length] >0 && domain && [domain length]>0) {
-		NSString* proxyAddress = [self stringForKey:@"proxy_preference"];
+		
+        /*NSString* proxyAddress = [self stringForKey:@"proxy_preference"];
 		if ((!proxyAddress || [proxyAddress length] <1 ) && domain) {
 			proxyAddress = [NSString stringWithFormat:@"sip:%@",domain] ;
 		} else {
 			proxyAddress = [NSString stringWithFormat:@"sip:%@",proxyAddress] ;
-		}
+		}*/
+        
+        // Set RingMail SIP Proxy
+        NSString* proxyAddress = @"1.voip.ringmail.com";
 		
 		const char* proxy = [proxyAddress cStringUsingEncoding:[NSString defaultCStringEncoding]];
-		
-		
         
 		//possible valid config detected
 		proxyCfg = linphone_core_create_proxy_config(lc);

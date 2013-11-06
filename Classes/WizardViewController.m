@@ -435,11 +435,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 		PayloadType *pt = (PayloadType*)elem->data;
         if (
             (strcmp(pt->mime_type, "PCMU") == 0) ||
-            (strcmp(pt->mime_type, "G722") == 0) ||
-            (strcmp(pt->mime_type, "speex") == 0) ||
-            (strcmp(pt->mime_type, "iLBC") == 0) ||
-            (strcmp(pt->mime_type, "SILK") == 0) ||
-            (strcmp(pt->mime_type, "VP8") == 0)
+            (strcmp(pt->mime_type, "opus") == 0) ||
+            (strcmp(pt->mime_type, "H264") == 0)
         ) {
             linphone_core_enable_payload_type(lc, pt, true);
         } else {

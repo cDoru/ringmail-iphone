@@ -22,6 +22,7 @@
 #import "FastAddressBook.h"
 #import "PhoneMainView.h"
 #import "UILinphone.h"
+#import "SMRotaryImage.h"
 
 @implementation IncomingCallViewController
 
@@ -131,7 +132,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^(void) {
                         UIImage *tmpImage2 = [UIImage decodedImageWithImage:tmpImage];
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            avatarImage.image = tmpImage2;
+                            avatarImage.image = [SMRotaryImage roundedImageWithImage:tmpImage2];
                         });
                     });
                 }

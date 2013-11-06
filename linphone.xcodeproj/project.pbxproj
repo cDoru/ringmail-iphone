@@ -209,6 +209,15 @@
 		C4701077181B4801005FDEE2 /* DialpadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4701076181B4801005FDEE2 /* DialpadViewController.m */; };
 		C470107A181B481F005FDEE2 /* DialpadViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4701078181B481F005FDEE2 /* DialpadViewController_iPhone5.xib */; };
 		C470107D181B4840005FDEE2 /* DialpadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C470107B181B4840005FDEE2 /* DialpadViewController.xib */; };
+		C472BE351829883F00B70AF9 /* NBAsYouTypeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = C472BE291829883F00B70AF9 /* NBAsYouTypeFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		C472BE361829883F00B70AF9 /* NBNumberFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = C472BE2B1829883F00B70AF9 /* NBNumberFormat.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		C472BE371829883F00B70AF9 /* NBPhoneMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = C472BE2D1829883F00B70AF9 /* NBPhoneMetaData.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		C472BE381829883F00B70AF9 /* NBPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = C472BE2F1829883F00B70AF9 /* NBPhoneNumber.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		C472BE391829883F00B70AF9 /* NBPhoneNumberDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = C472BE321829883F00B70AF9 /* NBPhoneNumberDesc.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		C472BE3A1829883F00B70AF9 /* NBPhoneNumberUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = C472BE341829883F00B70AF9 /* NBPhoneNumberUtil.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		C472BE3D1829887000B70AF9 /* NBPhoneNumberMetadata.plist in Resources */ = {isa = PBXBuildFile; fileRef = C472BE3B1829887000B70AF9 /* NBPhoneNumberMetadata.plist */; };
+		C472BE3E1829887000B70AF9 /* NBPhoneNumberMetadataForTesting.plist in Resources */ = {isa = PBXBuildFile; fileRef = C472BE3C1829887000B70AF9 /* NBPhoneNumberMetadataForTesting.plist */; };
+		C472BE411829975D00B70AF9 /* NSArray+NBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C472BE401829975D00B70AF9 /* NSArray+NBAdditions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		C479D9B817A70F4800A24601 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = C479D9B617A70F4800A24601 /* OpenUDID.m */; };
 		C479D9BB17A7183300A24601 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C479D9BA17A7183300A24601 /* libz.1.dylib */; };
 		C479D9D417A7187600A24601 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = C479D9BE17A7187600A24601 /* ASIAuthenticationDialog.m */; };
@@ -1508,6 +1517,23 @@
 		C4701076181B4801005FDEE2 /* DialpadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialpadViewController.m; sourceTree = "<group>"; };
 		C4701079181B481F005FDEE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DialpadViewController_iPhone5.xib; sourceTree = "<group>"; };
 		C470107C181B4840005FDEE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DialpadViewController.xib; sourceTree = "<group>"; };
+		C472BE281829883F00B70AF9 /* NBAsYouTypeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBAsYouTypeFormatter.h; sourceTree = "<group>"; };
+		C472BE291829883F00B70AF9 /* NBAsYouTypeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBAsYouTypeFormatter.m; sourceTree = "<group>"; };
+		C472BE2A1829883F00B70AF9 /* NBNumberFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNumberFormat.h; sourceTree = "<group>"; };
+		C472BE2B1829883F00B70AF9 /* NBNumberFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNumberFormat.m; sourceTree = "<group>"; };
+		C472BE2C1829883F00B70AF9 /* NBPhoneMetaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBPhoneMetaData.h; sourceTree = "<group>"; };
+		C472BE2D1829883F00B70AF9 /* NBPhoneMetaData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBPhoneMetaData.m; sourceTree = "<group>"; };
+		C472BE2E1829883F00B70AF9 /* NBPhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBPhoneNumber.h; sourceTree = "<group>"; };
+		C472BE2F1829883F00B70AF9 /* NBPhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBPhoneNumber.m; sourceTree = "<group>"; };
+		C472BE301829883F00B70AF9 /* NBPhoneNumberDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBPhoneNumberDefines.h; sourceTree = "<group>"; };
+		C472BE311829883F00B70AF9 /* NBPhoneNumberDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBPhoneNumberDesc.h; sourceTree = "<group>"; };
+		C472BE321829883F00B70AF9 /* NBPhoneNumberDesc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBPhoneNumberDesc.m; sourceTree = "<group>"; };
+		C472BE331829883F00B70AF9 /* NBPhoneNumberUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBPhoneNumberUtil.h; sourceTree = "<group>"; };
+		C472BE341829883F00B70AF9 /* NBPhoneNumberUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBPhoneNumberUtil.m; sourceTree = "<group>"; };
+		C472BE3B1829887000B70AF9 /* NBPhoneNumberMetadata.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = NBPhoneNumberMetadata.plist; path = Resources/NBPhoneNumberMetadata.plist; sourceTree = "<group>"; };
+		C472BE3C1829887000B70AF9 /* NBPhoneNumberMetadataForTesting.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = NBPhoneNumberMetadataForTesting.plist; path = Resources/NBPhoneNumberMetadataForTesting.plist; sourceTree = "<group>"; };
+		C472BE3F1829975D00B70AF9 /* NSArray+NBAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+NBAdditions.h"; sourceTree = "<group>"; };
+		C472BE401829975D00B70AF9 /* NSArray+NBAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+NBAdditions.m"; sourceTree = "<group>"; };
 		C479D9B517A70F4800A24601 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		C479D9B617A70F4800A24601 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		C479D9BA17A7183300A24601 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
@@ -2939,6 +2965,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C472BE3B1829887000B70AF9 /* NBPhoneNumberMetadata.plist */,
+				C472BE3C1829887000B70AF9 /* NBPhoneNumberMetadataForTesting.plist */,
 				C4C9E0B31825BB3300055EF7 /* ringmail_logo_small2.png */,
 				C4C9E0B41825BB3300055EF7 /* ringmail_logo_small2@2x.png */,
 				C4C9E0A71825AF6B00055EF7 /* left_btn_default.png */,
@@ -3553,6 +3581,29 @@
 			path = Utils/ImageHelper;
 			sourceTree = "<group>";
 		};
+		C472BE271829883F00B70AF9 /* libPhoneNumber */ = {
+			isa = PBXGroup;
+			children = (
+				C472BE281829883F00B70AF9 /* NBAsYouTypeFormatter.h */,
+				C472BE291829883F00B70AF9 /* NBAsYouTypeFormatter.m */,
+				C472BE2A1829883F00B70AF9 /* NBNumberFormat.h */,
+				C472BE2B1829883F00B70AF9 /* NBNumberFormat.m */,
+				C472BE2C1829883F00B70AF9 /* NBPhoneMetaData.h */,
+				C472BE2D1829883F00B70AF9 /* NBPhoneMetaData.m */,
+				C472BE2E1829883F00B70AF9 /* NBPhoneNumber.h */,
+				C472BE2F1829883F00B70AF9 /* NBPhoneNumber.m */,
+				C472BE301829883F00B70AF9 /* NBPhoneNumberDefines.h */,
+				C472BE311829883F00B70AF9 /* NBPhoneNumberDesc.h */,
+				C472BE321829883F00B70AF9 /* NBPhoneNumberDesc.m */,
+				C472BE331829883F00B70AF9 /* NBPhoneNumberUtil.h */,
+				C472BE341829883F00B70AF9 /* NBPhoneNumberUtil.m */,
+				C472BE3F1829975D00B70AF9 /* NSArray+NBAdditions.h */,
+				C472BE401829975D00B70AF9 /* NSArray+NBAdditions.m */,
+			);
+			name = libPhoneNumber;
+			path = Utils/libPhoneNumber;
+			sourceTree = "<group>";
+		};
 		C479D9B417A70F4800A24601 /* OpenUDID */ = {
 			isa = PBXGroup;
 			children = (
@@ -3622,6 +3673,7 @@
 		D326483415887D4400930C67 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C472BE271829883F00B70AF9 /* libPhoneNumber */,
 				C43E6B331821ED4100EDC34E /* JSONKit.h */,
 				C43E6B341821ED4100EDC34E /* JSONKit.m */,
 				C455CE9F1817088000618FA8 /* SVSegmentedControl */,
@@ -4152,8 +4204,10 @@
 				D37C638E15AAD251009D0BAC /* contact_number_over.png in Resources */,
 				D37C639015AAD251009D0BAC /* contact_number.png in Resources */,
 				D381881515FE3F7F00C3EDCA /* UIContactDetailsHeader.xib in Resources */,
+				C472BE3D1829887000B70AF9 /* NBPhoneNumberMetadata.plist in Resources */,
 				D3C6526B15AC228A0092A874 /* contact_ok_default.png in Resources */,
 				D3C6526D15AC228A0092A874 /* contact_ok_over.png in Resources */,
+				C472BE3E1829887000B70AF9 /* NBPhoneNumberMetadataForTesting.plist in Resources */,
 				D38187B515FE341B00C3EDCA /* ContactDetailsLabelViewController.xib in Resources */,
 				D38187F415FE354700C3EDCA /* UIContactDetailsFooter.xib in Resources */,
 				D32D5AA715ADE5D9008593F3 /* button_alert_background_default.png in Resources */,
@@ -4745,9 +4799,11 @@
 				D3F83F8E15822ABE00336684 /* PhoneMainView.m in Sources */,
 				D3ED3E871586291E006C0DE4 /* UIMainBar.m in Sources */,
 				D3ED3EA71587334E006C0DE4 /* HistoryTableViewController.m in Sources */,
+				C472BE381829883F00B70AF9 /* NBPhoneNumber.m in Sources */,
 				D3ED3EB81587392C006C0DE4 /* HistoryViewController.m in Sources */,
 				D35497FE15875372000081D8 /* ContactsViewController.m in Sources */,
 				D3549816158761D0000081D8 /* ContactsTableViewController.m in Sources */,
+				C472BE371829883F00B70AF9 /* NBPhoneMetaData.m in Sources */,
 				D35498211587716B000081D8 /* UIStateBar.m in Sources */,
 				D3A55FBC15877E5E003FD403 /* UIContactCell.m in Sources */,
 				D326483815887D5200930C67 /* OrderedDictionary.m in Sources */,
@@ -4781,6 +4837,7 @@
 				D3128FE115AABC7E00A2147A /* ContactDetailsViewController.m in Sources */,
 				D37C639515AADDAF009D0BAC /* UIContactDetailsHeader.m in Sources */,
 				D37C639B15AADEF6009D0BAC /* ContactDetailsTableViewController.m in Sources */,
+				C472BE391829883F00B70AF9 /* NBPhoneNumberDesc.m in Sources */,
 				D3C6526715AC1A8F0092A874 /* UIEditableTableViewCell.m in Sources */,
 				D378906515AC373B00BD776C /* ContactDetailsLabelViewController.m in Sources */,
 				D3E8F68615ADE05B0065A226 /* UIContactDetailsFooter.m in Sources */,
@@ -4790,6 +4847,7 @@
 				D35860D615B549B500513429 /* Utils.m in Sources */,
 				D3F7998115BD32370018C273 /* TPMultiLayoutViewController.m in Sources */,
 				D3807FBF15C28940005BE9BC /* DCRoundSwitch.m in Sources */,
+				C472BE3A1829883F00B70AF9 /* NBPhoneNumberUtil.m in Sources */,
 				D3807FC115C28940005BE9BC /* DCRoundSwitchKnobLayer.m in Sources */,
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
@@ -4800,18 +4858,21 @@
 				D3807FEE15C2894A005BE9BC /* IASKSettingsReader.m in Sources */,
 				D3807FF015C2894A005BE9BC /* IASKSettingsStore.m in Sources */,
 				D3807FF215C2894A005BE9BC /* IASKSettingsStoreFile.m in Sources */,
+				C472BE351829883F00B70AF9 /* NBAsYouTypeFormatter.m in Sources */,
 				D3807FF415C2894A005BE9BC /* IASKSettingsStoreUserDefaults.m in Sources */,
 				D3807FF615C2894A005BE9BC /* IASKSpecifier.m in Sources */,
 				D3807FF815C2894A005BE9BC /* IASKPSSliderSpecifierViewCell.m in Sources */,
 				D3807FFA15C2894A005BE9BC /* IASKPSTextFieldSpecifierViewCell.m in Sources */,
 				D3807FFC15C2894A005BE9BC /* IASKPSTitleValueSpecifierViewCell.m in Sources */,
 				D3807FFE15C2894A005BE9BC /* IASKSlider.m in Sources */,
+				C472BE361829883F00B70AF9 /* NBNumberFormat.m in Sources */,
 				D380800015C2894A005BE9BC /* IASKSwitch.m in Sources */,
 				D380800215C2894A005BE9BC /* IASKTextField.m in Sources */,
 				C4701077181B4801005FDEE2 /* DialpadViewController.m in Sources */,
 				D380800515C28A7A005BE9BC /* UILinphone.m in Sources */,
 				D380801315C299D0005BE9BC /* ColorSpaceUtilites.m in Sources */,
 				D378AB2A15DCDB4A0098505D /* ImagePickerViewController.m in Sources */,
+				C472BE411829975D00B70AF9 /* NSArray+NBAdditions.m in Sources */,
 				22405F001601C19200B92522 /* ImageViewController.m in Sources */,
 				D3ED40191602172200BF332B /* HPGrowingTextView.m in Sources */,
 				C43E6B351821ED4100EDC34E /* JSONKit.m in Sources */,

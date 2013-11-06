@@ -1110,6 +1110,7 @@ static int comp_call_state_paused  (const LinphoneCall* call, const void* param)
 	[LinphoneLogger log:LinphoneLoggerLog format:@"Long running task started, remaining [%g s] because at least one call is paused"
 	 ,[[UIApplication  sharedApplication] backgroundTimeRemaining]];
 }
+
 - (BOOL)enterBackgroundMode {
 	LinphoneProxyConfig* proxyCfg;
 	linphone_core_get_default_proxy(theLinphoneCore, &proxyCfg);	

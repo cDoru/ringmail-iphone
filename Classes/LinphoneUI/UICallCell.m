@@ -65,7 +65,7 @@
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^(void) {
                         UIImage *tmpImage2 = [UIImage decodedImageWithImage:tmpImage];
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self setImage: tmpImage2];
+                            [self setImage: [SMRotaryImage roundedImageWithImage:tmpImage2]];
                         });
                     });
                 }
@@ -373,7 +373,7 @@
     [pauseButton setType:UIPauseButtonType_Call call:call];
     
     [addressLabel setText:data.address];
-    [avatarImage setImage:[SMRotaryImage roundedImageWithImage:data.image]];
+    [avatarImage setImage:data.image];
     
     LinphoneCallState state = linphone_call_get_state(call);
     if(!conferenceCell) {
