@@ -43,5 +43,6 @@
 + (NSString*)normalizePhoneNumber:(NSString*)number;
 + (NSString*)normalizeSipURI:(NSString*)address;
 + (NSString*)e164number:(NSString*)numberIn;
++ (NSString*)getTargetFromSIP:(NSString*)sipURI;
 
 @end

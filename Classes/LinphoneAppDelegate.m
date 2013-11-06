@@ -287,8 +287,7 @@
     }
     else if([notification.userInfo objectForKey:@"command"] != nil) {
         NSString *ringcmd = (NSString*)[notification.userInfo objectForKey:@"command"];
-        NSURL *url = [NSURL URLWithString:ringcmd];
-        [[UIApplication sharedApplication] openURL:url];
+        [[LinphoneManager instance] processCommand:ringcmd];
     }
 }
 

@@ -42,8 +42,8 @@ expires=3600
 push_notification=1
 transport=tls
 sharing_server=https://app.ringmail.com/upload
-ice=0
-stun=
+ice=1
+stun=stun.linphone.org
 
 [app]
 hide_wizard_preference=0

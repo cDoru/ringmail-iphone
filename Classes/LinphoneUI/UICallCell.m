@@ -56,7 +56,8 @@
         char* lAddress = linphone_address_as_string_uri_only(addr);
         if(lAddress) {
             NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+            NSString *sipTarget = [FastAddressBook getTargetFromSIP:normalizedSipAddress];
+            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:sipTarget];
             if(contact) {
                 useLinphoneAddress = false;
                 self.address = [FastAddressBook getContactDisplayName:contact];

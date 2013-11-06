@@ -256,7 +256,7 @@
             NSString *jsonResult = [response object];
             //[LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Data: %@", jsonResult];
             NSArray *result = [jsonResult objectFromJSONString];
-            [LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Object: %@", result];
+            //[LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Object: %@", result];
             [RemoteModel deleteAll];
             for (id remoteData in result)
             {

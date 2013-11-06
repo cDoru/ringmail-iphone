@@ -160,6 +160,8 @@ typedef struct _LinphoneManagerSounds {
 - (void)lpConfigSetBool:(BOOL)value forKey:(NSString*)key forSection:(NSString*)section;
 - (BOOL)lpConfigBoolForKey:(NSString*)key forSection:(NSString*)section;
 
+- (void)processCommand:(NSString*)command;
+
 @property (readonly) FastAddressBook* fastAddressBook;
 @property Connectivity connectivity;
 @property (readonly) NetworkType network;

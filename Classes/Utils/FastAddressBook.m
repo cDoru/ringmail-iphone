@@ -422,4 +422,16 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
     return numberOut;
 }
 
++ (NSString *)getTargetFromSIP:(NSString *)sipURI
+{
+    NSError *error = NULL;
+    NSRegularExpression *regex1 = [NSRegularExpression regularExpressionWithPattern:@"^sip\\:" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSString *str1 = [regex1 stringByReplacingMatchesInString:sipURI options:0 range:NSMakeRange(0, [sipURI length]) withTemplate:@""];
+    NSRegularExpression *regex2 = [NSRegularExpression regularExpressionWithPattern:@"\\@sip\\.ringmail\\.com$" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSString *str2 = [regex2 stringByReplacingMatchesInString:str1 options:0 range:NSMakeRange(0, [str1 length]) withTemplate:@""];
+    NSRegularExpression *regex3 = [NSRegularExpression regularExpressionWithPattern:@"\\%40" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSString *str3 = [regex3 stringByReplacingMatchesInString:str2 options:0 range:NSMakeRange(0, [str2 length]) withTemplate:@"@"];
+    return str3;
+}
+
 @end

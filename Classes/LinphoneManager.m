@@ -23,6 +23,7 @@
 #include <sys/sysctl.h>
 
 #import <AVFoundation/AVAudioSession.h>
+#import <AVFoundation/AVCaptureDevice.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <CoreTelephony/CTCallCenter.h>
@@ -31,6 +32,7 @@
 #import "LinphoneCoreSettingsStore.h"
 #import "ChatModel.h"
 #import "PhoneMainView.h"
+#import "JSONKit.h"
 
 #include "linphonecore_utils.h"
 #include "lpconfig.h"
@@ -609,8 +611,7 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
             }
             else
             {
-                NSURL *url = [NSURL URLWithString:ringcmd];
-                [[UIApplication sharedApplication] openURL:url];
+                [[LinphoneManager instance] processCommand:ringcmd];
             }
             //[[LinphoneManager instance] setCommandURL:ringcmd];
             //[[PhoneMainView instance] changeCurrentView:[DirectoryViewController compositeViewDescription]];
@@ -880,6 +881,8 @@ static LinphoneCoreVTable linphonec_vtable = {
         [LinphoneLogger logc:LinphoneLoggerLog format:"linphonecore is already created"];
         return;
     }
+    
+    NSLog(@"AVCaptureDevices: %@", [AVCaptureDevice devices]);
 	
 	//get default config from bundle
 	NSString* factoryConfig = [LinphoneManager bundleFile:[LinphoneManager runningOnIpad]?@"linphonerc-factory~ipad":@"linphonerc-factory"];
@@ -944,6 +947,30 @@ static LinphoneCoreVTable linphonec_vtable = {
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	BOOL bAudioInputAvailable= [audioSession inputIsAvailable];
     [audioSession setDelegate:self];
+    
+    //RingMail - iOS 7: check for microphone permissions
+    SEL selector = NSSelectorFromString(@"requestRecordPermission:");
+    if ([audioSession respondsToSelector:selector]) {
+        [audioSession performSelector:selector withObject:^(BOOL granted) {
+            if (granted) {
+                // Microphone enabled code
+                NSLog(@"Microphone access granted");
+            }
+            else {
+                // Microphone disabled code
+                NSLog(@"Microphone access denied");
+                
+                // We're in a background thread here, so jump to main thread to do UI work.
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[[[UIAlertView alloc] initWithTitle:@"Microphone Access Denied"
+                                                 message:@"Please enable Microphone access for RingMail in Settings > Privacy > Microphone"
+                                                delegate:nil
+                                       cancelButtonTitle:@"Dismiss"
+                                       otherButtonTitles:nil] autorelease] show];
+                });
+            }
+        }];
+    }
 	
 	NSError* err;
 	[audioSession setActive:NO error: &err]; 
@@ -1585,5 +1612,25 @@ static void audioRouteChangeListenerCallback (
     [LinphoneLogger logc:LinphoneLoggerLog format:"Download Failed: %@ Error: %@", [request url], [request error]];
 }
 
+#pragma mark - RingMail Functions
+
+- (void)processCommand:(NSString*)command
+{
+    NSDictionary *result = [command objectFromJSONString];
+    NSString *pstn = [result objectForKey:@"pstn"];
+    if (pstn != nil)
+    {
+        NSString *phoneNumber = [@"telprompt://" stringByAppendingString:pstn];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+    }
+    else
+    {
+        NSString *urlString = [result objectForKey:@"url"];
+        if (urlString != nil)
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+        }
+    }
+}
 
 @end

@@ -209,6 +209,7 @@
 		C4701077181B4801005FDEE2 /* DialpadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4701076181B4801005FDEE2 /* DialpadViewController.m */; };
 		C470107A181B481F005FDEE2 /* DialpadViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4701078181B481F005FDEE2 /* DialpadViewController_iPhone5.xib */; };
 		C470107D181B4840005FDEE2 /* DialpadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C470107B181B4840005FDEE2 /* DialpadViewController.xib */; };
+		C4715B92182ADF7000F54810 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4715B91182ADF7000F54810 /* Images.xcassets */; };
 		C472BE351829883F00B70AF9 /* NBAsYouTypeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = C472BE291829883F00B70AF9 /* NBAsYouTypeFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		C472BE361829883F00B70AF9 /* NBNumberFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = C472BE2B1829883F00B70AF9 /* NBNumberFormat.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		C472BE371829883F00B70AF9 /* NBPhoneMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = C472BE2D1829883F00B70AF9 /* NBPhoneMetaData.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1517,6 +1518,7 @@
 		C4701076181B4801005FDEE2 /* DialpadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialpadViewController.m; sourceTree = "<group>"; };
 		C4701079181B481F005FDEE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DialpadViewController_iPhone5.xib; sourceTree = "<group>"; };
 		C470107C181B4840005FDEE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DialpadViewController.xib; sourceTree = "<group>"; };
+		C4715B91182ADF7000F54810 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = linphone/Images.xcassets; sourceTree = "<group>"; };
 		C472BE281829883F00B70AF9 /* NBAsYouTypeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBAsYouTypeFormatter.h; sourceTree = "<group>"; };
 		C472BE291829883F00B70AF9 /* NBAsYouTypeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBAsYouTypeFormatter.m; sourceTree = "<group>"; };
 		C472BE2A1829883F00B70AF9 /* NBNumberFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNumberFormat.h; sourceTree = "<group>"; };
@@ -2965,6 +2967,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C4715B91182ADF7000F54810 /* Images.xcassets */,
 				C472BE3B1829887000B70AF9 /* NBPhoneNumberMetadata.plist */,
 				C472BE3C1829887000B70AF9 /* NBPhoneNumberMetadataForTesting.plist */,
 				C4C9E0B31825BB3300055EF7 /* ringmail_logo_small2.png */,
@@ -3989,6 +3992,7 @@
 				D347347F1580E5F8003C7B8C /* history_selected.png in Resources */,
 				D38327F31580FE3A00FA0D23 /* contacts_default.png in Resources */,
 				D38327F41580FE3A00FA0D23 /* contacts_selected.png in Resources */,
+				C4715B92182ADF7000F54810 /* Images.xcassets in Resources */,
 				D38327F51580FE3A00FA0D23 /* dialer_default.png in Resources */,
 				D38327F61580FE3A00FA0D23 /* dialer_over.png in Resources */,
 				D38327F71580FE3A00FA0D23 /* settings_default.png in Resources */,
@@ -5330,6 +5334,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -5410,6 +5416,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
@@ -5661,6 +5669,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -5740,6 +5750,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
