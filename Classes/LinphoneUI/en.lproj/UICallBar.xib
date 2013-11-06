@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1072" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -47,11 +47,11 @@
                     <color key="backgroundColor" red="0.0" green="1" blue="0.19194547549999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view tag="18" contentMode="scaleToFill" id="30" userLabel="buttons">
-                    <rect key="frame" x="0.0" y="319" width="320" height="141"/>
+                    <rect key="frame" x="0.0" y="316" width="320" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" tag="19" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="12" userLabel="videoButton" customClass="UIVideoButton">
-                            <rect key="frame" x="0.0" y="0.0" width="107" height="73"/>
+                            <rect key="frame" x="0.0" y="0.0" width="106" height="76"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Video"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -67,7 +67,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="highlighted" backgroundImage="video_off_over.png">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="0.2274509817" green="0.53725492949999998" blue="0.78823530669999997" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <outlet property="waitView" destination="59" id="60"/>
@@ -78,7 +78,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
                         <button opaque="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="11" userLabel="microButton" customClass="UIMicroButton">
-                            <rect key="frame" x="106" y="0.0" width="106" height="72"/>
+                            <rect key="frame" x="106" y="0.0" width="107" height="76"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Micro"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -94,18 +94,20 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="highlighted" backgroundImage="micro_off_over.png">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="0.2274509817" green="0.53725492949999998" blue="0.78823530669999997" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" tag="22" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9" userLabel="speakerButton" customClass="UISpeakerButton">
-                            <rect key="frame" x="212" y="0.0" width="106" height="72"/>
+                            <rect key="frame" x="213" y="0.0" width="107" height="76"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Speaker"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="0.0" minY="45" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="Speaker" backgroundImage="speaker_off_default.png"/>
                             <state key="selected" backgroundImage="speaker_on_over.png"/>
-                            <state key="highlighted" backgroundImage="speaker_off_over.png"/>
+                            <state key="highlighted" backgroundImage="speaker_off_over.png">
+                                <color key="titleColor" red="0.2274509817" green="0.53725492949999998" blue="0.78823530669999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                         </button>
                         <button hidden="YES" opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="10" userLabel="optionsButton" customClass="UIToggleButton">
                             <rect key="frame" x="240" y="0.0" width="80" height="67"/>
@@ -754,13 +756,13 @@
         <image name="hangup_default_landscape.png" width="180" height="163"/>
         <image name="hangup_over.png" width="214" height="136"/>
         <image name="hangup_over_landscape.png" width="180" height="163"/>
-        <image name="micro_off_default.png" width="212" height="144"/>
+        <image name="micro_off_default.png" width="215" height="152"/>
         <image name="micro_off_default_landscape.png" width="130" height="163"/>
-        <image name="micro_off_disabled.png" width="214" height="146"/>
+        <image name="micro_off_disabled.png" width="215" height="152"/>
         <image name="micro_off_disabled_landscape.png" width="130" height="163"/>
-        <image name="micro_off_over.png" width="214" height="146"/>
+        <image name="micro_off_over.png" width="215" height="152"/>
         <image name="micro_off_over_landscape.png" width="130" height="163"/>
-        <image name="micro_on_default.png" width="214" height="146"/>
+        <image name="micro_on_default.png" width="215" height="152"/>
         <image name="micro_on_default_landscape.png" width="130" height="163"/>
         <image name="numpad4_eight_default.png" width="151" height="129"/>
         <image name="numpad4_eight_over.png" width="151" height="129"/>
@@ -836,20 +838,20 @@
         <image name="pause_off_over_landscape.png" width="130" height="163"/>
         <image name="pause_on_default.png" width="212" height="136"/>
         <image name="pause_on_default_landscape.png" width="130" height="163"/>
-        <image name="speaker_off_default.png" width="212" height="144"/>
+        <image name="speaker_off_default.png" width="214" height="152"/>
         <image name="speaker_off_default_landscape.png" width="130" height="163"/>
         <image name="speaker_off_disabled_landscape.png" width="130" height="163"/>
-        <image name="speaker_off_over.png" width="214" height="145"/>
+        <image name="speaker_off_over.png" width="214" height="152"/>
         <image name="speaker_off_over_landscape.png" width="130" height="163"/>
         <image name="speaker_on_default_landscape.png" width="130" height="163"/>
-        <image name="speaker_on_over.png" width="214" height="145"/>
-        <image name="video_off_default.png" width="212" height="146"/>
+        <image name="speaker_on_over.png" width="214" height="152"/>
+        <image name="video_off_default.png" width="211" height="152"/>
         <image name="video_off_default_landscape.png" width="130" height="163"/>
-        <image name="video_off_disabled.png" width="212" height="146"/>
+        <image name="video_off_disabled.png" width="211" height="152"/>
         <image name="video_off_disabled_landscape.png" width="130" height="163"/>
-        <image name="video_off_over.png" width="212" height="146"/>
+        <image name="video_off_over.png" width="211" height="152"/>
         <image name="video_off_over_landscape.png" width="130" height="163"/>
         <image name="video_on_default_landscape.png" width="130" height="163"/>
-        <image name="video_on_over.png" width="212" height="146"/>
+        <image name="video_on_over.png" width="211" height="152"/>
     </resources>
 </document>

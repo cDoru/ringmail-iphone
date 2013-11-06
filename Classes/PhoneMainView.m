@@ -24,6 +24,8 @@
 #import "PhoneMainView.h"
 #import "Utils.h"
 #import "DTActionSheet.h"
+#import "ChatRoomViewController.h"
+#import "ChatViewController.h"
 
 static PhoneMainView* phoneMainViewInstance=nil;
 
@@ -471,15 +473,41 @@ static PhoneMainView* phoneMainViewInstance=nil;
     [LinphoneLogger logc:LinphoneLoggerLog format:"PhoneMainView: Change current view to %@", [view name]];
     
     if(force || ![view equal: currentView]) {
+        
+        BOOL right = FALSE;
+        BOOL left = FALSE;
+        UICompositeViewDescription *old = currentView;
+        UICompositeViewDescription *new = view;
+        if([old equal:[ChatRoomViewController compositeViewDescription]]) {
+            if([new equal:[ChatViewController compositeViewDescription]]) {
+                left = true;
+            }
+        } else if([old equal:[ChatViewController compositeViewDescription]]) {
+            if([new equal:[ChatRoomViewController compositeViewDescription]]) {
+                right = true;
+            }
+        }
+        
+        //NSLog(@"Get Transition Left: %d", left);
+        
+        if(right)
+        {
+            transition = [PhoneMainView getForwardTransition];
+        }
+        else if (left)
+        {
+            transition = [PhoneMainView getBackwardTransition];
+        }
+        
         /*if(transition == nil)
             transition = [PhoneMainView getTransition:currentView new:view]; */
-        if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
+        /*if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
             //NSLog(@"Set Transition");
             [mainViewController setViewTransition:transition];
         } else {
             [mainViewController setViewTransition:nil];
-        }
-        [mainViewController setViewTransition:nil];
+        }*/
+        [mainViewController setViewTransition:transition];
         [mainViewController changeView:view];
         currentView = view;
     } 
