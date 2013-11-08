@@ -46,6 +46,7 @@
 @property(nonatomic,getter=isEditing) BOOL editing;
 
 - (IBAction)onAvatarClick:(id)event;
+- (IBAction)onInviteClick:(id)event;
 
 + (CGFloat)height:(BOOL)editing;
 

@@ -414,12 +414,58 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
     if (aError == nil)
     {
         numberOut = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&aError];
+        return numberOut;
     }
     if (aError != nil)
     {
         NSLog(@"PhoneNumberUtil Error: %@", [aError localizedDescription]);
     }
-    return numberOut;
+    return numberIn;
+}
+
++ (NSString *)formatNumber:(NSString *)numberIn
+{
+    if ([numberIn length] == 0)
+    {
+        return numberIn;
+    }
+    //NSLog(@"formatNumber: '%@'", numberIn);
+    NSString *res = nil;
+    NSString *tmp = nil;
+    NSError *error = NULL;
+    NBPhoneNumberUtil *phoneUtil = [NBPhoneNumberUtil sharedInstance];
+    NBPhoneNumber *number = [phoneUtil parse:numberIn defaultRegion:@"US" error:&error];
+    if (error == nil)
+    {
+        tmp = [phoneUtil format:number numberFormat:NBEPhoneNumberFormatE164 error:&error];
+    }
+    if (error != nil)
+    {
+        NSLog(@"PhoneNumberUtil Error: %@", [error localizedDescription]);
+        return numberIn;
+    }
+
+    UInt32 dRes = [phoneUtil extractCountryCode:tmp nationalNumber:&res];
+
+    if (dRes == 1)
+    {
+        NSRegularExpression *regex1 = [NSRegularExpression regularExpressionWithPattern:@"^(\\d{3})(\\d{3})(\\d{4})$" options:NSRegularExpressionCaseInsensitive error:&error];
+        NSString *str1 = [regex1 stringByReplacingMatchesInString:res options:0 range:NSMakeRange(0, [res length]) withTemplate:@"($1) $2-$3"];
+        //NSLog(@"Converted Number %@ -> %@", numberIn, str1);
+        return str1;
+    }
+    else
+    {
+        NBPhoneNumber *myNumber = [phoneUtil parse:numberIn defaultRegion:@"US" error:&error];
+        if (error == nil)
+        {
+            return [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatNATIONAL error:&error];
+        }
+        else
+        {
+            return numberIn;
+        }
+    }
 }
 
 + (NSString *)getTargetFromSIP:(NSString *)sipURI
@@ -432,6 +478,42 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
     NSRegularExpression *regex3 = [NSRegularExpression regularExpressionWithPattern:@"\\%40" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *str3 = [regex3 stringByReplacingMatchesInString:str2 options:0 range:NSMakeRange(0, [str2 length]) withTemplate:@"@"];
     return str3;
+}
+
++ (NSMutableDictionary *)getInviteData:(ABRecordRef)contact
+{
+    NSMutableDictionary *res = [NSMutableDictionary dictionaryWithCapacity:2];
+    NSMutableArray *emailArray = [NSMutableArray array];
+    NSMutableArray *phoneArray = [NSMutableArray array];
+    
+    ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)contact, kABPersonEmailProperty);
+    if (emailMap) {
+        for(int i = 0; i < ABMultiValueGetCount(emailMap); ++i) {
+            CFStringRef valueRef = ABMultiValueCopyValueAtIndex(emailMap, i);
+            if (valueRef) {
+                NSString* val = (NSString *)valueRef;
+                [emailArray addObject:val];
+                CFRelease(valueRef);
+            }
+        }
+        CFRelease(emailMap);
+    }
+    ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)contact, kABPersonPhoneProperty);
+    if (phoneMap) {
+        for(int i = 0; i < ABMultiValueGetCount(phoneMap); ++i) {
+            CFStringRef valueRef = ABMultiValueCopyValueAtIndex(phoneMap, i);
+            if (valueRef) {
+                NSString* val = (NSString *)valueRef;
+                [phoneArray addObject:[FastAddressBook formatNumber:val]];
+                CFRelease(valueRef);
+            }
+        }
+        CFRelease(phoneMap);
+    }
+    
+    [res setObject:emailArray forKey:@"email"];
+    [res setObject:phoneArray forKey:@"phone"];
+    return res;
 }
 
 @end

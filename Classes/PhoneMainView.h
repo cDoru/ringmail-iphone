@@ -18,6 +18,7 @@
  */   
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 #import "LinphoneManager.h"
 #import "UICompositeViewController.h"
@@ -50,7 +51,6 @@
     NSMutableArray *viewStack;
     NSMutableArray *inhibitedEvents;
     NSTimer *batteryTimer;
-
 }
 
 @property (nonatomic, retain) IBOutlet UICompositeViewController *mainViewController;

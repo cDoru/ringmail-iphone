@@ -69,6 +69,7 @@ static const int contactSections[ContactSections_MAX] = {ContactSections_None, C
 @synthesize headerController;
 @synthesize contactDetailsDelegate;
 @synthesize contact;
+@synthesize editFlag;
 
 #pragma mark - Lifecycle Functions
 
@@ -80,6 +81,7 @@ static const int contactSections[ContactSections_MAX] = {ContactSections_None, C
                   [NSString stringWithString:(NSString*)kABPersonPhoneIPhoneLabel],
                   [NSString stringWithString:(NSString*)kABPersonPhoneMainLabel], nil];
     editingIndexPath = nil;
+    editFlag = FALSE;
 }
 
 - (id)init {
@@ -493,7 +495,14 @@ static const int contactSections[ContactSections_MAX] = {ContactSections_None, C
         }
         CFStringRef valueRef = ABMultiValueCopyValueAtIndex(lMap, index);
         if(valueRef != NULL) {
-            value = [ContactDetailsTableViewController localizeLabel:(NSString*) valueRef];
+            if (editFlag)
+            {
+                value = [ContactDetailsTableViewController localizeLabel:(NSString*) valueRef];
+            }
+            else
+            {
+                value = [FastAddressBook formatNumber:[ContactDetailsTableViewController localizeLabel:(NSString*) valueRef]];
+            }
             CFRelease(valueRef);
         }
         CFRelease(lMap);

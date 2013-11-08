@@ -43,6 +43,8 @@
 + (NSString*)normalizePhoneNumber:(NSString*)number;
 + (NSString*)normalizeSipURI:(NSString*)address;
 + (NSString*)e164number:(NSString*)numberIn;
++ (NSString*)formatNumber:(NSString*)numberIn;
 + (NSString*)getTargetFromSIP:(NSString*)sipURI;
++ (NSMutableDictionary*)getInviteData:(ABRecordRef)contact;
 
 @end
