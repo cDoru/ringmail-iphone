@@ -139,6 +139,7 @@
 		C40CD7FB17839BD700E35C91 /* directory_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7F817839BD700E35C91 /* directory_default.png */; };
 		C40CD7FC17839BD700E35C91 /* directory_over.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7F917839BD700E35C91 /* directory_over.png */; };
 		C40CD7FD17839BD700E35C91 /* directory_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7FA17839BD700E35C91 /* directory_selected.png */; };
+		C40D1073182CA23E007463A1 /* ContactDetailsTableViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = C40D1072182CA23E007463A1 /* ContactDetailsTableViewController.h */; };
 		C4137DFC181C285B00827A3F /* dialer_call_button_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = C4137DFA181C285B00827A3F /* dialer_call_button_sel.png */; };
 		C4137DFD181C285B00827A3F /* dialer_call_button.png in Resources */ = {isa = PBXBuildFile; fileRef = C4137DFB181C285B00827A3F /* dialer_call_button.png */; };
 		C4283DEA1799B3DD00268244 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = C4283DE91799B3DD00268244 /* gear.png */; };
@@ -1438,6 +1439,7 @@
 		C40CD7F817839BD700E35C91 /* directory_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = directory_default.png; path = Resources/directory_default.png; sourceTree = "<group>"; };
 		C40CD7F917839BD700E35C91 /* directory_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = directory_over.png; path = Resources/directory_over.png; sourceTree = "<group>"; };
 		C40CD7FA17839BD700E35C91 /* directory_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = directory_selected.png; path = Resources/directory_selected.png; sourceTree = "<group>"; };
+		C40D1072182CA23E007463A1 /* ContactDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDetailsTableViewController.h; sourceTree = "<group>"; };
 		C4137DFA181C285B00827A3F /* dialer_call_button_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dialer_call_button_sel.png; path = Resources/dialer_call_button_sel.png; sourceTree = "<group>"; };
 		C4137DFB181C285B00827A3F /* dialer_call_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dialer_call_button.png; path = Resources/dialer_call_button.png; sourceTree = "<group>"; };
 		C41E6EA61818DEBE005FEC01 /* ContactSelectProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactSelectProtocol.h; sourceTree = "<group>"; };
@@ -1843,7 +1845,6 @@
 		D37C638D15AAD251009D0BAC /* contact_number.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = contact_number.png; path = Resources/contact_number.png; sourceTree = "<group>"; };
 		D37C639215AADDAE009D0BAC /* UIContactDetailsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIContactDetailsHeader.h; sourceTree = "<group>"; };
 		D37C639315AADDAE009D0BAC /* UIContactDetailsHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIContactDetailsHeader.m; sourceTree = "<group>"; };
-		D37C639915AADEF4009D0BAC /* ContactDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDetailsTableViewController.h; sourceTree = "<group>"; };
 		D37C639A15AADEF5009D0BAC /* ContactDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDetailsTableViewController.m; sourceTree = "<group>"; };
 		D37DC6BF1594AE1800B2A5EB /* LinphoneCoreSettingsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinphoneCoreSettingsStore.h; sourceTree = "<group>"; };
 		D37DC6C01594AE1800B2A5EB /* LinphoneCoreSettingsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinphoneCoreSettingsStore.m; sourceTree = "<group>"; };
@@ -2443,7 +2444,7 @@
 				D378906215AC373B00BD776C /* ContactDetailsLabelViewController.h */,
 				D378906315AC373B00BD776C /* ContactDetailsLabelViewController.m */,
 				D38187B815FE341B00C3EDCA /* ContactDetailsLabelViewController.xib */,
-				D37C639915AADEF4009D0BAC /* ContactDetailsTableViewController.h */,
+				C40D1072182CA23E007463A1 /* ContactDetailsTableViewController.h */,
 				D37C639A15AADEF5009D0BAC /* ContactDetailsTableViewController.m */,
 				D3128FDE15AABC7E00A2147A /* ContactDetailsViewController.h */,
 				D3128FDF15AABC7E00A2147A /* ContactDetailsViewController.m */,
@@ -4380,6 +4381,7 @@
 				C4569CA917C5407500ABBBF7 /* numpad4_sharp_default.png in Resources */,
 				C4569CAA17C5407500ABBBF7 /* numpad4_sharp_over.png in Resources */,
 				C4569CAB17C5407500ABBBF7 /* numpad4_six_default.png in Resources */,
+				C40D1073182CA23E007463A1 /* ContactDetailsTableViewController.h in Resources */,
 				C4569CAC17C5407500ABBBF7 /* numpad4_six_over.png in Resources */,
 				C4569CAD17C5407500ABBBF7 /* numpad4_star_default.png in Resources */,
 				C4569CAE17C5407500ABBBF7 /* numpad4_star_over.png in Resources */,

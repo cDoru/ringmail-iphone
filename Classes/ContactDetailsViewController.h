@@ -24,7 +24,7 @@
 #import "UIToggleButton.h"
 #import "ContactDetailsTableViewController.h"
 
-@interface ContactDetailsViewController : UIViewController<UICompositeViewDelegate, ContactDetailsDelegate, MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate> {
+@interface ContactDetailsViewController : UIViewController<UICompositeViewDelegate, ContactDetailsDelegate> {
     ABAddressBookRef addressBook;
     BOOL inhibUpdate;
 }
@@ -43,7 +43,5 @@
 - (void)newContact:(NSString*)address;
 - (void)editContact:(ABRecordRef)contact;
 - (void)editContact:(ABRecordRef)contact address:(NSString*)address;
-
-- (void)showInvite:(NSString *)emailTo phone:(NSString *)phoneTo;
 
 @end

@@ -370,9 +370,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - Action Functions
 
 
-- (IBAction)onSettingsClick:(id)event {
+/*- (IBAction)onSettingsClick:(id)event {
     [[PhoneMainView instance] changeCurrentView:[SettingsViewController compositeViewDescription]];
-}
+}*/
 
 - (IBAction)onAddressChange: (id)sender {
     if([[addressField text] length] > 0) {
@@ -412,6 +412,16 @@ static UICompositeViewDescription *compositeDescription = nil;
             [controller editContact:currentContact address:[ContactSelection getAddAddress]];
         }
     }
+}
+
+- (IBAction)onInviteClick:(id)event
+{
+    if (currentContact == nil)
+    {
+        return;
+    }
+    NSMutableDictionary* inviteData = [FastAddressBook getInviteData:currentContact];
+    [[PhoneMainView instance].mainViewController showInvite:[inviteData objectForKey:@"email"] phone:[inviteData objectForKey:@"phone"]];
 }
 
 @end

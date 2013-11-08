@@ -486,6 +486,11 @@ static PhoneMainView* phoneMainViewInstance=nil;
             if([new equal:[ChatRoomViewController compositeViewDescription]]) {
                 right = true;
             }
+        } else if([old equal:[DialerViewController compositeViewDescription]]
+                  || [old equal:[ContactsViewController compositeViewDescription]]) {
+            if([new equal:[ContactDetailsViewController compositeViewDescription]]) {
+                right = true;
+            }
         }
         
         //NSLog(@"Get Transition Left: %d", left);

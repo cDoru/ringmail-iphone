@@ -54,7 +54,7 @@
 
 @end
 
-@interface UICompositeViewController : TPMultiLayoutViewController {
+@interface UICompositeViewController : TPMultiLayoutViewController <MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate> {
     @private
     NSMutableDictionary *viewControllerCache;
     UICompositeViewDescription *currentViewDescription;
@@ -75,5 +75,7 @@
 - (UIViewController *)getCurrentViewController;
 - (UIInterfaceOrientation)currentOrientation;
 - (void)clearCache:(NSArray*)exclude;
+
+- (void)showInvite:(NSString *)emailTo phone:(NSString *)phoneTo;
 
 @end

@@ -57,5 +57,6 @@
 - (IBAction)onAddressChange: (id)sender;
 - (IBAction)onAddressClick: (id)sender;
 - (IBAction)onContactClick: (id)sender;
+- (IBAction)onInviteClick: (id)sender;
 
 @end

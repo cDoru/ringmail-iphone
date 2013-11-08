@@ -26,7 +26,6 @@
 #import "DTActionSheet.h"
 #import "FavoritesModel.h"
 #import "RemoteModel.h"
-#import "ContactDetailsViewController.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
 
@@ -327,8 +326,8 @@
 
 - (IBAction)onInviteClick:(id)event
 {
-    //NSMutableDictionary* inviteData = [FastAddressBook getInviteData:contact];
-    //[(ContactDetailsViewController *)mainView showInvite:[inviteData objectForKey:@"email"] phone:[inviteData objectForKey:@"phone"]];
+    NSMutableDictionary* inviteData = [FastAddressBook getInviteData:contact];
+    [[PhoneMainView instance].mainViewController showInvite:[inviteData objectForKey:@"email"] phone:[inviteData objectForKey:@"phone"]];
 }
 
 #pragma mark - ContactDetailsImagePickerDelegate Functions

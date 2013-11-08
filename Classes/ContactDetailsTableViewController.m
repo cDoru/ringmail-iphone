@@ -109,7 +109,6 @@ static const int contactSections[ContactSections_MAX] = {ContactSections_None, C
     }
     [labelArray release];
     [dataCache release];
-    
     [super dealloc];
 }
 
