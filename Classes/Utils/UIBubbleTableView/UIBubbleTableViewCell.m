@@ -111,10 +111,17 @@
     if (type == BubbleTypeSomeoneElse)
     {
         self.bubbleImage.image = [[UIImage imageNamed:@"bubbleSomeone.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
-
     }
-    else {
+    else
+    {
         self.bubbleImage.image = [[UIImage imageNamed:@"bubbleMine.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:14];
+        // Add delivery indicator
+        if (self.data.deliveryStatus != nil)
+        {
+            int statusWidth = self.data.deliveryStatus.frame.size.width;
+            self.data.deliveryStatus.frame = CGRectMake(self.frame.size.width - (statusWidth + 15), y + height + self.data.insets.top + self.data.insets.bottom - 4, self.data.deliveryStatus.frame.size.width, self.data.deliveryStatus.frame.size.height);
+            [self.contentView addSubview:self.data.deliveryStatus];
+        }
     }
 
     self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment version="784" defaultVersion="1072" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DialerViewController">
@@ -11,6 +11,8 @@
                 <outlet property="callButton" destination="BXI-Tf-2ee" id="PiH-v6-TkE"/>
                 <outlet property="contactButton" destination="iJ3-h6-dXX" id="nd2-c7-3dA"/>
                 <outlet property="favRotationView" destination="HHi-ZI-8FA" id="cGs-53-YFd"/>
+                <outlet property="inviteButton" destination="x5D-Sa-i4O" id="t1V-AL-W2s"/>
+                <outlet property="ringMailImage" destination="8hu-hP-Vsm" id="9as-LY-9MG"/>
                 <outlet property="textButton" destination="GDJ-Lb-unY" id="31r-bs-LCp"/>
                 <outlet property="view" destination="171" id="176"/>
             </connections>
@@ -41,22 +43,6 @@
                                 <outlet property="delegate" destination="-1" id="190"/>
                             </connections>
                         </textField>
-                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="255" userLabel="settings">
-                            <rect key="frame" x="279" y="0.0" width="40" height="52"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" image="gear.png">
-                                <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onSettingsClick:" destination="-1" eventType="touchUpInside" id="256"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iJ3-h6-dXX" userLabel="contactButton">
                             <rect key="frame" x="4" y="11" width="32" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -67,6 +53,26 @@
                                 <action selector="onContactClick:" destination="-1" eventType="touchUpInside" id="SoI-n6-A5j"/>
                             </connections>
                         </button>
+                        <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="x5D-Sa-i4O" userLabel="inviteButton">
+                            <rect key="frame" x="281" y="7" width="38" height="38"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Add contact"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" image="chat_photo_over.png">
+                                <color key="titleColor" red="0.91372549530000002" green="0.94901961089999998" blue="0.97647058959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="chat_photo_over.png">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onInviteClick:" destination="-1" eventType="touchUpInside" id="pjW-bH-CVX"/>
+                            </connections>
+                        </button>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ringmail_logo_small2@2x.png" id="8hu-hP-Vsm" userLabel="ringMailImage">
+                            <rect key="frame" x="284" y="10" width="32" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -129,7 +135,8 @@
         <image name="center_circle_02.png" width="120" height="60"/>
         <image name="center_circle_sel_01.png" width="120" height="60"/>
         <image name="center_circle_sel_02.png" width="120" height="60"/>
+        <image name="chat_photo_over.png" width="29" height="29"/>
         <image name="dialer_address_background.png" width="640" height="102"/>
-        <image name="gear.png" width="80" height="104"/>
+        <image name="ringmail_logo_small2@2x.png" width="640" height="102"/>
     </resources>
 </document>

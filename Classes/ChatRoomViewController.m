@@ -386,7 +386,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 	NSString *normalizedSipAddress = [NSString stringWithUTF8String:tmp];
 	ms_free(tmp);
 	
-    ABRecordRef acontact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+    NSString* ringMailAddress = [FastAddressBook getTargetFromSIP:normalizedSipAddress];
+    
+    ABRecordRef acontact = [[[LinphoneManager instance] fastAddressBook] getContact:ringMailAddress];
     if(acontact != nil) {
         displayName = [FastAddressBook getContactDisplayName:acontact];
         image = [FastAddressBook getContactImage:acontact thumbnail:true];
@@ -411,14 +413,23 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState state,void* ud) {
 	ChatRoomViewController* thiz = (ChatRoomViewController*)ud;
-	ChatModel *chat = (ChatModel *)linphone_chat_message_get_user_data(msg); 
-	[LinphoneLogger log:LinphoneLoggerLog format:@"Delivery status for [%@] is [%s]", (chat.message?chat.message:@""),linphone_chat_message_state_to_string(state)];
+	ChatModel *chat = (ChatModel *)linphone_chat_message_get_user_data(msg);
+    NSString* status = [NSString stringWithUTF8String:linphone_chat_message_state_to_string(state)];
+	[LinphoneLogger log:LinphoneLoggerLog format:@"Delivery status for [%@] is [%s]", (chat.message?chat.message:@""), status];
 	[chat setState:[NSNumber numberWithInt:state]];
 	[chat update];
 	[thiz updateChatEntry:chat];
 	linphone_chat_message_set_user_data(msg, NULL);
+    
+    if ([status isEqualToString:@"LinphoneChatMessageStateDelivered"])
+    {
+        if ([chat indexPath] != nil)
+        {
+            [thiz.bubbleTable updateDeliveryStatus:[chat indexPath] status:@"Sent"];
+        }
+    }
+    
 	[chat release]; // no longuer need to keep reference
-	
 }
 
 - (BOOL)sendMessage:(NSString *)message withExterlBodyUrl:(NSURL*)externalUrl withInternalUrl:(NSURL*)internalUrl {

@@ -22,6 +22,7 @@
 @synthesize avatar = _avatar;
 @synthesize mode = _mode;
 @synthesize chat = _chat;
+@synthesize deliveryStatus = _deliveryStatus;
 
 #pragma mark - Lifecycle
 
@@ -36,14 +37,19 @@
     
     self.avatar = nil;
 
+    if (_deliveryStatus != nil)
+    {
+        [_deliveryStatus release];
+    }
+    
     [super dealloc];
 }
 #endif
 
 #pragma mark - Text bubble
 
-const UIEdgeInsets textInsetsMine = {5, 10, 11, 19};
-const UIEdgeInsets textInsetsSomeone = {5, 19, 11, 10};
+const UIEdgeInsets textInsetsMine = {5, 8, 11, 19};
+const UIEdgeInsets textInsetsSomeone = {5, 16, 11, 10};
 
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
@@ -137,6 +143,23 @@ const UIEdgeInsets imageInsetsSomeone = {7, 18, 12, 9};
         _type = type;
         _mode = mode;
         _insets = insets;
+        _deliveryStatus = nil;
+        
+        if (type == BubbleTypeMine)
+        {
+            UIFont *font = [UIFont systemFontOfSize:13.0f];
+            CGSize size = [@"Sending" sizeWithFont:font constrainedToSize:CGSizeMake(260, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+            
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width + 50, size.height)];
+            label.numberOfLines = 0;
+            label.lineBreakMode = NSLineBreakByWordWrapping;
+            label.textAlignment = NSTextAlignmentRight;
+            label.text = @"Sending";
+            label.font = font;
+            label.backgroundColor = [UIColor clearColor];
+            label.hidden = YES;
+            _deliveryStatus = label;
+        }
     }
     return self;
 }

@@ -35,6 +35,7 @@ typedef enum _NSBubbleMode
 @property (readonly, nonatomic) UIEdgeInsets insets;
 @property (nonatomic, strong) UIImage *avatar;
 @property (nonatomic, retain) ChatModel *chat;
+@property (nonatomic, retain) UILabel *deliveryStatus;
 
 - (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;
