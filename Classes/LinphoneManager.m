@@ -277,7 +277,7 @@ struct codec_name_pref_table codec_pref_table[]={
 #pragma mark - Database Functions
 
 - (void)openDatabase {
-    NSString *databasePath = [LinphoneManager documentFile:@"database.sqlite"];
+    NSString *databasePath = [LinphoneManager documentFile:@"ringmailDatabase1_2.sqlite"];
 	NSFileManager *filemgr = [NSFileManager defaultManager];
 	//[filemgr removeItemAtPath:databasePath error:nil];
 	BOOL firstInstall= ![filemgr fileExistsAtPath: databasePath];
@@ -314,6 +314,15 @@ struct codec_name_pref_table codec_pref_table[]={
             [LinphoneLogger logc:LinphoneLoggerError format:"Can't create index error[%s] ", errMsg];
         }
         
+        const char *sql_stmt5 = "CREATE TABLE sysversion (id INTEGER PRIMARY KEY, ts NUMERIC)";
+        if (sqlite3_exec(database, sql_stmt5, NULL, NULL, &errMsg) != SQLITE_OK) {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Can't create table error[%s] ", errMsg];
+        }
+        
+        const char *sql_stmt6 = "INSERT INTO sysversion (id, ts) VALUES (1, strftime('%s', 'now'));";
+        if (sqlite3_exec(database, sql_stmt6, NULL, NULL, &errMsg) != SQLITE_OK) {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Can't create table error[%s] ", errMsg];
+        }
 	}
 	
 	[filemgr release];
