@@ -1,0 +1,53 @@
+diff --git coreapi/bellesip_sal/sal_op_message.c coreapi/bellesip_sal/sal_op_message.c
+index 1e3dc12..4d1d0bb 100644
+--- coreapi/bellesip_sal/sal_op_message.c
++++ coreapi/bellesip_sal/sal_op_message.c
+@@ -76,6 +76,10 @@ static bool_t is_external_body(belle_sip_header_content_type_t* content_type) {
+ 	return strcmp("message",belle_sip_header_content_type_get_type(content_type))==0
+ 			&&	strcmp("external-body",belle_sip_header_content_type_get_subtype(content_type))==0;
+ }
++static bool_t is_command_body(belle_sip_header_content_type_t* content_type) {
++	return strcmp("application",belle_sip_header_content_type_get_type(content_type))==0
++			&&	strcmp("ringmail",belle_sip_header_content_type_get_subtype(content_type))==0;
++}
+ 
+ static void process_request_event(void *op_base, const belle_sip_request_event_t *event) {
+ 	SalOp* op = (SalOp*)op_base;
+@@ -94,12 +98,13 @@ static void process_request_event(void *op_base, const belle_sip_request_event_t
+ 	char* from;
+ 	bool_t plain_text=FALSE;
+ 	bool_t external_body=FALSE;
++	bool_t command_body=FALSE;
+ 
+ 	from_header=belle_sip_message_get_header_by_type(BELLE_SIP_MESSAGE(req),belle_sip_header_from_t);
+ 	content_type=belle_sip_message_get_header_by_type(BELLE_SIP_MESSAGE(req),belle_sip_header_content_type_t);
+ 	if (content_type && ((plain_text=is_plain_text(content_type))
+-						|| (external_body=is_external_body(content_type)))) {
+-
++						|| (external_body=is_external_body(content_type))
++						|| (command_body=is_command_body(content_type)))) {
+ 		address=belle_sip_header_address_create(belle_sip_header_address_get_displayname(BELLE_SIP_HEADER_ADDRESS(from_header))
+ 				,belle_sip_header_address_get_uri(BELLE_SIP_HEADER_ADDRESS(from_header)));
+ 		from=belle_sip_object_to_string(BELLE_SIP_OBJECT(address));
+@@ -114,6 +119,12 @@ static void process_request_event(void *op_base, const belle_sip_request_event_t
+ 			salmsg.url = ms_strdup(belle_sip_parameters_get_parameter(BELLE_SIP_PARAMETERS(content_type),"URL")+1); /* skip first "*/
+ 			((char*)salmsg.url)[url_length-2]='\0'; /*remove trailing "*/
+ 		}
++		else if (command_body && belle_sip_parameters_get_parameter(BELLE_SIP_PARAMETERS(content_type),"DO")) {
++			size_t url_length=strlen(belle_sip_parameters_get_parameter(BELLE_SIP_PARAMETERS(content_type),"DO"));
++			salmsg.url = ms_strdup(belle_sip_parameters_get_parameter(BELLE_SIP_PARAMETERS(content_type),"DO")+1); /* skip first "*/
++			((char*)salmsg.url)[url_length-2]='\0'; /*remove trailing "*/
++			salmsg.text=belle_sip_message_get_body(BELLE_SIP_MESSAGE(req));
++		}
+ 		salmsg.message_id=message_id;
+ 		salmsg.time=date ? belle_sip_header_date_get_time(date) : time(NULL);
+ 		op->base.root->callbacks.text_received(op,&salmsg);
+@@ -122,7 +133,7 @@ static void process_request_event(void *op_base, const belle_sip_request_event_t
+ 		if (salmsg.url) ms_free((char*)salmsg.url);
+ 		response_code=200;
+ 	} else {
+-		ms_error("Unsupported MESSAGE with content type [%s/%s]",belle_sip_header_content_type_get_type(content_type)
++		ms_error("R- Unsupported MESSAGE with content type [%s/%s]",belle_sip_header_content_type_get_type(content_type)
+ 				,belle_sip_header_content_type_get_subtype(content_type));
+ 		response_code=501; /*not implemented sound appropriate*/
+ 	}
