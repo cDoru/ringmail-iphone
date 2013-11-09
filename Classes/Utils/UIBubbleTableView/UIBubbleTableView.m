@@ -45,6 +45,8 @@
     
     self.snapInterval = 120;
     self.typingBubble = NSBubbleTypingTypeNobody;
+    
+    lastPath = nil;
 }
 
 - (id)init
@@ -145,6 +147,10 @@
                 row = 1;
             }
             NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:section];
+            if (! [chat.direction intValue])
+            {
+                lastPath = path;
+            }
             NSObject *data = [self makeBubbleData:chat indexPath:path];
             row++;
             assert([data isKindOfClass:[NSBubbleData class]]);
@@ -285,10 +291,22 @@
             cell.longPressRecognizer = longPressRecognizer;  
         }
     }    
-    else {
-        
+    else
+    {
         cell.longPressRecognizer = nil;        
-    }    
+    }
+    
+    if (cell.data.type == BubbleTypeMine)
+    {
+        if (lastPath != nil)
+        {
+            if ([lastPath compare:indexPath] == NSOrderedSame)
+            {
+                cell.data.deliveryStatus.hidden = NO;
+            }
+        }
+    }
+    
     return cell;
 }
 
@@ -312,6 +330,17 @@
             UIImage *image = [UIImage imageWithContentsOfFile:[finalPath stringByAppendingString:@".jpg"]];
             [controller setImage:image];
         }
+    }
+}
+
+#pragma mark - Update delivery status
+
+- (void) updateDeliveryStatus:(NSIndexPath *)path status:(NSString *)status
+{
+    NSBubbleData *data = [[self.bubbleSection objectAtIndex:path.section] objectAtIndex:path.row - 1];
+    if (data.deliveryStatus != nil)
+    {
+        data.deliveryStatus.text = status;
     }
 }
 

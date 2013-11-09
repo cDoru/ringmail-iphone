@@ -290,7 +290,7 @@ struct codec_name_pref_table codec_pref_table[]={
 	if (firstInstall) {
 		char *errMsg;
 		//better to create the db from the code
-		const char *sql_stmt = "CREATE TABLE chat (id INTEGER PRIMARY KEY AUTOINCREMENT, localContact TEXT NOT NULL, remoteContact TEXT NOT NULL, direction INTEGER, message TEXT NOT NULL, time NUMERIC, read INTEGER, state INTEGER)";
+		const char *sql_stmt = "CREATE TABLE chat (id INTEGER PRIMARY KEY AUTOINCREMENT, localContact TEXT NOT NULL, remoteContact TEXT NOT NULL, direction INTEGER, message TEXT NOT NULL, time NUMERIC, read INTEGER, state INTEGER, sent NUMERIC, delivered NUMERIC, uuid TEXT)";
 			
 			if (sqlite3_exec(database, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
 				[LinphoneLogger logc:LinphoneLoggerError format:"Can't create table error[%s] ", errMsg];

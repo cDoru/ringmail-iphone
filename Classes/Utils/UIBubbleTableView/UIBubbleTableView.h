@@ -29,11 +29,16 @@ typedef enum _NSBubbleTypingType
     NSBubbleTypingTypeSomebody = 2
 } NSBubbleTypingType;
 
-@interface UIBubbleTableView : UITableView <UITableViewDelegate, UITableViewDataSource>
+@interface UIBubbleTableView : UITableView <UITableViewDelegate, UITableViewDataSource> {
+    @private
+    NSIndexPath* lastPath;
+}
 
 @property (nonatomic, assign) IBOutlet id<UIBubbleTableViewDataSource> bubbleDataSource;
 @property (nonatomic) NSTimeInterval snapInterval;
 @property (nonatomic) NSBubbleTypingType typingBubble;
 @property (nonatomic) BOOL showAvatars;
+
+- (void) updateDeliveryStatus:(NSIndexPath *)path status:(NSString *)status;
 
 @end
