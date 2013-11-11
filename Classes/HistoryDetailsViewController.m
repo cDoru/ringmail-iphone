@@ -211,9 +211,10 @@ static UICompositeViewDescription *compositeDescription = nil;
         char* lAddress = linphone_address_as_string_uri_only(addr);
         if(lAddress) {
             NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-            contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+            NSString *ringMailAddress = [FastAddressBook getTargetFromSIP:normalizedSipAddress];
+            contact = [[[LinphoneManager instance] fastAddressBook] getContact:ringMailAddress];
             if(contact) {
-                image = [FastAddressBook getContactImage:contact thumbnail:true];
+                image = [SMRotaryImage roundedImageWithImage:[FastAddressBook getContactImage:contact thumbnail:true]];
                 address = [FastAddressBook getContactDisplayName:contact];
                 useLinphoneAddress = false;
             }
@@ -283,7 +284,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (addr != NULL) {
         char* lAddress = linphone_address_as_string_uri_only(addr);
         if(lAddress != NULL) {
-            [plainAddressLabel setText:[NSString stringWithUTF8String:lAddress]];
+            NSString* addr = [FastAddressBook getTargetFromSIP:[NSString stringWithUTF8String:lAddress]];
+            [plainAddressLabel setText:addr];
             ms_free(lAddress);
         } else {
             
@@ -324,7 +326,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (addr != NULL) {
         char* lAddress = linphone_address_as_string_uri_only(addr);
         if(lAddress != NULL) {
-            [ContactSelection setAddAddress:[NSString stringWithUTF8String:lAddress]];
+            [ContactSelection setAddAddress:[FastAddressBook getTargetFromSIP:[NSString stringWithUTF8String:lAddress]]];
             [ContactSelection setSelectionMode:ContactSelectionModeEdit];
             
             [ContactSelection setSipFilter:FALSE];

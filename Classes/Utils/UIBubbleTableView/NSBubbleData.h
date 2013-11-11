@@ -33,7 +33,7 @@ typedef enum _NSBubbleMode
 @property (readonly, nonatomic) NSBubbleMode mode;
 @property (readonly, nonatomic, strong) UIView *view;
 @property (readonly, nonatomic) UIEdgeInsets insets;
-@property (nonatomic, strong) UIImage *avatar;
+@property (nonatomic, retain) UIImage *avatar;
 @property (nonatomic, retain) ChatModel *chat;
 @property (nonatomic, retain) UILabel *deliveryStatus;
 

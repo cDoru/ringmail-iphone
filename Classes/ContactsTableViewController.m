@@ -31,6 +31,7 @@
 @implementation ContactsTableViewController
 
 @synthesize delegate;
+@synthesize filter;
 
 static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void *context);
 
@@ -45,6 +46,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     addressBook = ABAddressBookCreateWithOptions(NULL, (CFErrorRef *)&error);
     ABAddressBookRegisterExternalChangeCallback(addressBook, sync_address_book, self);
     delegate = nil;
+    filter = [[NSString alloc] initWithString:@""];
 }
 
 - (id)init {
@@ -70,15 +72,29 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     [avatarMap release];
     [ringMailMap release];
     [favMap release];
+    [filter release];
     [super dealloc];
 }
 
 
 #pragma mark - 
 
+- (void)setFilter:(NSString *)aFilter {
+    if([filter isEqualToString:aFilter]) {
+        return;
+    }
+    filter = aFilter;
+    [self loadData];
+}
+
+
 - (void)loadData {
     [LinphoneLogger logc:LinphoneLoggerLog format:"Load contact list"];
     @synchronized (addressBookMap) {
+        
+        // Read RingMail databases
+        [RemoteModel getRingMailContacts:ringMailMap];
+        [FavoritesModel getFavoriteContacts:favMap];
         
         // Reset Address book
         [addressBookMap removeAllObjects];
@@ -113,6 +129,29 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                     add = true;
                 }
             }
+            
+            // Check for filter
+            if ([filter length] > 0)
+            {
+                NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)lPerson)];
+                if ([filter isEqualToString:@"fav"])
+                {
+                    NSNumber *rec = [favMap objectForKey:recordId];
+                    if (rec == nil)
+                    {
+                        add = false;
+                    }
+                }
+                else if ([filter isEqualToString:@"ring"])
+                {
+                    NSNumber *rec = [ringMailMap objectForKey:recordId];
+                    if (rec == nil)
+                    {
+                        add = false;
+                    }
+                }
+            }
+            
             if(add) {
                 CFStringRef lFirstName = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonFirstNameProperty);
                 CFStringRef lLocalizedFirstName = (lFirstName != nil)? ABAddressBookCopyLocalizedLabel(lFirstName): nil;
@@ -158,8 +197,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
             }
         }
         if (lContacts) CFRelease(lContacts);
-        [RemoteModel getRingMailContacts:ringMailMap];
-        [FavoritesModel getFavoriteContacts:favMap];
+
     }
     [self.tableView reloadData];
 }

@@ -8,7 +8,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactsViewController">
             <connections>
                 <outlet property="addButton" destination="6" id="91"/>
+                <outlet property="allButton" destination="WdV-8s-pA6" id="3rk-zc-dIM"/>
                 <outlet property="backButton" destination="87" id="90"/>
+                <outlet property="favoritesButton" destination="Rr2-zA-8sV" id="Z9w-aU-l15"/>
+                <outlet property="ringMailButton" destination="7tx-ZK-kAf" id="hJr-yi-JFE"/>
                 <outlet property="tableController" destination="76" id="83"/>
                 <outlet property="tableView" destination="69" id="84"/>
                 <outlet property="view" destination="2" id="16"/>
@@ -67,16 +70,26 @@
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" backgroundImage="left_btn_selected.png"/>
+                            <state key="highlighted" backgroundImage="left_btn_selected.png"/>
+                            <connections>
+                                <action selector="onFavoritesClick:" destination="-1" eventType="touchUpInside" id="WiA-x0-yu7"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WdV-8s-pA6" userLabel="allButton">
                             <rect key="frame" x="130" y="7" width="60" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                             <inset key="titleEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="All" backgroundImage="middle_btn_selected.png">
+                            <state key="normal" title="All" backgroundImage="middle_btn_default.png">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" backgroundImage="middle_btn_selected.png"/>
+                            <state key="highlighted" backgroundImage="middle_btn_selected.png"/>
+                            <connections>
+                                <action selector="onAllClick:" destination="-1" eventType="touchUpInside" id="aJn-cv-aFm"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7tx-ZK-kAf" userLabel="ringMailButton">
                             <rect key="frame" x="190" y="7" width="60" height="30"/>
@@ -87,6 +100,11 @@
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" backgroundImage="right_btn_selected.png"/>
+                            <state key="highlighted" backgroundImage="right_btn_selected.png"/>
+                            <connections>
+                                <action selector="onRingMailClick:" destination="-1" eventType="touchUpInside" id="BS6-nk-HNL"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.10588235294117647" green="0.19607843137254902" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
@@ -95,6 +113,7 @@
                     <rect key="frame" x="0.0" y="44" width="320" height="416"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="contentInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                     <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                     <color key="separatorColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -124,7 +143,10 @@
         <image name="chat_photo_default.png" width="29" height="29"/>
         <image name="chat_photo_over.png" width="29" height="29"/>
         <image name="left_btn_default.png" width="120" height="61"/>
+        <image name="left_btn_selected.png" width="120" height="61"/>
+        <image name="middle_btn_default.png" width="120" height="61"/>
         <image name="middle_btn_selected.png" width="120" height="61"/>
         <image name="right_btn_default.png" width="120" height="61"/>
+        <image name="right_btn_selected.png" width="120" height="61"/>
     </resources>
 </document>

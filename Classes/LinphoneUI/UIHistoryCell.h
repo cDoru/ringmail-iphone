@@ -30,6 +30,7 @@
 @property (nonatomic, retain) IBOutlet UILabel*     addressLabel;
 @property (nonatomic, retain) IBOutlet UIButton*    detailsButton;
 @property (nonatomic, retain) IBOutlet UIButton*    deleteButton;
+@property (nonatomic, retain) IBOutlet UILabel*     dateLabel;
 
 - (id)initWithIdentifier:(NSString*)identifier;
 

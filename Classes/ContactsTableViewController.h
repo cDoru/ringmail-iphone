@@ -33,6 +33,7 @@
 }
 
 @property (nonatomic, assign) id <ContactSelectProtocol> delegate;
+@property (nonatomic, retain) NSString* filter;
 
 - (void)loadData;
 

@@ -40,6 +40,9 @@
 @property (copy) NSDate *time;
 @property (copy) NSNumber *read;
 @property (copy) NSNumber *state;
+@property (copy) NSNumber *sent;
+@property (copy) NSNumber *delivered;
+@property (copy) NSString *uuid;
 @property (copy) NSIndexPath *indexPath;
 
 - (BOOL)isExternalImage;
@@ -47,7 +50,10 @@
 
 - (void)create;
 + (ChatModel*)read:(NSNumber*)id;
++ (ChatModel*)readUUID:(NSString*)uuidIn;
 - (void)update;
+- (void)updateSent;
+- (void)updateDelivered;
 - (void)delete;
 
 + (NSMutableArray *)listConversations;

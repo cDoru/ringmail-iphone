@@ -167,7 +167,7 @@ static float maxAlphavalue = 1.0;
             clove.minValue = fabsf(clove.maxValue);
         }
         mid -= fanWidth;
-        NSLog(@"cl is %@", clove);
+        //NSLog(@"cl is %@", clove);
         [self.cloves addObject:clove];
     }
 }
@@ -190,7 +190,7 @@ static float maxAlphavalue = 1.0;
             mid -= fanWidth;
         }
         [self.cloves addObject:clove];
-        NSLog(@"cl is %@", clove);
+        //NSLog(@"cl is %@", clove);
     }
 }
 

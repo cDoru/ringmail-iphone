@@ -583,11 +583,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     NSMutableSet *hiddenKeys = [NSMutableSet set];
     
-#ifndef DEBUG
+//#ifndef DEBUG
     [hiddenKeys addObject:@"release_button"];
     [hiddenKeys addObject:@"clear_cache_button"];
     [hiddenKeys addObject:@"battery_alert_button"];
-#endif
+//#endif
     
     [hiddenKeys addObject:@"audio_advanced_group"];
     [hiddenKeys addObject:@"playback_gain_preference"];
@@ -664,7 +664,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)settingsViewController:(IASKAppSettingsViewController*)sender buttonTappedForSpecifier:(IASKSpecifier*)specifier {
     NSString *key = [specifier.specifierDict objectForKey:kIASKKey];
 #ifdef DEBUG
-    if([key isEqual:@"release_button"]) {
+    /*if([key isEqual:@"release_button"]) {
         [[UIApplication sharedApplication].keyWindow.rootViewController  release];
         [[UIApplication sharedApplication].keyWindow setRootViewController:nil];
         [[LinphoneManager instance]	destroyLibLinphone];
@@ -675,7 +675,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [[UIDevice currentDevice] _setBatteryState:UIDeviceBatteryStateUnplugged];
         [[UIDevice currentDevice] _setBatteryLevel:0.01f];
         [[NSNotificationCenter defaultCenter] postNotificationName:UIDeviceBatteryLevelDidChangeNotification object:self];
-    }
+    }*/
 #endif
     if([key isEqual:@"console_button"]) {
         [[PhoneMainView instance] changeCurrentView:[ConsoleViewController compositeViewDescription] push:TRUE];

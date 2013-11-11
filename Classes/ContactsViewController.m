@@ -25,6 +25,7 @@
 
 @implementation ContactSelection
 
+
 static ContactSelectionMode sSelectionMode = ContactSelectionModeNone;
 static NSString* sAddAddress = nil;
 static BOOL sSipFilter = FALSE;
@@ -78,6 +79,10 @@ static BOOL sEmailFilter = FALSE;
 @synthesize backButton;
 @synthesize addButton;
 
+@synthesize favoritesButton;
+@synthesize allButton;
+@synthesize ringMailButton;
+
 
 #pragma mark - Lifecycle Functions
 
@@ -91,6 +96,10 @@ static BOOL sEmailFilter = FALSE;
     
     [backButton release];
     [addButton release];
+    
+    [allButton release];
+    [favoritesButton release];
+    [ringMailButton release];
     
     [super dealloc];
 }
@@ -161,10 +170,15 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [tableController setFilter:@""];
     [tableController loadData];
 
     [tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
     [tableController.tableView setBackgroundView:nil]; // Can't do it in Xib: issue with ios4
+    
+    allButton.selected = TRUE;
+    favoritesButton.selected = FALSE;
+    ringMailButton.selected = FALSE;
 }
 
 
@@ -185,6 +199,30 @@ static UICompositeViewDescription *compositeDescription = nil;
     [tableController loadData];
 }
 
+- (void)changeView: (ContactsView) view {
+    if(view == Contacts_All) {
+        allButton.selected = TRUE;
+        [tableController setFilter:@""];
+    } else {
+        allButton.selected = FALSE;
+    }
+    
+    if(view == Contacts_Favorites) {
+        favoritesButton.selected = TRUE;
+        [tableController setFilter:@"fav"];
+    } else {
+        favoritesButton.selected = FALSE;
+    }
+    
+    if(view == Contacts_RingMail) {
+        ringMailButton.selected = TRUE;
+        [tableController setFilter:@"ring"];
+    } else {
+        ringMailButton.selected = FALSE;
+    }
+}
+
+
 
 #pragma mark - Action Functions
 
@@ -202,6 +240,18 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onBackClick:(id)event {
     [[PhoneMainView instance] popCurrentView];
+}
+
+- (IBAction)onAllClick:(id)event {
+    [self changeView: Contacts_All];
+}
+
+- (IBAction)onRingMailClick:(id)event {
+    [self changeView: Contacts_RingMail];
+}
+
+- (IBAction)onFavoritesClick:(id)event {
+    [self changeView: Contacts_Favorites];
 }
 
 @end

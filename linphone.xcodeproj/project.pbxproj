@@ -274,6 +274,8 @@
 		C4C9E0B51825BB3300055EF7 /* ringmail_logo_small2.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C9E0B31825BB3300055EF7 /* ringmail_logo_small2.png */; };
 		C4C9E0B61825BB3300055EF7 /* ringmail_logo_small2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C9E0B41825BB3300055EF7 /* ringmail_logo_small2@2x.png */; };
 		C4CB6F7C179C55A2009B70E8 /* ContactSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CB6F7B179C55A1009B70E8 /* ContactSyncManager.m */; };
+		C4CE003F182EE07A002B1CDD /* details_call_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CE003D182EE07A002B1CDD /* details_call_default.png */; };
+		C4CE0040182EE07A002B1CDD /* details_call_over.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CE003E182EE07A002B1CDD /* details_call_over.png */; };
 		C4EEAB1117B70DF100AC4114 /* wild_oliva_@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EEAB0F17B70DF100AC4114 /* wild_oliva_@2X.png */; };
 		C4EEAB1217B70DF100AC4114 /* wild_oliva.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EEAB1017B70DF100AC4114 /* wild_oliva.png */; };
 		C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C90FAA7715AF54E6002091CB /* HistoryDetailsViewController.m */; };
@@ -1609,6 +1611,8 @@
 		C4C9E0B41825BB3300055EF7 /* ringmail_logo_small2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ringmail_logo_small2@2x.png"; path = "Resources/ringmail_logo_small2@2x.png"; sourceTree = "<group>"; };
 		C4CB6F7A179C55A1009B70E8 /* ContactSyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncManager.h; sourceTree = "<group>"; };
 		C4CB6F7B179C55A1009B70E8 /* ContactSyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncManager.m; sourceTree = "<group>"; };
+		C4CE003D182EE07A002B1CDD /* details_call_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = details_call_default.png; path = Resources/details_call_default.png; sourceTree = "<group>"; };
+		C4CE003E182EE07A002B1CDD /* details_call_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = details_call_over.png; path = Resources/details_call_over.png; sourceTree = "<group>"; };
 		C4EEAB0F17B70DF100AC4114 /* wild_oliva_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wild_oliva_@2X.png"; path = "Resources/wild_oliva_@2X.png"; sourceTree = "<group>"; };
 		C4EEAB1017B70DF100AC4114 /* wild_oliva.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wild_oliva.png; path = Resources/wild_oliva.png; sourceTree = "<group>"; };
 		C90FAA7615AF54E6002091CB /* HistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailsViewController.h; sourceTree = "<group>"; };
@@ -2952,6 +2956,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C4CE003D182EE07A002B1CDD /* details_call_default.png */,
+				C4CE003E182EE07A002B1CDD /* details_call_over.png */,
 				C4715B91182ADF7000F54810 /* Images.xcassets */,
 				C472BE3B1829887000B70AF9 /* NBPhoneNumberMetadata.plist */,
 				C472BE3C1829887000B70AF9 /* NBPhoneNumberMetadataForTesting.plist */,
@@ -4016,6 +4022,7 @@
 				C459863018125495008DEEF9 /* ringback.wav in Resources */,
 				D3F83F661582223B00336684 /* numpad_eight_over.png in Resources */,
 				D3F83F681582223B00336684 /* numpad_nine_default.png in Resources */,
+				C4CE003F182EE07A002B1CDD /* details_call_default.png in Resources */,
 				D3F83F6A1582223B00336684 /* numpad_nine_over.png in Resources */,
 				D3F83F6C1582223B00336684 /* numpad_sharp_default.png in Resources */,
 				D3F83F6E1582223B00336684 /* numpad_sharp_over.png in Resources */,
@@ -4290,6 +4297,7 @@
 				D35E91EE160CA0C70023116B /* button_background_default.9@2x.png in Resources */,
 				D35E91F0160CA0C70023116B /* button_background_over.9@2x.png in Resources */,
 				D35E9209160CAA1F0023116B /* field_background.9.png in Resources */,
+				C4CE0040182EE07A002B1CDD /* details_call_over.png in Resources */,
 				D35E920D160CABD70023116B /* button_background_default.9.png in Resources */,
 				D35E920F160CABD70023116B /* button_background_over.9.png in Resources */,
 				D3012CC616105ECF007CD926 /* bubble.png in Resources */,

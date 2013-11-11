@@ -239,7 +239,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
             }*/
         }
         CFRelease(lContacts);
-        NSLog(@"Contact Map: %@", [addressBookMap allKeys]);
+        //NSLog(@"Contact Map: %@", [addressBookMap allKeys]);
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneAddressBookUpdate object:self];
 }

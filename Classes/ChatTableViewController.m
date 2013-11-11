@@ -75,7 +75,8 @@
         // Background View
         UACellBackgroundView *selectedBackgroundView = [[[UACellBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
         cell.selectedBackgroundView = selectedBackgroundView;
-        [selectedBackgroundView setBackgroundColor:[UIColor colorWithRed:0.337 green:0.737 blue:0.969 alpha:1.0]];
+        UIColor *color = [UIColor colorWithRed:156/255.0f green:196/255.0f blue:228/255.0f alpha:1.0f];
+        [selectedBackgroundView setBackgroundColor:color];
     }
     
     [cell setChat:[data objectAtIndex:[indexPath row]]];

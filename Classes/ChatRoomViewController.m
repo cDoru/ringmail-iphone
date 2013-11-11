@@ -177,6 +177,14 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(coreUpdateEvent:)
                                                  name:kLinphoneCoreUpdate
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onChatUpdate:)
+                                                 name:@"RingMailChatUpdate"
+                                               object:nil];
+    
+    
+    
 //	if([tableController isEditing])
 //        [tableController setEditing:FALSE animated:FALSE];
 //    [editButton setOff];
@@ -222,6 +230,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 												  object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:kLinphoneCoreUpdate
+												  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"RingMailChatUpdate"
 												  object:nil];
 }
 
@@ -445,6 +456,11 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
 		chatRoom = linphone_core_create_chat_room([LinphoneManager getLc], [remoteAddress UTF8String]);
     }
     
+    // Create UUID
+    CFUUIDRef theUniqueString = CFUUIDCreate(NULL);
+    CFStringRef UUIDstring = CFUUIDCreateString(NULL, theUniqueString);
+    CFRelease(theUniqueString);
+    
     // Save message in database
     ChatModel *chat = [[ChatModel alloc] init];
     [chat setRemoteContact:remoteAddress];
@@ -458,12 +474,19 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
     [chat setTime:[NSDate date]];
     [chat setRead:[NSNumber numberWithInt:1]];
 	[chat setState:[NSNumber numberWithInt:1]]; //INPROGRESS
+    [chat setUuid:(NSString*)UUIDstring];
+    CFRelease(UUIDstring);
     [chat create];
     [self addChatEntry:chat];
     [self scrollToBottom:TRUE];
     [chat release];
     
-    LinphoneChatMessage* msg = linphone_chat_room_create_message(chatRoom, [message UTF8String]);
+    NSDictionary *final = @{ @"body": (message) ? message : @"", @"uuid": [chat uuid] };
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:final options:0 error:nil];
+    NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [result autorelease];
+    
+    LinphoneChatMessage* msg = linphone_chat_room_create_message(chatRoom, [result UTF8String]);
 	linphone_chat_message_set_user_data(msg, [chat retain]);
     if(externalUrl) {
         linphone_chat_message_set_external_body_url(msg, [[externalUrl absoluteString] UTF8String]);
@@ -600,6 +623,23 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
         }
         [self addChatEntry:chat];
         [self scrollToLastUnread:TRUE];
+    }
+}
+
+- (void)onChatUpdate:(NSNotification *)notif {
+    ChatModel *chat = [[notif userInfo] objectForKey:@"chat_delivered"];
+    if(chat == NULL) {
+        return;
+    }
+    NSString *from = chat.remoteContact;
+
+    //char *fromStr = linphone_address_as_string_uri_only(from);
+    if([from caseInsensitiveCompare:remoteAddress] == NSOrderedSame) {
+        ChatModel *tblChat = [bubbleTable.chatMap objectForKey:[chat chatId]];
+        if (tblChat != nil)
+        {
+            [bubbleTable updateDeliveryStatus:[tblChat indexPath] status:@"Delivered"];
+        }
     }
 }
 

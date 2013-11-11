@@ -60,6 +60,7 @@ NSString *const kLinphoneMainViewChange = @"LinphoneMainViewChange";
 NSString *const kLinphoneLogsUpdate = @"LinphoneLogsUpdate";
 NSString *const kLinphoneSettingsUpdate = @"LinphoneSettingsUpdate";
 NSString *const kContactSipField = @"SIP";
+NSString *const kRingMailChatUpdate = @"RingMailChatUpdate";
 
 
 extern void libmsilbc_init();
@@ -270,6 +271,7 @@ struct codec_name_pref_table codec_pref_table[]={
     [chatDownloads release];
     [photoLibrary release];
 	[pendindCallIdFromRemoteNotif release];
+    
     [super dealloc];
 }
 
@@ -277,7 +279,7 @@ struct codec_name_pref_table codec_pref_table[]={
 #pragma mark - Database Functions
 
 - (void)openDatabase {
-    NSString *databasePath = [LinphoneManager documentFile:@"ringmailDatabase1_2.sqlite"];
+    NSString *databasePath = [LinphoneManager documentFile:@"ringmailDatabase1_4.sqlite"];
 	NSFileManager *filemgr = [NSFileManager defaultManager];
 	//[filemgr removeItemAtPath:databasePath error:nil];
 	BOOL firstInstall= ![filemgr fileExistsAtPath: databasePath];
@@ -295,6 +297,12 @@ struct codec_name_pref_table codec_pref_table[]={
 			if (sqlite3_exec(database, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
 				[LinphoneLogger logc:LinphoneLoggerError format:"Can't create table error[%s] ", errMsg];
 			}
+        
+        const char *sql_stmt1 = "CREATE INDEX uuid_1 ON chat (uuid)";
+        
+        if (sqlite3_exec(database, sql_stmt1, NULL, NULL, &errMsg) != SQLITE_OK) {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Can't create index error[%s] ", errMsg];
+        }
         
         const char *sql_stmt2 = "CREATE TABLE favorites (id INTEGER PRIMARY KEY)";
         
@@ -572,7 +580,9 @@ static void linphone_iphone_transfer_state_changed(LinphoneCore* lc, LinphoneCal
 - (void)onRegister:(LinphoneCore *)lc cfg:(LinphoneProxyConfig*) cfg state:(LinphoneRegistrationState) state message:(const char*) message {
     [LinphoneLogger logc:LinphoneLoggerLog format:"NEW REGISTRATION STATE: '%s' (message: '%s')", linphone_registration_state_to_string(state), message];
 	if (state==LinphoneRegistrationOk)
+    {
 		[LinphoneManager instance]->stopWaitingRegisters=TRUE;
+    }
     
     // Post event
     NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -1638,6 +1648,22 @@ static void audioRouteChangeListenerCallback (
         if (urlString != nil)
         {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+        }
+        else
+        {
+            NSString *deliveryString = [result objectForKey:@"chat_delivered"];
+            if (deliveryString)
+            {
+                ChatModel *chat = [ChatModel readUUID:deliveryString];
+                if (chat != nil)
+                {
+                    [chat updateDelivered];
+                    NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          chat, @"chat_delivered",
+                                          nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RingMailChatUpdate" object:self userInfo:dict];
+                }
+            }
         }
     }
 }

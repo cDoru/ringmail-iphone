@@ -1,0 +1,13 @@
+diff --git coreapi/chat.c coreapi/chat.c
+index 71ff7c4..a29f433 100644
+--- coreapi/chat.c
++++ coreapi/chat.c
+@@ -130,7 +130,7 @@ static void _linphone_chat_room_send_message(LinphoneChatRoom *cr, LinphoneChatM
+ 	}
+ 	if (msg->external_body_url) {
+ 		content_type=ms_strdup_printf("message/external-body; access-type=URL; URL=\"%s\"",msg->external_body_url);
+-		sal_message_send(op,identity,cr->peer,content_type, NULL);
++		sal_message_send(op,identity,cr->peer,content_type, msg->message);
+ 		ms_free(content_type);
+ 	} else {
+ 		sal_text_send(op, identity, cr->peer,msg->message);

@@ -27,6 +27,7 @@
 @synthesize bubbleSection = _bubbleSection;
 @synthesize typingBubble = _typingBubble;
 @synthesize showAvatars = _showAvatars;
+@synthesize chatMap;
 
 #pragma mark - Initializators
 
@@ -47,6 +48,7 @@
     self.typingBubble = NSBubbleTypingTypeNobody;
     
     lastPath = nil;
+    self.chatMap = [NSMutableDictionary dictionary];
 }
 
 - (id)init
@@ -132,9 +134,11 @@
         
         int section = -1;
         int row = 1;
+        [chatMap removeAllObjects];
         for (int i = 0; i < count; i++)
         {
             ChatModel *chat = (ChatModel *)[bubbleData objectAtIndex:i];
+            [chatMap setObject:chat forKey: [chat chatId]];
             if ([chat.time timeIntervalSinceDate:last] > self.snapInterval)
             {
 #if !__has_feature(objc_arc)
@@ -240,7 +244,20 @@
     }
     
     NSBubbleData *data = [[self.bubbleSection objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
-    return MAX(data.insets.top + data.view.frame.size.height + data.insets.bottom, self.showAvatars ? 52 : 0);
+    
+    int extra = 0;
+    if (data.type == BubbleTypeMine)
+    {
+        if (lastPath != nil)
+        {
+            if ([lastPath compare:indexPath] == NSOrderedSame)
+            {
+                extra = data.deliveryStatus.frame.size.height;
+            }
+        }
+    }
+    
+    return MAX(data.insets.top + data.view.frame.size.height + data.insets.bottom + extra, self.showAvatars ? 52 : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

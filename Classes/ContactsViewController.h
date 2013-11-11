@@ -43,6 +43,13 @@ typedef enum _ContactSelectionMode {
 
 @end
 
+typedef enum _ContactsView {
+    Contacts_All,
+    Contacts_Favorites,
+    Contacts_RingMail,
+    Contacts_MAX
+} ContactsView;
+
 @interface ContactsViewController : UIViewController<UICompositeViewDelegate> {
 }
 
@@ -50,8 +57,15 @@ typedef enum _ContactSelectionMode {
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) IBOutlet UIButton *backButton;
 @property (nonatomic, retain) IBOutlet UIButton *addButton;
+@property (nonatomic, retain) IBOutlet UIButton *allButton;
+@property (nonatomic, retain) IBOutlet UIButton *favoritesButton;
+@property (nonatomic, retain) IBOutlet UIButton *ringMailButton;
 
 - (IBAction)onAddContactClick:(id)event;
 - (IBAction)onBackClick:(id)event;
+- (IBAction)onAllClick:(id)event;
+- (IBAction)onFavoritesClick:(id)event;
+- (IBAction)onRingMailClick:(id)event;
+
 
 @end

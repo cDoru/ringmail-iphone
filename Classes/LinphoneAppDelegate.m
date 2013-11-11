@@ -237,7 +237,7 @@
     if(aps != nil) {
         NSDictionary *alert = [aps objectForKey:@"alert"];
         if(alert != nil) {
-            NSString *loc_key = [alert objectForKey:@"loc-key"];
+            NSString *loc_key = [alert objectForKey:@"action-loc-key"];
 			/*if we receive a remote notification, it is because our TCP background socket was no more working.
 			 As a result, break it and refresh registers in order to make sure to receive incoming INVITE or MESSAGE*/
 			LinphoneCore *lc = [LinphoneManager getLc];
@@ -251,9 +251,13 @@
                     //it's a call
 					NSString *callid=[userInfo objectForKey:@"call-id"];
                     if (callid)
+                    {
+                        NSLog(@"Push Call ID: %@", callid);
+                    }
+                    /*if (callid)
 						[[LinphoneManager instance] enableAutoAnswerForCallId:callid];
 					else
-						[LinphoneLogger log:LinphoneLoggerError format:@"PushNotification: does not have call-id yet, fix it !"];
+						[LinphoneLogger log:LinphoneLoggerError format:@"PushNotification: does not have call-id yet, fix it !"];*/
                 }
             }
         }
@@ -262,6 +266,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 	[LinphoneLogger log:LinphoneLoggerLog format:@"PushNotification: Receive %@", userInfo];
+    [self startApplication];
 	[self processRemoteNotification:userInfo];
 }
 

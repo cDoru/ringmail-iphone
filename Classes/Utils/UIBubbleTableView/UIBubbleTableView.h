@@ -38,6 +38,7 @@ typedef enum _NSBubbleTypingType
 @property (nonatomic) NSTimeInterval snapInterval;
 @property (nonatomic) NSBubbleTypingType typingBubble;
 @property (nonatomic) BOOL showAvatars;
+@property (nonatomic, retain) NSMutableDictionary* chatMap;
 
 - (void) updateDeliveryStatus:(NSIndexPath *)path status:(NSString *)status;
 

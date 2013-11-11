@@ -171,13 +171,13 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
-    if(highlighted) {
+    /*if(highlighted) {
         [lastNameLabel setTextColor:[UIColor whiteColor]];
         [firstNameLabel setTextColor:[UIColor whiteColor]];
     } else {
         [lastNameLabel setTextColor:[UIColor  blackColor]];
         [firstNameLabel setTextColor:[UIColor blackColor]];   
-    }
+    }*/
 }
 
 @end

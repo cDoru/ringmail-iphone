@@ -491,6 +491,18 @@ static PhoneMainView* phoneMainViewInstance=nil;
             if([new equal:[ContactDetailsViewController compositeViewDescription]]) {
                 right = true;
             }
+        } else if([old equal:[HistoryDetailsViewController compositeViewDescription]]) {
+            if([new equal:[ContactDetailsViewController compositeViewDescription]]) {
+                right = true;
+            }
+        } else if([old equal:[ContactDetailsViewController compositeViewDescription]]) {
+            if([new equal:[HistoryDetailsViewController compositeViewDescription]]) {
+                left = true;
+            }
+        } else if([old equal:[HistoryViewController compositeViewDescription]]) {
+            if([new equal:[HistoryDetailsViewController compositeViewDescription]]) {
+                right = true;
+            }
         }
         
         //NSLog(@"Get Transition Left: %d", left);
@@ -560,17 +572,26 @@ static PhoneMainView* phoneMainViewInstance=nil;
     if (proxyCfg == nil) {
         lMessage = NSLocalizedString(@"Please make sure your device is connected to the internet and double check your SIP account configuration in the settings.", nil);
     } else {
-        lMessage = [NSString stringWithFormat : NSLocalizedString(@"Cannot call %@", nil), lUserName];
+        lMessage = [NSString stringWithFormat:NSLocalizedString(@"Cannot call %@", nil), lUserName];
     }
     
+    lTitle = NSLocalizedString(@"Call failed",nil);
     if (linphone_call_get_reason(call) == LinphoneReasonNotFound) {
-        lMessage = [NSString stringWithFormat : NSLocalizedString(@"'%@' not registered", nil), lUserName];
-    } else {
+        lMessage = [NSString stringWithFormat:NSLocalizedString(@"'%@' not registered", nil), lUserName];
+    }
+    else {
         if (message != nil) {
-            lMessage = [NSString stringWithFormat : NSLocalizedString(@"%@\nReason was: %@", nil), lMessage, message];
+            if ([message rangeOfString:@"NO_ANSWER"].location != NSNotFound)
+            {
+                lTitle = @"No Answer";
+                lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@ did not answer", nil), lUserName];
+            }
+            else
+            {
+                lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@\nReason: %@", nil), lMessage, message];
+            }
         }
     }
-    lTitle = NSLocalizedString(@"Call failed",nil);
     UIAlertView* error = [[UIAlertView alloc] initWithTitle:lTitle
                                                     message:lMessage 
                                                    delegate:nil 
@@ -607,12 +628,23 @@ static PhoneMainView* phoneMainViewInstance=nil;
 - (void)displayIncomingCall:(LinphoneCall*) call{
  	LinphoneCallLog* callLog=linphone_call_get_call_log(call);
 	NSString* callId=[NSString stringWithUTF8String:linphone_call_log_get_call_id(callLog)];
+    //NSLog(@"Inbound Call ID: '%@'", callId);
+    
+    const LinphoneCallParams* param = linphone_call_get_remote_params(call);
+    const char* pushHeader = linphone_call_params_get_custom_header(param, [@"X-RingMail-Push" UTF8String]);
+    NSString* pushId = (pushHeader) ? [NSString stringWithUTF8String:pushHeader] : @"";
+    //NSLog(@"Inbound Call Push ID: '%@'", pushId);
 
 	if (![[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]
 		|| [UIApplication sharedApplication].applicationState ==  UIApplicationStateActive) {
-		if ([[LinphoneManager instance] shouldAutoAcceptCallForCallId:callId]){
+		if (
+            [[LinphoneManager instance] shouldAutoAcceptCallForCallId:callId] ||
+            [pushId length] > 0
+        ){
             [[LinphoneManager instance] acceptCall:call];
-		}else{
+		}
+        else
+        {
 			IncomingCallViewController *controller = DYNAMIC_CAST([self changeCurrentView:[IncomingCallViewController compositeViewDescription] push:TRUE],IncomingCallViewController);
 			if(controller != nil) {
 				[controller setCall:call];
@@ -620,6 +652,8 @@ static PhoneMainView* phoneMainViewInstance=nil;
 			}
 		}
 	}
+    
+    linphone_call_log_get_remote_address(callLog);
 }
 
 - (void)batteryLevelChanged:(NSNotification*)notif {
