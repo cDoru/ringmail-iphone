@@ -171,4 +171,28 @@
     return;
 }
 
++ (void)deleteAll {
+    sqlite3* database = [[LinphoneManager instance] database];
+    if(database == NULL) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Database not ready"];
+        return;
+    }
+    
+    const char *sql = "DELETE FROM favorites";
+    sqlite3_stmt *sqlStatement;
+    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
+        return;
+    }
+    
+    if (sqlite3_step(sqlStatement) != SQLITE_DONE) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Error during execution of query: %s (%s)", sql, sqlite3_errmsg(database)];
+        sqlite3_finalize(sqlStatement);
+        return;
+    }
+    
+    sqlite3_finalize(sqlStatement);
+    
+}
+
 @end

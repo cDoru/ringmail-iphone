@@ -62,6 +62,7 @@
                                 [NSNumber numberWithFloat:0.9], NSLocalizedString(@"Maximum", nil),
                                 [NSNumber numberWithFloat:0.5], NSLocalizedString(@"Average", nil),
                                 [NSNumber numberWithFloat:0.0], NSLocalizedString(@"Minimum", nil), nil];
+        self->avatarImage = [SMRotaryImage roundedImageWithImage:[UIImage imageNamed:@"avatar_unknown_small.png"]];
     }
     return self;
 }
@@ -270,6 +271,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     int pos = [chatData count];
     [chatData insertObject:chat atIndex:pos];
+    [self update];
     [bubbleTable reloadData];
 }
 
@@ -429,6 +431,7 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
 	[LinphoneLogger log:LinphoneLoggerLog format:@"Delivery status for [%@] is [%s]", (chat.message?chat.message:@""), status];
 	[chat setState:[NSNumber numberWithInt:state]];
 	[chat update];
+    [chat updateSent];
 	[thiz updateChatEntry:chat];
 	linphone_chat_message_set_user_data(msg, NULL);
     
@@ -638,6 +641,7 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
         ChatModel *tblChat = [bubbleTable.chatMap objectForKey:[chat chatId]];
         if (tblChat != nil)
         {
+            [tblChat setDelivered:chat.delivered];
             [bubbleTable updateDeliveryStatus:[tblChat indexPath] status:@"Delivered"];
         }
     }

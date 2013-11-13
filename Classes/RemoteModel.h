@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+enum {
+    RemoteItemFavorites = 0
+};
+typedef int RemoteItem;
+
 @interface RemoteModel : NSObject {
 @private
     NSNumber *contactId;
@@ -29,5 +34,7 @@
 + (BOOL)hasContactId:(NSNumber *)num;
 + (BOOL)hasRingMail:(NSNumber *)num;
 + (void)getRingMailContacts:(NSMutableDictionary *)dict;
++ (void)updateRemote:(RemoteItem)item date:(NSDate *)now;
++ (NSDate *)getUpdated:(RemoteItem)item;
 
 @end

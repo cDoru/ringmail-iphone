@@ -15,5 +15,6 @@
 + (void)addFavorite:(NSNumber *)fav;
 + (void)removeFavorite:(NSNumber *)fav;
 + (void)getFavoriteContacts:(NSMutableDictionary *)dict;
++ (void)deleteAll;
 
 @end

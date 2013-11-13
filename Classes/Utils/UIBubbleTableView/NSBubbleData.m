@@ -10,6 +10,7 @@
 
 #import "NSBubbleData.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SMRotaryImage.h"
 
 @implementation NSBubbleData
 
@@ -35,8 +36,10 @@
     _view = nil;
     [_chat release];
     
-    self.avatar = nil;
-
+    if (_avatar != nil)
+    {
+        [_avatar release];
+    }
     if (_deliveryStatus != nil)
     {
         [_deliveryStatus release];
@@ -144,6 +147,7 @@ const UIEdgeInsets imageInsetsSomeone = {7, 18, 12, 9};
         _mode = mode;
         _insets = insets;
         _deliveryStatus = nil;
+        _avatar = nil;
         
         if (type == BubbleTypeMine)
         {

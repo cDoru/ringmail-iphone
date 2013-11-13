@@ -141,10 +141,11 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     } else {
         [LinphoneLogger logc:LinphoneLoggerLog format:"Save AddressBook: Success!"];
     }
-    FastAddressBook* book = [[LinphoneManager instance] fastAddressBook];
+    LinphoneManager* mgr = [LinphoneManager instance];
+    FastAddressBook* book = [mgr fastAddressBook];
     [book loadData];
     [book setupWheelContacts];
-    [[LinphoneManager instance] setReloadWheels:YES];
+    [mgr setReloadWheels:YES];
 }
 
 - (void)newContact {

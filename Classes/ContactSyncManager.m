@@ -17,6 +17,7 @@
 #import <XMLRPCRequest.h>
 #import "JSONKit.h"
 #import "RemoteModel.h"
+#import "FavoritesModel.h"
 
 @implementation ContactSyncManager
 
@@ -116,6 +117,11 @@
 
 - (NSString*)contactsToJSON {
     NSMutableArray *contactsArray = [NSMutableArray array];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    [dateFormatter setLocale:enUSPOSIXLocale];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
     for (id lPerson in contacts) {
         ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonEmailProperty);
         NSMutableArray *emailArray = [NSMutableArray array];
@@ -143,15 +149,8 @@
             }
             CFRelease(phoneMap);
         }
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-        [dateFormatter setLocale:enUSPOSIXLocale];
-        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-        [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
         CFDateRef modDate= ABRecordCopyValue((ABRecordRef)lPerson, kABPersonModificationDateProperty);
         NSString *modDateGMT = [dateFormatter stringFromDate: (NSDate*)modDate];
-        [dateFormatter release];
-        [enUSPOSIXLocale release];
         CFRelease(modDate);
         NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)lPerson)];
         NSString *recordStr = [NSString stringWithFormat:@"%@", recordId];
@@ -189,6 +188,8 @@
             CFRelease(lFirstName);
         [contactsArray addObject:contact];
     }
+    [dateFormatter release];
+    [enUSPOSIXLocale release];
     NSDictionary *final = @{ @"contacts":contactsArray, @"login":login, @"password":pass };
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:final options:0 error:nil];
     NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -212,7 +213,7 @@
     [request release];
 }
 
-- (void)getRemoteData:(NSArray *)contactIds login:(NSString*) username password:(NSString*) password
+- (void)getRemoteData:(NSArray *)contactIds favorites:(NSArray *)favs login:(NSString*) username password:(NSString*) password
 {
     if (contactIds == nil)
     {
@@ -222,9 +223,61 @@
     [reqstruct setObject:username forKey:@"login"];
     [reqstruct setObject:password forKey:@"password"];
     [reqstruct setObject:contactIds forKey:@"contacts"];
+    if (favs != nil)
+    {
+        NSDate* favUpdated = [RemoteModel getUpdated:RemoteItemFavorites];
+        if (favUpdated != nil)
+        {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+            [dateFormatter setLocale:enUSPOSIXLocale];
+            [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+            [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
+            [reqstruct setObject:[dateFormatter stringFromDate:favUpdated] forKey:@"favorites_ts"];
+            [dateFormatter release];
+            [enUSPOSIXLocale release];
+            [reqstruct setObject:favs forKey:@"favorites"];
+        }
+    }
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqstruct options:0 error:nil];
     NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC get_remote_data %@", result];
+    NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
+    XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
+    [request setMethod: @"get_remote_data" withParameters:[NSArray arrayWithObjects:result, nil]];
+    NSError* error = nil;
+    XMLRPCResponse *xmlrpc = [XMLRPCConnection sendSynchronousXMLRPCRequest:request error:&error];
+    if (xmlrpc != nil)
+    {
+        [self processResponse:xmlrpc request:request];
+    }
+    [request release];
+}
+
+- (void)getRemoteFavorites:(NSArray *)favs login:(NSString*) username password:(NSString*) password
+{
+    NSMutableDictionary *reqstruct = [NSMutableDictionary dictionary];
+    [reqstruct setObject:username forKey:@"login"];
+    [reqstruct setObject:password forKey:@"password"];
+    if (favs != nil)
+    {
+        NSDate* favUpdated = [RemoteModel getUpdated:RemoteItemFavorites];
+        if (favUpdated != nil)
+        {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+            [dateFormatter setLocale:enUSPOSIXLocale];
+            [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+            [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
+            [reqstruct setObject:[dateFormatter stringFromDate:favUpdated] forKey:@"favorites_ts"];
+            [dateFormatter release];
+            [enUSPOSIXLocale release];
+            [reqstruct setObject:favs forKey:@"favorites"];
+        }
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqstruct options:0 error:nil];
+    NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC get_remote_data (favorites) %@", result];
     NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
     [request setMethod: @"get_remote_data" withParameters:[NSArray arrayWithObjects:result, nil]];
@@ -255,26 +308,52 @@
         else if([[request method] isEqualToString:@"get_remote_data"]) {
             NSString *jsonResult = [response object];
             //[LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Data: %@", jsonResult];
-            NSArray *result = [jsonResult objectFromJSONString];
+            NSDictionary *result = [jsonResult objectFromJSONString];
+            
             //[LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Object: %@", result];
-            [RemoteModel deleteAll];
-            for (id remoteData in result)
+            //NSLog(@"RingMail Remote Object: %@", result);
+            
+            NSArray *ringmail = [result objectForKey:@"ringmail"];
+            if (ringmail != nil)
             {
-                RemoteModel *rmod = [[RemoteModel alloc] init];
-                [rmod setContactId:[(NSDictionary *)remoteData objectForKey:@"id"]];
-                [rmod setTsUpdated:[NSDate date]];
-                [rmod setPrimaryUri:[(NSDictionary *)remoteData objectForKey:@"uri"]];
-                [rmod setRingMailUser:[(NSDictionary *)remoteData objectForKey:@"reg"]];
-                if ([RemoteModel hasContactId:[rmod contactId]])
+                [RemoteModel deleteAll];
+                for (id remoteData in ringmail)
                 {
-                    [rmod update];
-                    NSLog(@"Updated Remote: %@", [rmod contactId]);
+                    RemoteModel *rmod = [[RemoteModel alloc] init];
+                    [rmod setContactId:[(NSDictionary *)remoteData objectForKey:@"id"]];
+                    [rmod setTsUpdated:[NSDate date]];
+                    [rmod setPrimaryUri:[(NSDictionary *)remoteData objectForKey:@"uri"]];
+                    [rmod setRingMailUser:[(NSDictionary *)remoteData objectForKey:@"reg"]];
+                    if ([RemoteModel hasContactId:[rmod contactId]])
+                    {
+                        [rmod update];
+                        NSLog(@"Updated Remote: %@", [rmod contactId]);
+                    }
+                    else
+                    {
+                        [rmod create];
+                        NSLog(@"Created Remote: %@", [rmod contactId]);
+                    }
                 }
-                else
+            }
+            
+            NSArray* favList = [result objectForKey:@"favorites"];
+            if (favList != nil)
+            {
+                NSLog(@"Updating Favorites: %@", favList);
+                [FavoritesModel deleteAll];
+                for (id favData in favList)
                 {
-                    [rmod create];
-                    NSLog(@"Created Remote: %@", [rmod contactId]);
+                    NSNumber *favId = [NSNumber numberWithInt:[(NSString *)favData intValue]];
+                    [FavoritesModel addFavorite:favId];
                 }
+                NSDate* remoteDate = [NSDate dateWithTimeIntervalSince1970:[[result objectForKey:@"favorites_ts"] doubleValue]];
+                [RemoteModel updateRemote:RemoteItemFavorites date:remoteDate];
+                LinphoneManager* mgr = [LinphoneManager instance];
+                FastAddressBook* book = [mgr fastAddressBook];
+                [book setupWheelContacts];
+                [mgr setReloadWheels:YES];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"RingMailWheelUpdated" object:self userInfo:nil];
             }
         }
     }

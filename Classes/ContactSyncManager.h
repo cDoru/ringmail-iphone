@@ -21,6 +21,7 @@
 }
 
 -(void) syncContacts:(NSString*) username password:(NSString*) password;
--(void) getRemoteData:(NSArray*)contactIds login:(NSString*) username password:(NSString*) password;
+-(void) getRemoteData:(NSArray*)contactIds favorites:(NSArray *)favs login:(NSString*) username password:(NSString*) password;
+-(void) getRemoteFavorites:(NSArray *)favs login:(NSString*) username password:(NSString*) password;
 
 @end

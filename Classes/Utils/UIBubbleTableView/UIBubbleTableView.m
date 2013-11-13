@@ -197,16 +197,26 @@
     {
         bubble = [NSBubbleData dataWithText:chat.message date:chat.time type:dir];
     }
+    [LinphoneLogger logc:LinphoneLoggerWarning format:"Chat Bubble: %@", chat.message];
     if([chat.direction intValue]) // Incoming
     {
-        bubble.avatar = [(ChatRoomViewController*)self.bubbleDataSource avatarImage];
+        bubble.avatar = [(ChatRoomViewController*)_bubbleDataSource avatarImage];
     }
     else
     {
-        bubble.avatar = nil;
+        if (bubble.deliveryStatus != nil)
+        {
+            if ([[chat delivered] intValue] > 0)
+            {
+                bubble.deliveryStatus.text = @"Delivered";
+            }
+            else if ([[chat sent] intValue] > 0)
+            {
+                bubble.deliveryStatus.text = @"Sent";
+            }
+        }
     }
     bubble.chat = chat;
-    [LinphoneLogger logc:LinphoneLoggerWarning format:"Chat Bubble: %@", chat.message];
     return bubble;
 }
 

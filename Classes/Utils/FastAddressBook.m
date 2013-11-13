@@ -161,7 +161,6 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     @synchronized (addressBookMap) {
         [addressBookIds removeAllObjects];
         [addressBookMap removeAllObjects];
-        [addressBookWheels removeAllObjects];
         
         NSArray *lContacts = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
         for (id lPerson in lContacts) {
@@ -305,63 +304,65 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
 - (void) setupWheelContacts
 {
     NSLog(@"Setup Wheel Contacts");
-    ABAddressBookRef addressBookList = ABAddressBookCreateWithOptions(NULL, nil);
-    NSArray *contactList = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookList);
-    NSMutableDictionary* contactLookup = [NSMutableDictionary dictionaryWithCapacity:[contactList count]];
-    for (id person in contactList)
-    {
-        CFStringRef lFirstName = ABRecordCopyValue((ABRecordRef)person, kABPersonFirstNameProperty);
-        CFStringRef lLocalizedFirstName = (lFirstName != nil) ? ABAddressBookCopyLocalizedLabel(lFirstName) : nil;
-        NSString *shortName = nil;
-        if(lLocalizedFirstName != nil)
+    @synchronized (addressBookWheels) {
+        ABAddressBookRef addressBookList = ABAddressBookCreateWithOptions(NULL, nil);
+        NSArray *contactList = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookList);
+        NSMutableDictionary* contactLookup = [NSMutableDictionary dictionaryWithCapacity:[contactList count]];
+        for (id person in contactList)
         {
-            shortName = [NSString stringWithString:(NSString *)lLocalizedFirstName];
-            CFRelease(lLocalizedFirstName);
-        }
-        if(shortName != nil)
-        {
-            NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)person)];
-            NSMutableDictionary *ctItem = [NSMutableDictionary dictionaryWithObjectsAndKeys:shortName, @"name", recordId, @"id", nil];
-            [contactLookup setObject:ctItem forKey:recordId];
-            UIImage* image = [FastAddressBook getContactImage:person thumbnail:true];
-            if(image != nil) {
-                [ctItem setObject:[self imageWithAlpha:image] forKey:@"img"];
+            CFStringRef lFirstName = ABRecordCopyValue((ABRecordRef)person, kABPersonFirstNameProperty);
+            CFStringRef lLocalizedFirstName = (lFirstName != nil) ? ABAddressBookCopyLocalizedLabel(lFirstName) : nil;
+            NSString *shortName = nil;
+            if(lLocalizedFirstName != nil)
+            {
+                shortName = [NSString stringWithString:(NSString *)lLocalizedFirstName];
+                CFRelease(lLocalizedFirstName);
+            }
+            if(shortName != nil)
+            {
+                NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)person)];
+                NSMutableDictionary *ctItem = [NSMutableDictionary dictionaryWithObjectsAndKeys:shortName, @"name", recordId, @"id", nil];
+                [contactLookup setObject:ctItem forKey:recordId];
+                UIImage* image = [FastAddressBook getContactImage:person thumbnail:true];
+                if(image != nil) {
+                    [ctItem setObject:[self imageWithAlpha:image] forKey:@"img"];
+                }
+            }
+            if(lFirstName != nil)
+            {
+                CFRelease(lFirstName);
             }
         }
-        if(lFirstName != nil)
-        {
-            CFRelease(lFirstName);
-        }
-    }
-    CFRelease(contactList);
+        CFRelease(contactList);
 
-    NSMutableArray* favorites = [FavoritesModel getFavorites];
-    NSMutableArray* favList = [NSMutableArray arrayWithCapacity:[favorites count]];
-    for (id favId in favorites)
-    {
-        NSNumber* fav = (NSNumber*)favId;
-        NSMutableDictionary* ctItem = [contactLookup objectForKey:fav];
-        if (ctItem != nil)
+        NSMutableArray* favorites = [FavoritesModel getFavorites];
+        NSMutableArray* favList = [NSMutableArray arrayWithCapacity:[favorites count]];
+        for (id favId in favorites)
         {
-            [favList addObject:ctItem];
+            NSNumber* fav = (NSNumber*)favId;
+            NSMutableDictionary* ctItem = [contactLookup objectForKey:fav];
+            if (ctItem != nil)
+            {
+                [favList addObject:ctItem];
+            }
         }
-    }
-    // sort favorites
-    NSArray *sortedFavorites = [favList sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        NSString *first = [(NSMutableDictionary*)a objectForKey:@"name"];
-        NSString *second = [(NSMutableDictionary*)b objectForKey:@"name"];
-        return [first compare:second];
-    }];
-    NSMutableArray *favArray = [NSMutableArray arrayWithArray:sortedFavorites];
-    int favCount = [favArray count];
-    if (favCount < 8)
-    {
-        for (int i = 0; i < (8 - favCount); i++)
+        // sort favorites
+        NSArray *sortedFavorites = [favList sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+            NSString *first = [(NSMutableDictionary*)a objectForKey:@"name"];
+            NSString *second = [(NSMutableDictionary*)b objectForKey:@"name"];
+            return [first compare:second];
+        }];
+        NSMutableArray *favArray = [NSMutableArray arrayWithArray:sortedFavorites];
+        int favCount = [favArray count];
+        if (favCount < 8)
         {
-            [favArray addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"", @"name", nil]];
+            for (int i = 0; i < (8 - favCount); i++)
+            {
+                [favArray addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"", @"name", nil]];
+            }
         }
+        [addressBookWheels setObject:favArray forKey:@"favorites"];
     }
-    [addressBookWheels setObject:favArray forKey:@"favorites"];
 }
 
 - (UIImage *)imageWithAlpha:(UIImage *)img

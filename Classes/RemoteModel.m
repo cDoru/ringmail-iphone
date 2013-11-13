@@ -293,4 +293,67 @@
     return;
 }
 
++ (void)updateRemote:(RemoteItem)item date:(NSDate *)now
+{
+    sqlite3* database = [[LinphoneManager instance] database];
+    if(database == NULL) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Database not ready"];
+        return;
+    }
+    
+    const char *sql = "REPLACE INTO remote_update (id, tsUpdated) VALUES (@ID, @TSUPDATED)";
+    sqlite3_stmt *sqlStatement;
+    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
+        return;
+    }
+    
+    // Prepare statement
+    if (now == nil)
+    {
+        now = [NSDate date];
+    }
+    sqlite3_bind_int(sqlStatement, 1, item);
+    sqlite3_bind_double(sqlStatement, 2, [now timeIntervalSince1970]);
+    
+    if (sqlite3_step(sqlStatement) != SQLITE_DONE) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Error during execution of query: %s (%s)", sql, sqlite3_errmsg(database)];
+        sqlite3_finalize(sqlStatement);
+        return;
+    }
+    
+    sqlite3_finalize(sqlStatement);
+}
+
++ (NSDate *)getUpdated:(RemoteItem)item
+{
+    NSDate* res = nil;
+    sqlite3* database = [[LinphoneManager instance] database];
+    if(database == NULL) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Database not ready"];
+        return res;
+    }
+    const char *sql = "SELECT tsUpdated FROM remote_update WHERE id=@ID";
+    sqlite3_stmt *sqlStatement;
+    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Can't execute the query: %s (%s)", sql, sqlite3_errmsg(database)];
+        return res;
+    }
+    // Prepare statement
+    sqlite3_bind_int(sqlStatement, 1, item);
+    int err;
+    err = sqlite3_step(sqlStatement);
+    if (err == SQLITE_ROW)
+    {
+        res = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(sqlStatement, 0)];
+    }
+    else
+    {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Error during execution of query: %s (%s)", sql, sqlite3_errmsg(database)];
+        return res;
+    }
+    sqlite3_finalize(sqlStatement);
+    return res;
+}
+
 @end

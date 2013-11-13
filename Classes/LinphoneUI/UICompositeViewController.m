@@ -481,7 +481,7 @@
         currentViewDescription = [description copy];
         
         // Animate only with a previous screen
-        NSLog(@"Transition: %@ Prev View: %@", viewTransition, oldViewDescription);
+        //NSLog(@"Transition: %@ Prev View: %@", viewTransition, oldViewDescription);
         if(oldViewDescription != nil && viewTransition != nil) {
             NSLog(@"Apply Transition");
             [contentView.layer removeAnimationForKey:@"transition"];

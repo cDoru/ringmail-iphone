@@ -112,44 +112,7 @@
 		}
 	}
     
-    // Get username
-    LinphoneProxyConfig *cfg=NULL;
-    linphone_core_get_default_proxy(lc,&cfg);
-    bool setup = 0;
-    if (cfg)
-    {
-        const char *identity=linphone_proxy_config_get_identity(cfg);
-		LinphoneAddress *addr=linphone_address_new(identity);
-        if (addr)
-        {
-            const char *username = linphone_address_get_username(addr);
-            NSString *login = [[NSString alloc] initWithCString:username encoding:[NSString defaultCStringEncoding]];
-            NSString *password = NULL;
-            [LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Username: %@", login];
-            linphone_address_destroy(addr);
-            {
-                LinphoneAuthInfo *ai;
-                const MSList *elem=linphone_core_get_auth_info_list(lc);
-                if (elem && (ai=(LinphoneAuthInfo*)elem->data)){
-                    const char *pass = linphone_auth_info_get_passwd(ai);
-                    password = [[NSString alloc] initWithCString:pass encoding:[NSString defaultCStringEncoding]];
-                }
-                else
-                {
-                    password = @"";
-                }
-            }
-            setup = 1;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^{
-                ContactSyncManager* sync = [[ContactSyncManager alloc] init];
-                [sync syncContacts:login password:password];
-                [sync getRemoteData:nil login:login password:password];
-                [sync release];
-                [login release];
-                [password release];
-            });
-        }
-    }
+    BOOL setup = [[LinphoneManager instance] syncRemote];
     if (! setup)
     {
         WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);

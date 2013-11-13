@@ -44,7 +44,6 @@
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
 @synthesize favRotationView;
-@synthesize wheel;
 @synthesize favWheel;
 @synthesize contactButton;
 @synthesize currentContact;
@@ -69,7 +68,7 @@
         //TODO
         //[textButton setHiddenAddress:@""];
         
-        wheel = nil;
+        favWheel = nil;
         currentContact = nil;
     }
     return self;
@@ -129,6 +128,12 @@ static UICompositeViewDescription *compositeDescription = nil;
                                              selector:@selector(coreUpdateEvent:)
                                                  name:kLinphoneCoreUpdate
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(wheelUpdateEvent:)
+                                                 name:@"RingMailWheelUpdated"
+                                               object:nil];
+    
     // Update on show
     if([LinphoneManager isLcReady]) {
         LinphoneCore* lc = [LinphoneManager getLc];
@@ -148,20 +153,8 @@ static UICompositeViewDescription *compositeDescription = nil;
             }
         }
     }
-    
-    if ([[LinphoneManager instance] reloadWheels])
-    {
-        if (wheel)
-        {
-            [wheel updateAll];
-        }
-        if (favWheel)
-        {
-            [favWheel updateAll];
-        }
-        [[LinphoneManager instance] setReloadWheels:NO];
-    }
 
+    [self wheelUpdateEvent:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -176,6 +169,9 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                     name:kLinphoneCoreUpdate
                                                   object:nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"RingMailWheelUpdated"
+                                                  object:nil];
 }
 
 - (void)viewDidLoad {
@@ -206,7 +202,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    [wheel release];
+    [favWheel release];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -251,6 +247,18 @@ static UICompositeViewDescription *compositeDescription = nil;
             [backgroundView setHidden:TRUE];
             [videoCameraSwitch setHidden:TRUE];
         }
+    }
+}
+
+- (void)wheelUpdateEvent:(NSNotification*)notif {
+    LinphoneManager *mgr = [LinphoneManager instance];
+    if ([mgr reloadWheels])
+    {
+        if (favWheel)
+        {
+            [favWheel updateAll];
+        }
+        [mgr setReloadWheels:NO];
     }
 }
 

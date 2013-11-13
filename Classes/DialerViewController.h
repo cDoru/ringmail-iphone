@@ -50,7 +50,6 @@
 @property (nonatomic, retain) IBOutlet UIButton* inviteButton;
 @property (nonatomic, retain) IBOutlet UIImageView* ringMailImage;
 
-@property (nonatomic, retain) SMRotaryWheel *wheel;
 @property (nonatomic, retain) SMRotaryWheel *favWheel;
 @property (nonatomic, assign) ABRecordRef currentContact;
 

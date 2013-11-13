@@ -26,6 +26,7 @@
 #import "DTActionSheet.h"
 #import "FavoritesModel.h"
 #import "RemoteModel.h"
+#import "ContactSyncManager.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
 
@@ -318,10 +319,12 @@
     {
         [FavoritesModel removeFavorite:fav];
     }
-    FastAddressBook* book = [[LinphoneManager instance] fastAddressBook];
-    [book loadData];
+    [RemoteModel updateRemote:RemoteItemFavorites date:nil];
+    LinphoneManager* mgr = [LinphoneManager instance];
+    FastAddressBook* book = [mgr fastAddressBook];
     [book setupWheelContacts];
-    [[LinphoneManager instance] setReloadWheels:YES];
+    [mgr setReloadWheels:YES];
+    [mgr syncRemoteFavorites];
 }
 
 - (IBAction)onInviteClick:(id)event

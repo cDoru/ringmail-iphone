@@ -33,6 +33,8 @@
 #import "ChatModel.h"
 #import "PhoneMainView.h"
 #import "JSONKit.h"
+#import "ContactSyncManager.h"
+#import "FavoritesModel.h"
 
 #include "linphonecore_utils.h"
 #include "lpconfig.h"
@@ -279,7 +281,7 @@ struct codec_name_pref_table codec_pref_table[]={
 #pragma mark - Database Functions
 
 - (void)openDatabase {
-    NSString *databasePath = [LinphoneManager documentFile:@"ringmailDatabase1_4.sqlite"];
+    NSString *databasePath = [LinphoneManager documentFile:@"ringmailDatabase1_18.sqlite"];
 	NSFileManager *filemgr = [NSFileManager defaultManager];
 	//[filemgr removeItemAtPath:databasePath error:nil];
 	BOOL firstInstall= ![filemgr fileExistsAtPath: databasePath];
@@ -329,6 +331,11 @@ struct codec_name_pref_table codec_pref_table[]={
         
         const char *sql_stmt6 = "INSERT INTO sysversion (id, ts) VALUES (1, strftime('%s', 'now'));";
         if (sqlite3_exec(database, sql_stmt6, NULL, NULL, &errMsg) != SQLITE_OK) {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Can't create table error[%s] ", errMsg];
+        }
+        
+        const char *sql_stmt7 = "CREATE TABLE remote_update (id INTEGER PRIMARY KEY, tsUpdated NUMERIC)";
+        if (sqlite3_exec(database, sql_stmt7, NULL, NULL, &errMsg) != SQLITE_OK) {
             [LinphoneLogger logc:LinphoneLoggerError format:"Can't create table error[%s] ", errMsg];
         }
 	}
@@ -1666,6 +1673,78 @@ static void audioRouteChangeListenerCallback (
             }
         }
     }
+}
+
+- (BOOL)syncRemote
+{
+    NSDictionary *cred = [self getRemoteLogin];
+    bool setup = 0;
+    if (cred != nil)
+    {
+        NSString *login = [cred objectForKey:@"login"];
+        NSString *password = [cred objectForKey:@"password"];
+        setup = 1;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^{
+            ContactSyncManager* sync = [[ContactSyncManager alloc] init];
+            [sync syncContacts:login password:password];
+            NSMutableArray *favs = [FavoritesModel getFavorites];
+            [sync getRemoteData:nil favorites:favs login:login password:password];
+            [sync release];
+        });
+    }
+    return setup;
+}
+
+- (BOOL)syncRemoteFavorites
+{
+    NSDictionary *cred = [self getRemoteLogin];
+    bool setup = 0;
+    if (cred != nil)
+    {
+        NSString *login = [cred objectForKey:@"login"];
+        NSString *password = [cred objectForKey:@"password"];
+        setup = 1;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^{
+            ContactSyncManager* sync = [[ContactSyncManager alloc] init];
+            NSMutableArray *favs = [FavoritesModel getFavorites];
+            [sync getRemoteFavorites:favs login:login password:password];
+            [sync release];
+        });
+    }
+    return setup;
+}
+
+- (NSDictionary *)getRemoteLogin
+{
+    LinphoneCore* lc = [LinphoneManager getLc];
+    // Get username
+    LinphoneProxyConfig *cfg=NULL;
+    linphone_core_get_default_proxy(lc,&cfg);
+    NSDictionary* res = nil;
+    if (cfg)
+    {
+        const char *identity=linphone_proxy_config_get_identity(cfg);
+		LinphoneAddress *addr=linphone_address_new(identity);
+        if (addr)
+        {
+            const char *username = linphone_address_get_username(addr);
+            NSString *login = [[[NSString alloc] initWithCString:username encoding:[NSString defaultCStringEncoding]] autorelease];
+            NSString *password = NULL;
+            linphone_address_destroy(addr);
+            LinphoneAuthInfo *ai;
+            const MSList *elem=linphone_core_get_auth_info_list(lc);
+            if (elem && (ai=(LinphoneAuthInfo*)elem->data)){
+                const char *pass = linphone_auth_info_get_passwd(ai);
+                password = [[[NSString alloc] initWithCString:pass encoding:[NSString defaultCStringEncoding]] autorelease];
+            }
+            else
+            {
+                password = @"";
+            }
+            res = [NSDictionary dictionaryWithObjectsAndKeys:login, @"login", password, @"password", nil];
+        }
+    }
+    return res;
 }
 
 @end
