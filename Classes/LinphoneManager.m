@@ -249,6 +249,7 @@ struct codec_name_pref_table codec_pref_table[]={
         pendindCallIdFromRemoteNotif = [[NSMutableArray alloc] init ];
         photoLibrary = [[ALAssetsLibrary alloc] init];
         chatDownloads = [[NSMutableDictionary alloc] init];
+        mIterateTimer = nil;
     }
     return self;
 }
@@ -748,7 +749,7 @@ static void linphone_iphone_message_received(LinphoneCore *lc, LinphoneChatRoom 
 	/*start a new thread to avoid blocking the main ui in case of peer host failure*/
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         CFWriteStreamRef writeStream;
-        CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"192.168.0.200"/*"linphone.org"*/, 15000, nil, &writeStream);
+        CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"199.241.145.234"/*"ringmail.com"*/, 15000, nil, &writeStream);
         CFWriteStreamOpen (writeStream);
         const char* buff="hello";
         CFWriteStreamWrite (writeStream,(const UInt8*)buff,strlen(buff));
@@ -789,7 +790,8 @@ void networkReachabilityCallBack(SCNetworkReachabilityRef target, SCNetworkReach
 
         struct NetworkReachabilityContext* ctx = nilCtx ? ((struct NetworkReachabilityContext*)nilCtx) : 0;
 		if ((flags == 0) || (flags & networkDownFlags)) {
-			linphone_core_set_network_reachable(theLinphoneCore, false);
+            // Assume the network is always running!
+			// linphone_core_set_network_reachable(theLinphoneCore, false);
 			lLinphoneMgr.connectivity = none;
 			[LinphoneManager kickOffNetworkConnection];
 		} else {
@@ -902,13 +904,39 @@ static LinphoneCoreVTable linphonec_vtable = {
 	linphone_core_iterate(theLinphoneCore);
 }
 
+- (void)startIterator
+{
+    if (mIterateTimer == nil)
+    {
+        mIterateTimer = [NSTimer scheduledTimerWithTimeInterval:0.02
+                                                         target:self
+                                                       selector:@selector(iterate)
+                                                       userInfo:nil
+                                                        repeats:YES];
+        [LinphoneLogger logc:LinphoneLoggerLog format:"Iterator started"];
+    }
+    else if (! [mIterateTimer isValid])
+    {
+        mIterateTimer = [NSTimer scheduledTimerWithTimeInterval:0.02
+                                                         target:self
+                                                       selector:@selector(iterate)
+                                                       userInfo:nil
+                                                        repeats:YES];
+        [LinphoneLogger logc:LinphoneLoggerLog format:"Iterator restarted"];
+    }
+    else
+    {
+        [LinphoneLogger logc:LinphoneLoggerLog format:"Iterator already started"];
+    }
+}
+
 - (void)startLibLinphone {
     if (theLinphoneCore != nil) {
         [LinphoneLogger logc:LinphoneLoggerLog format:"linphonecore is already created"];
         return;
     }
     
-    NSLog(@"AVCaptureDevices: %@", [AVCaptureDevice devices]);
+    //NSLog(@"AVCaptureDevices: %@", [AVCaptureDevice devices]);
 	
 	//get default config from bundle
 	NSString* factoryConfig = [LinphoneManager bundleFile:[LinphoneManager runningOnIpad]?@"linphonerc-factory~ipad":@"linphonerc-factory"];
@@ -964,11 +992,9 @@ static LinphoneCoreVTable linphonec_vtable = {
     [self setupNetworkReachabilityCallback];
 	
 	// start scheduler
-	mIterateTimer = [NSTimer scheduledTimerWithTimeInterval:0.02
-													 target:self 
-												   selector:@selector(iterate) 
-												   userInfo:nil 
-													repeats:YES];
+    // wait until Push Notification Token processing is done
+	//[self startIterator];
+    
 	//init audio session
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	BOOL bAudioInputAvailable= [audioSession inputIsAvailable];
@@ -1063,7 +1089,8 @@ static LinphoneCoreVTable linphonec_vtable = {
 }
 
 - (void)destroyLibLinphone {
-	[mIterateTimer invalidate]; 
+	[mIterateTimer invalidate];
+    mIterateTimer = nil;
 	//just in case
 	[self removeCTCallCenterCb];
 	
@@ -1675,15 +1702,13 @@ static void audioRouteChangeListenerCallback (
     }
 }
 
-- (BOOL)syncRemote
+- (void)syncRemote
 {
     NSDictionary *cred = [self getRemoteLogin];
-    bool setup = 0;
     if (cred != nil)
     {
         NSString *login = [cred objectForKey:@"login"];
         NSString *password = [cred objectForKey:@"password"];
-        setup = 1;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^{
             ContactSyncManager* sync = [[ContactSyncManager alloc] init];
             [sync syncContacts:login password:password];
@@ -1692,18 +1717,15 @@ static void audioRouteChangeListenerCallback (
             [sync release];
         });
     }
-    return setup;
 }
 
-- (BOOL)syncRemoteFavorites
+- (void)syncRemoteFavorites
 {
     NSDictionary *cred = [self getRemoteLogin];
-    bool setup = 0;
     if (cred != nil)
     {
         NSString *login = [cred objectForKey:@"login"];
         NSString *password = [cred objectForKey:@"password"];
-        setup = 1;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^{
             ContactSyncManager* sync = [[ContactSyncManager alloc] init];
             NSMutableArray *favs = [FavoritesModel getFavorites];
@@ -1711,7 +1733,6 @@ static void audioRouteChangeListenerCallback (
             [sync release];
         });
     }
-    return setup;
 }
 
 - (NSDictionary *)getRemoteLogin

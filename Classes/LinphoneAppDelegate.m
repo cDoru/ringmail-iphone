@@ -45,6 +45,7 @@
     self = [super init];
     if(self != nil) {
         self->started = FALSE;
+        self->startedPush = FALSE;
     }
     return self;
 }
@@ -112,13 +113,23 @@
 		}
 	}
     
-    BOOL setup = [[LinphoneManager instance] syncRemote];
-    if (! setup)
+    LinphoneManager *inst = [LinphoneManager instance];
+    NSDictionary *cred = [inst getRemoteLogin];
+    if (cred != nil)
+    {
+        [inst syncRemote];
+    }
+    else
     {
         WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);
         if(controller != nil) {
             [controller reset];
         }
+    }
+    
+    if (startedPush)
+    {
+        [inst startIterator];
     }
 }
 
@@ -169,6 +180,7 @@
             started = TRUE;
             [[PhoneMainView instance] startUp];
         }
+
     }
 }
 
@@ -203,9 +215,9 @@
             NSString *loc_key = [alert objectForKey:@"action-loc-key"];
 			/*if we receive a remote notification, it is because our TCP background socket was no more working.
 			 As a result, break it and refresh registers in order to make sure to receive incoming INVITE or MESSAGE*/
-			LinphoneCore *lc = [LinphoneManager getLc];
-			linphone_core_set_network_reachable(lc, FALSE);
-			linphone_core_set_network_reachable(lc, TRUE);
+			//LinphoneCore *lc = [LinphoneManager getLc];
+			//linphone_core_set_network_reachable(lc, FALSE);
+			//linphone_core_set_network_reachable(lc, TRUE);
             if(loc_key != nil) {
                 if([loc_key isEqualToString:@"IM_MSG"]) {
                     [[PhoneMainView instance] addInhibitedEvent:kLinphoneTextReceived];
@@ -264,12 +276,18 @@
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
     [LinphoneLogger log:LinphoneLoggerLog format:@"PushNotification: Token %@", deviceToken];
-    [[LinphoneManager instance] setPushNotificationToken:deviceToken];
+    startedPush = TRUE;
+    LinphoneManager *inst = [LinphoneManager instance];
+    [inst setPushNotificationToken:deviceToken];
+    [inst startIterator];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
     [LinphoneLogger log:LinphoneLoggerError format:@"PushNotification: Error %@", [error localizedDescription]];
-    [[LinphoneManager instance] setPushNotificationToken:nil];
+    startedPush = TRUE;
+    LinphoneManager *inst = [LinphoneManager instance];
+    [inst setPushNotificationToken:nil];
+    [inst startIterator];
 }
 
 @end

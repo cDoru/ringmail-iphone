@@ -31,6 +31,7 @@
     @private
 	UIWindow *window;
     BOOL started;
+    BOOL startedPush;
 	int savedMaxCall;
 	
 }

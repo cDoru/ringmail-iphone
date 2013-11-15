@@ -50,7 +50,7 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:stats options:0 error:nil];
     NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC %@ check_sync %@", URL, result];
+    //[LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC %@ check_sync %@", URL, result];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
     [request setMethod: @"check_sync" withParameters:[NSArray arrayWithObjects:result, nil]];
     NSError* error = nil;
@@ -200,7 +200,7 @@
 - (void)sendContacts
 {
     NSString* result = [self contactsToJSON];
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC sync_contacts %@", result];
+    //[LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC sync_contacts %@", result];
     NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
     [request setMethod: @"sync_contacts" withParameters:[NSArray arrayWithObjects:result, nil]];
@@ -241,7 +241,7 @@
     }
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqstruct options:0 error:nil];
     NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC get_remote_data %@", result];
+    //[LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC get_remote_data %@", result];
     NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
     [request setMethod: @"get_remote_data" withParameters:[NSArray arrayWithObjects:result, nil]];
@@ -277,7 +277,7 @@
     }
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqstruct options:0 error:nil];
     NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC get_remote_data (favorites) %@", result];
+    //[LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC get_remote_data (favorites) %@", result];
     NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
     [request setMethod: @"get_remote_data" withParameters:[NSArray arrayWithObjects:result, nil]];
@@ -291,7 +291,7 @@
 }
 
 - (void)processResponse:(XMLRPCResponse *)response request:(XMLRPCRequest *)request {
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC %@: %@", [request method], [response body]];
+    //[LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC %@: %@", [request method], [response body]];
     if ([response isFault]) {
         [LinphoneLogger logc:LinphoneLoggerLog format:"XMLRPC Failure: $@", [response faultString]];
     } else if([response object] != nil) { //Don't handle if not object: HTTP/Communication Error
@@ -327,12 +327,12 @@
                     if ([RemoteModel hasContactId:[rmod contactId]])
                     {
                         [rmod update];
-                        NSLog(@"Updated Remote: %@", [rmod contactId]);
+                        //NSLog(@"Updated Remote: %@", [rmod contactId]);
                     }
                     else
                     {
                         [rmod create];
-                        NSLog(@"Created Remote: %@", [rmod contactId]);
+                        //NSLog(@"Created Remote: %@", [rmod contactId]);
                     }
                 }
             }

@@ -161,9 +161,10 @@ typedef struct _LinphoneManagerSounds {
 - (BOOL)lpConfigBoolForKey:(NSString*)key forSection:(NSString*)section;
 
 - (void)processCommand:(NSString*)command;
-- (BOOL)syncRemote;
-- (BOOL)syncRemoteFavorites;
+- (void)syncRemote;
+- (void)syncRemoteFavorites;
 - (NSDictionary *)getRemoteLogin;
+- (void)startIterator;
 
 @property (readonly) FastAddressBook* fastAddressBook;
 @property Connectivity connectivity;
