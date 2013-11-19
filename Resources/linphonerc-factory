@@ -35,7 +35,7 @@ max_calls=3
 [wizard]
 service_url=https://app.ringmail.com/service/xmlrpc
 domain=sip.ringmail.com
-proxy=162.243.151.4 :5060
+proxy=1.proxy.ringmail.com:5060
 password_length=4
 username_length=4
 expires=3600

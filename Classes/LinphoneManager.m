@@ -790,8 +790,7 @@ void networkReachabilityCallBack(SCNetworkReachabilityRef target, SCNetworkReach
 
         struct NetworkReachabilityContext* ctx = nilCtx ? ((struct NetworkReachabilityContext*)nilCtx) : 0;
 		if ((flags == 0) || (flags & networkDownFlags)) {
-            // Assume the network is always running!
-			// linphone_core_set_network_reachable(theLinphoneCore, false);
+			linphone_core_set_network_reachable(theLinphoneCore, false);
 			lLinphoneMgr.connectivity = none;
 			[LinphoneManager kickOffNetworkConnection];
 		} else {

@@ -200,7 +200,7 @@
     [LinphoneLogger logc:LinphoneLoggerWarning format:"Chat Bubble: %@", chat.message];
     if([chat.direction intValue]) // Incoming
     {
-        bubble.avatar = [(ChatRoomViewController*)_bubbleDataSource avatarImage];
+        bubble.avatar = [[(ChatRoomViewController*)_bubbleDataSource avatarImage] retain];
     }
     else
     {
