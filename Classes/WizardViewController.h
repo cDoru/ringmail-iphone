@@ -26,7 +26,6 @@
     UITextField *activeTextField;
     UIView *currentView;
     NSMutableArray *historyViews;
-    int regAttempts;
 }
 
 @property (nonatomic, retain) IBOutlet UIScrollView *contentView;
@@ -37,6 +36,7 @@
 @property (nonatomic, retain) IBOutlet UIView *connectAccountView;
 @property (nonatomic, retain) IBOutlet UIView *externalAccountView;
 @property (nonatomic, retain) IBOutlet UIView *validateAccountView;
+@property (nonatomic, retain) IBOutlet UIView *validatePhoneView;
 
 @property (nonatomic, retain) IBOutlet UIView *waitView;
 
@@ -65,5 +65,8 @@
 - (IBAction)onSignInClick:(id)sender;
 - (IBAction)onSignInExternalClick:(id)sender;
 - (IBAction)onRegisterClick:(id)sender;
+
+- (IBAction)onCheckPhoneClick:(id)sender;
+- (IBAction)onSkipPhoneClick:(id)sender;
 
 @end

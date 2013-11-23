@@ -379,7 +379,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     if(lAddress == NULL)
         return;
     
-    NSString *displayName = nil;
+    // displayName not used
+    //
+    /*NSString *displayName = nil;
     if(contact != nil) {
         displayName = [FastAddressBook getContactDisplayName:contact];
     } else {
@@ -389,7 +391,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             displayName = [NSString stringWithUTF8String:lDisplayName];
         else if(lUserName)
             displayName = [NSString stringWithUTF8String:lUserName];
-    }
+    }*/
     
     // Go to ChatRoom view
     [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];

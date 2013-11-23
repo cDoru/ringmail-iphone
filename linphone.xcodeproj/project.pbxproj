@@ -140,6 +140,8 @@
 		C40CD7FC17839BD700E35C91 /* directory_over.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7F917839BD700E35C91 /* directory_over.png */; };
 		C40CD7FD17839BD700E35C91 /* directory_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C40CD7FA17839BD700E35C91 /* directory_selected.png */; };
 		C40D1073182CA23E007463A1 /* ContactDetailsTableViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = C40D1072182CA23E007463A1 /* ContactDetailsTableViewController.h */; };
+		C412C953183D4170007DD97D /* UIChatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C412C952183D4170007DD97D /* UIChatButton.m */; };
+		C412C95518400672007DD97D /* ValidationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C412C95418400672007DD97D /* ValidationModel.m */; };
 		C4137DFC181C285B00827A3F /* dialer_call_button_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = C4137DFA181C285B00827A3F /* dialer_call_button_sel.png */; };
 		C4137DFD181C285B00827A3F /* dialer_call_button.png in Resources */ = {isa = PBXBuildFile; fileRef = C4137DFB181C285B00827A3F /* dialer_call_button.png */; };
 		C4283DEA1799B3DD00268244 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = C4283DE91799B3DD00268244 /* gear.png */; };
@@ -1434,6 +1436,10 @@
 		C40CD7F917839BD700E35C91 /* directory_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = directory_over.png; path = Resources/directory_over.png; sourceTree = "<group>"; };
 		C40CD7FA17839BD700E35C91 /* directory_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = directory_selected.png; path = Resources/directory_selected.png; sourceTree = "<group>"; };
 		C40D1072182CA23E007463A1 /* ContactDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDetailsTableViewController.h; sourceTree = "<group>"; };
+		C412C94F183D4132007DD97D /* UIChatButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIChatButton.h; sourceTree = "<group>"; };
+		C412C952183D4170007DD97D /* UIChatButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIChatButton.m; sourceTree = "<group>"; };
+		C412C95418400672007DD97D /* ValidationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ValidationModel.m; path = Model/ValidationModel.m; sourceTree = "<group>"; };
+		C412C95618400682007DD97D /* ValidationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValidationModel.h; path = Model/ValidationModel.h; sourceTree = "<group>"; };
 		C4137DFA181C285B00827A3F /* dialer_call_button_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dialer_call_button_sel.png; path = Resources/dialer_call_button_sel.png; sourceTree = "<group>"; };
 		C4137DFB181C285B00827A3F /* dialer_call_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dialer_call_button.png; path = Resources/dialer_call_button.png; sourceTree = "<group>"; };
 		C41E6EA61818DEBE005FEC01 /* ContactSelectProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactSelectProtocol.h; sourceTree = "<group>"; };
@@ -2728,6 +2734,8 @@
 				D38187E815FE349D00C3EDCA /* UICallBar~ipad.xib */,
 				2214EB7812F846B1002A5394 /* UICallButton.h */,
 				2214EB7912F846B1002A5394 /* UICallButton.m */,
+				C412C94F183D4132007DD97D /* UIChatButton.h */,
+				C412C952183D4170007DD97D /* UIChatButton.m */,
 				D36C43C4158F2E5A0048BA40 /* UICallCell.h */,
 				D36C43C5158F2E5A0048BA40 /* UICallCell.m */,
 				D381881415FE3F0B00C3EDCA /* UICallCell.xib */,
@@ -3698,6 +3706,8 @@
 				C455CEAF1818518100618FA8 /* FavoritesModel.m */,
 				D32B6E3615A5C2430033019F /* ChatModel.h */,
 				D32B6E3715A5C2430033019F /* ChatModel.m */,
+				C412C95618400682007DD97D /* ValidationModel.h */,
+				C412C95418400672007DD97D /* ValidationModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -4832,6 +4842,7 @@
 				C48D29FB1800792C00F6E76A /* SMRotaryImage.m in Sources */,
 				D3F9A9EE15AF277E0045320F /* UACellBackgroundView.m in Sources */,
 				D35860D615B549B500513429 /* Utils.m in Sources */,
+				C412C953183D4170007DD97D /* UIChatButton.m in Sources */,
 				D3F7998115BD32370018C273 /* TPMultiLayoutViewController.m in Sources */,
 				D3807FBF15C28940005BE9BC /* DCRoundSwitch.m in Sources */,
 				C472BE3A1829883F00B70AF9 /* NBPhoneNumberUtil.m in Sources */,
@@ -4862,6 +4873,7 @@
 				C472BE411829975D00B70AF9 /* NSArray+NBAdditions.m in Sources */,
 				22405F001601C19200B92522 /* ImageViewController.m in Sources */,
 				D3ED40191602172200BF332B /* HPGrowingTextView.m in Sources */,
+				C412C95518400672007DD97D /* ValidationModel.m in Sources */,
 				C43E6B351821ED4100EDC34E /* JSONKit.m in Sources */,
 				D3ED401B1602172200BF332B /* HPTextViewInternal.m in Sources */,
 				D37EE162160377D7003608A6 /* DTActionSheet.m in Sources */,

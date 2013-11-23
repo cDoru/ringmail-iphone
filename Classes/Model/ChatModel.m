@@ -376,15 +376,27 @@
         return array;
     }
     
-    const char *sql = "SELECT id, localContact, remoteContact, direction, message, time, read, state, sent, delivered, uuid FROM chat WHERE remoteContact=@REMOTECONTACT ORDER BY time ASC";
     sqlite3_stmt *sqlStatement;
-    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
-        [LinphoneLogger logc:LinphoneLoggerError format:"Can't execute the query: %s (%s)", sql, sqlite3_errmsg(database)];
-        return array;
+    const char *sql;
+    if (contact == nil)
+    {
+        sql = "SELECT id, localContact, remoteContact, direction, message, time, read, state, sent, delivered, uuid FROM chat ORDER BY time ASC";
+        if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Can't execute the query: %s (%s)", sql, sqlite3_errmsg(database)];
+            return array;
+        }
     }
-    
-    // Prepare statement
-    sqlite3_bind_text(sqlStatement, 1, [contact UTF8String], -1, SQLITE_STATIC);
+    else
+    {
+        sql = "SELECT id, localContact, remoteContact, direction, message, time, read, state, sent, delivered, uuid FROM chat WHERE remoteContact=@REMOTECONTACT ORDER BY time ASC";
+        if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Can't execute the query: %s (%s)", sql, sqlite3_errmsg(database)];
+            return array;
+        }
+        
+        // Prepare statement
+        sqlite3_bind_text(sqlStatement, 1, [contact UTF8String], -1, SQLITE_STATIC);
+    }
     
     int err;
     while ((err = sqlite3_step(sqlStatement)) == SQLITE_ROW) {
@@ -409,30 +421,6 @@
     {
         [chat delete];
     }
-    
-/*    sqlite3* database = [[LinphoneManager instance] database];
-    if(database == NULL) {
-        [LinphoneLogger logc:LinphoneLoggerError format:"Database not ready"];
-        return;
-    }
-    
-    const char *sql = "DELETE FROM chat WHERE remoteContact=@REMOTECONTACT";
-    sqlite3_stmt *sqlStatement;
-    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
-        [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
-        return;
-    }    
-    
-    // Prepare statement
-    sqlite3_bind_text(sqlStatement, 1, [contact UTF8String], -1, SQLITE_STATIC);
-    
-    if (sqlite3_step(sqlStatement) != SQLITE_DONE) {
-        [LinphoneLogger logc:LinphoneLoggerError format:"Error during execution of query: %s (%s)", sql, sqlite3_errmsg(database)];
-        sqlite3_finalize(sqlStatement);
-        return;
-    }
-    
-    sqlite3_finalize(sqlStatement); */
 }
 
 + (int)unreadMessages {

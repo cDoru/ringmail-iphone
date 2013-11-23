@@ -40,6 +40,7 @@
 #include "lpconfig.h"
 
 #define LINPHONE_LOGS_MAX_ENTRY 5000
+#define RINGMAIL_DATABASE @"ringmailDatabase1_18.sqlite"
 
 static void audioRouteChangeListenerCallback (
                                               void                   *inUserData,                                 // 1
@@ -281,8 +282,18 @@ struct codec_name_pref_table codec_pref_table[]={
 
 #pragma mark - Database Functions
 
+- (void)removeDatabase {
+    NSString *databasePath = [LinphoneManager documentFile:RINGMAIL_DATABASE];
+    NSFileManager *fileMgr = [NSFileManager defaultManager];
+    NSError *error;
+    if ([fileMgr removeItemAtPath:databasePath error:&error] != YES)
+    {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Error deleting file %@: %@", databasePath, [error localizedDescription]];
+    }
+}
+
 - (void)openDatabase {
-    NSString *databasePath = [LinphoneManager documentFile:@"ringmailDatabase1_18.sqlite"];
+    NSString *databasePath = [LinphoneManager documentFile:RINGMAIL_DATABASE];
 	NSFileManager *filemgr = [NSFileManager defaultManager];
 	//[filemgr removeItemAtPath:databasePath error:nil];
 	BOOL firstInstall= ![filemgr fileExistsAtPath: databasePath];
@@ -934,6 +945,10 @@ static LinphoneCoreVTable linphonec_vtable = {
         [LinphoneLogger logc:LinphoneLoggerLog format:"linphonecore is already created"];
         return;
     }
+    
+#ifdef DEBUG
+    [LinphoneLogger logc:LinphoneLoggerLog format:"Build for DEBUG mode"];
+#endif
     
     //NSLog(@"AVCaptureDevices: %@", [AVCaptureDevice devices]);
 	

@@ -64,9 +64,8 @@
     
     if(self) {
         self->transferMode = FALSE;
-        [callButton setHiddenAddress:@""];
-        //TODO
-        //[textButton setHiddenAddress:@""];
+        [callButton setHiddenContact:nil];
+        [textButton setHiddenContact:nil];
         
         favWheel = nil;
         currentContact = nil;
@@ -256,10 +255,32 @@ static UICompositeViewDescription *compositeDescription = nil;
     {
         if (favWheel)
         {
-            [favWheel updateAll];
+            if (![[NSThread currentThread] isMainThread])
+            {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self wheelUpdate];
+                });
+            }
+            else // Main thread
+            {
+                [self wheelUpdate];
+            }
         }
         [mgr setReloadWheels:NO];
     }
+}
+
+- (void)wheelUpdate
+{
+    [favWheel removeFromSuperview];
+    favWheel = [[SMRotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 310, 310)
+                                        andDelegate:self
+                                       withSections:8
+                                           withName:@"favorites"];
+    
+    favWheel.center = [favRotationView convertPoint:favRotationView.center fromView:favRotationView.superview];
+    [favRotationView addSubview:favWheel];
+    [favRotationView setNeedsDisplay];
 }
 
 #pragma mark -
@@ -342,8 +363,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                 NSString* displayName = [FastAddressBook getContactDisplayName:contact];
                 //NSLog(@"Selected: %@", displayName);
                 [self setAddress:displayName];
-                [callButton setHiddenAddress:[FastAddressBook getPrimaryTarget:contact]];
-                //[textButton setHiddenAddress:[FastAddressBook getPrimaryTarget:contact]];
+                [callButton setHiddenContact:contact];
+                [textButton setHiddenContact:contact];
                 currentContact = contact;
                 UIImage* image = [FastAddressBook getContactImage:contact thumbnail:true];
                 if (image == nil)
@@ -394,17 +415,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onAddressClick: (id)sender {
     NSLog(@"Address Click");
-    if ([[callButton hiddenAddress] length] > 0 && [[addressField text] length] > 0)
+    if ([callButton hasHidden] > 0 && [[addressField text] length] > 0)
     {
         [self setAddress:@""];
-        [callButton setHiddenAddress:@""];
+        [callButton setHiddenContact:nil];
+        [textButton setHiddenContact:nil];
         [contactButton setImage:[UIImage imageNamed:@"avatar_unknown_small.png"] forState:UIControlStateNormal];
         currentContact = nil;
         ringMailImage.hidden = YES;
         inviteButton.hidden = YES;
     }
 }
-
 
 - (IBAction)onContactClick: (id)sender {
 // Go to Contact details view

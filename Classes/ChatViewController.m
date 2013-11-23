@@ -122,8 +122,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     if ([[addressField text ]length] == 0) { // if no address is manually set, lauch address book
 		[ContactSelection setSelectionMode:ContactSelectionModeMessage];
 		[ContactSelection setAddAddress:nil];
-		[ContactSelection setSipFilter:TRUE];
-        [ContactSelection setEmailFilter:TRUE];
+		//[ContactSelection setSipFilter:TRUE];
+        //[ContactSelection setEmailFilter:TRUE];
 		[[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription] push:TRUE];
 	} else {
 		[self startChatRoom]; 

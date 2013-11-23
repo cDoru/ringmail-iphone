@@ -35,12 +35,12 @@ max_calls=3
 [wizard]
 service_url=https://app.ringmail.com/service/xmlrpc
 domain=sip.ringmail.com
-proxy=1.proxy.ringmail.com:5060
+proxy=gw.ringmail.com:5061
 password_length=4
 username_length=4
 expires=3600
 push_notification=1
-transport=tcp
+transport=tls
 sharing_server=https://app.ringmail.com/upload
 ice=1
 stun=stun.linphone.org

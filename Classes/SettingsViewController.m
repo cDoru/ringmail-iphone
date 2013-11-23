@@ -22,6 +22,7 @@
 #import "PhoneMainView.h"
 #import "UILinphone.h"
 #import "UACellBackgroundView.h"
+#import "ValidationModel.h"
 
 #import "DCRoundSwitch.h"
 
@@ -682,6 +683,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else if([key isEqual:@"wizard_button"]) {
         WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);
         if(controller != nil) {
+            [ValidationModel removeData];
             [controller reset];
         }
     } else if([key isEqual:@"about_button"]) {

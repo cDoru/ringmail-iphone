@@ -30,7 +30,7 @@
 
 + (BOOL)isSipURI:(NSString*)address;
 + (NSString*)getContactDisplayName:(ABRecordRef)contact;
-+ (NSString*)getPrimaryTarget:(ABRecordRef)contact;
+//+ (NSString*)getPrimaryTarget:(ABRecordRef)contact;
 + (UIImage*)getContactImage:(ABRecordRef)contact thumbnail:(BOOL)thumbnail;
 - (NSMutableArray*)getWheel:(NSString*)name;
 - (ABRecordRef)getContact:(NSString*)address;
@@ -46,5 +46,7 @@
 + (NSString*)formatNumber:(NSString*)numberIn;
 + (NSString*)getTargetFromSIP:(NSString*)sipURI;
 + (NSMutableDictionary*)getInviteData:(ABRecordRef)contact;
++ (NSString*)getRingMailURI:(ABRecordRef)contact;
++ (NSMutableArray*)getPhoneNumbers:(ABRecordRef)contact;
 
 @end

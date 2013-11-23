@@ -20,13 +20,12 @@
 #import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
 
-
-@interface UICallButton : UIButton {
+@interface UIChatButton : UIButton {
 }
 
 @property (nonatomic, retain) IBOutlet UITextField* addressField;
 @property (nonatomic, assign) ABRecordRef hiddenContact;
 
-- (BOOL) hasHidden;
+-(BOOL) hasHidden;
 
 @end

@@ -28,6 +28,5 @@
 @property (nonatomic, retain) NSString *name;
 
 - (id) initWithFrame:(CGRect)frame andDelegate:(id)del withSections:(int)sectionsNumber withName:(NSString *)contactsName;
-- (void) updateAll;
 
 @end

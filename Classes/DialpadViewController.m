@@ -76,7 +76,7 @@
     
     if(self) {
         self->transferMode = FALSE;
-        [callButton setHiddenAddress:@""];
+        [callButton setHiddenContact:nil];
     }
     return self;
 }
@@ -369,10 +369,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onAddressClick: (id)sender {
     NSLog(@"Address Click");
-    if ([[callButton hiddenAddress] length] > 0 && [[addressField text] length] > 0)
+    if ([callButton hasHidden] && [[addressField text] length] > 0)
     {
         [self setAddress:@""];
-        [callButton setHiddenAddress:@""];
+        [callButton setHiddenContact:nil];
     }
 }
 

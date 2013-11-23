@@ -143,7 +143,7 @@
 #ifdef DEBUG
 								 @"YES",@"debugenable_preference",
 #else
-								 @"NO",@"debugenable_preference",
+								 @"YES",@"debugenable_preference",
 #endif
                                  nil];
 	[[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];

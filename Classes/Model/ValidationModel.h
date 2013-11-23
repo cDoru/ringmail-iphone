@@ -1,6 +1,6 @@
-/* UICallButton.h
+/* ChatModel.h
  *
- * Copyright (C) 2011  Belledonne Comunications, Grenoble, France
+ * Copyright (C) 2012  Belledonne Comunications, Grenoble, France
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,18 +15,16 @@
  *  You should have received a copy of the GNU General Public License   
  *  along with this program; if not, write to the Free Software         
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */              
+ */ 
 
-#import <UIKit/UIKit.h>
-#import <AddressBook/AddressBook.h>
+#import <Foundation/Foundation.h>
 
-
-@interface UICallButton : UIButton {
+@interface ValidationModel : NSObject {
 }
 
-@property (nonatomic, retain) IBOutlet UITextField* addressField;
-@property (nonatomic, assign) ABRecordRef hiddenContact;
-
-- (BOOL) hasHidden;
++ (BOOL)hasData;
++ (void)storeData:(NSDictionary *)data;
++ (NSMutableDictionary *)readData;
++ (void)removeData;
 
 @end

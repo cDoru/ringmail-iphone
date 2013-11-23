@@ -298,13 +298,30 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     
     if (delegate == nil)
     {
-        // Go to Contact details view
-        ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
-        if(controller != nil) {
-            if([ContactSelection getSelectionMode] != ContactSelectionModeEdit) {
-                [controller setContact:lPerson];
-            } else {
-                [controller editContact:lPerson address:[ContactSelection getAddAddress]];
+        if ([ContactSelection getSelectionMode] == ContactSelectionModeMessage) {
+            NSString *address = [FastAddressBook getRingMailURI:lPerson];
+            if (address == nil)
+            {
+                NSArray* phones = [FastAddressBook getPhoneNumbers:lPerson];
+                [[PhoneMainView instance].mainViewController selectPhoneAction:@"chat" list:phones];
+                return;
+            }
+
+            [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
+            ChatRoomViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE], ChatRoomViewController);
+            if(controller != nil) {
+                [controller setRemoteAddress:address];
+            }
+        } else {
+            // Go to Contact details view
+            ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
+            if(controller != nil) {
+                if([ContactSelection getSelectionMode] == ContactSelectionModeEdit) {
+                    [controller editContact:lPerson address:[ContactSelection getAddAddress]];
+                }
+                else {
+                    [controller setContact:lPerson];
+                }
             }
         }
     }

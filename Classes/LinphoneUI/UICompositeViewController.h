@@ -77,5 +77,6 @@
 - (void)clearCache:(NSArray*)exclude;
 
 - (void)showInvite:(NSString *)emailTo phone:(NSString *)phoneTo;
+- (void)selectPhoneAction:(NSString *)type list:(NSArray *)data;
 
 @end

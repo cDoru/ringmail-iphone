@@ -165,6 +165,9 @@ typedef struct _LinphoneManagerSounds {
 - (void)syncRemoteFavorites;
 - (NSDictionary *)getRemoteLogin;
 - (void)startIterator;
+- (void)closeDatabase;
+- (void)openDatabase;
+- (void)removeDatabase;
 
 @property (readonly) FastAddressBook* fastAddressBook;
 @property Connectivity connectivity;

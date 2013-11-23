@@ -42,6 +42,9 @@
 @synthesize favSwitch;
 @synthesize ringMailView;
 @synthesize inviteView;
+@synthesize callButton;
+@synthesize textButton;
+@synthesize ringMailURI;
 
 #pragma mark - Lifecycle Functions
 
@@ -90,6 +93,10 @@
     [inviteView release];
     [ringMailView release];
     
+    [callButton release];
+    [textButton release];
+    [ringMailURI release];
+    
     [super dealloc];
 }
 
@@ -111,6 +118,8 @@
 
 - (void)setContact:(ABRecordRef)acontact {
     contact = acontact;
+    [callButton setHiddenContact:acontact];
+    [textButton setHiddenContact:acontact];
     [self update];
 }
 
@@ -153,6 +162,8 @@
     {
         ringMailView.hidden = NO;
         inviteView.hidden = YES;
+        RemoteModel *m = [RemoteModel read:contactId];
+        ringMailURI.text = [m primaryUri];
     }
     else
     {

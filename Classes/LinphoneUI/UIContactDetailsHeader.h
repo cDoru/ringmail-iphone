@@ -23,6 +23,8 @@
 #import "ImagePickerViewController.h"
 #import "ContactDetailsDelegate.h"
 #import "SMRotaryImage.h"
+#import "UICallButton.h"
+#import "UIChatButton.h"
 
 @interface UIContactDetailsHeader : UIViewController<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, ImagePickerDelegate> {
     @private
@@ -42,6 +44,9 @@
 @property (nonatomic, retain) IBOutlet UISwitch *favSwitch;
 @property (nonatomic, retain) IBOutlet UIView *ringMailView;
 @property (nonatomic, retain) IBOutlet UIView *inviteView;
+@property (nonatomic, retain) IBOutlet UICallButton *callButton;
+@property (nonatomic, retain) IBOutlet UIChatButton *textButton;
+@property (nonatomic, retain) IBOutlet UILabel *ringMailURI;
 
 @property(nonatomic,getter=isEditing) BOOL editing;
 

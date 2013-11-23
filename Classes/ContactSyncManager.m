@@ -311,7 +311,7 @@
             NSDictionary *result = [jsonResult objectFromJSONString];
             
             //[LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Object: %@", result];
-            //NSLog(@"RingMail Remote Object: %@", result);
+            NSLog(@"RingMail Remote Object: %@", result);
             
             NSArray *ringmail = [result objectForKey:@"ringmail"];
             if (ringmail != nil)

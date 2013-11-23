@@ -721,7 +721,7 @@
     DTActionSheetBlock cancelBlock = ^() {
         [LinphoneLogger logc:LinphoneLoggerLog format:"Send Invite: Cancel"];
     };
-    [sheet addDestructiveButtonWithTitle:@"Cancel"  block:cancelBlock];
+    [sheet addCancelButtonWithTitle:@"Cancel"  block:cancelBlock];
     [sheet showInView:self.view];
 }
 
@@ -849,6 +849,92 @@
     
     // Close the Mail Interface
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark - RingMail External Calling
+
+- (void)selectPhoneAction:(NSString *)type list:(NSArray *)data
+{
+    if ([data count] == 0)
+    {
+        UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Unable To Connect" message:@"No phone number or RingMail address for contact." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [warningAlert show];
+        return;
+    }
+    if ([data count] == 1)
+    {
+        if ([type isEqualToString:@"call"])
+        {
+            [self externalCall:[data objectAtIndex:0] ask:TRUE];
+        }
+        else if ([type isEqualToString:@"chat"])
+        {
+            [self externalText:[data objectAtIndex:0]];
+        }
+        return;
+    }
+    int max = [data count];
+    if (max > 5)
+    {
+        max = 5;
+    }
+    NSString* title = @"";
+    if ([type isEqualToString:@"call"])
+    {
+        title = @"Number To Call";
+    }
+    else if ([type isEqualToString:@"chat"])
+    {
+        title = @"Number To Send SMS";
+    }
+    DTActionSheet *sheet = [[[DTActionSheet alloc] initWithTitle:title] autorelease];
+    for (int i = 0; i < max; i++)
+    {
+        NSString *to = [data objectAtIndex:i];
+        [sheet addButtonWithTitle:to block:^() {
+            if ([type isEqualToString:@"call"])
+            {
+                [self externalCall:to ask:TRUE];
+            }
+            else if ([type isEqualToString:@"chat"])
+            {
+                [self externalText:to];
+            }
+        }];
+    }
+    DTActionSheetBlock cancelBlock = ^() {
+        //[LinphoneLogger logc:LinphoneLoggerLog format:""];
+    };
+    [sheet addDestructiveButtonWithTitle:@"Cancel"  block:cancelBlock];
+    [sheet showInView:self.view];
+}
+
+- (void)externalCall:(NSString *)phone ask:(BOOL)ask
+{
+    NSString *tel;
+    NSString *newPhone = [FastAddressBook e164number:phone];
+    if (ask)
+    {
+        tel = [NSString stringWithFormat:@"telprompt://%@", newPhone];
+    }
+    else
+    {
+        tel = [NSString stringWithFormat:@"tel://%@", newPhone];
+    }
+    NSLog(@"External Call URI: %@", tel);
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel]];
+}
+
+- (void)externalText:(NSString *)phone
+{
+    NSArray *recipents = @[phone];
+    
+    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+    messageController.messageComposeDelegate = self;
+    [messageController setRecipients:recipents];
+    
+    // Present message view controller on screen
+    [self presentViewController:messageController animated:NO completion:nil];
 }
 
 @end

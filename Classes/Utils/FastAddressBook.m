@@ -20,6 +20,7 @@
 #import "FastAddressBook.h"
 #import "LinphoneManager.h"
 #import "FavoritesModel.h"
+#import "RemoteModel.h"
 #import "NBPhoneNumberUtil.h"
 
 @implementation FastAddressBook
@@ -259,6 +260,7 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
 
 #pragma mark - RingMail
 
+/*
 + (NSString *) getPrimaryTarget:(ABRecordRef)contact {
     NSString *res = nil;
     if (contact)
@@ -295,6 +297,7 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
     }
     return res;
 }
+*/
 
 - (NSMutableArray*) getWheel:(NSString*)name
 {
@@ -515,6 +518,36 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
     [res setObject:emailArray forKey:@"email"];
     [res setObject:phoneArray forKey:@"phone"];
     return res;
+}
+
++ (NSString *)getRingMailURI:(ABRecordRef)contact
+{
+    NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)];
+    if ([RemoteModel hasRingMail:recordId])
+    {
+        RemoteModel *data = [RemoteModel read:recordId];
+        NSString* uri = [NSString stringWithString:[data primaryUri]];
+        return uri;
+    } // Check for updates from server
+    return nil;
+}
+
++ (NSMutableArray *)getPhoneNumbers:(ABRecordRef)contact
+{
+    NSMutableArray *phoneArray = [NSMutableArray array];
+    ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)contact, kABPersonPhoneProperty);
+    if (phoneMap) {
+        for(int i = 0; i < ABMultiValueGetCount(phoneMap); ++i) {
+            CFStringRef valueRef = ABMultiValueCopyValueAtIndex(phoneMap, i);
+            if (valueRef) {
+                NSString* val = (NSString *)valueRef;
+                [phoneArray addObject:[FastAddressBook formatNumber:val]];
+                CFRelease(valueRef);
+            }
+        }
+        CFRelease(phoneMap);
+    }
+    return phoneArray;
 }
 
 @end

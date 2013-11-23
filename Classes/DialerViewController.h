@@ -24,6 +24,7 @@
 #import "UIEraseButton.h"
 #import "UICamSwitch.h"
 #import "UICallButton.h"
+#import "UIChatButton.h"
 #import "UITransferButton.h"
 #import "UIDigitButton.h"
 #import "SMRotaryProtocol.h"
@@ -39,7 +40,7 @@
 
 @property (nonatomic, retain) IBOutlet UITextField* addressField;
 @property (nonatomic, retain) IBOutlet UICallButton* callButton;
-@property (nonatomic, retain) IBOutlet UIButton* textButton;
+@property (nonatomic, retain) IBOutlet UIChatButton* textButton;
 @property (nonatomic, retain) IBOutlet UIButton* contactButton;
 
 @property (nonatomic, retain) IBOutlet UIView* backgroundView;

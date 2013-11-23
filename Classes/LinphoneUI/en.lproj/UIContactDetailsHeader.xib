@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1072" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIContactDetailsHeader">
             <connections>
                 <outlet property="addressLabel" destination="8" id="21"/>
                 <outlet property="avatarImage" destination="6" id="9"/>
+                <outlet property="callButton" destination="kjV-qS-CBN" id="g3q-0J-1Sy"/>
                 <outlet property="editView" destination="13" id="16"/>
                 <outlet property="favSwitch" destination="hvI-Kz-OdE" id="Rkt-lW-sUt"/>
                 <outlet property="inviteView" destination="cR4-6Z-lD9" id="In1-FX-NbK"/>
                 <outlet property="normalView" destination="12" id="17"/>
+                <outlet property="ringMailURI" destination="lce-7e-elM" id="Qbf-eg-lsz"/>
                 <outlet property="ringMailView" destination="bIZ-88-aqy" id="tNX-WK-Juq"/>
                 <outlet property="tableView" destination="15" id="20"/>
+                <outlet property="textButton" destination="XYa-pP-zXe" id="SvH-Xo-j3G"/>
                 <outlet property="view" destination="4" id="5"/>
             </connections>
         </placeholder>
@@ -58,7 +61,7 @@
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kjV-qS-CBN" userLabel="callButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kjV-qS-CBN" userLabel="callButton" customClass="UICallButton">
                             <rect key="frame" x="10" y="159" width="144" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
@@ -70,7 +73,7 @@
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XYa-pP-zXe" userLabel="chatButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XYa-pP-zXe" userLabel="chatButton" customClass="UIChatButton">
                             <rect key="frame" x="166" y="159" width="144" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
@@ -112,6 +115,13 @@
                                     <rect key="frame" x="33" y="77" width="80" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lce-7e-elM" userLabel="ringMailURI">
+                                    <rect key="frame" x="42" y="95" width="177" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>

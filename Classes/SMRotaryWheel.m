@@ -101,41 +101,6 @@ static float maxAlphavalue = 1.0;
     //[self.delegate wheelDidChangeValue:[self getCloveName:currentValue]];
 }
 
-- (void) updateAll {
-    NSLog(@"*** UPDATE ALL ***");
-    NSMutableArray* contacts = [[[LinphoneManager instance] fastAddressBook] getWheel:self.name];
-    for (int i = 0; i < numberOfSections; i++)
-    {
-        SMRotaryImage *item = [self.cloveImages objectAtIndex:i];
-        int cur = item.imgNum;
-        if (cur != -1)
-        {
-            if ([contacts count] > cur)
-            {
-                NSDictionary *itemData = [contacts objectAtIndex:cur];
-                UIImage* img = [itemData objectForKey:@"img"];
-                if (img == nil)
-                {
-                    img = [UIImage imageNamed:@"avatar_unknown_small.png"];
-                }
-                [item updateItem:cur newText:[itemData objectForKey:@"name"] newImage:img];
-            }
-
-        }
-    }
-    container.userInteractionEnabled = NO;
-    [self addSubview:container];
-    self.cloves = [NSMutableArray arrayWithCapacity:numberOfSections];
-    if (numberOfSections % 2 == 0)
-    {
-        [self buildClovesEven];
-    }
-    else
-    {
-        [self buildClovesOdd];
-    }
-}
-
 - (UIImageView *) getCloveByValue:(int)value {
     UIImageView *res;
     NSArray *views = [container subviews];

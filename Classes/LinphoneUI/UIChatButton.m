@@ -1,4 +1,4 @@
-/* UICallButton.m
+/* UIChatButton.m
  *
  * Copyright (C) 2011  Belledonne Comunications, Grenoble, France
  *
@@ -17,27 +17,27 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */              
 
-#import "UICallButton.h"
+#import "UIChatButton.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 
 #import <CoreTelephony/CTCallCenter.h>
 
-@implementation UICallButton
+@implementation UIChatButton
 
 @synthesize addressField;
 @synthesize hiddenContact;
 
 #pragma mark - Lifecycle Functions
 
-- (void)initUICallButton {
+- (void)initUIChatButton {
     [self addTarget:self action:@selector(touchUp:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (id)init {
     self = [super init];
     if (self) {
-		[self initUICallButton];
+		[self initUIChatButton];
     }
     return self;
 }
@@ -45,7 +45,7 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-		[self initUICallButton];
+		[self initUIChatButton];
     }
     return self;
 }
@@ -53,7 +53,7 @@
 - (id)initWithCoder:(NSCoder *)decoder {
     self = [super initWithCoder:decoder];
     if (self) {
-		[self initUICallButton];
+		[self initUIChatButton];
 	}
     return self;
 }	
@@ -71,29 +71,27 @@
 #pragma mark -
 
 - (void)touchUp:(id) sender {
-    NSString *displayName = nil;
     NSString *address = nil;
     if (hiddenContact != nil)
     {
-        displayName = [FastAddressBook getContactDisplayName:hiddenContact];
         address = [FastAddressBook getRingMailURI:hiddenContact];
         if (address == nil)
         {
             NSArray* phones = [FastAddressBook getPhoneNumbers:hiddenContact];
-            [[PhoneMainView instance].mainViewController selectPhoneAction:@"call" list:phones];
+            [[PhoneMainView instance].mainViewController selectPhoneAction:@"chat" list:phones];
             return;
         }
     }
     else
     {
         address = [addressField text];
-        ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-        if (contact)
-        {
-            displayName = [FastAddressBook getContactDisplayName:contact];
-        }
     }
-    [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
+    
+    [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
+    ChatRoomViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE], ChatRoomViewController);
+    if(controller != nil) {
+        [controller setRemoteAddress:address];
+    }
 }
 
 - (BOOL) hasHidden
