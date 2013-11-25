@@ -5372,6 +5372,7 @@
 					"/Users/mfrager/RingMail/linphone-iphone-dyl/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ringmail;
@@ -5404,7 +5405,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				PROVISIONING_PROFILE = "946E39AE-2382-4152-A923-5501235C7853";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5457,6 +5458,7 @@
 					"/Users/mfrager/RingMail/linphone-iphone-dyl/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ringmail;
@@ -5660,7 +5662,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				PROVISIONING_PROFILE = "946E39AE-2382-4152-A923-5501235C7853";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5712,6 +5714,7 @@
 					"/Users/mfrager/RingMail/linphone-iphone-dyl/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ringmail;
@@ -5744,7 +5747,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				PROVISIONING_PROFILE = "946E39AE-2382-4152-A923-5501235C7853";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5797,6 +5800,7 @@
 					"/Users/mfrager/RingMail/linphone-iphone-dyl/liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ringmail;
@@ -5830,7 +5834,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "946E39AE-2382-4152-A923-5501235C7853";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

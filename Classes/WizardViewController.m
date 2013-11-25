@@ -427,7 +427,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	addressSipUri = [addressSipUri substringFromIndex:([addressSipScheme length] + 1)];
 	NSRange range = [addressSipUri rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"@"]];
 	addressSipUri = [addressSipUri substringToIndex:range.location];
-	LinphoneAuthInfo* info = linphone_auth_info_new([username UTF8String], [addressSipUri cStringUsingEncoding:[NSString defaultCStringEncoding]], [password UTF8String], NULL, NULL);
+	LinphoneAuthInfo* info = linphone_auth_info_new([username UTF8String], [addressSipUri cStringUsingEncoding:[NSString defaultCStringEncoding]], [password UTF8String], NULL, NULL, linphone_proxy_config_get_domain(proxyCfg));
 	linphone_proxy_config_set_identity(proxyCfg, identity);
 	linphone_proxy_config_set_server_addr(proxyCfg, [server UTF8String]);
     if([server compare:domain options:NSCaseInsensitiveSearch] != 0) {

@@ -66,7 +66,8 @@ const UIEdgeInsets textInsetsSomeone = {5, 16, 11, 10};
 - (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
     UIFont *font = [UIFont systemFontOfSize:16.0f];
-    CGSize size = [(text ? text : @"") sizeWithFont:font constrainedToSize:CGSizeMake(260, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+    int width = (type == BubbleTypeMine) ? 260 : 230;
+    CGSize size = [(text ? text : @"") sizeWithFont:font constrainedToSize:CGSizeMake(width, 9999) lineBreakMode:NSLineBreakByWordWrapping];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     label.numberOfLines = 0;
@@ -85,8 +86,8 @@ const UIEdgeInsets textInsetsSomeone = {5, 16, 11, 10};
 
 #pragma mark - Image bubble
 
-const UIEdgeInsets imageInsetsMine = {7, 9, 12, 18};
-const UIEdgeInsets imageInsetsSomeone = {7, 18, 12, 9};
+const UIEdgeInsets imageInsetsMine = {7, 8, 12, 19};
+const UIEdgeInsets imageInsetsSomeone = {7, 16, 12, 11};
 
 + (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type
 {

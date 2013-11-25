@@ -64,6 +64,7 @@
 - (void)showTabBar:(BOOL)show;
 - (void)fullScreen:(BOOL)enabled;
 - (void)startUp;
+- (void)displayIncomingCall:(LinphoneCall*) call;
 
 - (void)addInhibitedEvent:(id)event;
 - (BOOL)removeInhibitedEvent:(id)event;

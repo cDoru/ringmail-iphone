@@ -369,7 +369,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 			fromSipUri = [fromSipUri substringFromIndex:([fromSipScheme length] + 1)];
 			NSRange range = [fromSipUri rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"@"]];
 			fromSipUri = [fromSipUri substringToIndex:range.location];
-			info=linphone_auth_info_new(linphone_address_get_username(from),[fromSipUri cStringUsingEncoding:[NSString defaultCStringEncoding]],password,NULL,NULL);
+			info=linphone_auth_info_new(linphone_address_get_username(from),[fromSipUri cStringUsingEncoding:[NSString defaultCStringEncoding]],password,NULL,NULL,linphone_proxy_config_get_domain(proxyCfg));
 			linphone_core_add_auth_info(lc,info);
             linphone_address_destroy(from);
 		}

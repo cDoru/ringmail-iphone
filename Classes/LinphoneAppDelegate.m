@@ -94,14 +94,15 @@
 	[LinphoneLogger logc:LinphoneLoggerLog format:"applicationDidBecomeActive"];
     [self startApplication];
     
-	[[LinphoneManager instance] becomeActive];
+    LinphoneManager* instance = [LinphoneManager instance];
+    
+    [instance becomeActive];
     
     
     LinphoneCore* lc = [LinphoneManager getLc];
     LinphoneCall* call = linphone_core_get_current_call(lc);
     
 	if (call){
-		LinphoneManager* instance = [LinphoneManager instance];
 		if (call == instance->currentCallContextBeforeGoingBackground.call) {
 			const LinphoneCallParams* params = linphone_call_get_current_params(call);
 			if (linphone_call_params_video_enabled(params)) {
@@ -110,7 +111,12 @@
                                         instance->currentCallContextBeforeGoingBackground.cameraIsEnabled);
 			}
 			instance->currentCallContextBeforeGoingBackground.call = 0;
-		}
+		} else if ( linphone_call_get_state(call) == LinphoneCallIncomingReceived ) {
+            [[PhoneMainView  instance] displayIncomingCall:call];
+            // in this case, the ringing sound comes from the notification.
+            // To stop it we have to do the iOS7 ring fix...
+            [self fixRing];
+        }
 	}
     
     LinphoneManager *inst = [LinphoneManager instance];
@@ -164,6 +170,7 @@
 		[LinphoneLogger log:LinphoneLoggerLog format:@"PushNotification from launch received."];
 		[self processRemoteNotification:remoteNotif];
 	}
+    
     return YES;
 }
 
@@ -207,6 +214,15 @@
 	return YES;
 }
 
+- (void)fixRing
+{
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+        // iOS7 fix for notification sound not stopping.
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+    }
+}
+
 - (void)processRemoteNotification:(NSDictionary*)userInfo{
 	NSDictionary *aps = [userInfo objectForKey:@"aps"];
     if(aps != nil) {
@@ -224,6 +240,7 @@
                     [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
                 } else if([loc_key isEqualToString:@"IC_MSG"]) {
                     //it's a call
+                    [self fixRing];
 					NSString *callid=[userInfo objectForKey:@"call-id"];
                     if (callid)
                     {
@@ -246,6 +263,7 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [[UIApplication sharedApplication] cancelLocalNotification:notification];
     if([notification.userInfo objectForKey:@"callId"] != nil) {
         [[LinphoneManager instance] acceptCallForCallId:[notification.userInfo objectForKey:@"callId"]];
     } else if([notification.userInfo objectForKey:@"chat"] != nil) {
