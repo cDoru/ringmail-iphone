@@ -146,7 +146,7 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password Again" adjustsFontSizeToFit="NO" minimumFontSize="10" background="field_background.png" id="76" userLabel="password2Field" customClass="UILinphoneTextField">
-                    <rect key="frame" x="20" y="262" width="280" height="35"/>
+                    <rect key="frame" x="20" y="261" width="280" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Password again"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -156,7 +156,7 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" adjustsFontSizeToFit="NO" minimumFontSize="10" background="field_background.png" id="139" userLabel="phoneField" customClass="UILinphoneTextField">
-                    <rect key="frame" x="20" y="158" width="280" height="35"/>
+                    <rect key="frame" x="20" y="157" width="280" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Password again"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -195,7 +195,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </view>
         <view contentMode="scaleToFill" id="52" userLabel="connectAccountView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="394"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="394.00000000000006"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="RingMail User Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="122" userLabel="title">
@@ -226,7 +226,7 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" adjustsFontSizeToFit="NO" minimumFontSize="10" background="field_background.png" id="68" userLabel="usernameField" customClass="UILinphoneTextField">
-                    <rect key="frame" x="20" y="108" width="280" height="35"/>
+                    <rect key="frame" x="20" y="107" width="280" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Email address"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -325,7 +325,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </view>
         <view contentMode="scaleToFill" id="101" userLabel="validateAccountView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="394"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="394.00000000000006"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Verify Email Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="124" userLabel="title">
@@ -379,7 +379,7 @@
                     <size key="shadowOffset" width="-1" height="-1"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="200" contentMode="left" text="Your RingMail account has been created. You should receive a SMS text shortly with a code to verify your phone number." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="1km-0v-5yG" userLabel="label">
-                    <rect key="frame" x="20" y="60" width="280" height="64"/>
+                    <rect key="frame" x="20" y="60" width="280" height="63.999999999999993"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
