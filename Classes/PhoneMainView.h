@@ -18,6 +18,7 @@
  */   
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 #import "LinphoneManager.h"
 #import "UICompositeViewController.h"
@@ -28,6 +29,8 @@
 #import "ChatRoomViewController.h"
 #import "ChatViewController.h"
 #import "DialerViewController.h"
+#import "DialpadViewController.h"
+#import "DirectoryViewController.h"
 #import "ContactsViewController.h"
 #import "ContactDetailsViewController.h"
 #import "ContactDetailsLabelViewController.h"
@@ -62,6 +65,7 @@
 - (void)fullScreen:(BOOL)enabled;
 - (void)updateStatusBar:(UICompositeViewDescription*)to_view;
 - (void)startUp;
+- (void)displayIncomingCall:(LinphoneCall*) call;
 
 - (void)addInhibitedEvent:(id)event;
 - (BOOL)removeInhibitedEvent:(id)event;

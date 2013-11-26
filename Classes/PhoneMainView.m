@@ -24,6 +24,8 @@
 #import "PhoneMainView.h"
 #import "Utils.h"
 #import "DTActionSheet.h"
+#import "ChatRoomViewController.h"
+#import "ChatViewController.h"
 
 static PhoneMainView* phoneMainViewInstance=nil;
 
@@ -211,24 +213,42 @@ static PhoneMainView* phoneMainViewInstance=nil;
     [self updateApplicationBadgeNumber];
 }
 
-- (void)registrationUpdate:(NSNotification*)notif {
+- (void)registrationUpdate:(NSNotification*)notif { 
     LinphoneRegistrationState state = [[notif.userInfo objectForKey: @"state"] intValue];
     LinphoneProxyConfig *cfg = [[notif.userInfo objectForKey: @"cfg"] pointerValue];
-	//Only report bad credential issue
-    if (state == LinphoneRegistrationFailed
-		&&[UIApplication sharedApplication].applicationState != UIApplicationStateBackground
-		&& linphone_proxy_config_get_error(cfg) == LinphoneReasonBadCredentials ) {
-		UIAlertView* error = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Registration failure",nil)
-														message:NSLocalizedString(@"Bad credentials, check your account settings", nil)
-													   delegate:nil
-											  cancelButtonTitle:NSLocalizedString(@"Continue",nil)
-											  otherButtonTitles:nil,nil];
-		[error show];
-		[error release];
+    // Show error
+    if (state == LinphoneRegistrationFailed) {
+		NSString* lErrorMessage = nil;
+        LinphoneReason reason = linphone_proxy_config_get_error(cfg);
+		if (reason == LinphoneReasonBadCredentials) {
+			lErrorMessage = NSLocalizedString(@"Wrong login or password", nil);
+		}/* else if (reason == LinphoneReasonNoResponse) {
+			lErrorMessage = NSLocalizedString(@"Server unreachable", nil);
+		} else {
+            lErrorMessage = NSLocalizedString(@"Unknown error", nil);
+        }*/
+		
+		if (lErrorMessage != nil && linphone_proxy_config_get_error(cfg) != LinphoneReasonNoResponse) { 
+            //do not report network connection issue on registration
+			//default behavior if no registration delegates
+			UIApplicationState s = [UIApplication sharedApplication].applicationState;
+            
+            // do not stack error message when going to backgroud
+            if (s != UIApplicationStateBackground) {
+                UIAlertView* error = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Registration failure",nil)
+                                                                message:lErrorMessage
+                                                               delegate:nil 
+                                                      cancelButtonTitle:NSLocalizedString(@"Continue",nil) 
+                                                      otherButtonTitles:nil,nil];
+                [error show];
+                [error release];
+            }
+		}
+		
 	}
 }
 
-- (void)callUpdate:(NSNotification*)notif {
+- (void)callUpdate:(NSNotification*)notif {  
     LinphoneCall *call = [[notif.userInfo objectForKey: @"call"] pointerValue];
     LinphoneCallState state = [[notif.userInfo objectForKey: @"state"] intValue];
     NSString *message = [notif.userInfo objectForKey: @"message"];
@@ -272,10 +292,15 @@ static PhoneMainView* phoneMainViewInstance=nil;
         {
             if (canHideInCallView) {
                 // Go to dialer view
-                DialerViewController *controller = DYNAMIC_CAST([self changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
-                if(controller != nil) {
-                    [controller setAddress:@""];
-                    [controller setTransferMode:FALSE];
+                
+                // Check if view is still in-call view
+                if([[self currentView] equal:[InCallViewController compositeViewDescription]])
+                {
+                    DialerViewController *controller = DYNAMIC_CAST([self changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
+                    if(controller != nil) {
+                        [controller setAddress:@""];
+                        [controller setTransferMode:FALSE];
+                    }
                 }
             } else {
                 [self changeCurrentView:[InCallViewController compositeViewDescription]];
@@ -367,32 +392,45 @@ static PhoneMainView* phoneMainViewInstance=nil;
     return trans;
 }
 
++ (CATransition*)getChangeTransition {
+    CATransition* trans = [CATransition animation];
+    [trans setType:kCATransitionMoveIn];
+    [trans setDuration:0.35];
+    [trans setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [trans setSubtype:kCATransitionFromTop];
+    
+    return trans;
+}
+
 + (CATransition*)getTransition:(UICompositeViewDescription *)old new:(UICompositeViewDescription *)new {
     bool left = false;
     
-    if([old equal:[ChatViewController compositeViewDescription]]) {
-        if([new equal:[ContactsViewController compositeViewDescription]] ||
-           [new equal:[DialerViewController   compositeViewDescription]] ||
-           [new equal:[HistoryViewController  compositeViewDescription]]) {
-            left = true;
-        }
-    } else if([old equal:[SettingsViewController compositeViewDescription]]) {
-        if([new equal:[DialerViewController   compositeViewDescription]] ||
+    if([old equal:[DialpadViewController compositeViewDescription]]) {
+        if([new equal:[ChatViewController compositeViewDescription]] ||
+           [new equal:[DialerViewController compositeViewDescription]] ||
            [new equal:[ContactsViewController compositeViewDescription]] ||
-           [new equal:[HistoryViewController  compositeViewDescription]] ||
-           [new equal:[ChatViewController     compositeViewDescription]]) {
-            left = true;
-        }
-    } else if([old equal:[DialerViewController compositeViewDescription]]) {
-        if([new equal:[ContactsViewController  compositeViewDescription]] ||
-           [new equal:[HistoryViewController   compositeViewDescription]]) {
+           [new equal:[HistoryViewController compositeViewDescription]]) {
             left = true;
         }
     } else if([old equal:[ContactsViewController compositeViewDescription]]) {
-        if([new equal:[HistoryViewController compositeViewDescription]]) {
+        if(
+           [new equal:[ChatViewController compositeViewDescription]] ||
+           [new equal:[DialerViewController compositeViewDescription]] ||
+           [new equal:[HistoryViewController compositeViewDescription]]) {
+            left = true;
+        }
+    } else if([old equal:[DialerViewController compositeViewDescription]]) {
+        if([new equal:[ChatViewController compositeViewDescription]] ||
+           [new equal:[HistoryViewController compositeViewDescription]]) {
+            left = true;
+        }
+    } else if([old equal:[HistoryViewController compositeViewDescription]]) {
+        if([new equal:[ChatViewController compositeViewDescription]]) {
             left = true;
         }
     } 
+    
+    //NSLog(@"Get Transition Left: %d", left);
     
     if(left) {
         return [PhoneMainView getBackwardTransition];
@@ -412,23 +450,6 @@ static PhoneMainView* phoneMainViewInstance=nil;
 - (void) showStateBar:(BOOL)show {
     [mainViewController setStateBarHidden:!show];
 }
-
-- (void)updateStatusBar:(UICompositeViewDescription*)to_view {
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-    if ([LinphoneManager runningOnIpad]) {
-        // In iOS7, the ipad has a black background on dialer, so we have to adjust the
-        // status bar style for each transition to/from this view
-        BOOL toLightStatus   = [to_view     equal:[DialerViewController compositeViewDescription]];
-        BOOL fromLightStatus = [currentView equal:[DialerViewController compositeViewDescription]];
-        if( (!to_view && fromLightStatus) || // this case happens at app launch
-            toLightStatus )
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-        else if(fromLightStatus)
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    }
-#endif
-}
-
 
 - (void)fullScreen:(BOOL)enabled {
     [mainViewController setFullScreen:enabled];
@@ -452,17 +473,61 @@ static PhoneMainView* phoneMainViewInstance=nil;
     [LinphoneLogger logc:LinphoneLoggerLog format:"PhoneMainView: Change current view to %@", [view name]];
     
     if(force || ![view equal: currentView]) {
-        if(transition == nil)
-            transition = [PhoneMainView getTransition:currentView new:view];
-        if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
+        
+        BOOL right = FALSE;
+        BOOL left = FALSE;
+        UICompositeViewDescription *old = currentView;
+        UICompositeViewDescription *new = view;
+        if([old equal:[ChatRoomViewController compositeViewDescription]]) {
+            if([new equal:[ChatViewController compositeViewDescription]]) {
+                left = true;
+            }
+        } else if([old equal:[ChatViewController compositeViewDescription]]) {
+            if([new equal:[ChatRoomViewController compositeViewDescription]]) {
+                right = true;
+            }
+        } else if([old equal:[DialerViewController compositeViewDescription]]
+                  || [old equal:[ContactsViewController compositeViewDescription]]) {
+            if([new equal:[ContactDetailsViewController compositeViewDescription]]) {
+                right = true;
+            }
+        } else if([old equal:[HistoryDetailsViewController compositeViewDescription]]) {
+            if([new equal:[ContactDetailsViewController compositeViewDescription]]) {
+                right = true;
+            }
+        } else if([old equal:[ContactDetailsViewController compositeViewDescription]]) {
+            if([new equal:[HistoryDetailsViewController compositeViewDescription]]) {
+                left = true;
+            }
+        } else if([old equal:[HistoryViewController compositeViewDescription]]) {
+            if([new equal:[HistoryDetailsViewController compositeViewDescription]]) {
+                right = true;
+            }
+        }
+        
+        //NSLog(@"Get Transition Left: %d", left);
+        
+        if(right)
+        {
+            transition = [PhoneMainView getForwardTransition];
+        }
+        else if (left)
+        {
+            transition = [PhoneMainView getBackwardTransition];
+        }
+        
+        /*if(transition == nil)
+            transition = [PhoneMainView getTransition:currentView new:view]; */
+        /*if ([[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
+            //NSLog(@"Set Transition");
             [mainViewController setViewTransition:transition];
         } else {
             [mainViewController setViewTransition:nil];
-        }
-        [self updateStatusBar:view];
+        }*/
+        [mainViewController setViewTransition:transition];
         [mainViewController changeView:view];
         currentView = view;
-    }
+    } 
     
     NSDictionary* mdict = [NSMutableDictionary dictionaryWithObject:currentView forKey:@"view"];
     [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneMainViewChange object:self userInfo:mdict];
@@ -507,17 +572,26 @@ static PhoneMainView* phoneMainViewInstance=nil;
     if (proxyCfg == nil) {
         lMessage = NSLocalizedString(@"Please make sure your device is connected to the internet and double check your SIP account configuration in the settings.", nil);
     } else {
-        lMessage = [NSString stringWithFormat : NSLocalizedString(@"Cannot call %@", nil), lUserName];
+        lMessage = [NSString stringWithFormat:NSLocalizedString(@"Cannot call %@", nil), lUserName];
     }
     
+    lTitle = NSLocalizedString(@"Call failed",nil);
     if (linphone_call_get_reason(call) == LinphoneReasonNotFound) {
-        lMessage = [NSString stringWithFormat : NSLocalizedString(@"'%@' not registered", nil), lUserName];
-    } else {
+        lMessage = [NSString stringWithFormat:NSLocalizedString(@"'%@' not registered", nil), lUserName];
+    }
+    else {
         if (message != nil) {
-            lMessage = [NSString stringWithFormat : NSLocalizedString(@"%@\nReason was: %@", nil), lMessage, message];
+            if ([message rangeOfString:@"NO_ANSWER"].location != NSNotFound)
+            {
+                lTitle = @"No Answer";
+                lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@ did not answer", nil), lUserName];
+            }
+            else
+            {
+                lMessage = [NSString stringWithFormat:NSLocalizedString(@"%@\nReason: %@", nil), lMessage, message];
+            }
         }
     }
-    lTitle = NSLocalizedString(@"Call failed",nil);
     UIAlertView* error = [[UIAlertView alloc] initWithTitle:lTitle
                                                     message:lMessage 
                                                    delegate:nil 
@@ -554,12 +628,23 @@ static PhoneMainView* phoneMainViewInstance=nil;
 - (void)displayIncomingCall:(LinphoneCall*) call{
  	LinphoneCallLog* callLog=linphone_call_get_call_log(call);
 	NSString* callId=[NSString stringWithUTF8String:linphone_call_log_get_call_id(callLog)];
+    //NSLog(@"Inbound Call ID: '%@'", callId);
+    
+    const LinphoneCallParams* param = linphone_call_get_remote_params(call);
+    const char* pushHeader = linphone_call_params_get_custom_header(param, [@"X-RingMail-Push" UTF8String]);
+    NSString* pushId = (pushHeader) ? [NSString stringWithUTF8String:pushHeader] : @"";
+    //NSLog(@"Inbound Call Push ID: '%@'", pushId);
 
 	if (![[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]
 		|| [UIApplication sharedApplication].applicationState ==  UIApplicationStateActive) {
-		if ([[LinphoneManager instance] shouldAutoAcceptCallForCallId:callId]){
+		if (
+            [[LinphoneManager instance] shouldAutoAcceptCallForCallId:callId] ||
+            [pushId length] > 0
+        ){
             [[LinphoneManager instance] acceptCall:call];
-		}else{
+		}
+        else
+        {
 			IncomingCallViewController *controller = DYNAMIC_CAST([self changeCurrentView:[IncomingCallViewController compositeViewDescription] push:TRUE],IncomingCallViewController);
 			if(controller != nil) {
 				[controller setCall:call];
@@ -567,6 +652,8 @@ static PhoneMainView* phoneMainViewInstance=nil;
 			}
 		}
 	}
+    
+    linphone_call_log_get_remote_address(callLog);
 }
 
 - (void)batteryLevelChanged:(NSNotification*)notif {

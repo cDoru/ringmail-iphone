@@ -115,11 +115,13 @@
 	 now lets create the body of the post
 	 */
 	NSMutableData *body = [NSMutableData data];
-    NSString *imageName = [NSString stringWithFormat:@"%i-%f.jpg", [image hash],[NSDate timeIntervalSinceReferenceDate]];
+    NSString *imageName = [NSString stringWithFormat:@"%i.jpg", [image hash]];
+    //NSString *imageName = [NSString stringWithFormat:@"%i.png", [image hash]];
 	[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	[body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@\"\r\n",imageName] dataUsingEncoding:NSUTF8StringEncoding]];
 	[body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-	[body appendData:[NSData dataWithData:UIImageJPEGRepresentation(image, 1.0)]];
+	[body appendData:[NSData dataWithData:UIImageJPEGRepresentation(image, 0.9)]];
+    //[body appendData:[NSData dataWithData:UIImagePNGRepresentation(image)]];
 	[body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	[request setHTTPBody:body];
 	
@@ -155,7 +157,7 @@
 	[LinphoneLogger log:LinphoneLoggerLog format:@"File transfer status code [%i]", statusCode];
     
     if (statusCode == 200 && !upload) {
-        totalBytesExpectedToRead = [response expectedContentLength];
+        totalBytesExpectedToRead = [NSNumber numberWithLongLong:[response expectedContentLength]].unsignedIntValue;
     }
 }
 

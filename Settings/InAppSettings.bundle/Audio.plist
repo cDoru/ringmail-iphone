@@ -14,6 +14,16 @@
 			<key>DefaultValue</key>
 			<true/>
 			<key>Key</key>
+			<string>opus_preference</string>
+			<key>Title</key>
+			<string>Opus 48kHz</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
 			<string>speex_16k_preference</string>
 			<key>Title</key>
 			<string>Speex 16Khz</string>

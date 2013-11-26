@@ -192,14 +192,14 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
-							<string key="IBUIAccessibilityLabel">Créer un compte linphone.org</string>
+							<string key="IBUIAccessibilityLabel">Créer un compte RingMail</string>
 							<boolean value="YES" key="IBUIIsAccessibilityElement"/>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<bool key="IBUIAdjustsImageWhenHighlighted">NO</bool>
-						<string key="IBUINormalTitle">Créer un compte sur linphone.org</string>
+						<string key="IBUINormalTitle">Créer un compte RingMail</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="514969770">
 							<int key="NSColorSpace">2</int>
 							<bytes key="NSRGB">MC43MjU0OTAxOTYxIDAuNzY4NjI3NDUxIDAuNzk2MDc4NDMxNAA</bytes>
@@ -239,14 +239,14 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
-							<string key="IBUIAccessibilityLabel">S'enregistrer sur un compte linphone.org</string>
+							<string key="IBUIAccessibilityLabel">S'enregistrer sur un compte RingMail</string>
 							<boolean value="YES" key="IBUIIsAccessibilityElement"/>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<bool key="IBUIAdjustsImageWhenHighlighted">NO</bool>
-						<string key="IBUINormalTitle">J'ai déjà un compte linphone.org</string>
+						<string key="IBUINormalTitle">J'ai déjà un compte RingMail</string>
 						<reference key="IBUIHighlightedTitleColor" ref="514969770"/>
 						<reference key="IBUINormalTitleColor" ref="1013845973"/>
 						<reference key="IBUINormalTitleShadowColor" ref="929224261"/>
@@ -329,7 +329,7 @@
 						<int key="IBUITag">200</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Entrez votre nom d'utilsateur, votre mot de passe ainsi que votre adresse email.</string>
+						<string key="IBUIText">Entrez votre adresse email et votre mot de passe.</string>
 						<reference key="IBUITextColor" ref="784405869"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
@@ -352,12 +352,12 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUITag">100</int>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
-							<string key="IBUIAccessibilityLabel">Nom d'utilisateur</string>
+							<string key="IBUIAccessibilityLabel">Adresse email</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
-						<string key="IBUIPlaceholder">Nom d'utilisateur</string>
+						<string key="IBUIPlaceholder">Adresse email</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -559,7 +559,7 @@
 						<int key="IBUITag">200</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Entrez votre nom d'utilisateur et votre mot de passe de votre compte linphone.org.</string>
+						<string key="IBUIText">Entrez l'adresse email et le mot de passe de votre compte RingMail.</string>
 						<reference key="IBUITextColor" ref="784405869"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
@@ -614,12 +614,12 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUITag">100</int>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
-							<string key="IBUIAccessibilityLabel">Nom d'utilisateur</string>
+							<string key="IBUIAccessibilityLabel">Adresse email</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
-						<string key="IBUIPlaceholder">Nom d'utilisateur</string>
+						<string key="IBUIPlaceholder">Adresse email</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -730,12 +730,12 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUITag">100</int>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
-							<string key="IBUIAccessibilityLabel">Nom d'utilisateur</string>
+							<string key="IBUIAccessibilityLabel">Adresse email</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
-						<string key="IBUIPlaceholder">Nom d'utilisateur</string>
+						<string key="IBUIPlaceholder">Adresse email</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -946,7 +946,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
-						<string key="IBUIPlaceholder">Nom d'utilisateur</string>
+						<string key="IBUIPlaceholder">Adresse email</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -1073,6 +1073,14 @@
 						<reference key="destination" ref="1010946447"/>
 					</object>
 					<int key="connectionID">136</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">createAccountViewEmailField</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="131114733"/>
+					</object>
+					<int key="connectionID">137</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1583,7 +1591,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">136</int>
+			<int key="maxID">137</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1729,6 +1737,7 @@
 						<string key="contentView">UIScrollView</string>
 						<string key="createAccountButton">UIButton</string>
 						<string key="createAccountView">UIView</string>
+						<string key="createAccountViewEmailField">UITextField</string>
 						<string key="externalAccountButton">UIButton</string>
 						<string key="externalAccountView">UIView</string>
 						<string key="startButton">UIButton</string>
@@ -1769,6 +1778,10 @@
 						<object class="IBToOneOutletInfo" key="createAccountView">
 							<string key="name">createAccountView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="createAccountViewEmailField">
+							<string key="name">createAccountViewEmailField</string>
+							<string key="candidateClassName">UITextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="externalAccountButton">
 							<string key="name">externalAccountButton</string>
@@ -1814,7 +1827,7 @@
 			<string key="button_background_default.png">{550, 101}</string>
 			<string key="button_background_over.png">{550, 101}</string>
 			<string key="field_background.png">{542, 88}</string>
-			<string key="setup_welcome_logo.png">{179, 161}</string>
+			<string key="setup_welcome_logo.png">{322, 323}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>

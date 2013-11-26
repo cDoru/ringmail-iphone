@@ -94,7 +94,9 @@
 	NSString *normalizedSipAddress = [NSString stringWithUTF8String:tmp];
 	ms_free(tmp);
     
-    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+    NSString* ringMailAddress = [FastAddressBook getTargetFromSIP:normalizedSipAddress];
+    
+    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:ringMailAddress];
     if(contact != nil) {
         displayName = [FastAddressBook getContactDisplayName:contact];
         image = [FastAddressBook getContactImage:contact thumbnail:true];

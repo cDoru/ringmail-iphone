@@ -24,21 +24,29 @@
 #import "UACellBackgroundView.h"
 #import "UILinphone.h"
 #import "Utils.h"
+#import "SMRotaryImage.h"
+#import "RemoteModel.h"
+#import "FavoritesModel.h"
 
 @implementation ContactsTableViewController
 
-static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void *context);
+@synthesize delegate;
+@synthesize filter;
 
+static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void *context);
 
 #pragma mark - Lifecycle Functions
 
 - (void)initContactsTableViewController {
     addressBookMap  = [[OrderedDictionary alloc] init];
     avatarMap = [[NSMutableDictionary alloc] init];
-    
-    addressBook = ABAddressBookCreate();
-	
+    ringMailMap = [[NSMutableDictionary alloc] init];
+    favMap = [[NSMutableDictionary alloc] init];
+    NSError *error = nil;
+    addressBook = ABAddressBookCreateWithOptions(NULL, (CFErrorRef *)&error);
     ABAddressBookRegisterExternalChangeCallback(addressBook, sync_address_book, self);
+    delegate = nil;
+    filter = [[NSString alloc] initWithString:@""];
 }
 
 - (id)init {
@@ -62,15 +70,31 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     CFRelease(addressBook);
     [addressBookMap release];
     [avatarMap release];
+    [ringMailMap release];
+    [favMap release];
+    [filter release];
     [super dealloc];
 }
 
 
 #pragma mark - 
 
+- (void)setFilter:(NSString *)aFilter {
+    if([filter isEqualToString:aFilter]) {
+        return;
+    }
+    filter = aFilter;
+    [self loadData];
+}
+
+
 - (void)loadData {
     [LinphoneLogger logc:LinphoneLoggerLog format:"Load contact list"];
     @synchronized (addressBookMap) {
+        
+        // Read RingMail databases
+        [RemoteModel getRingMailContacts:ringMailMap];
+        [FavoritesModel getFavoriteContacts:favMap];
         
         // Reset Address book
         [addressBookMap removeAllObjects];
@@ -87,26 +111,13 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                     CFDictionaryRef lDict = ABMultiValueCopyValueAtIndex(lMap, i);
                     if(CFDictionaryContainsKey(lDict, kABPersonInstantMessageServiceKey)) {
                         CFStringRef serviceKey = CFDictionaryGetValue(lDict, kABPersonInstantMessageServiceKey);
-						CFStringRef username = username=CFDictionaryGetValue(lDict, kABPersonInstantMessageUsernameKey);
-                        if(CFStringCompare((CFStringRef)[LinphoneManager instance].contactSipField, serviceKey, kCFCompareCaseInsensitive) == 0) {
+                        if(CFStringCompare((CFStringRef)@"SIP", serviceKey, kCFCompareCaseInsensitive) == 0) {
                             add = true;
-                        }  else {
-							add=false;
-						}
-                    }  else {
-						//check domain
-						LinphoneAddress* address = linphone_address_new([(NSString*)CFDictionaryGetValue(lDict,kABPersonInstantMessageUsernameKey) UTF8String]);
-						if (address) {
-							if ([[ContactSelection getSipFilter] compare:@"*" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-								add = true;
-							} else {
-								NSString* domain = [NSString stringWithCString:linphone_address_get_domain(address)
-																	  encoding:[NSString defaultCStringEncoding]];
-								add = [domain compare:[ContactSelection getSipFilter] options:NSCaseInsensitiveSearch] == NSOrderedSame;
-							}
-							linphone_address_destroy(address);
-						} else {
-                            add = false;
+                        }
+                    } else {
+                        NSString* usernameKey = CFDictionaryGetValue(lDict, kABPersonInstantMessageUsernameKey);
+                        if([usernameKey hasPrefix:@"sip:"]) {
+                            add = true;
                         }
                     }
                     CFRelease(lDict);
@@ -118,6 +129,29 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                     add = true;
                 }
             }
+            
+            // Check for filter
+            if ([filter length] > 0)
+            {
+                NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)lPerson)];
+                if ([filter isEqualToString:@"fav"])
+                {
+                    NSNumber *rec = [favMap objectForKey:recordId];
+                    if (rec == nil)
+                    {
+                        add = false;
+                    }
+                }
+                else if ([filter isEqualToString:@"ring"])
+                {
+                    NSNumber *rec = [ringMailMap objectForKey:recordId];
+                    if (rec == nil)
+                    {
+                        add = false;
+                    }
+                }
+            }
+            
             if(add) {
                 CFStringRef lFirstName = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonFirstNameProperty);
                 CFStringRef lLocalizedFirstName = (lFirstName != nil)? ABAddressBookCopyLocalizedLabel(lFirstName): nil;
@@ -163,6 +197,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
             }
         }
         if (lContacts) CFRelease(lContacts);
+
     }
     [self.tableView reloadData];
 }
@@ -214,13 +249,14 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     
     // Cached avatar
     UIImage *image = nil;
-    id data = [avatarMap objectForKey:[NSNumber numberWithInt: ABRecordGetRecordID(contact)]];
+    NSNumber *contactId = [NSNumber numberWithInt: ABRecordGetRecordID(contact)];
+    id data = [avatarMap objectForKey:contactId];
     if(data == nil) {
         image = [FastAddressBook getContactImage:contact thumbnail:true];
         if(image != nil) {
-            [avatarMap setObject:image forKey:[NSNumber numberWithInt: ABRecordGetRecordID(contact)]];
+            [avatarMap setObject:image forKey:contactId];
         } else {
-            [avatarMap setObject:[NSNull null] forKey:[NSNumber numberWithInt: ABRecordGetRecordID(contact)]];
+            [avatarMap setObject:[NSNull null] forKey:contactId];
         }
     } else if(data != [NSNull null]) {
         image = data;
@@ -230,6 +266,24 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     }
     [[cell avatarImage] setImage:image];
     
+    NSNumber* recId = [ringMailMap objectForKey:contactId];
+    if (recId != nil)
+    {
+        [cell setHasRingMail:TRUE];
+    }
+    else
+    {
+        [cell setHasRingMail:FALSE];
+    }
+    NSNumber* favId = [favMap objectForKey:contactId];
+    if (favId != nil)
+    {
+        [cell setHasFavorite:TRUE];
+    }
+    else
+    {
+        [cell setHasFavorite:FALSE];
+    }
     [cell setContact: contact];
     return cell;
 }
@@ -242,15 +296,66 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     OrderedDictionary *subDic = [addressBookMap objectForKey: [addressBookMap keyAtIndex: [indexPath section]]]; 
     ABRecordRef lPerson = [subDic objectForKey: [subDic keyAtIndex:[indexPath row]]];
     
-    // Go to Contact details view
-    ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
-    if(controller != nil) {
-        if([ContactSelection getSelectionMode] != ContactSelectionModeEdit) {
-            [controller setContact:lPerson];
+    if (delegate == nil)
+    {
+        if ([ContactSelection getSelectionMode] == ContactSelectionModeMessage) {
+            NSString *address = [FastAddressBook getRingMailURI:lPerson];
+            if (address == nil)
+            {
+                NSArray* phones = [FastAddressBook getPhoneNumbers:lPerson];
+                [[PhoneMainView instance].mainViewController selectPhoneAction:@"chat" list:phones];
+                return;
+            }
+
+            [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
+            ChatRoomViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE], ChatRoomViewController);
+            if(controller != nil) {
+                [controller setRemoteAddress:address];
+            }
         } else {
-            [controller editContact:lPerson address:[ContactSelection getAddAddress]];
+            // Go to Contact details view
+            ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
+            if(controller != nil) {
+                if([ContactSelection getSelectionMode] == ContactSelectionModeEdit) {
+                    [controller editContact:lPerson address:[ContactSelection getAddAddress]];
+                }
+                else {
+                    [controller setContact:lPerson];
+                }
+            }
         }
     }
+    else
+    {
+        [delegate contactSelected:lPerson];
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+	// create the parent view that will hold header Label
+	UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 22.0)];
+    [customView autorelease];
+
+    customView.backgroundColor = [UIColor colorWithRed:58/255.0f green:137/255.0f blue:201/255.0f alpha:1.0f];
+	
+	// create the button object
+	UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [headerLabel autorelease];
+	headerLabel.backgroundColor = [UIColor clearColor];
+	headerLabel.opaque = NO;
+	headerLabel.textColor = [UIColor whiteColor];
+	headerLabel.highlightedTextColor = [UIColor blackColor];
+	headerLabel.font = [UIFont boldSystemFontOfSize:18];
+	headerLabel.frame = CGRectMake(15.0, 0.0, 305.0, 22.0);
+    
+	// If you want to align the header text as centered
+	// headerLabel.frame = CGRectMake(150.0, 0.0, 300.0, 44.0);
+    
+	headerLabel.text = [addressBookMap keyAtIndex: section]; // i.e. array element
+	[customView addSubview:headerLabel];
+    
+	return customView;
 }
 
 

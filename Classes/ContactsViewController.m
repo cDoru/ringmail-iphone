@@ -25,9 +25,10 @@
 
 @implementation ContactSelection
 
+
 static ContactSelectionMode sSelectionMode = ContactSelectionModeNone;
 static NSString* sAddAddress = nil;
-static NSString* sSipFilter = nil;
+static BOOL sSipFilter = FALSE;
 static BOOL sEmailFilter = FALSE;
 
 + (void)setSelectionMode:(ContactSelectionMode)selectionMode {
@@ -52,12 +53,11 @@ static BOOL sEmailFilter = FALSE;
     return sAddAddress;
 }
 
-+ (void)setSipFilter:(NSString*)domain {
-    [sSipFilter release];
-	sSipFilter = [domain retain];
++ (void)setSipFilter:(BOOL)enable {
+    sSipFilter = enable;
 }
 
-+ (NSString*)getSipFilter {
++ (BOOL)getSipFilter {
     return sSipFilter;
 }
 
@@ -76,16 +76,12 @@ static BOOL sEmailFilter = FALSE;
 @synthesize tableController;
 @synthesize tableView;
 
-@synthesize allButton;
-@synthesize linphoneButton;
 @synthesize backButton;
 @synthesize addButton;
 
-typedef enum _HistoryView {
-    History_All,
-    History_Linphone,
-    History_MAX
-} HistoryView;
+@synthesize favoritesButton;
+@synthesize allButton;
+@synthesize ringMailButton;
 
 
 #pragma mark - Lifecycle Functions
@@ -98,10 +94,12 @@ typedef enum _HistoryView {
     [tableController release];
     [tableView release];
     
-    [allButton release];
-    [linphoneButton release];
     [backButton release];
     [addButton release];
+    
+    [allButton release];
+    [favoritesButton release];
+    [ringMailButton release];
     
     [super dealloc];
 }
@@ -171,50 +169,20 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self changeView:History_All];
-    
-    // Set selected+over background: IB lack !
-    [linphoneButton setBackgroundImage:[UIImage imageNamed:@"contacts_linphone_selected.png"]
-                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
-    
-    [linphoneButton setTitle:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]
-					forState:UIControlStateNormal];
-	
-	[LinphoneUtils buttonFixStates:linphoneButton];
-    
-    // Set selected+over background: IB lack !
-    [allButton setBackgroundImage:[UIImage imageNamed:@"contacts_all_selected.png"] 
-                    forState:(UIControlStateHighlighted | UIControlStateSelected)];
-    
-    [LinphoneUtils buttonFixStates:allButton];
-    
+
+    [tableController setFilter:@""];
+    [tableController loadData];
+
     [tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
     [tableController.tableView setBackgroundView:nil]; // Can't do it in Xib: issue with ios4
+    
+    allButton.selected = TRUE;
+    favoritesButton.selected = FALSE;
+    ringMailButton.selected = FALSE;
 }
 
 
 #pragma mark -
-
-- (void)changeView:(HistoryView)view {
-    if(view == History_All) {
-        [ContactSelection setSipFilter:nil];
-        [ContactSelection setEmailFilter:FALSE];
-        [tableController loadData];
-        allButton.selected = TRUE;
-    } else {
-        allButton.selected = FALSE;
-    }
-    
-    if(view == History_Linphone) {
-        [ContactSelection setSipFilter:[LinphoneManager instance].contactFilter];
-	[ContactSelection setEmailFilter:FALSE];
-        [tableController loadData];
-        linphoneButton.selected = TRUE;
-    } else {
-        linphoneButton.selected = FALSE;
-    }
-}
 
 - (void)update {
     switch ([ContactSelection getSelectionMode]) {
@@ -228,26 +196,35 @@ static UICompositeViewDescription *compositeDescription = nil;
             [backButton setHidden:TRUE];
             break;
     }
-    if([ContactSelection getSipFilter]) {
-        allButton.selected = FALSE;
-        linphoneButton.selected = TRUE;
-    } else {
-        allButton.selected = TRUE;
-        linphoneButton.selected = FALSE;   
-    }
     [tableController loadData];
 }
 
+- (void)changeView: (ContactsView) view {
+    if(view == Contacts_All) {
+        allButton.selected = TRUE;
+        [tableController setFilter:@""];
+    } else {
+        allButton.selected = FALSE;
+    }
+    
+    if(view == Contacts_Favorites) {
+        favoritesButton.selected = TRUE;
+        [tableController setFilter:@"fav"];
+    } else {
+        favoritesButton.selected = FALSE;
+    }
+    
+    if(view == Contacts_RingMail) {
+        ringMailButton.selected = TRUE;
+        [tableController setFilter:@"ring"];
+    } else {
+        ringMailButton.selected = FALSE;
+    }
+}
+
+
 
 #pragma mark - Action Functions
-
-- (IBAction)onAllClick:(id)event {
-    [self changeView: History_All];
-}
-
-- (IBAction)onLinphoneClick:(id)event {
-    [self changeView: History_Linphone];
-}
 
 - (IBAction)onAddContactClick:(id)event {
     // Go to Contact details view
@@ -263,6 +240,18 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)onBackClick:(id)event {
     [[PhoneMainView instance] popCurrentView];
+}
+
+- (IBAction)onAllClick:(id)event {
+    [self changeView: Contacts_All];
+}
+
+- (IBAction)onRingMailClick:(id)event {
+    [self changeView: Contacts_RingMail];
+}
+
+- (IBAction)onFavoritesClick:(id)event {
+    [self changeView: Contacts_Favorites];
 }
 
 @end

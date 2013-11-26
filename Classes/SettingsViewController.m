@@ -22,6 +22,7 @@
 #import "PhoneMainView.h"
 #import "UILinphone.h"
 #import "UACellBackgroundView.h"
+#import "ValidationModel.h"
 
 #import "DCRoundSwitch.h"
 
@@ -141,8 +142,8 @@
 		[((IASKSwitchEx*)cell.accessoryView) addTarget:self action:@selector(toggledValue:) forControlEvents:UIControlEventValueChanged];
         [((IASKSwitchEx*)cell.accessoryView) setOnTintColor:LINPHONE_MAIN_COLOR];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.minimumFontSize = kIASKMinimumFontSize;
-        cell.detailTextLabel.minimumFontSize = kIASKMinimumFontSize;
+        cell.textLabel.minimumScaleFactor = kIASKMinimumFontSize;
+        cell.detailTextLabel.minimumScaleFactor = kIASKMinimumFontSize;
 	} else {
         cell = [super newCellForIdentifier:identifier];
     }
@@ -357,11 +358,11 @@
     [viewController viewWillAppear:animated]; // Force view
     UILabel *labelTitleView = [[UILabel alloc] init];
     labelTitleView.backgroundColor = [UIColor clearColor];
-    labelTitleView.textColor = [UIColor colorWithRed:0x41/255.0f green:0x48/255.0f blue:0x4f/255.0f alpha:1.0];
-    labelTitleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+    labelTitleView.textColor = [UIColor colorWithRed:0xFF/255.0f green:0xFF/255.0f blue:0xFF/255.0f alpha:1.0];
+    //labelTitleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
     labelTitleView.font = [UIFont boldSystemFontOfSize:20];
-    labelTitleView.shadowOffset = CGSizeMake(0,1);
-    labelTitleView.textAlignment = UITextAlignmentCenter;
+    //labelTitleView.shadowOffset = CGSizeMake(0,1);
+    labelTitleView.textAlignment = NSTextAlignmentCenter;
     labelTitleView.text = viewController.title;
     [labelTitleView sizeToFit];
     viewController.navigationItem.titleView = labelTitleView;
@@ -464,6 +465,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     navigationController.view.frame = self.view.frame;
     [navigationController pushViewController:settingsController animated:FALSE];
+    
+    
+    settingsController.navigationController.navigationBar.translucent = NO;
     [self.view addSubview: navigationController.view];
 }
 
@@ -617,11 +621,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     NSMutableSet *hiddenKeys = [NSMutableSet set];
     
-#ifndef DEBUG
+//#ifndef DEBUG
     [hiddenKeys addObject:@"release_button"];
     [hiddenKeys addObject:@"clear_cache_button"];
     [hiddenKeys addObject:@"battery_alert_button"];
-#endif
+//#endif
     
     [hiddenKeys addObject:@"playback_gain_preference"];
     [hiddenKeys addObject:@"microphone_gain_preference"];
@@ -697,7 +701,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)settingsViewController:(IASKAppSettingsViewController*)sender buttonTappedForSpecifier:(IASKSpecifier*)specifier {
     NSString *key = [specifier.specifierDict objectForKey:kIASKKey];
 #ifdef DEBUG
-    if([key isEqual:@"release_button"]) {
+    /*if([key isEqual:@"release_button"]) {
         [[UIApplication sharedApplication].keyWindow.rootViewController  release];
         [[UIApplication sharedApplication].keyWindow setRootViewController:nil];
         [[LinphoneManager instance]	destroyLibLinphone];
@@ -708,13 +712,14 @@ static UICompositeViewDescription *compositeDescription = nil;
         [[UIDevice currentDevice] _setBatteryState:UIDeviceBatteryStateUnplugged];
         [[UIDevice currentDevice] _setBatteryLevel:0.01f];
         [[NSNotificationCenter defaultCenter] postNotificationName:UIDeviceBatteryLevelDidChangeNotification object:self];
-    }
+    }*/
 #endif
     if([key isEqual:@"console_button"]) {
         [[PhoneMainView instance] changeCurrentView:[ConsoleViewController compositeViewDescription] push:TRUE];
     } else if([key isEqual:@"wizard_button"]) {
         WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);
         if(controller != nil) {
+            [ValidationModel removeData];
             [controller reset];
         }
     } else if([key isEqual:@"about_button"]) {

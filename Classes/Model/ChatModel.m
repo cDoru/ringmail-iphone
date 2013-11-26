@@ -30,6 +30,10 @@
 @synthesize time;
 @synthesize read;
 @synthesize state;
+@synthesize indexPath;
+@synthesize sent;
+@synthesize delivered;
+@synthesize uuid;
 
 #pragma mark - Lifecycle Functions
 
@@ -43,7 +47,10 @@
         self.message = [NSString stringWithUTF8String: (const char*) sqlite3_column_text(sqlStatement, 4)];
         self.time = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(sqlStatement, 5)];
         self.read = [NSNumber numberWithInt:sqlite3_column_int(sqlStatement, 6)];
-		self.state = [NSNumber numberWithInt:sqlite3_column_int(sqlStatement, 7)];  
+		self.state = [NSNumber numberWithInt:sqlite3_column_int(sqlStatement, 7)];
+        self.sent = [NSNumber numberWithInt:sqlite3_column_int(sqlStatement, 8)];
+        self.delivered =[NSNumber numberWithInt:sqlite3_column_int(sqlStatement, 9)];
+        self.uuid = ((const char*) sqlite3_column_text(sqlStatement, 10)) ? [NSString stringWithUTF8String: (const char*) sqlite3_column_text(sqlStatement, 10)] : @"";
     }
     return self;
 }
@@ -57,6 +64,19 @@
     [time release];
     [read release];
     [state release];
+    if (delivered != nil)
+    {
+        [delivered release];
+    }
+    if (sent != nil)
+    {
+        [sent release];
+    }
+    [uuid release];
+    if (indexPath != nil)
+    {
+        [indexPath release];
+    }
     [super dealloc];
 }
 
@@ -66,9 +86,9 @@
 }
 
 - (BOOL)isInternalImage {
-    return [message hasPrefix:@"assets-library:"];
+//    return [message hasPrefix:@"assets-library:"];
+    return [message hasPrefix:@"file:"];
 }
-
 
 #pragma mark - CRUD Functions
 
@@ -79,7 +99,7 @@
         return;
     }
     
-    const char *sql = "INSERT INTO chat (localContact, remoteContact, direction, message, time, read, state) VALUES (@LOCALCONTACT, @REMOTECONTACT, @DIRECTION, @MESSAGE, @TIME, @READ, @STATE)";
+    const char *sql = "INSERT INTO chat (localContact, remoteContact, direction, message, time, read, state, uuid) VALUES (@LOCALCONTACT, @REMOTECONTACT, @DIRECTION, @MESSAGE, @TIME, @READ, @STATE, @UUID)";
     sqlite3_stmt *sqlStatement;
     if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
         [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
@@ -94,6 +114,7 @@
     sqlite3_bind_double(sqlStatement, 5, [time timeIntervalSince1970]);
     sqlite3_bind_int(sqlStatement, 6, [read intValue]);
 	sqlite3_bind_int(sqlStatement, 7, [state intValue]);
+    sqlite3_bind_text(sqlStatement, 8, [uuid UTF8String], -1, SQLITE_STATIC);
     
     if (sqlite3_step(sqlStatement) != SQLITE_DONE) {
         [LinphoneLogger logc:LinphoneLoggerError format:"Error during execution of query: %s (%s)", sql, sqlite3_errmsg(database)];
@@ -103,7 +124,7 @@
     if([self chatId] != nil) {
         [chatId release];
     } 
-    chatId = [[NSNumber alloc] initWithInt:sqlite3_last_insert_rowid(database)];
+    chatId = [[NSNumber alloc] initWithLongLong:sqlite3_last_insert_rowid(database)];
     sqlite3_finalize(sqlStatement);
 }
 
@@ -114,7 +135,7 @@
         return nil;
     }
 
-    const char *sql = "SELECT id, localContact, remoteContact, direction, message, time, read FROM chat WHERE id=@ID";
+    const char *sql = "SELECT id, localContact, remoteContact, direction, message, time, read, sent, delivered, uuid FROM chat WHERE id=@ID";
     sqlite3_stmt *sqlStatement;
     if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
         [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
@@ -123,6 +144,37 @@
     
     // Prepare statement
     sqlite3_bind_int(sqlStatement, 1, [chatId intValue]);
+    
+    ChatModel* line = nil;
+    int err = sqlite3_step(sqlStatement);
+    if (err == SQLITE_ROW) {
+        line = [[[ChatModel alloc] initWithData:sqlStatement] autorelease];
+    } else if (err != SQLITE_DONE) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Error during execution of query: %s (%s)", sql, sqlite3_errmsg(database)];
+        sqlite3_finalize(sqlStatement);
+        return nil;
+    }
+    
+    sqlite3_finalize(sqlStatement);
+    return line;
+}
+
++ (ChatModel*)readUUID:(NSString*)uuidIn {
+    sqlite3* database = [[LinphoneManager instance] database];
+    if(database == NULL) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Database not ready"];
+        return nil;
+    }
+    
+    const char *sql = "SELECT id, localContact, remoteContact, direction, message, time, read, sent, delivered, uuid FROM chat WHERE uuid=@UUID";
+    sqlite3_stmt *sqlStatement;
+    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
+        return nil;
+    }
+    
+    // Prepare statement
+    sqlite3_bind_text(sqlStatement, 1, [uuidIn UTF8String], -1, SQLITE_STATIC);
     
     ChatModel* line = nil;
     int err = sqlite3_step(sqlStatement);
@@ -171,6 +223,60 @@
     sqlite3_finalize(sqlStatement);
 }
 
+- (void)updateSent {
+    sqlite3* database = [[LinphoneManager instance] database];
+    if(database == NULL) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Database not ready"];
+        return;
+    }
+    
+    const char *sql = "UPDATE chat SET sent=@SENT";
+    sqlite3_stmt *sqlStatement;
+    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
+        return;
+    }
+    
+    // Prepare statement
+    sqlite3_bind_double(sqlStatement, 1, [time timeIntervalSince1970]);
+	sqlite3_bind_int(sqlStatement, 2, [chatId intValue]);
+    
+    if (sqlite3_step(sqlStatement) != SQLITE_DONE) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Error during execution of query: %s (%s)", sql, sqlite3_errmsg(database)];
+        sqlite3_finalize(sqlStatement);
+        return;
+    }
+    
+    sqlite3_finalize(sqlStatement);
+}
+
+- (void)updateDelivered {
+    sqlite3* database = [[LinphoneManager instance] database];
+    if(database == NULL) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Database not ready"];
+        return;
+    }
+    
+    const char *sql = "UPDATE chat SET delivered=@DELIVERED";
+    sqlite3_stmt *sqlStatement;
+    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
+        return;
+    }
+    
+    // Prepare statement
+    sqlite3_bind_double(sqlStatement, 1, [time timeIntervalSince1970]);
+	sqlite3_bind_int(sqlStatement, 2, [chatId intValue]);
+    
+    if (sqlite3_step(sqlStatement) != SQLITE_DONE) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"Error during execution of query: %s (%s)", sql, sqlite3_errmsg(database)];
+        sqlite3_finalize(sqlStatement);
+        return;
+    }
+    
+    sqlite3_finalize(sqlStatement);
+}
+
 - (void)delete {
     sqlite3* database = [[LinphoneManager instance] database];
     if(database == NULL) {
@@ -195,10 +301,40 @@
     }
     
     sqlite3_finalize(sqlStatement);
+    
+    
+    // Delete images
+    if ([self isInternalImage])
+    {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documents = [paths objectAtIndex:0];
+        NSString *file = message;
+        NSString *file2 = [file copy];
+        file2 = [file substringFromIndex:5];
+        NSString *finalPath = [documents stringByAppendingPathComponent:file2];
+        NSFileManager *fileMgr = [NSFileManager defaultManager];
+        NSError *error;
+        if ([fileMgr removeItemAtPath:[finalPath stringByAppendingString:@".jpg"] error:&error] != YES)
+        {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Error deleting file %@.jpg: %@", finalPath, [error localizedDescription]];
+        }
+        else
+        {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Deleted file %@.jpg", finalPath];
+        }
+        if ([fileMgr removeItemAtPath:[finalPath stringByAppendingString:@"_t.jpg"] error:&error] != YES)
+        {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Error deleting file %@_t.jpg: %@", finalPath, [error localizedDescription]];
+        }
+        else
+        {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Deleted file %@_t.jpg", finalPath];
+        }
+    }
 }
 
 
-#pragma mark - 
+#pragma mark -
 
 + (NSMutableArray *)listConversations {
     NSMutableArray *array = [NSMutableArray array];
@@ -240,15 +376,27 @@
         return array;
     }
     
-    const char *sql = "SELECT id, localContact, remoteContact, direction, message, time, read, state FROM chat WHERE remoteContact=@REMOTECONTACT ORDER BY time ASC";
     sqlite3_stmt *sqlStatement;
-    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
-        [LinphoneLogger logc:LinphoneLoggerError format:"Can't execute the query: %s (%s)", sql, sqlite3_errmsg(database)];
-        return array;
+    const char *sql;
+    if (contact == nil)
+    {
+        sql = "SELECT id, localContact, remoteContact, direction, message, time, read, state, sent, delivered, uuid FROM chat ORDER BY time ASC";
+        if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Can't execute the query: %s (%s)", sql, sqlite3_errmsg(database)];
+            return array;
+        }
     }
-    
-    // Prepare statement
-    sqlite3_bind_text(sqlStatement, 1, [contact UTF8String], -1, SQLITE_STATIC);
+    else
+    {
+        sql = "SELECT id, localContact, remoteContact, direction, message, time, read, state, sent, delivered, uuid FROM chat WHERE remoteContact=@REMOTECONTACT ORDER BY time ASC";
+        if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+            [LinphoneLogger logc:LinphoneLoggerError format:"Can't execute the query: %s (%s)", sql, sqlite3_errmsg(database)];
+            return array;
+        }
+        
+        // Prepare statement
+        sqlite3_bind_text(sqlStatement, 1, [contact UTF8String], -1, SQLITE_STATIC);
+    }
     
     int err;
     while ((err = sqlite3_step(sqlStatement)) == SQLITE_ROW) {
@@ -268,29 +416,11 @@
 }
 
 + (void)removeConversation:(NSString *)contact {
-    sqlite3* database = [[LinphoneManager instance] database];
-    if(database == NULL) {
-        [LinphoneLogger logc:LinphoneLoggerError format:"Database not ready"];
-        return;
+    NSArray *msgs = [self listMessages:contact];
+    for (id chat in msgs)
+    {
+        [chat delete];
     }
-    
-    const char *sql = "DELETE FROM chat WHERE remoteContact=@REMOTECONTACT";
-    sqlite3_stmt *sqlStatement;
-    if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
-        [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
-        return;
-    }    
-    
-    // Prepare statement
-    sqlite3_bind_text(sqlStatement, 1, [contact UTF8String], -1, SQLITE_STATIC);
-    
-    if (sqlite3_step(sqlStatement) != SQLITE_DONE) {
-        [LinphoneLogger logc:LinphoneLoggerError format:"Error during execution of query: %s (%s)", sql, sqlite3_errmsg(database)];
-        sqlite3_finalize(sqlStatement);
-        return;
-    }
-    
-    sqlite3_finalize(sqlStatement);
 }
 
 + (int)unreadMessages {

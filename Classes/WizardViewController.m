@@ -20,6 +20,8 @@
 #import "WizardViewController.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
+#import "ChatModel.h"
+#import "ValidationModel.h"
 
 #import <XMLRPCConnection.h>
 #import <XMLRPCConnectionManager.h>
@@ -27,11 +29,14 @@
 #import <XMLRPCRequest.h>
 
 typedef enum _ViewElement {
-    ViewElement_Username = 100,
-    ViewElement_Password = 101,
-    ViewElement_Password2 = 102,
-    ViewElement_Email = 103,
-    ViewElement_Domain = 104,
+    ViewElement_Name = 100,
+    ViewElement_Username = 101, // Unused
+    ViewElement_Email = 102,
+    ViewElement_Phone = 103,
+    ViewElement_Password = 104,
+    ViewElement_Password2 = 105,
+    ViewElement_PhoneVerify = 106,
+    ViewElement_Domain = 104, // Unused
     ViewElement_Label = 200,
     ViewElement_Error = 201
 } ViewElement;
@@ -46,6 +51,7 @@ typedef enum _ViewElement {
 @synthesize connectAccountView;
 @synthesize externalAccountView;
 @synthesize validateAccountView;
+@synthesize validatePhoneView;
 
 @synthesize waitView;
 
@@ -56,6 +62,7 @@ typedef enum _ViewElement {
 @synthesize externalAccountButton;
 
 @synthesize choiceViewLogoImageView;
+// @synthesize createAccountViewEmailField;
 
 @synthesize viewTapGestureRecognizer;
 
@@ -96,6 +103,7 @@ typedef enum _ViewElement {
     [externalAccountButton release];
 
     [choiceViewLogoImageView release];
+//    [createAccountViewEmailField release];
     
     [historyViews release];
     
@@ -174,6 +182,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [LinphoneUtils adjustFontSize:connectAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:externalAccountView mult:2.22f];
         [LinphoneUtils adjustFontSize:validateAccountView mult:2.22f];
+        [LinphoneUtils adjustFontSize:validatePhoneView mult:2.22f];
     }
 }
 
@@ -204,6 +213,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [LinphoneLogger logc:LinphoneLoggerError format:"cannot set transport"];
     }
     
+    [[LinphoneManager instance] lpConfigSetBool:TRUE forKey:@"debugenable_preference"];
     [[LinphoneManager instance] lpConfigSetString:@"" forKey:@"sharing_server_preference"];
     [[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"ice_preference"];
     [[LinphoneManager instance] lpConfigSetString:@"" forKey:@"stun_preference"];
@@ -215,11 +225,31 @@ static UICompositeViewDescription *compositeDescription = nil;
     [WizardViewController cleanTextField:connectAccountView];
     [WizardViewController cleanTextField:externalAccountView];
     [WizardViewController cleanTextField:validateAccountView];
-    if ([[LinphoneManager instance] lpConfigBoolForKey:@"hide_wizard_welcome_view_preference"] == true) {
-        [self changeView:choiceView back:FALSE animation:FALSE];
-    } else {
-        [self changeView:welcomeView back:FALSE animation:FALSE];
+    [self changeView:choiceView back:FALSE animation:FALSE];
+    
+    // Remove database file
+    linphone_core_clear_call_logs(lc);
+    [ChatModel removeConversation:nil];
+    LinphoneManager* mgr = [LinphoneManager instance];
+    [mgr closeDatabase];
+    [mgr removeDatabase];
+    [mgr openDatabase];
+    
+    if ([ValidationModel hasData])
+    {
+        NSDictionary *res = [ValidationModel readData];
+        NSString *phoneValid = [res objectForKey:@"valid_phone"];
+        if ([phoneValid isEqualToString:@"yes"] || [phoneValid isEqualToString:@"skip"])
+        {
+            // Go to email validation
+            [self changeView:validateAccountView back:FALSE animation:FALSE];
+        }
+        else
+        {
+            [self changeView:validatePhoneView back:FALSE animation:FALSE];
+        }
     }
+    
     [waitView setHidden:TRUE];
 }
 
@@ -264,19 +294,16 @@ static UICompositeViewDescription *compositeDescription = nil;
         [backButton setHidden:false];
     }
     
-    if (view == validateAccountView) {
+    if (view == validateAccountView ||
+        view == validatePhoneView ||
+        view == choiceView
+    ) {
         [backButton setEnabled:FALSE];
-    } else if (view == choiceView) {
-        if ([[LinphoneManager instance] lpConfigBoolForKey:@"hide_wizard_welcome_view_preference"] == true) {
-            [backButton setEnabled:FALSE];
-        } else {
-            [backButton setEnabled:TRUE];
-        }
     } else {
         [backButton setEnabled:TRUE];
     }
 
-    if (view == choiceView) {
+    /*if (view == choiceView) {
         if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_wizard_logo_in_choice_view_preference"] == true) {
             [choiceViewLogoImageView setHidden:FALSE];
         }
@@ -289,8 +316,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [connectAccountButton setCenter: [externalAccountButton center]];
             }
         }
-    }
-    
+    }*/
+
     // Animation
     if(animation && [[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"] == true) {
       CATransition* trans = [CATransition animation];
@@ -388,14 +415,19 @@ static UICompositeViewDescription *compositeDescription = nil;
     if(server == nil) {
         server = domain;
     }
-	LinphoneProxyConfig* proxyCfg = linphone_core_create_proxy_config([LinphoneManager getLc]);
     char normalizedUserName[256];
     LinphoneAddress* linphoneAddress = linphone_address_new("sip:user@domain.com");
-    linphone_proxy_config_normalize_number(proxyCfg, [username cStringUsingEncoding:[NSString defaultCStringEncoding]], normalizedUserName, sizeof(normalizedUserName));
+    linphone_proxy_config_normalize_number(NULL, [username cStringUsingEncoding:[NSString defaultCStringEncoding]], normalizedUserName, sizeof(normalizedUserName));
     linphone_address_set_username(linphoneAddress, normalizedUserName);
     linphone_address_set_domain(linphoneAddress, [domain UTF8String]);
     const char* identity = linphone_address_as_string_uri_only(linphoneAddress);
-	LinphoneAuthInfo* info = linphone_auth_info_new([username UTF8String], NULL, [password UTF8String], NULL, NULL);
+	LinphoneProxyConfig* proxyCfg = linphone_core_create_proxy_config([LinphoneManager getLc]);
+	NSString* addressSipUri = [NSString stringWithUTF8String:linphone_address_as_string_uri_only(linphoneAddress)];
+	NSString* addressSipScheme = [NSString stringWithUTF8String:linphone_address_get_scheme(linphoneAddress)];
+	addressSipUri = [addressSipUri substringFromIndex:([addressSipScheme length] + 1)];
+	NSRange range = [addressSipUri rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"@"]];
+	addressSipUri = [addressSipUri substringToIndex:range.location];
+	LinphoneAuthInfo* info = linphone_auth_info_new([username UTF8String], [addressSipUri cStringUsingEncoding:[NSString defaultCStringEncoding]], [password UTF8String], NULL, NULL, linphone_proxy_config_get_domain(proxyCfg));
 	linphone_proxy_config_set_identity(proxyCfg, identity);
 	linphone_proxy_config_set_server_addr(proxyCfg, [server UTF8String]);
     if([server compare:domain options:NSCaseInsensitiveSearch] != 0) {
@@ -413,6 +445,29 @@ static UICompositeViewDescription *compositeDescription = nil;
 	linphone_core_add_auth_info([LinphoneManager getLc], info);
 }
 
+- (void)configureCodecs: (const MSList *)codecs {
+    LinphoneCore *lc = [LinphoneManager getLc];
+ 	const MSList *elem = codecs;
+	for(;elem != NULL; elem = elem->next) {
+		PayloadType *pt = (PayloadType*)elem->data;
+        if (
+            (strcmp(pt->mime_type, "PCMU") == 0) ||
+            (strcmp(pt->mime_type, "opus") == 0) ||
+            (strcmp(pt->mime_type, "H264") == 0)
+        ) {
+            linphone_core_enable_payload_type(lc, pt, true);
+        } else {
+            linphone_core_enable_payload_type(lc, pt, false);
+        }
+    }
+}
+
+- (void)setCodecsConfig {
+    LinphoneCore *lc = [LinphoneManager getLc];
+    [self configureCodecs: linphone_core_get_audio_codecs(lc)];
+    [self configureCodecs: linphone_core_get_video_codecs(lc)];
+}
+
 - (NSString*)identityFromUsername:(NSString*)username {
     char normalizedUserName[256];
     LinphoneAddress* linphoneAddress = linphone_address_new("sip:user@domain.com");
@@ -424,12 +479,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     return [uri substringFromIndex:[scheme length] + 1];
 }
 
-- (void)checkUserExist:(NSString*)username {
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC check_account %@", username];
+- (void)checkUserExist:(NSString*)email phone:(NSString*)phone {
+    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC check_account %@", email];
     
     NSURL *URL = [NSURL URLWithString:[[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
-    [request setMethod: @"check_account" withParameters:[NSArray arrayWithObjects:username, nil]];
+    [request setMethod: @"check_account_with_phone" withParameters:[NSArray arrayWithObjects:email, phone,  nil]];
     
     XMLRPCConnectionManager *manager = [XMLRPCConnectionManager sharedManager];
     [manager spawnConnectionWithXMLRPCRequest: request delegate: self];
@@ -438,13 +493,109 @@ static UICompositeViewDescription *compositeDescription = nil;
     [waitView setHidden:false];
 }
 
-- (void)createAccount:(NSString*)identity password:(NSString*)password email:(NSString*)email {
+- (NSString*)contactsToJSON {
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
+    NSArray *lContacts = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+    NSMutableArray *contactsArray = [NSMutableArray array];
+    for (id lPerson in lContacts) {
+        ABMultiValueRef emailMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonEmailProperty);
+        NSMutableArray *emailArray = [NSMutableArray array];
+        if (emailMap) {
+            for(int i = 0; i < ABMultiValueGetCount(emailMap); ++i) {
+                CFStringRef valueRef = ABMultiValueCopyValueAtIndex(emailMap, i);
+                if (valueRef) {
+                    NSString* val = (NSString *)valueRef;
+                    [emailArray addObject:val];
+                    CFRelease(valueRef);
+                }
+            }
+            CFRelease(emailMap);
+        }
+        ABMultiValueRef phoneMap = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonPhoneProperty);
+        NSMutableArray *phoneArray = [NSMutableArray array];
+        if (phoneMap) {
+            for(int i = 0; i < ABMultiValueGetCount(phoneMap); ++i) {
+                CFStringRef valueRef = ABMultiValueCopyValueAtIndex(phoneMap, i);
+                if (valueRef) {
+                    NSString* val = (NSString *)valueRef;
+                    [phoneArray addObject:val];
+                    CFRelease(valueRef);
+                }
+            }
+            CFRelease(phoneMap);
+        }
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+        [dateFormatter setLocale:enUSPOSIXLocale];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+        [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
+        CFDateRef modDate= ABRecordCopyValue((ABRecordRef)lPerson, kABPersonModificationDateProperty);
+        NSString *modDateGMT = [dateFormatter stringFromDate: (NSDate*)modDate];
+        [dateFormatter release];
+        [enUSPOSIXLocale release];
+        CFRelease(modDate);
+        NSNumber *recordId = [NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)lPerson)];
+        NSString *recordStr = [NSString stringWithFormat:@"%@", recordId];
+        NSDictionary *contactBase = @{ @"em": emailArray, @"ph": phoneArray, @"ts": modDateGMT, @"id": recordStr };
+        NSMutableDictionary *contact = [NSMutableDictionary dictionaryWithDictionary:contactBase];
+        CFStringRef lFirstName = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonFirstNameProperty);
+        CFStringRef lLocalizedFirstName = (lFirstName != nil)? ABAddressBookCopyLocalizedLabel(lFirstName): nil;
+        CFStringRef lLastName = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonLastNameProperty);
+        CFStringRef lLocalizedLastName = (lLastName != nil)? ABAddressBookCopyLocalizedLabel(lLastName): nil;
+        CFStringRef lOrganization = ABRecordCopyValue((ABRecordRef)lPerson, kABPersonOrganizationProperty);
+        CFStringRef lLocalizedlOrganization = (lOrganization != nil)? ABAddressBookCopyLocalizedLabel(lOrganization): nil;
+        if (lLocalizedFirstName != nil)
+        {
+            [contact setObject:(NSString*)lLocalizedFirstName forKey:@"fn"];
+        }
+        if (lLocalizedLastName != nil)
+        {
+            [contact setObject:(NSString*)lLocalizedLastName forKey:@"ln"];
+        }
+        if (lLocalizedlOrganization != nil)
+        {
+            [contact setObject:(NSString*)lLocalizedlOrganization forKey:@"co"];
+        }
+        if(lLocalizedlOrganization != nil)
+            CFRelease(lLocalizedlOrganization);
+        if(lOrganization != nil)
+            CFRelease(lOrganization);
+        if(lLocalizedLastName != nil)
+            CFRelease(lLocalizedLastName);
+        if(lLastName != nil)
+            CFRelease(lLastName);
+        if(lLocalizedFirstName != nil)
+            CFRelease(lLocalizedFirstName);
+        if(lFirstName != nil)
+            CFRelease(lFirstName);
+        [contactsArray addObject:contact];
+    }
+    CFRelease(lContacts);
+    CFRelease(addressBook);
+    NSDictionary *final = @{ @"contacts":contactsArray };
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:final options:0 error:nil];
+    NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [result autorelease];
+    return result;
+}
+
+- (void)createAccount:(NSString*)identity password:(NSString*)password email:(NSString*)email phone:(NSString*)phone name:(NSString*)name{
     NSString *useragent = [LinphoneManager getUserAgent];
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC create_account_with_useragent %@ %@ %@ %@", identity, password, email, useragent];
+    NSString *contacts = NULL;
+    if ([FastAddressBook isAuthorized])
+    {
+        contacts = [self contactsToJSON];
+    }
+    else
+    {
+        contacts = @"{\"contacts\":[]}";
+    }
+    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC create_account_with_contacts %@ %@ %@ %@ %@", email, password, useragent, phone, contacts];
     
     NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
-    [request setMethod: @"create_account_with_useragent" withParameters:[NSArray arrayWithObjects:identity, password, email, useragent, nil]];
+
+    [request setMethod: @"create_account_with_contacts" withParameters:[NSArray arrayWithObjects:email, password, useragent, phone, name, contacts, nil]];
     
     XMLRPCConnectionManager *manager = [XMLRPCConnectionManager sharedManager];
     [manager spawnConnectionWithXMLRPCRequest: request delegate: self];
@@ -453,12 +604,26 @@ static UICompositeViewDescription *compositeDescription = nil;
     [waitView setHidden:false];
 }
 
-- (void)checkAccountValidation:(NSString*)identity {
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC check_account_validated %@", identity];
+- (void)checkAccountValidation:(NSString*)username {
+    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC check_account_validated %@", username];
     
     NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
-    [request setMethod: @"check_account_validated" withParameters:[NSArray arrayWithObjects:identity, nil]];
+    [request setMethod: @"check_account_validated" withParameters:[NSArray arrayWithObjects:username, nil]];
+    
+    XMLRPCConnectionManager *manager = [XMLRPCConnectionManager sharedManager];
+    [manager spawnConnectionWithXMLRPCRequest: request delegate: self];
+    
+    [request release];
+    [waitView setHidden:false];
+}
+
+- (void)checkPhoneValidation:(NSString*)username phone:(NSString*)phone code:(NSString*)code {
+    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC validate_phone %@ %@ %@", username, phone, code];
+    
+    NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
+    XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
+    [request setMethod: @"validate_phone" withParameters:[NSArray arrayWithObjects:username, phone, code, nil]];
     
     XMLRPCConnectionManager *manager = [XMLRPCConnectionManager sharedManager];
     [manager spawnConnectionWithXMLRPCRequest: request delegate: self];
@@ -471,6 +636,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     switch (state) {
         case LinphoneRegistrationOk: {
             [waitView setHidden:true];
+            [[LinphoneManager instance] syncRemote];
             [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
             break;
         }
@@ -536,13 +702,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onCheckValidationClick:(id)sender {
-    NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
-    NSString *identity = [self identityFromUsername:username];
-    [self checkAccountValidation:identity];
+    NSDictionary *res = [ValidationModel readData];
+    NSString *email = [res objectForKey:@"email"];
+    [self checkAccountValidation:email];
 }
 
 - (IBAction)onSignInExternalClick:(id)sender {
-    NSString *username = [WizardViewController findTextField:ViewElement_Username  view:contentView].text;
+    NSString *username = [WizardViewController findTextField:ViewElement_Email  view:contentView].text;
     NSString *password = [WizardViewController findTextField:ViewElement_Password  view:contentView].text;
     NSString *domain = [WizardViewController findTextField:ViewElement_Domain  view:contentView].text;
     
@@ -568,19 +734,31 @@ static UICompositeViewDescription *compositeDescription = nil;
     } else {
         [self.waitView setHidden:false];
         [self addProxyConfig:username password:password domain:domain server:nil];
+        [self setCodecsConfig];
     }
 }
 
 - (IBAction)onSignInClick:(id)sender {
-    NSString *username = [WizardViewController findTextField:ViewElement_Username  view:contentView].text;
+    NSString *username = [WizardViewController findTextField:ViewElement_Email  view:contentView].text;
     NSString *password = [WizardViewController findTextField:ViewElement_Password  view:contentView].text;
     
     NSMutableString *errors = [NSMutableString string];
-    if ([username length] == 0) {
-        
-        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a username.\n", nil)]];
+
+    int username_length = [[LinphoneManager instance] lpConfigIntForKey:@"username_length" forSection:@"wizard"];
+    int password_length = [[LinphoneManager instance] lpConfigIntForKey:@"password_length" forSection:@"wizard"];
+
+    if ([username length] < username_length) {
+        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"The login is too short (minimum %d characters).\n", nil), username_length]];
+    }
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @".+@.+\\.[A-Za-z]{2}[A-Za-z]*"];
+    if(![emailTest evaluateWithObject:username]) {
+        [errors appendString:NSLocalizedString(@"The login is invalid.\n", nil)];
     }
     
+    if ([password length] < password_length) {
+        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"The password is too short (minimum %d characters).\n", nil), password_length]];
+    }
+
     if([errors length]) {
         UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)",nil)
                                                             message:[errors substringWithRange:NSMakeRange(0, [errors length] - 1)]
@@ -594,35 +772,30 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self addProxyConfig:username password:password
                       domain:[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"]
                       server:[[LinphoneManager instance] lpConfigStringForKey:@"proxy" forSection:@"wizard"]];
+        [self setCodecsConfig];
     }
 }
 
 - (IBAction)onRegisterClick:(id)sender {
-    NSString *username = [WizardViewController findTextField:ViewElement_Username  view:contentView].text;
+    NSString *email = [WizardViewController findTextField:ViewElement_Email  view:contentView].text;
+    NSString *phone = [WizardViewController findTextField:ViewElement_Phone  view:contentView].text;
     NSString *password = [WizardViewController findTextField:ViewElement_Password  view:contentView].text;
     NSString *password2 = [WizardViewController findTextField:ViewElement_Password2  view:contentView].text;
-    NSString *email = [WizardViewController findTextField:ViewElement_Email view:contentView].text;
     NSMutableString *errors = [NSMutableString string];
     
-    int username_length = [[LinphoneManager instance] lpConfigIntForKey:@"username_length" forSection:@"wizard"];
     int password_length = [[LinphoneManager instance] lpConfigIntForKey:@"password_length" forSection:@"wizard"];
     
-    if ([username length] < username_length) {
-        
-        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"The username is too short (minimum %d characters).\n", nil), username_length]];
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @".+@.+\\.[A-Za-z]{2}[A-Za-z]*"];
+    if(![emailTest evaluateWithObject:email]) {
+        [errors appendString:NSLocalizedString(@"The email is invalid.\n", nil)];
     }
-    
+
     if ([password length] < password_length) {
         [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"The password is too short (minimum %d characters).\n", nil), password_length]];
     }
     
     if (![password2 isEqualToString:password]) {
         [errors appendString:NSLocalizedString(@"The passwords are different.\n", nil)];
-    }
-    
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @".+@.+\\.[A-Za-z]{2}[A-Za-z]*"];
-    if(![emailTest evaluateWithObject:email]) {
-        [errors appendString:NSLocalizedString(@"The email is invalid.\n", nil)];
     }
     
     if([errors length]) {
@@ -634,8 +807,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [errorView show];
         [errorView release];
     } else {
-        NSString *identity = [self identityFromUsername:username];
-        [self checkUserExist:identity];
+        [self checkUserExist:email phone:phone];
     }
 }
 
@@ -643,11 +815,42 @@ static UICompositeViewDescription *compositeDescription = nil;
     [LinphoneUtils findAndResignFirstResponder:currentView];
 }
 
+- (IBAction)onCheckPhoneClick:(id)sender {
+    NSString *code = [WizardViewController findTextField:ViewElement_PhoneVerify view:contentView].text;
+    NSLog(@"Check Phone Validation Code: %@", code);
+    
+    // Validate code
+    NSPredicate *codeTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"^\\d{4}$"];
+    if(![codeTest evaluateWithObject:code])
+    {
+        UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)",nil)
+                                                            message:@"Invalid verification code"
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+                                                  otherButtonTitles:nil,nil];
+        [errorView show];
+        [errorView release];
+    }
+    else
+    {
+        NSMutableDictionary* res = [ValidationModel readData];
+        [self checkPhoneValidation:[res objectForKey:@"email"] phone:[res objectForKey:@"phone"] code:code];
+    }
+}
+
+- (IBAction)onSkipPhoneClick:(id)sender {
+    NSMutableDictionary* res = [ValidationModel readData];
+    [res setObject:@"skip" forKey:@"valid_phone"];
+    [ValidationModel storeData:res];
+    [self changeView:validateAccountView back:FALSE animation:FALSE];
+}
+
 
 #pragma mark - Event Functions
 
 - (void)registrationUpdateEvent:(NSNotification*)notif {
-    [self registrationUpdate:[[notif.userInfo objectForKey: @"state"] intValue]];
+    int state = [[notif.userInfo objectForKey: @"state"] intValue];
+    [self registrationUpdate:state];
 }
 
 
@@ -724,29 +927,90 @@ static UICompositeViewDescription *compositeDescription = nil;
         [errorView show];
         [errorView release];
     } else if([response object] != nil) { //Don't handle if not object: HTTP/Communication Error
-        if([[request method] isEqualToString:@"check_account"]) {
+        if([[request method] isEqualToString:@"check_account_with_phone"]) {
             if([response object] == [NSNumber numberWithInt:1]) {
                 UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check issue",nil)
-                                                                message:NSLocalizedString(@"Username already exists", nil)
+                                                                message:NSLocalizedString(@"Email already exists", nil)
                                                                delegate:nil
                                                       cancelButtonTitle:NSLocalizedString(@"Continue",nil)
                                                       otherButtonTitles:nil,nil];
                 [errorView show];
                 [errorView release];
-            } else {
-                NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
-                NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
-                NSString *email = [WizardViewController findTextField:ViewElement_Email view:contentView].text;
-                NSString* identity = [self identityFromUsername:username];
-                [self createAccount:identity password:password email:email];
             }
-        } else if([[request method] isEqualToString:@"create_account_with_useragent"]) {
-            if([response object] == [NSNumber numberWithInt:0]) {
-                NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
+            else if([response object] == [NSNumber numberWithInt:2]) {
+                UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check issue",nil)
+                                                                    message:NSLocalizedString(@"Username not valid", nil)
+                                                                   delegate:nil
+                                                          cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+                                                          otherButtonTitles:nil,nil];
+                [errorView show];
+                [errorView release];
+            }
+            else if([response object] == [NSNumber numberWithInt:3]) {
+                UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check issue",nil)
+                                                                    message:NSLocalizedString(@"Username already registered", nil)
+                                                                   delegate:nil
+                                                          cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+                                                          otherButtonTitles:nil,nil];
+                [errorView show];
+                [errorView release];
+            }
+            else if([response object] == [NSNumber numberWithInt:4]) {
+                UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check issue",nil)
+                                                                    message:NSLocalizedString(@"Phone number not valid", nil)
+                                                                   delegate:nil
+                                                          cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+                                                          otherButtonTitles:nil,nil];
+                [errorView show];
+                [errorView release];
+            }
+            else if([response object] == [NSNumber numberWithInt:5]) {
+                UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check issue",nil)
+                                                                    message:NSLocalizedString(@"Phone number already registered", nil)
+                                                                   delegate:nil
+                                                          cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+                                                          otherButtonTitles:nil,nil];
+                [errorView show];
+                [errorView release];
+            }
+            else {
+                NSString *name = [WizardViewController findTextField:ViewElement_Name view:contentView].text;
+                NSString *email = [WizardViewController findTextField:ViewElement_Email view:contentView].text;
+                NSString *phone = [WizardViewController findTextField:ViewElement_Phone view:contentView].text;
                 NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
-                [self changeView:validateAccountView back:FALSE animation:TRUE];
-                [WizardViewController findTextField:ViewElement_Username view:contentView].text = username;
-                [WizardViewController findTextField:ViewElement_Password view:contentView].text = password;
+                NSString* identity = [self identityFromUsername:email];
+                [self createAccount:identity password:password email:email phone:phone name:name];
+            }
+        } else if([[request method] isEqualToString:@"create_account_with_contacts"]) {
+            if([response object] == [NSNumber numberWithInt:0]) {
+                NSString *name = [WizardViewController findTextField:ViewElement_Name view:contentView].text;
+                NSString *email = [WizardViewController findTextField:ViewElement_Email view:contentView].text;
+                NSString *phone = [WizardViewController findTextField:ViewElement_Phone view:contentView].text;
+                NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
+                NSString *validPhone;
+                if ([phone length])
+                {
+                    validPhone = @"no";
+                }
+                else
+                {
+                    validPhone = @"skip";
+                }
+                [ValidationModel storeData:[NSDictionary dictionaryWithObjectsAndKeys:
+                                            email, @"email",
+                                            password, @"password",
+                                            phone, @"phone",
+                                            name, @"name",
+                                            validPhone, @"valid_phone",
+                                            nil]];
+                if ([phone length])
+                {
+                    [self changeView:validatePhoneView back:FALSE animation:TRUE];
+                }
+                else
+                {
+                    [self changeView:validateAccountView back:FALSE animation:TRUE];
+                }
             } else {
                 UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account creation issue",nil)
                                                                     message:NSLocalizedString(@"Can't create the account. Please try again.", nil)
@@ -756,13 +1020,33 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [errorView show];
                 [errorView release];
             }
+        }
+        else if([[request method] isEqualToString:@"validate_phone"]) {
+            if([response object] == [NSNumber numberWithInt:1]) {
+                UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check issue",nil)
+                                                                    message:@"Wrong validation code"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+                                                          otherButtonTitles:nil,nil];
+                [errorView show];
+                [errorView release];
+            }
+            else {
+                NSMutableDictionary* res = [ValidationModel readData];
+                [res setObject:@"yes" forKey:@"valid_phone"];
+                [ValidationModel storeData:res];
+                [self changeView:validateAccountView back:FALSE animation:TRUE];
+            }
         } else if([[request method] isEqualToString:@"check_account_validated"]) {
              if([response object] == [NSNumber numberWithInt:1]) {
-                 NSString *username = [WizardViewController findTextField:ViewElement_Username view:contentView].text;
-                 NSString *password = [WizardViewController findTextField:ViewElement_Password view:contentView].text;
-                [self addProxyConfig:username password:password
+                 NSDictionary *res = [ValidationModel readData];
+                 NSString *email = [res objectForKey:@"email"];
+                 NSString *password = [res objectForKey:@"password"];
+                 [ValidationModel removeData]; // Email validated
+                 [self addProxyConfig:email password:password
                               domain:[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"]
                               server:[[LinphoneManager instance] lpConfigStringForKey:@"proxy" forSection:@"wizard"]];
+                 [self setCodecsConfig];
              } else {
                  UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account validation issue",nil)
                                                                      message:NSLocalizedString(@"Your account is not validate yet.", nil)

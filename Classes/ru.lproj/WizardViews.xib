@@ -1087,6 +1087,14 @@
 					<int key="connectionID">136</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">createAccountViewEmailField</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="131114733"/>
+					</object>
+					<int key="connectionID">137</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">onCreateAccountClick:</string>
 						<reference key="source" ref="480353232"/>
@@ -1595,7 +1603,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">136</int>
+			<int key="maxID">137</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1741,6 +1749,7 @@
 						<string key="contentView">UIScrollView</string>
 						<string key="createAccountButton">UIButton</string>
 						<string key="createAccountView">UIView</string>
+						<string key="createAccountViewEmailField">UITextField</string>
 						<string key="externalAccountButton">UIButton</string>
 						<string key="externalAccountView">UIView</string>
 						<string key="startButton">UIButton</string>
@@ -1781,6 +1790,10 @@
 						<object class="IBToOneOutletInfo" key="createAccountView">
 							<string key="name">createAccountView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="createAccountViewEmailField">
+							<string key="name">createAccountViewEmailField</string>
+							<string key="candidateClassName">UITextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="externalAccountButton">
 							<string key="name">externalAccountButton</string>
@@ -1826,7 +1839,7 @@
 			<string key="button_background_default.png">{550, 101}</string>
 			<string key="button_background_over.png">{550, 101}</string>
 			<string key="field_background.png">{542, 88}</string>
-			<string key="setup_welcome_logo.png">{179, 161}</string>
+			<string key="setup_welcome_logo.png">{322, 323}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>

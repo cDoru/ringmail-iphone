@@ -19,13 +19,14 @@
 
 #import "UICallButton.h"
 #import "LinphoneManager.h"
+#import "PhoneMainView.h"
 
 #import <CoreTelephony/CTCallCenter.h>
 
 @implementation UICallButton
 
 @synthesize addressField;
-
+@synthesize hiddenContact;
 
 #pragma mark - Lifecycle Functions
 
@@ -58,7 +59,10 @@
 }	
 
 - (void)dealloc {
-	[addressField release];
+    if (addressField != nil)
+    {
+        [addressField release];
+    }
     
     [super dealloc];
 }
@@ -67,13 +71,41 @@
 #pragma mark -
 
 - (void)touchUp:(id) sender {
-    NSString *address = [addressField text];
     NSString *displayName = nil;
-    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-    if(contact) {
-        displayName = [FastAddressBook getContactDisplayName:contact];
+    NSString *address = nil;
+    if (hiddenContact != nil)
+    {
+        displayName = [FastAddressBook getContactDisplayName:hiddenContact];
+        address = [FastAddressBook getRingMailURI:hiddenContact];
+        if (address == nil)
+        {
+            NSArray* phones = [FastAddressBook getPhoneNumbers:hiddenContact];
+            [[PhoneMainView instance].mainViewController selectPhoneAction:@"call" list:phones];
+            return;
+        }
+    }
+    else
+    {
+        address = [addressField text];
+        ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+        if (contact)
+        {
+            displayName = [FastAddressBook getContactDisplayName:contact];
+        }
     }
     [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
+}
+
+- (BOOL) hasHidden
+{
+    if (hiddenContact == nil)
+    {
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
 }
 
 @end

@@ -23,6 +23,7 @@
 #import "UILinphone.h"
 #import "LinphoneManager.h"
 #import "FastAddressBook.h"
+#import "SMRotaryImage.h"
 
 @implementation UICallCellData
 
@@ -55,7 +56,8 @@
         char* lAddress = linphone_address_as_string_uri_only(addr);
         if(lAddress) {
             NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+            NSString *sipTarget = [FastAddressBook getTargetFromSIP:normalizedSipAddress];
+            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:sipTarget];
             if(contact) {
                 useLinphoneAddress = false;
                 self.address = [FastAddressBook getContactDisplayName:contact];
@@ -64,7 +66,7 @@
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^(void) {
                         UIImage *tmpImage2 = [UIImage decodedImageWithImage:tmpImage];
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self setImage: tmpImage2];
+                            [self setImage: [SMRotaryImage roundedImageWithImage:tmpImage2]];
                         });
                     });
                 }
@@ -272,11 +274,11 @@
 #pragma mark - Static Functions
 
 + (int)getMaximizedHeight {
-    return 280;
+    return 200;
 }
 
 + (int)getMinimizedHeight {
-    return 54;
+    return 72;
 }
 
 + (void)adaptSize:(UILabel*)label field:(UIView*)field {
@@ -401,7 +403,8 @@
         [stateImage setHidden:true];
         [pauseButton setHidden:true];
         [removeButton setHidden:false];
-        [headerBackgroundImage setImage:[UIImage imageNamed:@"cell_conference.png"]];
+        //[headerBackgroundImage setImage:[UIImage imageNamed:@"cell_conference.png"]];
+        [headerBackgroundImage setImage:[UIImage imageNamed:@"cell_call_first.png"]];
     }
     
     int duration = linphone_call_get_duration(call);
@@ -501,7 +504,7 @@
     if(parentTable != nil) {
        NSIndexPath *index= [parentTable indexPathForCell:self];
         if(index != nil) {
-            [parentTable reloadRowsAtIndexPaths:[[NSArray alloc] initWithObjects:index, nil] withRowAnimation:false];
+            [parentTable reloadRowsAtIndexPaths:[NSArray arrayWithObjects:index, nil] withRowAnimation:false];
         }
     }
 }
@@ -510,10 +513,10 @@
 #pragma mark - Action Functions
 
 - (IBAction)doHeaderClick:(id)sender {
-    if(data) {
+    /*if(data) {
         data->minimize = !data->minimize;
         [self selfUpdate];
-    }
+    }*/
 }
 
 - (IBAction)doRemoveClick:(id)sender {

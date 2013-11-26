@@ -19,6 +19,7 @@
 
 #import "ContactDetailsViewController.h"
 #import "PhoneMainView.h"
+#import "DTActionSheet.h"
 
 @implementation ContactDetailsViewController
 
@@ -140,6 +141,11 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     } else {
         [LinphoneLogger logc:LinphoneLoggerLog format:"Save AddressBook: Success!"];
     }
+    LinphoneManager* mgr = [LinphoneManager instance];
+    FastAddressBook* book = [mgr fastAddressBook];
+    [book loadData];
+    [book setupWheelContacts];
+    [mgr setReloadWheels:YES];
 }
 
 - (void)newContact {
@@ -153,12 +159,18 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 }
 
 - (void)newContact:(NSString*)address {
-    [LinphoneLogger logc:LinphoneLoggerLog format:"New contact"];
+    [LinphoneLogger logc:LinphoneLoggerLog format:"New contact: %@", address];
     contact = NULL;
     [self resetData];
     contact = ABPersonCreate();
     [tableController setContact:contact];
-    if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true) {
+    if ([address rangeOfString:@"@"].length > 0) {
+        [tableController addEmailField:address];
+    } else {
+        [tableController addPhoneField:address];
+    }
+    
+/*    if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true) {
         LinphoneAddress *linphoneAddress = linphone_address_new([address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
         NSString *username = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
         if ([username rangeOfString:@"@"].length > 0) {
@@ -169,7 +181,8 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
         linphone_address_destroy(linphoneAddress);
     } else {
         [tableController addSipField:address];
-    }
+    } */
+    
     [self enableEdit:FALSE];
     [[tableController tableView] reloadData];
 }
@@ -190,7 +203,15 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     [self resetData];
     contact = ABAddressBookGetPersonWithRecordID(addressBook, ABRecordGetRecordID(acontact));
     [tableController setContact:contact];
-    if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true) {
+    
+    [tableController setContact:contact];
+    if ([address rangeOfString:@"@"].length > 0) {
+        [tableController addEmailField:address];
+    } else {
+        [tableController addPhoneField:address];
+    }
+    
+/*    if ([[LinphoneManager instance] lpConfigBoolForKey:@"show_contacts_emails_preference"] == true) {
         LinphoneAddress *linphoneAddress = linphone_address_new([address cStringUsingEncoding:[NSString defaultCStringEncoding]]);
         NSString *username = [NSString stringWithUTF8String:linphone_address_get_username(linphoneAddress)];
         if ([username rangeOfString:@"@"].length > 0) {
@@ -201,7 +222,9 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
         linphone_address_destroy(linphoneAddress);
     } else {
         [tableController addSipField:address];
-    }
+    } */
+    
+    
     [self enableEdit:FALSE];
     [[tableController tableView] reloadData];
 }
@@ -224,11 +247,11 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     [super viewDidLoad];
     
     // Set selected+over background: IB lack !
-    [editButton setBackgroundImage:[UIImage imageNamed:@"contact_ok_over.png"]
+    [editButton setBackgroundImage:[UIImage imageNamed:@"chat_edit_over.png"]
                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
     
     // Set selected+disabled background: IB lack !
-    [editButton setBackgroundImage:[UIImage imageNamed:@"contact_ok_disabled.png"]
+    [editButton setBackgroundImage:[UIImage imageNamed:@"chat_edit_over.png"]
                 forState:(UIControlStateDisabled | UIControlStateSelected)];
     
     [LinphoneUtils buttonFixStates:editButton];
@@ -296,6 +319,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)enableEdit:(BOOL)animated {
     if(![tableController isEditing]) {
+        [tableController setEditFlag:TRUE];
         [tableController setEditing:TRUE animated:animated];
     }
     [editButton setOn];
@@ -305,6 +329,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)disableEdit:(BOOL)animated {
     if([tableController isEditing]) {
+        [tableController setEditFlag:FALSE];
         [tableController setEditing:FALSE animated:animated];
     }
     [editButton setOff];
@@ -351,5 +376,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         [editButton setEnabled:FALSE];
     }
 }
+
 
 @end

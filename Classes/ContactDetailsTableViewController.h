@@ -33,6 +33,7 @@
 }
 
 @property (nonatomic, assign) ABRecordRef contact;
+@property (nonatomic, assign) BOOL editFlag;
 @property (nonatomic, retain) IBOutlet id<ContactDetailsDelegate> contactDetailsDelegate;
 @property (nonatomic, retain) IBOutlet UIContactDetailsHeader *headerController;
 @property (nonatomic, retain) IBOutlet UIContactDetailsFooter *footerController;
@@ -40,5 +41,6 @@
 - (BOOL)isValid;
 - (void)addSipField:(NSString*)address;
 - (void)addEmailField:(NSString*)address;
+- (void)addPhoneField:(NSString*)address;
 
 @end

@@ -109,10 +109,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [HistoryDetailsViewController adaptSize:dateHeaderLabel field:dateLabel];
-    [HistoryDetailsViewController adaptSize:durationHeaderLabel field:durationLabel];
-    [HistoryDetailsViewController adaptSize:typeHeaderLabel field:typeLabel];
-    [HistoryDetailsViewController adaptSize:plainAddressHeaderLabel field:plainAddressLabel];
+    //[HistoryDetailsViewController adaptSize:dateHeaderLabel field:dateLabel];
+    //[HistoryDetailsViewController adaptSize:durationHeaderLabel field:durationLabel];
+    //[HistoryDetailsViewController adaptSize:typeHeaderLabel field:typeLabel];
+    //[HistoryDetailsViewController adaptSize:plainAddressHeaderLabel field:plainAddressLabel];
     [callButton.titleLabel setAdjustsFontSizeToFitWidth:TRUE]; // Auto shrink: IB lack!
     [messageButton.titleLabel setAdjustsFontSizeToFitWidth:TRUE]; // Auto shrink: IB lack!
 }
@@ -211,9 +211,10 @@ static UICompositeViewDescription *compositeDescription = nil;
         char* lAddress = linphone_address_as_string_uri_only(addr);
         if(lAddress) {
             NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-            contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+            NSString *ringMailAddress = [FastAddressBook getTargetFromSIP:normalizedSipAddress];
+            contact = [[[LinphoneManager instance] fastAddressBook] getContact:ringMailAddress];
             if(contact) {
-                image = [FastAddressBook getContactImage:contact thumbnail:true];
+                image = [SMRotaryImage roundedImageWithImage:[FastAddressBook getContactImage:contact thumbnail:true]];
                 address = [FastAddressBook getContactDisplayName:contact];
                 useLinphoneAddress = false;
             }
@@ -281,15 +282,14 @@ static UICompositeViewDescription *compositeDescription = nil;
     // contact name
     [plainAddressLabel setText:@""];
     if (addr != NULL) {
-        if ([[LinphoneManager instance] lpConfigBoolForKey:@"contact_display_username_only"]) {
-			[plainAddressLabel setText:[NSString stringWithUTF8String:linphone_address_get_username(addr)?linphone_address_get_username(addr):""]];
-		} else {
-			char* lAddress = linphone_address_as_string_uri_only(addr);
-			if(lAddress != NULL) {
-				[plainAddressLabel setText:[NSString stringWithUTF8String:lAddress]];
-				ms_free(lAddress);
-			}
-		}
+        char* lAddress = linphone_address_as_string_uri_only(addr);
+        if(lAddress != NULL) {
+            NSString* addr = [FastAddressBook getTargetFromSIP:[NSString stringWithUTF8String:lAddress]];
+            [plainAddressLabel setText:addr];
+            ms_free(lAddress);
+        } else {
+            
+        }
     }
     
     if (addr != NULL) {
@@ -326,10 +326,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (addr != NULL) {
         char* lAddress = linphone_address_as_string_uri_only(addr);
         if(lAddress != NULL) {
-            [ContactSelection setAddAddress:[NSString stringWithUTF8String:lAddress]];
+            [ContactSelection setAddAddress:[FastAddressBook getTargetFromSIP:[NSString stringWithUTF8String:lAddress]]];
             [ContactSelection setSelectionMode:ContactSelectionModeEdit];
             
-            [ContactSelection setSipFilter:nil];
+            [ContactSelection setSipFilter:FALSE];
             [ContactSelection setEmailFilter:FALSE];
             ContactsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription] push:TRUE], ContactsViewController);
             if(controller != nil) {
@@ -379,7 +379,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     if(lAddress == NULL)
         return;
     
-    NSString *displayName = nil;
+    // displayName not used
+    //
+    /*NSString *displayName = nil;
     if(contact != nil) {
         displayName = [FastAddressBook getContactDisplayName:contact];
     } else {
@@ -389,7 +391,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             displayName = [NSString stringWithUTF8String:lDisplayName];
         else if(lUserName)
             displayName = [NSString stringWithUTF8String:lUserName];
-    }
+    }*/
     
     // Go to ChatRoom view
     [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];

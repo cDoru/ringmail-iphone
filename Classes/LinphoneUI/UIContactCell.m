@@ -20,14 +20,17 @@
 #import "UIContactCell.h"
 #import "Utils.h"
 #import "FastAddressBook.h"
+#import "FavoritesModel.h"
 
 @implementation UIContactCell
 
 @synthesize firstNameLabel;
 @synthesize lastNameLabel;
 @synthesize avatarImage;
+@synthesize ringMailLogo;
 @synthesize contact;
-
+@synthesize hasRingMail;
+@synthesize hasFavorite;
 
 #pragma mark - Lifecycle Functions
 
@@ -55,7 +58,8 @@
 
 #pragma mark - Property Functions
 
-- (void)setContact:(ABRecordRef)acontact {
+- (void)setContact:(ABRecordRef)acontact
+{
     contact = acontact;
     [self update];
 }
@@ -109,6 +113,26 @@
         CFRelease(lLocalizedFirstName);
     if(lFirstName != nil)
         CFRelease(lFirstName);
+    
+    if (hasFavorite)
+    {
+        firstNameLabel.font = [UIFont boldSystemFontOfSize:15.0];
+        lastNameLabel.font = [UIFont boldSystemFontOfSize:15.0];
+    }
+    else
+    {
+        firstNameLabel.font = [UIFont systemFontOfSize:15.0];
+        lastNameLabel.font = [UIFont systemFontOfSize:15.0];
+    }
+    
+    if (hasRingMail)
+    {
+        [ringMailLogo setHidden:FALSE];
+    }
+    else
+    {
+        [ringMailLogo setHidden:TRUE];
+    }
 }
 
 - (void)layoutSubviews {
@@ -147,13 +171,13 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
-    if(highlighted) {
+    /*if(highlighted) {
         [lastNameLabel setTextColor:[UIColor whiteColor]];
         [firstNameLabel setTextColor:[UIColor whiteColor]];
     } else {
         [lastNameLabel setTextColor:[UIColor  blackColor]];
         [firstNameLabel setTextColor:[UIColor blackColor]];   
-    }
+    }*/
 }
 
 @end

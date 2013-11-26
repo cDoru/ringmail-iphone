@@ -27,7 +27,10 @@
 @property (nonatomic, retain) IBOutlet UILabel* firstNameLabel;
 @property (nonatomic, retain) IBOutlet UILabel* lastNameLabel;
 @property (nonatomic, retain) IBOutlet UIImageView *avatarImage;
+@property (nonatomic, retain) IBOutlet UIImageView *ringMailLogo;
 @property (nonatomic, assign) ABRecordRef contact;
+@property (nonatomic, assign) BOOL hasRingMail;
+@property (nonatomic, assign) BOOL hasFavorite;
 
 - (id)initWithIdentifier:(NSString*)identifier;
 

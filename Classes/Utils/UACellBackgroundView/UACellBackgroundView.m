@@ -11,7 +11,7 @@
 
 #import "UACellBackgroundView.h"
 
-static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWidth,float ovalHeight);
+// static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWidth,float ovalHeight);
 
 @implementation UACellBackgroundView
 
@@ -261,7 +261,7 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
 
 @end
 
-static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWidth,float ovalHeight) {
+/* static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWidth,float ovalHeight) {
     float fw, fh;
 	
     if (ovalWidth == 0 || ovalHeight == 0) {// 1
@@ -285,4 +285,4 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
     CGContextClosePath(context);// 12
 	
     CGContextRestoreGState(context);// 13
-}
+} */

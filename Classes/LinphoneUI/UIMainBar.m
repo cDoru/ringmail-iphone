@@ -32,7 +32,7 @@ static NSString * const kDisappearAnimation = @"disappear";
 @synthesize historyButton;
 @synthesize contactsButton;
 @synthesize dialerButton;
-@synthesize settingsButton;
+@synthesize directoryButton;
 @synthesize chatButton;
 @synthesize historyNotificationView;
 @synthesize historyNotificationLabel;
@@ -51,7 +51,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     [historyButton release];
     [contactsButton release];
     [dialerButton release];
-    [settingsButton release];
+    [directoryButton release];
     [chatButton release];
     [historyNotificationView release];
     [historyNotificationLabel release];
@@ -112,7 +112,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *historyButtonLandscape = (UIButton*) [landscapeView viewWithTag:[historyButton tag]];
         // Set selected+over background: IB lack !
-        [historyButton setBackgroundImage:[UIImage imageNamed:@"history_selected.png"]
+        [historyButton setBackgroundImage:[UIImage imageNamed:@"history_default.png"]
                                  forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
         // Set selected+over background: IB lack !
@@ -126,7 +126,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *contactsButtonLandscape = (UIButton*) [landscapeView viewWithTag:[contactsButton tag]];
         // Set selected+over background: IB lack !
-        [contactsButton setBackgroundImage:[UIImage imageNamed:@"contacts_selected.png"]
+        [contactsButton setBackgroundImage:[UIImage imageNamed:@"contacts_default.png"]
                                   forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
         // Set selected+over background: IB lack !
@@ -139,7 +139,7 @@ static NSString * const kDisappearAnimation = @"disappear";
     {
         UIButton *dialerButtonLandscape = (UIButton*) [landscapeView viewWithTag:[dialerButton tag]];
         // Set selected+over background: IB lack !
-        [dialerButton setBackgroundImage:[UIImage imageNamed:@"dialer_selected.png"]
+        [dialerButton setBackgroundImage:[UIImage imageNamed:@"ringmail_default.png"]
                                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
         // Set selected+over background: IB lack !
@@ -150,23 +150,23 @@ static NSString * const kDisappearAnimation = @"disappear";
         [LinphoneUtils buttonFixStatesForTabs:dialerButtonLandscape];
     }
     {
-        UIButton *settingsButtonLandscape = (UIButton*) [landscapeView viewWithTag:[settingsButton tag]];
+        UIButton *directoryButtonLandscape = (UIButton*) [landscapeView viewWithTag:[directoryButton tag]];
         // Set selected+over background: IB lack !
-        [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings_selected.png"]
+        [directoryButton setBackgroundImage:[UIImage imageNamed:@"directory_default.png"]
                                   forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
         // Set selected+over background: IB lack !
-        [settingsButtonLandscape setBackgroundImage:[UIImage imageNamed:@"settings_selected_landscape.png"]
+        [directoryButtonLandscape setBackgroundImage:[UIImage imageNamed:@"settings_selected_landscape.png"]
                                        forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
-        [LinphoneUtils buttonFixStatesForTabs:settingsButton];
-        [LinphoneUtils buttonFixStatesForTabs:settingsButtonLandscape];
+        [LinphoneUtils buttonFixStatesForTabs:directoryButton];
+        [LinphoneUtils buttonFixStatesForTabs:directoryButtonLandscape];
     }
     
     {
         UIButton *chatButtonLandscape = (UIButton*) [landscapeView viewWithTag:[chatButton tag]];
         // Set selected+over background: IB lack !
-        [chatButton setBackgroundImage:[UIImage imageNamed:@"chat_selected.png"]
+        [chatButton setBackgroundImage:[UIImage imageNamed:@"chat_default.png"]
                               forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
         // Set selected+over background: IB lack !
@@ -378,10 +378,10 @@ static NSString * const kDisappearAnimation = @"disappear";
     } else {
         dialerButton.selected = FALSE;
     }
-    if([view equal:[SettingsViewController compositeViewDescription]]) {
-        settingsButton.selected = TRUE;
+    if([view equal:[DialpadViewController compositeViewDescription]]) {
+        directoryButton.selected = TRUE;
     } else {
-        settingsButton.selected = FALSE;
+        directoryButton.selected = FALSE;
     }
     if([view equal:[ChatViewController compositeViewDescription]]) {
         chatButton.selected = TRUE;
@@ -400,7 +400,7 @@ static NSString * const kDisappearAnimation = @"disappear";
 - (IBAction)onContactsClick:(id)event {
     [ContactSelection setSelectionMode:ContactSelectionModeNone];
     [ContactSelection setAddAddress:nil];
-    [ContactSelection setSipFilter:nil];
+    [ContactSelection setSipFilter:FALSE];
     [ContactSelection setEmailFilter:FALSE];
     [[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription]];
 }
@@ -409,14 +409,17 @@ static NSString * const kDisappearAnimation = @"disappear";
     [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
 }
 
-- (IBAction)onSettingsClick:(id)event {
+/* - (IBAction)onSettingsClick:(id)event {
     [[PhoneMainView instance] changeCurrentView:[SettingsViewController compositeViewDescription]];
-}
+} */
 
 - (IBAction)onChatClick:(id)event {
     [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
 }
 
+- (IBAction)onDirectoryClick:(id)event {
+    [[PhoneMainView instance] changeCurrentView:[DialpadViewController compositeViewDescription]];
+}
 
 #pragma mark - TPMultiLayoutViewController Functions
 

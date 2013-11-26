@@ -18,11 +18,15 @@
  */              
 
 #import <UIKit/UIKit.h>
+#import <AddressBook/AddressBook.h>
 
 
 @interface UICallButton : UIButton {
 }
 
 @property (nonatomic, retain) IBOutlet UITextField* addressField;
+@property (nonatomic, assign) ABRecordRef hiddenContact;
+
+- (BOOL) hasHidden;
 
 @end

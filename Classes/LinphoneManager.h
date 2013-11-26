@@ -32,6 +32,11 @@
 #import "FastAddressBook.h"
 #import "Utils.h"
 
+#import "ASIHTTPRequest.h"
+#import "ASIHTTPRequestDelegate.h"
+#import "ImageHelper.h"
+#import "SMRotaryWheel.h"
+
 #include "linphonecore.h"
 
 extern const char *const LINPHONERC_APPLICATION_KEY;
@@ -45,7 +50,8 @@ extern NSString *const kLinphoneMainViewChange;
 extern NSString *const kLinphoneAddressBookUpdate;
 extern NSString *const kLinphoneLogsUpdate;
 extern NSString *const kLinphoneSettingsUpdate;
-extern NSString *const kLinphoneBluetoothAvailabilityUpdate;
+
+extern NSString *const kContactSipField;
 
 typedef enum _NetworkType {
     network_none = 0,
@@ -87,7 +93,7 @@ typedef struct _LinphoneManagerSounds {
     SystemSoundID message;
 } LinphoneManagerSounds;
 
-@interface LinphoneManager : NSObject <AVAudioSessionDelegate> {
+@interface LinphoneManager : NSObject <AVAudioSessionDelegate,ASIHTTPRequestDelegate> {
 @protected
 	SCNetworkReachabilityRef proxyReachability;
     
@@ -99,6 +105,7 @@ typedef struct _LinphoneManagerSounds {
 	UIBackgroundTaskIdentifier pausedCallBgTask;
 	UIBackgroundTaskIdentifier incallBgTask;
 	CTCallCenter* mCallCenter;
+    NSMutableDictionary *chatDownloads;
     
 @public
     CallContext currentCallContextBeforeGoingBackground;
@@ -112,10 +119,8 @@ typedef struct _LinphoneManagerSounds {
 + (BOOL)runningOnIpad;
 + (BOOL)isNotIphone3G;
 + (NSString *)getPreferenceForCodec: (const char*) name withRate: (int) rate;
-+ (BOOL)isCodecSupported: (const char*)codecName;
 + (NSSet *)unsupportedCodecs;
 + (NSString *)getUserAgent;
-
 
 - (void)startLibLinphone;
 - (void)destroyLibLinphone;
@@ -144,7 +149,6 @@ typedef struct _LinphoneManagerSounds {
 
 - (void)lpConfigSetString:(NSString*)value forKey:(NSString*)key;
 - (NSString*)lpConfigStringForKey:(NSString*)key;
-- (NSString*)lpConfigStringForKey:(NSString*)key withDefault:(NSString*)value;
 - (void)lpConfigSetString:(NSString*)value forKey:(NSString*)key forSection:(NSString*)section;
 - (NSString*)lpConfigStringForKey:(NSString*)key forSection:(NSString*)section;
 - (void)lpConfigSetInt:(NSInteger)value forKey:(NSString*)key;
@@ -156,6 +160,14 @@ typedef struct _LinphoneManagerSounds {
 - (void)lpConfigSetBool:(BOOL)value forKey:(NSString*)key forSection:(NSString*)section;
 - (BOOL)lpConfigBoolForKey:(NSString*)key forSection:(NSString*)section;
 
+- (void)processCommand:(NSString*)command;
+- (void)syncRemote;
+- (void)syncRemoteFavorites;
+- (NSDictionary *)getRemoteLogin;
+- (void)startIterator;
+- (void)closeDatabase;
+- (void)openDatabase;
+- (void)removeDatabase;
 
 @property (readonly) FastAddressBook* fastAddressBook;
 @property Connectivity connectivity;
@@ -167,11 +179,9 @@ typedef struct _LinphoneManagerSounds {
 @property (readonly) LinphoneManagerSounds sounds;
 @property (readonly) NSMutableArray *logs;
 @property (nonatomic, assign) BOOL speakerEnabled;
-@property (nonatomic, assign) BOOL bluetoothAvailable;
-@property (nonatomic, assign) BOOL bluetoothEnabled;
+@property (nonatomic, assign) BOOL reloadWheels;
 @property (readonly) ALAssetsLibrary *photoLibrary;
-@property (readonly) NSString* contactSipField;
-@property (readonly,copy) NSString* contactFilter;
+@property (nonatomic, retain) NSString *commandURL;
 
 @end
 

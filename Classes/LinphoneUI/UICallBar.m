@@ -293,7 +293,7 @@
         [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot update call bar: Linphone core not ready"];
         return;
     }
-    LinphoneCore* lc = [LinphoneManager getLc]; 
+//    LinphoneCore* lc = [LinphoneManager getLc];
 
     [speakerButton update];
     [microButton update];
@@ -303,7 +303,8 @@
     
     
     // Show Pause/Conference button following call count
-    if(linphone_core_get_calls_nb(lc) > 1) {
+    // DISABLED Conferencing (It is too flaky)
+/*    if(linphone_core_get_calls_nb(lc) > 1) {
         if(![pauseButton isHidden]) {
             [pauseButton setHidden:true];
             [conferenceButton setHidden:false];
@@ -331,12 +332,12 @@
         }
     }
 
-    // Disable transfert in conference
+    // Disable transfer in conference
     if(linphone_core_get_current_call(lc) == NULL) {
         [optionsTransferButton setEnabled:FALSE];
     } else {
         [optionsTransferButton setEnabled:TRUE];
-    }
+    } */
     
     switch(state) {
         LinphoneCallEnd:
@@ -547,11 +548,11 @@
 }
 
 - (IBAction)onOptionsClick:(id)sender {
-    if([optionsView isHidden]) {
+/*    if([optionsView isHidden]) {
         [self showOptions:[[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"]];
     } else {
         [self hideOptions:[[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"]];
-    }
+    } */
 }
 
 - (IBAction)onConferenceClick:(id)sender {

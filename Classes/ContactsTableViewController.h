@@ -21,14 +21,19 @@
 #import <AddressBook/AddressBook.h>
 
 #import "OrderedDictionary.h"
+#import "ContactSelectProtocol.h"
 
 @interface ContactsTableViewController : UITableViewController {
     @private
     OrderedDictionary* addressBookMap;
     NSMutableDictionary* avatarMap;
-    
     ABAddressBookRef addressBook;
+    NSMutableDictionary* ringMailMap;
+    NSMutableDictionary* favMap;
 }
+
+@property (nonatomic, assign) id <ContactSelectProtocol> delegate;
+@property (nonatomic, retain) NSString* filter;
 
 - (void)loadData;
 

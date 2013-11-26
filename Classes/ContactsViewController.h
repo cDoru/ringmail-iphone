@@ -36,27 +36,36 @@ typedef enum _ContactSelectionMode {
 + (ContactSelectionMode)getSelectionMode;
 + (void)setAddAddress:(NSString*)address;
 + (NSString*)getAddAddress;
-/* define sip filter, can be * or sip domain*/
-+ (void)setSipFilter:(NSString*) domain;
-+ (NSString*)getSipFilter;
++ (void)setSipFilter:(BOOL)enable;
++ (BOOL)getSipFilter;
 + (void)setEmailFilter:(BOOL)enable;
 + (BOOL)getEmailFilter;
 
 @end
+
+typedef enum _ContactsView {
+    Contacts_All,
+    Contacts_Favorites,
+    Contacts_RingMail,
+    Contacts_MAX
+} ContactsView;
 
 @interface ContactsViewController : UIViewController<UICompositeViewDelegate> {
 }
 
 @property (nonatomic, retain) IBOutlet ContactsTableViewController* tableController;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) IBOutlet UIButton* allButton;
-@property (nonatomic, retain) IBOutlet UIButton* linphoneButton;
 @property (nonatomic, retain) IBOutlet UIButton *backButton;
 @property (nonatomic, retain) IBOutlet UIButton *addButton;
+@property (nonatomic, retain) IBOutlet UIButton *allButton;
+@property (nonatomic, retain) IBOutlet UIButton *favoritesButton;
+@property (nonatomic, retain) IBOutlet UIButton *ringMailButton;
 
-- (IBAction)onAllClick:(id)event;
-- (IBAction)onLinphoneClick:(id)event;
 - (IBAction)onAddContactClick:(id)event;
 - (IBAction)onBackClick:(id)event;
+- (IBAction)onAllClick:(id)event;
+- (IBAction)onFavoritesClick:(id)event;
+- (IBAction)onRingMailClick:(id)event;
+
 
 @end

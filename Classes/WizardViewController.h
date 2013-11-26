@@ -36,6 +36,7 @@
 @property (nonatomic, retain) IBOutlet UIView *connectAccountView;
 @property (nonatomic, retain) IBOutlet UIView *externalAccountView;
 @property (nonatomic, retain) IBOutlet UIView *validateAccountView;
+@property (nonatomic, retain) IBOutlet UIView *validatePhoneView;
 
 @property (nonatomic, retain) IBOutlet UIView *waitView;
 
@@ -46,6 +47,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *externalAccountButton;
 
 @property (nonatomic, retain) IBOutlet UIImageView *choiceViewLogoImageView;
+@property (nonatomic, retain) IBOutlet UITextField *createAccountViewEmailField;
 
 @property (nonatomic, retain) IBOutlet UITapGestureRecognizer *viewTapGestureRecognizer;
 
@@ -63,5 +65,8 @@
 - (IBAction)onSignInClick:(id)sender;
 - (IBAction)onSignInExternalClick:(id)sender;
 - (IBAction)onRegisterClick:(id)sender;
+
+- (IBAction)onCheckPhoneClick:(id)sender;
+- (IBAction)onSkipPhoneClick:(id)sender;
 
 @end

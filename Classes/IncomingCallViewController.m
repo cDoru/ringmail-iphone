@@ -22,6 +22,7 @@
 #import "FastAddressBook.h"
 #import "PhoneMainView.h"
 #import "UILinphone.h"
+#import "SMRotaryImage.h"
 
 @implementation IncomingCallViewController
 
@@ -124,19 +125,26 @@ static UICompositeViewDescription *compositeDescription = nil;
         char* lAddress = linphone_address_as_string_uri_only(addr);
         if(lAddress) {
             NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+            NSString *sipTarget = [FastAddressBook getTargetFromSIP:normalizedSipAddress];
+            NSLog(@"Inbound Call URI: %@", sipTarget);
+            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:sipTarget];
             if(contact) {
+                NSLog(@"Inbound Matched Contact");
                 UIImage *tmpImage = [FastAddressBook getContactImage:contact thumbnail:false];
                 if(tmpImage != nil) {
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^(void) {
                         UIImage *tmpImage2 = [UIImage decodedImageWithImage:tmpImage];
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            avatarImage.image = tmpImage2;
+                            avatarImage.image = [SMRotaryImage roundedImageWithImage:tmpImage2];
                         });
                     });
                 }
                 address = [FastAddressBook getContactDisplayName:contact];
                 useLinphoneAddress = false;
+            }
+            else
+            {
+                NSLog(@"Inbound No Contact Matched");
             }
             ms_free(lAddress);
         }

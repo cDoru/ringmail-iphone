@@ -21,19 +21,32 @@
 #import <AddressBook/AddressBook.h>
 
 @interface FastAddressBook :  NSObject {
-    NSMutableDictionary* addressBookMap;  
+    NSMutableDictionary* addressBookMap;
+    NSMutableDictionary* addressBookIds;
+    NSMutableDictionary* addressBookWheels;
     
     ABAddressBookRef addressBook;
 }
 
 + (BOOL)isSipURI:(NSString*)address;
 + (NSString*)getContactDisplayName:(ABRecordRef)contact;
+//+ (NSString*)getPrimaryTarget:(ABRecordRef)contact;
 + (UIImage*)getContactImage:(ABRecordRef)contact thumbnail:(BOOL)thumbnail;
+- (NSMutableArray*)getWheel:(NSString*)name;
 - (ABRecordRef)getContact:(NSString*)address;
+- (ABRecordRef)getContactById:(NSNumber*)itemId;
 - (void)reload;
+- (void)loadData;
+- (void)setupWheelContacts;
 + (BOOL)isAuthorized;
 + (NSString*)appendCountryCodeIfPossible:(NSString*)number;
 + (NSString*)normalizePhoneNumber:(NSString*)number;
 + (NSString*)normalizeSipURI:(NSString*)address;
++ (NSString*)e164number:(NSString*)numberIn;
++ (NSString*)formatNumber:(NSString*)numberIn;
++ (NSString*)getTargetFromSIP:(NSString*)sipURI;
++ (NSMutableDictionary*)getInviteData:(ABRecordRef)contact;
++ (NSString*)getRingMailURI:(ABRecordRef)contact;
++ (NSMutableArray*)getPhoneNumbers:(ABRecordRef)contact;
 
 @end

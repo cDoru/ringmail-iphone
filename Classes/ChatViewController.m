@@ -50,7 +50,7 @@
     [super viewDidLoad];
     
     // Set selected+over background: IB lack !
-    [editButton setBackgroundImage:[UIImage imageNamed:@"chat_ok_over.png"]
+    [editButton setBackgroundImage:[UIImage imageNamed:@"chat_edit_over.png"]
                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
     
     [LinphoneUtils buttonFixStates:editButton];
@@ -122,8 +122,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     if ([[addressField text ]length] == 0) { // if no address is manually set, lauch address book
 		[ContactSelection setSelectionMode:ContactSelectionModeMessage];
 		[ContactSelection setAddAddress:nil];
-		[ContactSelection setSipFilter: [LinphoneManager instance].contactFilter];
-		[ContactSelection setEmailFilter:FALSE];
+		//[ContactSelection setSipFilter:TRUE];
+        //[ContactSelection setEmailFilter:TRUE];
 		[[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription] push:TRUE];
 	} else {
 		[self startChatRoom]; 

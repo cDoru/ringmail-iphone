@@ -45,6 +45,7 @@
     self = [super init];
     if(self != nil) {
         self->started = FALSE;
+        self->startedPush = FALSE;
     }
     return self;
 }
@@ -93,14 +94,15 @@
 	[LinphoneLogger logc:LinphoneLoggerLog format:"applicationDidBecomeActive"];
     [self startApplication];
     
-	[[LinphoneManager instance] becomeActive];
+    LinphoneManager* instance = [LinphoneManager instance];
+    
+    [instance becomeActive];
     
     
     LinphoneCore* lc = [LinphoneManager getLc];
     LinphoneCall* call = linphone_core_get_current_call(lc);
     
 	if (call){
-		LinphoneManager* instance = [LinphoneManager instance];
 		if (call == instance->currentCallContextBeforeGoingBackground.call) {
 			const LinphoneCallParams* params = linphone_call_get_current_params(call);
 			if (linphone_call_params_video_enabled(params)) {
@@ -109,11 +111,33 @@
                                         instance->currentCallContextBeforeGoingBackground.cameraIsEnabled);
 			}
 			instance->currentCallContextBeforeGoingBackground.call = 0;
-		}
+		} else if ( linphone_call_get_state(call) == LinphoneCallIncomingReceived ) {
+            [[PhoneMainView  instance] displayIncomingCall:call];
+            // in this case, the ringing sound comes from the notification.
+            // To stop it we have to do the iOS7 ring fix...
+            [self fixRing];
+        }
 	}
+    
+    LinphoneManager *inst = [LinphoneManager instance];
+    NSDictionary *cred = [inst getRemoteLogin];
+    if (cred != nil)
+    {
+        [inst syncRemote];
+    }
+    else
+    {
+        WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);
+        if(controller != nil) {
+            [controller reset];
+        }
+    }
+    
+    if (startedPush)
+    {
+        [inst startIterator];
+    }
 }
-
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge];
@@ -125,10 +149,12 @@
 #ifdef DEBUG
 								 @"YES",@"debugenable_preference",
 #else
-								 @"NO",@"debugenable_preference",
+								 @"YES",@"debugenable_preference",
 #endif
                                  nil];
 	[[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    
+    //[[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 	
     if ([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]
 		&& [UIApplication sharedApplication].applicationState ==  UIApplicationStateBackground
@@ -145,8 +171,6 @@
 		[self processRemoteNotification:remoteNotif];
 	}
     
-    [[PhoneMainView instance] updateStatusBar:nil];
-
     return YES;
 }
 
@@ -163,6 +187,7 @@
             started = TRUE;
             [[PhoneMainView instance] startUp];
         }
+
     }
 }
 
@@ -174,15 +199,28 @@
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     [self startApplication];
     if([LinphoneManager isLcReady]) {
-        if([[url scheme] isEqualToString:@"sip"]) {
+        if([[url scheme] isEqualToString:@"ring"]) {
             // Go to ChatRoom view
             DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
             if(controller != nil) {
-                [controller setAddress:[url absoluteString]];
+                NSString *address = [[url absoluteString] substringFromIndex:[[url scheme] length] + 1];
+                if ([address hasPrefix:@"//"]) {
+                    address = [address substringFromIndex:2];
+                }
+                [controller setAddress:address];
             }
         }
     }
 	return YES;
+}
+
+- (void)fixRing
+{
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+        // iOS7 fix for notification sound not stopping.
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+    }
 }
 
 - (void)processRemoteNotification:(NSDictionary*)userInfo{
@@ -190,31 +228,28 @@
     if(aps != nil) {
         NSDictionary *alert = [aps objectForKey:@"alert"];
         if(alert != nil) {
-            NSString *loc_key = [alert objectForKey:@"loc-key"];
+            NSString *loc_key = [alert objectForKey:@"action-loc-key"];
 			/*if we receive a remote notification, it is because our TCP background socket was no more working.
 			 As a result, break it and refresh registers in order to make sure to receive incoming INVITE or MESSAGE*/
-			LinphoneCore *lc = [LinphoneManager getLc];
-			linphone_core_set_network_reachable(lc, FALSE);
-			linphone_core_set_network_reachable(lc, TRUE);
+			//LinphoneCore *lc = [LinphoneManager getLc];
+			//linphone_core_set_network_reachable(lc, FALSE);
+			//linphone_core_set_network_reachable(lc, TRUE);
             if(loc_key != nil) {
                 if([loc_key isEqualToString:@"IM_MSG"]) {
                     [[PhoneMainView instance] addInhibitedEvent:kLinphoneTextReceived];
                     [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
                 } else if([loc_key isEqualToString:@"IC_MSG"]) {
                     //it's a call
+                    [self fixRing];
 					NSString *callid=[userInfo objectForKey:@"call-id"];
                     if (callid)
+                    {
+                        NSLog(@"Push Call ID: %@", callid);
+                    }
+                    /*if (callid)
 						[[LinphoneManager instance] enableAutoAnswerForCallId:callid];
 					else
-						[LinphoneLogger log:LinphoneLoggerError format:@"PushNotification: does not have call-id yet, fix it !"];
-
-                    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
-                        // iOS7 fix for notification sound not stopping.
-                        // see http://stackoverflow.com/questions/19124882/stopping-ios-7-remote-notification-sound
-                        [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];
-                        [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
-                    }
-
+						[LinphoneLogger log:LinphoneLoggerError format:@"PushNotification: does not have call-id yet, fix it !"];*/
                 }
             }
         }
@@ -223,10 +258,12 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 	[LinphoneLogger log:LinphoneLoggerLog format:@"PushNotification: Receive %@", userInfo];
+    [self startApplication];
 	[self processRemoteNotification:userInfo];
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [[UIApplication sharedApplication] cancelLocalNotification:notification];
     if([notification.userInfo objectForKey:@"callId"] != nil) {
         [[LinphoneManager instance] acceptCallForCallId:[notification.userInfo objectForKey:@"callId"]];
     } else if([notification.userInfo objectForKey:@"chat"] != nil) {
@@ -246,6 +283,10 @@
             [controller setCallLogId:callLog];
         }
     }
+    else if([notification.userInfo objectForKey:@"command"] != nil) {
+        NSString *ringcmd = (NSString*)[notification.userInfo objectForKey:@"command"];
+        [[LinphoneManager instance] processCommand:ringcmd];
+    }
 }
 
 
@@ -253,12 +294,18 @@
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
     [LinphoneLogger log:LinphoneLoggerLog format:@"PushNotification: Token %@", deviceToken];
-    [[LinphoneManager instance] setPushNotificationToken:deviceToken];
+    startedPush = TRUE;
+    LinphoneManager *inst = [LinphoneManager instance];
+    [inst setPushNotificationToken:deviceToken];
+    [inst startIterator];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
     [LinphoneLogger log:LinphoneLoggerError format:@"PushNotification: Error %@", [error localizedDescription]];
-    [[LinphoneManager instance] setPushNotificationToken:nil];
+    startedPush = TRUE;
+    LinphoneManager *inst = [LinphoneManager instance];
+    [inst setPushNotificationToken:nil];
+    [inst startIterator];
 }
 
 @end

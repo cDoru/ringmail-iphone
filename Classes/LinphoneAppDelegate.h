@@ -20,8 +20,8 @@
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/ABPeoplePickerNavigationController.h>
 
-
 #import "LinphoneCoreSettingsStore.h"
+#import "ContactSyncManager.h"
 
 @interface UILinphoneWindow : UIWindow
 
@@ -31,6 +31,7 @@
     @private
 	UIWindow *window;
     BOOL started;
+    BOOL startedPush;
 	int savedMaxCall;
 	
 }

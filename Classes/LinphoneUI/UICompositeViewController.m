@@ -20,6 +20,7 @@
 #import "UICompositeViewController.h"
 
 #import "LinphoneAppDelegate.h"
+#import "DTActionSheet.h"
 
 @implementation UICompositeViewDescription
 
@@ -480,7 +481,9 @@
         currentViewDescription = [description copy];
         
         // Animate only with a previous screen
+        //NSLog(@"Transition: %@ Prev View: %@", viewTransition, oldViewDescription);
         if(oldViewDescription != nil && viewTransition != nil) {
+            NSLog(@"Apply Transition");
             [contentView.layer removeAnimationForKey:@"transition"];
             [contentView.layer addAnimation:viewTransition forKey:@"transition"];
             if(oldViewDescription.stateBar != currentViewDescription.stateBar ||
@@ -675,6 +678,263 @@
 
 - (UIViewController *) getCurrentViewController {
     return [[self.contentViewController retain] autorelease];
+}
+
+
+#pragma mark - RingMail Invites
+
+- (void)showInvite:(NSMutableArray *)emailTo phone:(NSMutableArray *)phoneTo {
+    int emails = [emailTo count];
+    int phones = [phoneTo count];
+    
+    if(! [MFMessageComposeViewController canSendText])
+    {
+        phones = 0;
+    }
+    if (emails == 0 && phones == 0)
+    {
+        UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Invite To RingMail" message:@"An email address or phone number is required to send an invitation." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [warningAlert show];
+        return;
+    }
+    if (emails > 0 && phones == 0)
+    {
+        [self selectInvite:@"email" list:emailTo];
+        return;
+    }
+    else if (phones > 0 && emails == 0)
+    {
+        [self selectInvite:@"phone" list:phoneTo];
+        return;
+    }
+    
+    NSString* title = @"Invite To RingMail";
+    DTActionSheet *sheet = [[[DTActionSheet alloc] initWithTitle:title] autorelease];
+    [sheet addButtonWithTitle:@"Send Email" block:^() {
+        [LinphoneLogger logc:LinphoneLoggerLog format:"Send Invite: Email"];
+        [self selectInvite:@"email" list:emailTo];
+    }];
+    [sheet addButtonWithTitle:@"Send SMS" block:^() {
+        [LinphoneLogger logc:LinphoneLoggerLog format:"Send Invite: SMS"];
+        [self selectInvite:@"phone" list:phoneTo];
+    }];
+    DTActionSheetBlock cancelBlock = ^() {
+        [LinphoneLogger logc:LinphoneLoggerLog format:"Send Invite: Cancel"];
+    };
+    [sheet addCancelButtonWithTitle:@"Cancel"  block:cancelBlock];
+    [sheet showInView:self.view];
+}
+
+- (void)selectInvite:(NSString *)type list:(NSMutableArray *)data
+{
+    if ([data count] == 1)
+    {
+        if ([type isEqualToString:@"email"])
+        {
+            [self inviteEmail:[data objectAtIndex:0]];
+        }
+        else if ([type isEqualToString:@"phone"])
+        {
+            [self inviteText:[data objectAtIndex:0]];
+        }
+        return;
+    }
+    int max = [data count];
+    if (max > 5)
+    {
+        max = 5;
+    }
+    NSString* title = @"Invite To RingMail";
+    if ([type isEqualToString:@"email"])
+    {
+        title = @"Invite Via Email";
+    }
+    else if ([type isEqualToString:@"phone"])
+    {
+        title = @"Invite Via SMS";
+    }
+    DTActionSheet *sheet = [[[DTActionSheet alloc] initWithTitle:title] autorelease];
+    for (int i = 0; i < max; i++)
+    {
+        NSString *to = [data objectAtIndex:i];
+        [sheet addButtonWithTitle:to block:^() {
+            [LinphoneLogger logc:LinphoneLoggerLog format:"Send Invite Select: Email"];
+            if ([type isEqualToString:@"email"])
+            {
+                [self inviteEmail:to];
+            }
+            else if ([type isEqualToString:@"phone"])
+            {
+                [self inviteText:to];
+            }
+        }];
+    }
+    DTActionSheetBlock cancelBlock = ^() {
+        [LinphoneLogger logc:LinphoneLoggerLog format:"Send Invite Select: Cancel"];
+    };
+    [sheet addDestructiveButtonWithTitle:@"Cancel"  block:cancelBlock];
+    [sheet showInView:self.view];
+}
+
+- (void)inviteText:(NSString *)phoneTo
+{
+    NSArray *recipents = @[phoneTo];
+    NSString *message = [NSString stringWithFormat:@"Hey, I started using RingMail. It's a cool free app that lets you call an email address! ring.ml/dl"];
+    
+    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+    messageController.messageComposeDelegate = self;
+    [messageController setRecipients:recipents];
+    [messageController setBody:message];
+    
+    // Present message view controller on screen
+    [self presentViewController:messageController animated:NO completion:nil];
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult) result
+{
+    switch (result) {
+        case MessageComposeResultCancelled:
+            break;
+        case MessageComposeResultFailed:
+        {
+            UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [warningAlert show];
+            break;
+        }
+        case MessageComposeResultSent:
+            break;
+        default:
+            break;
+    }
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+- (void)inviteEmail:(NSString *)emailTo
+{
+    NSString *emailTitle = @"Invitation to RingMail";
+    // Email Content
+    NSString *messageBody = @"<p>Hey,<br/><br/>I started using RingMail. It's a cool free app that lets you call an email address!<br/>RingMail is fun to use and works just like your regular phone.<br/><ul><li>Use your email address to log in</li><li>Make calls over the Internet</li><li>Access all of your contacts</li></ul><br/>Get RingMail: <a href=\"http://ring.ml/dl\">ring.ml/dl</a></p><div><a href=\"http://ring.ml/dl\"><img width=\"289\" height\"377\" src=\"http://ring.ml/img/home/iphone-placeholder.png\"/></a></div>"; // Change the message body to HTML
+    // To address
+    NSArray *toRecipents = [NSArray arrayWithObject:emailTo];
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:YES];
+    [mc setToRecipients:toRecipents];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark - RingMail External Calling
+
+- (void)selectPhoneAction:(NSString *)type list:(NSArray *)data
+{
+    if ([data count] == 0)
+    {
+        UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Unable To Connect" message:@"No phone number or RingMail address for contact." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [warningAlert show];
+        return;
+    }
+    if ([data count] == 1)
+    {
+        if ([type isEqualToString:@"call"])
+        {
+            [self externalCall:[data objectAtIndex:0] ask:TRUE];
+        }
+        else if ([type isEqualToString:@"chat"])
+        {
+            [self externalText:[data objectAtIndex:0]];
+        }
+        return;
+    }
+    int max = [data count];
+    if (max > 5)
+    {
+        max = 5;
+    }
+    NSString* title = @"";
+    if ([type isEqualToString:@"call"])
+    {
+        title = @"Number To Call";
+    }
+    else if ([type isEqualToString:@"chat"])
+    {
+        title = @"Number To Send SMS";
+    }
+    DTActionSheet *sheet = [[[DTActionSheet alloc] initWithTitle:title] autorelease];
+    for (int i = 0; i < max; i++)
+    {
+        NSString *to = [data objectAtIndex:i];
+        [sheet addButtonWithTitle:to block:^() {
+            if ([type isEqualToString:@"call"])
+            {
+                [self externalCall:to ask:TRUE];
+            }
+            else if ([type isEqualToString:@"chat"])
+            {
+                [self externalText:to];
+            }
+        }];
+    }
+    DTActionSheetBlock cancelBlock = ^() {
+        //[LinphoneLogger logc:LinphoneLoggerLog format:""];
+    };
+    [sheet addDestructiveButtonWithTitle:@"Cancel"  block:cancelBlock];
+    [sheet showInView:self.view];
+}
+
+- (void)externalCall:(NSString *)phone ask:(BOOL)ask
+{
+    NSString *tel;
+    NSString *newPhone = [FastAddressBook e164number:phone];
+    if (ask)
+    {
+        tel = [NSString stringWithFormat:@"telprompt://%@", newPhone];
+    }
+    else
+    {
+        tel = [NSString stringWithFormat:@"tel://%@", newPhone];
+    }
+    NSLog(@"External Call URI: %@", tel);
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel]];
+}
+
+- (void)externalText:(NSString *)phone
+{
+    NSArray *recipents = @[phone];
+    
+    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+    messageController.messageComposeDelegate = self;
+    [messageController setRecipients:recipents];
+    
+    // Present message view controller on screen
+    [self presentViewController:messageController animated:NO completion:nil];
 }
 
 @end

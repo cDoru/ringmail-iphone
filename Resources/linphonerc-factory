@@ -1,4 +1,6 @@
 [net]
+download_bw=380
+upload_bw=380
 mtu=1300
 activate_edge_workarounds=0
 edge_ping_time=10
@@ -31,21 +33,22 @@ history_max_size=30
 max_calls=3
 
 [wizard]
-service_url=https://www.linphone.org/wizard.php
-domain=sip.linphone.org
-proxy=sip.linphone.org:5223
-password_length=6
+service_url=https://app.ringmail.com/service/xmlrpc
+domain=sip.ringmail.com
+proxy=gw.ringmail.com:5061
+password_length=4
 username_length=4
-expires=604800
+expires=3600
 push_notification=1
 transport=tls
-sharing_server=https://www.linphone.org:444/upload.php
+sharing_server=https://app.ringmail.com/upload
 ice=1
 stun=stun.linphone.org
 
-[video]
-display_filter_auto_rotate=0
-
 [app]
-#contact_display_username_only=1
-#contact_filter_on_default_domain=1
+hide_wizard_preference=0
+hide_run_assistant_preference=0
+hide_wizard_welcome_view_preference=1
+hide_wizard_custom_account_button_preference=1
+show_wizard_logo_in_choice_view_preference=1
+show_contacts_emails_preference=1

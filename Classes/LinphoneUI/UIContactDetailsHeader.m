@@ -24,6 +24,9 @@
 #import "UILinphone.h"
 #import "PhoneMainView.h"
 #import "DTActionSheet.h"
+#import "FavoritesModel.h"
+#import "RemoteModel.h"
+#import "ContactSyncManager.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
 
@@ -36,6 +39,12 @@
 @synthesize editView;
 @synthesize tableView;
 @synthesize contactDetailsDelegate;
+@synthesize favSwitch;
+@synthesize ringMailView;
+@synthesize inviteView;
+@synthesize callButton;
+@synthesize textButton;
+@synthesize ringMailURI;
 
 #pragma mark - Lifecycle Functions
 
@@ -80,6 +89,14 @@
     
     [propertyList release];
     
+    [favSwitch release];
+    [inviteView release];
+    [ringMailView release];
+    
+    [callButton release];
+    [textButton release];
+    [ringMailURI release];
+    
     [super dealloc];
 }
 
@@ -93,6 +110,7 @@
     [normalView setAlpha:1.0f];
     [editView setAlpha:0.0f];
     [tableView setEditing:TRUE animated:false];
+    [favSwitch addTarget:self action:@selector(onFavSwitchChange:) forControlEvents:UIControlEventValueChanged];
 }
 
 
@@ -100,6 +118,8 @@
 
 - (void)setContact:(ABRecordRef)acontact {
     contact = acontact;
+    [callButton setHiddenContact:acontact];
+    [textButton setHiddenContact:acontact];
     [self update];
 }
 
@@ -127,7 +147,7 @@
         if(image == nil) {
             image = [UIImage imageNamed:@"avatar_unknown_small.png"];
         }
-        [avatarImage setImage:image];
+        [avatarImage setImage:[SMRotaryImage roundedImageWithImage:image]];
     }
     
     // Contact label
@@ -135,6 +155,21 @@
         [addressLabel setText:[FastAddressBook getContactDisplayName:contact]];
     }
     
+    NSNumber *contactId = [NSNumber numberWithInteger:ABRecordGetRecordID(contact)];
+    favSwitch.on = [FavoritesModel isFavorite:contactId];
+    
+    if ([RemoteModel hasContactId:contactId])
+    {
+        ringMailView.hidden = NO;
+        inviteView.hidden = YES;
+        RemoteModel *m = [RemoteModel read:contactId];
+        ringMailURI.text = [m primaryUri];
+    }
+    else
+    {
+        ringMailView.hidden = YES;
+        inviteView.hidden = NO;
+    }
     [tableView reloadData];
 }
 
@@ -142,7 +177,7 @@
     if(editing) {
         return 170.0f;
     } else {
-        return 80.0f;
+        return 210.0f;
     }
 }
 
@@ -238,7 +273,6 @@
     return cell;
 }
 
-
 #pragma mark - Action Functions
 
 - (IBAction)onAvatarClick:(id)event {
@@ -289,11 +323,33 @@
             }];
         }
         [sheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel",nil) block:nil];
-        
         [sheet showInView:[PhoneMainView instance].view];
     }
 }
 
+- (void) onFavSwitchChange:(id)event {
+    NSNumber *fav = [NSNumber numberWithInteger:ABRecordGetRecordID(contact)];
+    if ([favSwitch isOn])
+    {
+        [FavoritesModel addFavorite:fav];
+    }
+    else
+    {
+        [FavoritesModel removeFavorite:fav];
+    }
+    [RemoteModel updateRemote:RemoteItemFavorites date:nil];
+    LinphoneManager* mgr = [LinphoneManager instance];
+    FastAddressBook* book = [mgr fastAddressBook];
+    [book setupWheelContacts];
+    [mgr setReloadWheels:YES];
+    [mgr syncRemoteFavorites];
+}
+
+- (IBAction)onInviteClick:(id)event
+{
+    NSMutableDictionary* inviteData = [FastAddressBook getInviteData:contact];
+    [[PhoneMainView instance].mainViewController showInvite:[inviteData objectForKey:@"email"] phone:[inviteData objectForKey:@"phone"]];
+}
 
 #pragma mark - ContactDetailsImagePickerDelegate Functions
 

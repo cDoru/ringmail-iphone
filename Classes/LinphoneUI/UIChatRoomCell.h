@@ -20,7 +20,7 @@
 #import <UIKit/UIKit.h>
 
 #import "ChatModel.h"
-#import "ChatRoomTableViewController.h"
+#import "ChatRoomDelegate.h"
 #import "UILoadingImageView.h"
 #import "UITransparentTVCell.h"
 

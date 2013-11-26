@@ -29,6 +29,7 @@
 @synthesize imageView;
 @synthesize deleteButton;
 @synthesize detailsButton;
+@synthesize dateLabel;
 
 #pragma mark - Lifecycle Functions
 
@@ -140,6 +141,15 @@
     if(address == nil) {
         address = @"Unknown";
     }
+    
+    // Date
+    NSDate *startData = [NSDate dateWithTimeIntervalSince1970:linphone_call_log_get_start_date(callLog)];
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    NSLocale *locale = [NSLocale currentLocale];
+    [dateFormatter setLocale:locale];
+    [dateLabel setText:[dateFormatter stringFromDate:startData]];
 
     [addressLabel setText:address];
     [imageView setImage: image];

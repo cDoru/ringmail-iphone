@@ -19,9 +19,9 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface ChatModel : NSObject {
     @private
+    NSIndexPath *indexPath;
     NSNumber *chatId;
     NSString *localContact;
     NSString *remoteContact;
@@ -40,13 +40,20 @@
 @property (copy) NSDate *time;
 @property (copy) NSNumber *read;
 @property (copy) NSNumber *state;
+@property (copy) NSNumber *sent;
+@property (copy) NSNumber *delivered;
+@property (copy) NSString *uuid;
+@property (copy) NSIndexPath *indexPath;
 
 - (BOOL)isExternalImage;
 - (BOOL)isInternalImage;
 
 - (void)create;
 + (ChatModel*)read:(NSNumber*)id;
++ (ChatModel*)readUUID:(NSString*)uuidIn;
 - (void)update;
+- (void)updateSent;
+- (void)updateDelivered;
 - (void)delete;
 
 + (NSMutableArray *)listConversations;

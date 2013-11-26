@@ -175,6 +175,7 @@ NSTimer *callSecurityTimer;
             image = [UIImage imageNamed:@"led_connected.png"];
             break;
     }
+    
     [registrationStateLabel setText:message];
     [registrationStateImage setImage:image];
 }

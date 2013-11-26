@@ -18,16 +18,18 @@
  */       
 
 #import <UIKit/UIKit.h>
-
+#import <AddressBook/AddressBook.h>
 #import "UICompositeViewController.h"
 
 #import "UIEraseButton.h"
 #import "UICamSwitch.h"
 #import "UICallButton.h"
+#import "UIChatButton.h"
 #import "UITransferButton.h"
 #import "UIDigitButton.h"
+#import "SMRotaryProtocol.h"
 
-@interface DialerViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate> {
+@interface DialerViewController : UIViewController <UITextFieldDelegate, UICompositeViewDelegate, SMRotaryProtocol> {
 }
 
 - (void)setAddress:(NSString*)address;
@@ -37,31 +39,24 @@
 @property (nonatomic, assign) BOOL transferMode;
 
 @property (nonatomic, retain) IBOutlet UITextField* addressField;
-@property (nonatomic, retain) IBOutlet UIButton* addContactButton;
 @property (nonatomic, retain) IBOutlet UICallButton* callButton;
-@property (nonatomic, retain) IBOutlet UICallButton* addCallButton;
-@property (nonatomic, retain) IBOutlet UITransferButton* transferButton;
-@property (nonatomic, retain) IBOutlet UIButton* backButton;
-@property (nonatomic, retain) IBOutlet UIEraseButton* eraseButton;
+@property (nonatomic, retain) IBOutlet UIChatButton* textButton;
+@property (nonatomic, retain) IBOutlet UIButton* contactButton;
 
-@property (nonatomic, retain) IBOutlet UIDigitButton* oneButton;
-@property (nonatomic, retain) IBOutlet UIDigitButton* twoButton;
-@property (nonatomic, retain) IBOutlet UIDigitButton* threeButton;
-@property (nonatomic, retain) IBOutlet UIDigitButton* fourButton;
-@property (nonatomic, retain) IBOutlet UIDigitButton* fiveButton;
-@property (nonatomic, retain) IBOutlet UIDigitButton* sixButton;
-@property (nonatomic, retain) IBOutlet UIDigitButton* sevenButton;
-@property (nonatomic, retain) IBOutlet UIDigitButton* eightButton;
-@property (nonatomic, retain) IBOutlet UIDigitButton* nineButton;
-@property (nonatomic, retain) IBOutlet UIDigitButton* starButton;
-@property (nonatomic, retain) IBOutlet UIDigitButton* zeroButton;
-@property (nonatomic, retain) IBOutlet UIDigitButton* sharpButton;
 @property (nonatomic, retain) IBOutlet UIView* backgroundView;
 @property (nonatomic, retain) IBOutlet UIView* videoPreview;
 @property (nonatomic, retain) IBOutlet UICamSwitch* videoCameraSwitch;
+@property (nonatomic, retain) IBOutlet UIView* favRotationView;
+@property (nonatomic, retain) IBOutlet UIView* padView;
+@property (nonatomic, retain) IBOutlet UIButton* inviteButton;
+@property (nonatomic, retain) IBOutlet UIImageView* ringMailImage;
 
-- (IBAction)onAddContactClick: (id) event;
-- (IBAction)onBackClick: (id) event;
+@property (nonatomic, retain) SMRotaryWheel *favWheel;
+@property (nonatomic, assign) ABRecordRef currentContact;
+
 - (IBAction)onAddressChange: (id)sender;
+- (IBAction)onAddressClick: (id)sender;
+- (IBAction)onContactClick: (id)sender;
+- (IBAction)onInviteClick: (id)sender;
 
 @end
