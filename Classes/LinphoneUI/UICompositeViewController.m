@@ -779,7 +779,7 @@
 - (void)inviteText:(NSString *)phoneTo
 {
     NSArray *recipents = @[phoneTo];
-    NSString *message = [NSString stringWithFormat:@"You're invited to join RingMail!"];
+    NSString *message = [NSString stringWithFormat:@"Hey, I started using RingMail. It's a cool free app that lets you call an email address! ring.ml/dl"];
     
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     messageController.messageComposeDelegate = self;
@@ -811,9 +811,9 @@
 
 - (void)inviteEmail:(NSString *)emailTo
 {
-    NSString *emailTitle = @"RingMail Invitation";
+    NSString *emailTitle = @"Invitation to RingMail";
     // Email Content
-    NSString *messageBody = @"<h1>Register your email with RingMail for FREE Internet calling!</h1>"; // Change the message body to HTML
+    NSString *messageBody = @"<p>Hey,<br/><br/>I started using RingMail. It's a cool free app that lets you call an email address!<br/>RingMail is fun to use and works just like your regular phone.<br/><ul><li>Use your email address to log in</li><li>Make calls over the Internet</li><li>Access all of your contacts</li></ul><br/>Get RingMail: <a href=\"http://ring.ml/dl\">ring.ml/dl</a></p><div><a href=\"http://ring.ml/dl\"><img width=\"289\" height\"377\" src=\"http://ring.ml/img/home/iphone-placeholder.png\"/></a></div>"; // Change the message body to HTML
     // To address
     NSArray *toRecipents = [NSArray arrayWithObject:emailTo];
     
