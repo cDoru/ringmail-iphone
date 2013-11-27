@@ -342,7 +342,7 @@
             NSDictionary *result = [jsonResult objectFromJSONString];
             
             //[LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Object: %@", result];
-            NSLog(@"RingMail Remote Object: %@", result);
+            //NSLog(@"RingMail Remote Object: %@", result);
             
             NSArray *ringmail = [result objectForKey:@"ringmail"];
             if (ringmail != nil)
@@ -358,7 +358,7 @@
                     if ([(NSDictionary *)remoteData objectForKey:@"reg"] == nil)
                     {
                         [rmod delete];
-                        NSLog(@"Deleted Remote: %@", [rmod contactId]);
+                        //NSLog(@"Deleted Remote: %@", [rmod contactId]);
                     }
                     else
                     {
@@ -368,12 +368,12 @@
                         if ([RemoteModel hasContactId:[rmod contactId]])
                         {
                             [rmod update];
-                            NSLog(@"Updated Remote: %@", [rmod contactId]);
+                            //NSLog(@"Updated Remote: %@", [rmod contactId]);
                         }
                         else
                         {
                             [rmod create];
-                            NSLog(@"Created Remote: %@", [rmod contactId]);
+                            //NSLog(@"Created Remote: %@", [rmod contactId]);
                         }
                     }
                     if ([cmd isEqualToString:@"set_contact"])
