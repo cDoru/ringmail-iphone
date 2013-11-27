@@ -402,7 +402,38 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"RingMailWheelUpdated" object:self userInfo:nil];
             }
         }
+        else if([cmd isEqualToString:@"get_chat_messages"]) {
+            NSString *jsonResult = [response object];
+            //[LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Data: %@", jsonResult];
+            NSDictionary *result = [jsonResult objectFromJSONString];
+            NSArray* chatList = [result objectForKey:@"messages"];
+            if (chatList != nil)
+            {
+            }
+        }
     }
+}
+
+#pragma mark - Chat Update Downloading
+
+-(void) getChatMessages:(NSString *)username password:(NSString *)password
+{
+    NSMutableDictionary *stats = [NSMutableDictionary dictionary];
+    [stats setObject:username forKey:@"login"];
+    [stats setObject:password forKey:@"password"];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:stats options:0 error:nil];
+    NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
+    XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
+    [request setMethod: @"get_chat_messages" withParameters:[NSArray arrayWithObjects:result, nil]];
+    NSError* error = nil;
+    XMLRPCResponse *xmlrpc = [XMLRPCConnection sendSynchronousXMLRPCRequest:request error:&error];
+    if (xmlrpc != nil)
+    {
+        [self processResponse:xmlrpc request:request];
+    }
+    [request release];
+    [result release];
 }
 
 @end
