@@ -234,6 +234,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [mgr closeDatabase];
     [mgr removeDatabase];
     [mgr openDatabase];
+    FastAddressBook* book = [mgr fastAddressBook];
+    [book setupWheelContacts];
+    [mgr setReloadWheels:YES];
     
     if ([ValidationModel hasData])
     {

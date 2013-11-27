@@ -482,10 +482,8 @@ static PhoneMainView* phoneMainViewInstance=nil;
             if([new equal:[ChatViewController compositeViewDescription]]) {
                 left = true;
             }
-        } else if([old equal:[ChatViewController compositeViewDescription]]) {
-            if([new equal:[ChatRoomViewController compositeViewDescription]]) {
-                right = true;
-            }
+        } else if([new equal:[ChatRoomViewController compositeViewDescription]]) {
+            right = true;
         } else if([old equal:[DialerViewController compositeViewDescription]]
                   || [old equal:[ContactsViewController compositeViewDescription]]) {
             if([new equal:[ContactDetailsViewController compositeViewDescription]]) {

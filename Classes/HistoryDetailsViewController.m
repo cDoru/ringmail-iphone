@@ -394,7 +394,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }*/
     
     // Go to ChatRoom view
-    [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
+    //[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
     ChatRoomViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE], ChatRoomViewController);
     if(controller != nil) {
         [controller setRemoteAddress:[NSString stringWithUTF8String:lAddress]];

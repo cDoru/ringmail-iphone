@@ -20,6 +20,7 @@
 #import "ContactDetailsViewController.h"
 #import "PhoneMainView.h"
 #import "DTActionSheet.h"
+#import "ContactSyncManager.h"
 
 @implementation ContactDetailsViewController
 
@@ -146,6 +147,18 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     [book loadData];
     [book setupWheelContacts];
     [mgr setReloadWheels:YES];
+    
+    NSDictionary *cred = [mgr getRemoteLogin];
+    if (cred != nil)
+    {
+        NSString *login = [cred objectForKey:@"login"];
+        NSString *password = [cred objectForKey:@"password"];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^{
+            ContactSyncManager* sync = [[ContactSyncManager alloc] init];
+            [sync setRemoteContact:contact login:login password:password];
+            [sync release];
+        });
+    }
 }
 
 - (void)newContact {
@@ -265,6 +278,10 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     if ([[UIDevice currentDevice].systemVersion doubleValue] < 5.0) {
         [tableController viewWillDisappear:animated];
     }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"RingMailWheelUpdated"
+                                                  object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -277,7 +294,13 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     }
     if ([[UIDevice currentDevice].systemVersion doubleValue] < 5.0) {
         [tableController viewWillAppear:animated];
-    }   
+    }
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contactUpdateEvent:)
+                                                 name:@"RingMailContactUpdated"
+                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -365,6 +388,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)onRemove:(id)event {
     [self disableEdit:FALSE];
+    // TODO: add confirmation
     [self removeContact];
     [[PhoneMainView instance] popCurrentView];
 }
@@ -374,6 +398,31 @@ static UICompositeViewDescription *compositeDescription = nil;
         [editButton setEnabled:TRUE];
     } else {
         [editButton setEnabled:FALSE];
+    }
+}
+
+- (void)contactUpdateEvent:(NSNotification*)notif {
+    if (contact != NULL)
+    {
+        NSDictionary *data = [notif userInfo];
+        if ([data objectForKey:@"id"] != nil)
+        {
+            NSNumber *theId = [NSNumber numberWithInteger:[(NSString*)[data objectForKey:@"id"] intValue]];
+            if ([theId isEqualToNumber:[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)]])
+            {
+                NSLog(@"*** Update Contact ***");
+                if (![[NSThread currentThread] isMainThread])
+                {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        [self setContact:contact];
+                    });
+                }
+                else // Main thread
+                {
+                    [self setContact:contact];
+                }
+            }
+        }
     }
 }
 

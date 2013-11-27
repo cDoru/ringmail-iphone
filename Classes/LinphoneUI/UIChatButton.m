@@ -87,7 +87,9 @@
         address = [addressField text];
     }
     
-    [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
+    NSLog(@"Chat Address: %@", address);
+    
+    //[[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
     ChatRoomViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE], ChatRoomViewController);
     if(controller != nil) {
         [controller setRemoteAddress:address];

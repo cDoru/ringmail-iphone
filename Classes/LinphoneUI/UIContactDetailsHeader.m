@@ -163,7 +163,13 @@
         ringMailView.hidden = NO;
         inviteView.hidden = YES;
         RemoteModel *m = [RemoteModel read:contactId];
-        ringMailURI.text = [m primaryUri];
+        NSString *puri = [m primaryUri];
+        NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"^\\+\\d+$"];
+        if([phoneTest evaluateWithObject:puri])
+        {
+            puri = [FastAddressBook formatNumber:puri];
+        }
+        ringMailURI.text = puri;
     }
     else
     {
