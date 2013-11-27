@@ -184,7 +184,7 @@ NSTimer *callSecurityTimer;
 #pragma mark - 
 
 - (void)callSecurityUpdate {
-    BOOL pending = false;
+/*    BOOL pending = false;
     BOOL security = true;
     
     if(![LinphoneManager isLcReady]) {
@@ -221,7 +221,7 @@ NSTimer *callSecurityTimer;
     } else {
         [callSecurityImage setImage:[UIImage imageNamed:@"security_ko.png"]];
     }
-    [callSecurityImage setHidden: false];
+    [callSecurityImage setHidden: false];*/
 }
 
 - (void)callQualityUpdate { 
