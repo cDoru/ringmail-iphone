@@ -82,7 +82,8 @@
 
 
 - (BOOL)isExternalImage {
-    return [message hasPrefix:@"http:"] || [message hasPrefix:@"https:"];
+    //return [message hasPrefix:@"http:"] || [message hasPrefix:@"https:"];
+    return FALSE; // No external images in RingMail
 }
 
 - (BOOL)isInternalImage {

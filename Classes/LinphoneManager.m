@@ -662,6 +662,7 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
     [chat setLocalContact:@""];
     [chat setRemoteContact:[NSString stringWithUTF8String:fromStr]];
     bool image = 0;
+    NSString* uuidChat = @"";
     NSString* imgurl = @"";
     if (linphone_chat_message_get_external_body_url(msg)) {
         CFUUIDRef theUniqueString = CFUUIDCreate(NULL);
@@ -670,14 +671,28 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
         [chat setMessage:[NSString stringWithFormat:@"file:%@", (NSString*)string]];
         CFRelease(string);
         imgurl = [NSString stringWithUTF8String:linphone_chat_message_get_external_body_url(msg)];
+        uuidChat = [imgurl substringToIndex:36];
+        imgurl = [imgurl substringFromIndex:37];
         image = 1;
 	} else {
-		[chat setMessage:[NSString stringWithUTF8String:linphone_chat_message_get_text(msg)]];
+        NSString *chatMsg = [NSString stringWithUTF8String:linphone_chat_message_get_text(msg)];
+        uuidChat = [chatMsg substringToIndex:36];
+		[chat setMessage:[chatMsg substringFromIndex:37]];
     }
 	[chat setDirection:[NSNumber numberWithInt:1]];
     [chat setTime:[NSDate date]];
     [chat setRead:[NSNumber numberWithInt:0]];
+    [chat setUuid:uuidChat];
     [chat create];
+    
+    NSDictionary *chatData = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [chat remoteContact], @"remoteContact",
+                              [chat direction], @"direction",
+                              [chat time], @"time",
+                              [chat message], @"message",
+                              [chat uuid], @"uuid",
+                               nil];
+    NSLog(@"chatData = %@", chatData);
 
     ms_free(fromStr);
     
