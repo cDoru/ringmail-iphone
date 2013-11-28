@@ -18,6 +18,7 @@
 #import "JSONKit.h"
 #import "RemoteModel.h"
 #import "FavoritesModel.h"
+#import "ChatModel.h"
 
 
 @implementation ContactSyncManager
@@ -403,12 +404,22 @@
             }
         }
         else if([cmd isEqualToString:@"get_chat_messages"]) {
-            NSString *jsonResult = [response object];
-            //[LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Remote Data: %@", jsonResult];
-            NSDictionary *result = [jsonResult objectFromJSONString];
+            [LinphoneLogger logc:LinphoneLoggerLog format:"RingMail Chat Backlog: %@", [response object]];
+            NSDictionary *result;
+            if ([[response object] isKindOfClass:[NSString class]])
+            {
+                result = [[response object] objectFromJSONString];
+            }
+            else
+            {
+                result = [[response object] objectFromJSONData];
+            }
             NSArray* chatList = [result objectForKey:@"messages"];
             if (chatList != nil)
             {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self processChatMessages:chatList];
+                });
             }
         }
     }
@@ -416,7 +427,7 @@
 
 #pragma mark - Chat Update Downloading
 
--(void) getChatMessages:(NSString *)username password:(NSString *)password
+-(void)getChatMessages:(NSString *)username password:(NSString *)password
 {
     NSMutableDictionary *stats = [NSMutableDictionary dictionary];
     [stats setObject:username forKey:@"login"];
@@ -434,6 +445,52 @@
     }
     [request release];
     [result release];
+}
+
+-(void)processChatMessages:(NSArray*)chatList
+{
+    NSString* lastUUID = nil;
+    NSMutableArray* chatArray = [NSMutableArray arrayWithCapacity:[chatList count]];
+    for (id chatData in chatList)
+    {
+        ChatModel *dupChat = [ChatModel readUUID:[chatData objectForKey:@"uuid"]];
+        if (dupChat == nil)
+        {
+            ChatModel *chat = [[ChatModel alloc] init];
+            [chat setDirection:[NSNumber numberWithInt:1]];
+            [chat setRead:[NSNumber numberWithInt:0]];
+            [chat setLocalContact:@""];
+            [chat setRemoteContact:[chatData objectForKey:@"from"]];
+            [chat setTime:[NSDate dateWithTimeIntervalSince1970:[[chatData objectForKey:@"ts"] doubleValue]]];
+            [chat setUuid:[chatData objectForKey:@"uuid"]];
+            NSString* imgurl = [chatData objectForKey:@"img"];
+            if (imgurl == nil) // Text chat
+            {
+                [chat setMessage:[chatData objectForKey:@"body"]];
+                [chat create];
+                [chatArray addObject:chat];
+                [chat release];
+                lastUUID = [chatData objectForKey:@"uuid"];
+            }
+            else // Image
+            {
+                CFUUIDRef theUniqueString = CFUUIDCreate(NULL);
+                CFStringRef string = CFUUIDCreateString(NULL, theUniqueString);
+                CFRelease(theUniqueString);
+                [chat setMessage:[NSString stringWithFormat:@"file:%@", (NSString*)string]];
+                CFRelease(string);
+                [chat create];
+                [[LinphoneManager instance] getChatImage:imgurl chat:chat];
+            }
+        }
+    }
+    if (lastUUID != nil)
+    {
+        NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              chatArray, @"chats",
+                              nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self userInfo:dict];
+    }
 }
 
 @end

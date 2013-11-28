@@ -271,7 +271,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     int pos = [chatData count];
     [chatData insertObject:chat atIndex:pos];
-    [self update];
+    //[self update];
     [bubbleTable reloadData];
 }
 
@@ -611,21 +611,48 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
     
     //LinphoneAddress *from = [[[notif userInfo] objectForKey:@"from"] pointerValue];
     
-	ChatModel *chat = [[notif userInfo] objectForKey:@"chat"];
-    NSString *from = chat.remoteContact;
-    if(chat == NULL) {
-        return;
-    }
-    //char *fromStr = linphone_address_as_string_uri_only(from);
-    if([from caseInsensitiveCompare:remoteAddress] == NSOrderedSame) {
-        if (![[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]
-            || [UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-            [chat setRead:[NSNumber numberWithInt:1]];
-            [chat update];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
+    NSArray *chatList = [[notif userInfo] objectForKey:@"chats"];
+    if (chatList != nil)
+    {
+        for (ChatModel* chat in chatList)
+        {
+            NSString *from = chat.remoteContact;
+            if(chat == NULL) {
+                return;
+            }
+            //char *fromStr = linphone_address_as_string_uri_only(from);
+            if([from caseInsensitiveCompare:remoteAddress] == NSOrderedSame) {
+                if (![[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]
+                    || [UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+                    [chat setRead:[NSNumber numberWithInt:1]];
+                    [chat update];
+                    
+                }
+                int pos = [chatData count];
+                [chatData insertObject:chat atIndex:pos];
+            }
         }
-        [self addChatEntry:chat];
-        [self scrollToLastUnread:TRUE];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
+        [bubbleTable reloadData];
+        [self scrollToBottom:TRUE];
+    }
+    else
+    {
+        ChatModel *chat = [[notif userInfo] objectForKey:@"chat"];
+        if(chat == NULL) {
+            return;
+        }
+        NSString *from = chat.remoteContact;
+        if([from caseInsensitiveCompare:remoteAddress] == NSOrderedSame) {
+            if (![[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]
+                || [UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+                [chat setRead:[NSNumber numberWithInt:1]];
+                [chat update];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
+            }
+            [self addChatEntry:chat];
+            [self scrollToLastUnread:TRUE];
+        }
     }
 }
 

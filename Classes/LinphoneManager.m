@@ -661,6 +661,7 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
     ChatModel *chat = [[ChatModel alloc] init];
     [chat setLocalContact:@""];
     [chat setRemoteContact:[NSString stringWithUTF8String:fromStr]];
+    ms_free(fromStr);
     bool image = 0;
     NSString* uuidChat = @"";
     NSString* imgurl = @"";
@@ -679,11 +680,11 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
         uuidChat = [chatMsg substringToIndex:36];
 		[chat setMessage:[chatMsg substringFromIndex:37]];
     }
+    
 	[chat setDirection:[NSNumber numberWithInt:1]];
     [chat setTime:[NSDate date]];
     [chat setRead:[NSNumber numberWithInt:0]];
     [chat setUuid:uuidChat];
-    [chat create];
     
     NSDictionary *chatData = [NSDictionary dictionaryWithObjectsAndKeys:
                               [chat remoteContact], @"remoteContact",
@@ -693,9 +694,15 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
                               [chat uuid], @"uuid",
                                nil];
     NSLog(@"chatData = %@", chatData);
-
-    ms_free(fromStr);
     
+    ChatModel *dupChat = [ChatModel readUUID:uuidChat];
+    if (dupChat != nil)
+    {
+        NSLog(@"Chat Already Received UUID: %@", uuidChat);
+        return;
+    }
+    
+    [chat create];
     if (image)
     {
         NSURL *url = [NSURL URLWithString:imgurl];
@@ -709,6 +716,16 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
     {
         [self notifyMessageReceived:chat];
     }
+}
+
+- (void) getChatImage:(NSString*)imgurl chat:(ChatModel*)chat
+{
+    NSURL *url = [NSURL URLWithString:imgurl];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [chatDownloads setObject:chat forKey:url];
+    [LinphoneLogger logc:LinphoneLoggerLog format:"Download Image: %@ -> %@", imgurl, chat.message];
+    [request setDelegate:self];
+    [request startAsynchronous];
 }
 
 - (void) notifyMessageReceived:(ChatModel*)chat
@@ -1692,6 +1709,9 @@ static void audioRouteChangeListenerCallback (
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
     [LinphoneLogger logc:LinphoneLoggerLog format:"Download Failed: %@ Error: %@", [request url], [request error]];
+    ChatModel* chat = (ChatModel*)[chatDownloads objectForKey:[request url]];
+    [chatDownloads removeObjectForKey:[request url]];
+    [chat release];
 }
 
 #pragma mark - RingMail Functions
@@ -1743,6 +1763,7 @@ static void audioRouteChangeListenerCallback (
             [sync syncContacts:login password:password];
             NSMutableArray *favs = [FavoritesModel getFavorites];
             [sync getRemoteData:nil favorites:favs login:login password:password];
+            [sync getChatMessages:login password:password];
             [sync release];
         });
     }

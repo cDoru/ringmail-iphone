@@ -238,6 +238,14 @@
                 if([loc_key isEqualToString:@"IM_MSG"]) {
                     [[PhoneMainView instance] addInhibitedEvent:kLinphoneTextReceived];
                     [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
+                    if ([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)]
+                        && [UIApplication sharedApplication].applicationState ==  UIApplicationStateActive) {
+                        NSLog(@"Push Message Received While Active");
+                    }
+                    else
+                    {
+                        NSLog(@"Push Message Received While Closed");
+                    }
                 } else if([loc_key isEqualToString:@"IC_MSG"]) {
                     //it's a call
                     [self fixRing];

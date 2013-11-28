@@ -36,6 +36,7 @@
 #import "ASIHTTPRequestDelegate.h"
 #import "ImageHelper.h"
 #import "SMRotaryWheel.h"
+#import "ChatModel.h"
 
 #include "linphonecore.h"
 
@@ -168,6 +169,7 @@ typedef struct _LinphoneManagerSounds {
 - (void)closeDatabase;
 - (void)openDatabase;
 - (void)removeDatabase;
+- (void)getChatImage:(NSString*)imgurl chat:(ChatModel*)chat;
 
 @property (readonly) FastAddressBook* fastAddressBook;
 @property Connectivity connectivity;
