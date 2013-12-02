@@ -136,7 +136,7 @@
         return nil;
     }
 
-    const char *sql = "SELECT id, localContact, remoteContact, direction, message, time, read, sent, delivered, uuid FROM chat WHERE id=@ID";
+    const char *sql = "SELECT id, localContact, remoteContact, direction, message, time, read, state, sent, delivered, uuid FROM chat WHERE id=@ID";
     sqlite3_stmt *sqlStatement;
     if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
         [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
@@ -167,7 +167,7 @@
         return nil;
     }
     
-    const char *sql = "SELECT id, localContact, remoteContact, direction, message, time, read, sent, delivered, uuid FROM chat WHERE uuid=@UUID";
+    const char *sql = "SELECT id, localContact, remoteContact, direction, message, time, read, state, sent, delivered, uuid FROM chat WHERE uuid=@UUID";
     sqlite3_stmt *sqlStatement;
     if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
         [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
@@ -231,7 +231,7 @@
         return;
     }
     
-    const char *sql = "UPDATE chat SET sent=@SENT";
+    const char *sql = "UPDATE chat SET sent=@SENT WHERE id=@ID";
     sqlite3_stmt *sqlStatement;
     if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
         [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];
@@ -258,7 +258,7 @@
         return;
     }
     
-    const char *sql = "UPDATE chat SET delivered=@DELIVERED";
+    const char *sql = "UPDATE chat SET delivered=@DELIVERED WHERE id=@ID";
     sqlite3_stmt *sqlStatement;
     if (sqlite3_prepare_v2(database, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
         [LinphoneLogger logc:LinphoneLoggerError format:"Can't prepare the query: %s (%s)", sql, sqlite3_errmsg(database)];

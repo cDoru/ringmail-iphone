@@ -479,7 +479,8 @@ static PhoneMainView* phoneMainViewInstance=nil;
         UICompositeViewDescription *old = currentView;
         UICompositeViewDescription *new = view;
         if([old equal:[ChatRoomViewController compositeViewDescription]]) {
-            if([new equal:[ChatViewController compositeViewDescription]]) {
+            if([new equal:[ChatViewController compositeViewDescription]] ||
+               [new equal:[ContactDetailsViewController compositeViewDescription]]) {
                 left = true;
             }
         } else if([new equal:[ChatRoomViewController compositeViewDescription]]) {

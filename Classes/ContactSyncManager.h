@@ -27,5 +27,6 @@
 -(void) getRemoteData:(NSArray*)contactIds favorites:(NSArray *)favs login:(NSString*) username password:(NSString*) password;
 -(void) getRemoteFavorites:(NSArray *)favs login:(NSString*) username password:(NSString*) password;
 -(void) getChatMessages:(NSString*) username password:(NSString*) password;
+-(void) logoutDevice:(NSString *)username password:(NSString *)password;
 
 @end

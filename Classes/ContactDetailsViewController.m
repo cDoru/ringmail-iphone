@@ -410,7 +410,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             NSNumber *theId = [NSNumber numberWithInteger:[(NSString*)[data objectForKey:@"id"] intValue]];
             if ([theId isEqualToNumber:[NSNumber numberWithInteger:ABRecordGetRecordID((ABRecordRef)contact)]])
             {
-                NSLog(@"*** Update Contact ***");
+                //NSLog(@"*** Update Contact ***");
                 if (![[NSThread currentThread] isMainThread])
                 {
                     dispatch_sync(dispatch_get_main_queue(), ^{

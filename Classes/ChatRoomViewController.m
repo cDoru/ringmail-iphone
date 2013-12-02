@@ -37,7 +37,7 @@
 @synthesize remoteAddress;
 @synthesize addressLabel;
 @synthesize avatarImage;
-@synthesize headerView;
+@synthesize avatarButton;
 @synthesize chatView;
 @synthesize messageView;
 @synthesize messageBackgroundImage;
@@ -76,7 +76,7 @@
     [remoteAddress release];
     [addressLabel release];
     [avatarImage release];
-    [headerView release];
+    [avatarButton release];
     [messageView release];
     [messageBackgroundImage release];
     [transferBackgroundImage release];
@@ -145,6 +145,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
     [bubbleTable addGestureRecognizer:listTapGestureRecognizer];
     [listTapGestureRecognizer setEnabled:FALSE];
+    
+    UIImage* defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];
+    [avatarButton setImage:defaultImage forState:UIControlStateNormal];
     
 //    [tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
 //    [tableController.tableView setBackgroundView:nil];
@@ -420,7 +423,17 @@ static UICompositeViewDescription *compositeDescription = nil;
         image = [UIImage imageNamed:@"avatar_unknown_small.png"];
     }
     avatarImage = [SMRotaryImage roundedImageWithImage:image];
-    
+    if (acontact != nil)
+    {
+        [avatarButton setImage:avatarImage forState:UIControlStateNormal];
+
+    }
+    else
+    {
+        UIImage* defaultImage = [UIImage imageNamed:@"avatar_unknown_small.png"];
+        [avatarButton setImage:defaultImage forState:UIControlStateNormal];
+
+    }
     linphone_address_destroy(linphoneAddress);
 }
 
@@ -650,6 +663,7 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
                 [chat update];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self];
             }
+            [self update];
             [self addChatEntry:chat];
             [self scrollToLastUnread:TRUE];
         }
@@ -804,6 +818,30 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
     }
 }
 
+- (IBAction)onContactClick:(id)event {
+    if(remoteAddress == NULL) {
+        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot update chat room header: null contact"];
+        return;
+    }
+	LinphoneAddress* linphoneAddress = linphone_core_interpret_url([LinphoneManager getLc], [remoteAddress UTF8String]);
+	if (linphoneAddress == NULL) {
+        [LinphoneLogger logc:LinphoneLoggerWarning format:"Bad linphone address for chat"];
+        return;
+    }
+	char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
+	NSString *normalizedSipAddress = [NSString stringWithUTF8String:tmp];
+	ms_free(tmp);
+	
+    NSString* ringMailAddress = [FastAddressBook getTargetFromSIP:normalizedSipAddress];
+    ABRecordRef acontact = [[[LinphoneManager instance] fastAddressBook] getContact:ringMailAddress];
+    if(acontact != nil)
+    {
+        ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
+        if(controller != nil) {
+            [controller setContact:acontact];
+        }
+    }
+}
 
 #pragma mark ChatRoomDelegate
 

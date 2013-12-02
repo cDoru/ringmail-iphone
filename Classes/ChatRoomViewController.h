@@ -49,8 +49,8 @@
 @property (nonatomic, retain) IBOutlet UIToggleButton *editButton;
 @property (nonatomic, retain) IBOutlet HPGrowingTextView* messageField;
 @property (nonatomic, retain) IBOutlet UIButton* sendButton;
+@property (nonatomic, retain) IBOutlet UIButton* avatarButton;
 @property (nonatomic, retain) IBOutlet UILabel *addressLabel;
-@property (nonatomic, retain) IBOutlet UIView *headerView;
 @property (nonatomic, retain) IBOutlet UIView *chatView;
 @property (nonatomic, retain) IBOutlet UIView *messageView;
 @property (nonatomic, retain) IBOutlet UIImageView *messageBackgroundImage;
@@ -72,6 +72,7 @@
 - (IBAction)onPictureClick:(id)event;
 - (IBAction)onTransferCancelClick:(id)event;
 - (IBAction)onListTap:(id)sender;
+- (IBAction)onContactClick:(id)event;
 
 - (void)addChatEntry:(ChatModel*)chat;
 - (void)updateChatEntry:(ChatModel*)chat;

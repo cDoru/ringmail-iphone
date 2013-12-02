@@ -348,6 +348,7 @@
             NSArray *ringmail = [result objectForKey:@"ringmail"];
             if (ringmail != nil)
             {
+
                 if ([cmd isEqualToString:@"get_remote_data"])
                 {
                     [RemoteModel deleteAll];
@@ -356,9 +357,11 @@
                 {
                     RemoteModel *rmod = [[RemoteModel alloc] init];
                     [rmod setContactId:[(NSDictionary *)remoteData objectForKey:@"id"]];
+                    BOOL change = [RemoteModel hasRingMail:[rmod contactId]];
                     if ([(NSDictionary *)remoteData objectForKey:@"reg"] == nil)
                     {
                         [rmod delete];
+                        change = (change == YES) ? YES : NO;
                         //NSLog(@"Deleted Remote: %@", [rmod contactId]);
                     }
                     else
@@ -376,10 +379,14 @@
                             [rmod create];
                             //NSLog(@"Created Remote: %@", [rmod contactId]);
                         }
+                        change = (change == NO) ? YES : NO;
                     }
                     if ([cmd isEqualToString:@"set_contact"])
                     {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"RingMailContactUpdated" object:self userInfo:[NSDictionary dictionaryWithObject:[rmod contactId] forKey:@"id"]];
+                        if (change)
+                        {
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"RingMailContactUpdated" object:self userInfo:[NSDictionary dictionaryWithObject:[rmod contactId] forKey:@"id"]];
+                        }
                     }
                 }
             }
@@ -415,12 +422,16 @@
                 result = [[response object] objectFromJSONData];
             }
             NSArray* chatList = [result objectForKey:@"messages"];
+            NSArray* confirmList = [result objectForKey:@"chat_confirms"];
             if (chatList != nil)
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self processChatMessages:chatList];
+                    [self processChatMessages:chatList confirms:confirmList];
                 });
             }
+        }
+        else if([cmd isEqualToString:@"logout_device"]) {
+            [LinphoneLogger logc:LinphoneLoggerLog format:"Logout Device: %@", [response object]];
         }
     }
 }
@@ -447,7 +458,7 @@
     [result release];
 }
 
--(void)processChatMessages:(NSArray*)chatList
+-(void)processChatMessages:(NSArray*)chatList confirms:(NSArray*)confirmList
 {
     NSString* lastUUID = nil;
     NSMutableArray* chatArray = [NSMutableArray arrayWithCapacity:[chatList count]];
@@ -484,6 +495,18 @@
             }
         }
     }
+    for (NSString *deliveryString in confirmList)
+    {
+        ChatModel *chat = [ChatModel readUUID:deliveryString];
+        if (chat != nil)
+        {
+            [chat updateDelivered];
+            NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  chat, @"chat_delivered",
+                                  nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RingMailChatUpdate" object:self userInfo:dict];
+        }
+    }
     if (lastUUID != nil)
     {
         NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -491,6 +514,28 @@
                               nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:kLinphoneTextReceived object:self userInfo:dict];
     }
+}
+
+#pragma mark - Log out of RingMail
+
+-(void)logoutDevice:(NSString *)username password:(NSString *)password
+{
+    NSMutableDictionary *stats = [NSMutableDictionary dictionary];
+    [stats setObject:username forKey:@"login"];
+    [stats setObject:password forKey:@"password"];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:stats options:0 error:nil];
+    NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
+    XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
+    [request setMethod: @"logout_device" withParameters:[NSArray arrayWithObjects:result, nil]];
+    NSError* error = nil;
+    XMLRPCResponse *xmlrpc = [XMLRPCConnection sendSynchronousXMLRPCRequest:request error:&error];
+    if (xmlrpc != nil)
+    {
+        [self processResponse:xmlrpc request:request];
+    }
+    [request release];
+    [result release];
 }
 
 @end

@@ -21,6 +21,8 @@
 
 #import "LinphoneAppDelegate.h"
 #import "DTActionSheet.h"
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 
 @implementation UICompositeViewDescription
 
@@ -778,6 +780,11 @@
 
 - (void)inviteText:(NSString *)phoneTo
 {
+    if (! [self callingCapability])
+    {
+        return;
+    }
+    
     NSArray *recipents = @[phoneTo];
     NSString *message = [NSString stringWithFormat:@"Hey, I started using RingMail. It's a cool free app that lets you call an email address! ring.ml/dl"];
     
@@ -911,6 +918,11 @@
 
 - (void)externalCall:(NSString *)phone ask:(BOOL)ask
 {
+    if (! [self callingCapability])
+    {
+        return;
+    }
+    
     NSString *tel;
     NSString *newPhone = [FastAddressBook e164number:phone];
     if (ask)
@@ -927,6 +939,11 @@
 
 - (void)externalText:(NSString *)phone
 {
+    if (! [self callingCapability])
+    {
+        return;
+    }
+    
     NSArray *recipents = @[phone];
     
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
@@ -935,6 +952,33 @@
     
     // Present message view controller on screen
     [self presentViewController:messageController animated:NO completion:nil];
+}
+
+- (BOOL)callingCapability
+{
+    BOOL calling = NO;
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel://"]]) {
+        // Device supports phone calls, lets confirm it can place one right now
+        CTTelephonyNetworkInfo *netInfo = [[[CTTelephonyNetworkInfo alloc] init] autorelease];
+        CTCarrier *carrier = [netInfo subscriberCellularProvider];
+        NSString *mnc = [carrier mobileNetworkCode];
+        if (([mnc length] == 0) || ([mnc isEqualToString:@"65535"])) {
+            // Device cannot place a call at this time.  SIM might be removed.
+            calling = NO;
+        } else {
+            // Device can place a phone call
+            calling = YES;
+        }
+    } else {
+        // Device does not support phone calls
+        calling = NO;
+    }
+    if (! calling)
+    {
+        UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"No Calling Capability" message:@"No calling or SMS capability on this device." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [warningAlert show];
+    }
+    return calling;
 }
 
 @end

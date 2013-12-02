@@ -736,7 +736,8 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
         
         NSString* address = [chat remoteContact];
         NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:address];
-        ABRecordRef contact = [fastAddressBook getContact:normalizedSipAddress];
+        NSString* ringMailAddress = [FastAddressBook getTargetFromSIP:normalizedSipAddress];
+        ABRecordRef contact = [fastAddressBook getContact:ringMailAddress];
         if(contact) {
             address = [FastAddressBook getContactDisplayName:contact];
         } else {
@@ -1116,8 +1117,8 @@ static LinphoneCoreVTable linphonec_vtable = {
 		linphone_core_enable_video(theLinphoneCore, FALSE, FALSE);
 	}
     
-    
-
+    // Update codecs
+    [LinphoneManager setCodecsConfig:theLinphoneCore];
     
     [LinphoneLogger logc:LinphoneLoggerWarning format:"Linphone [%s]  started on [%s]"
                ,linphone_core_get_version()
@@ -1741,6 +1742,7 @@ static void audioRouteChangeListenerCallback (
                 if (chat != nil)
                 {
                     [chat updateDelivered];
+                    NSLog(@"Chat Delivered: %@", deliveryString);
                     NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                           chat, @"chat_delivered",
                                           nil];
@@ -1816,6 +1818,46 @@ static void audioRouteChangeListenerCallback (
         }
     }
     return res;
+}
+
+- (void)remoteLogout
+{
+    NSDictionary *cred = [self getRemoteLogin];
+    if (cred != nil)
+    {
+        NSString *login = [cred objectForKey:@"login"];
+        NSString *password = [cred objectForKey:@"password"];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, (unsigned long)NULL), ^{
+            ContactSyncManager* sync = [[ContactSyncManager alloc] init];
+            [sync logoutDevice:login password:password];
+            [sync release];
+        });
+    }
+}
+
++ (void)configureCodecs: (const MSList *)codecs core:(LinphoneCore *)lc
+{
+ 	const MSList *elem = codecs;
+	for(;elem != NULL; elem = elem->next) {
+		PayloadType *pt = (PayloadType*)elem->data;
+        if (
+            (strcmp(pt->mime_type, "PCMU") == 0) ||
+            (strcmp(pt->mime_type, "opus") == 0) ||
+            (strcmp(pt->mime_type, "H264") == 0)
+            ) {
+            linphone_core_enable_payload_type(lc, pt, true);
+            NSLog(@"Codec: '%s' Enabled", pt->mime_type);
+        } else {
+            linphone_core_enable_payload_type(lc, pt, false);
+            NSLog(@"Codec: '%s' Disabled", pt->mime_type);
+        }
+    }
+}
+
++ (void)setCodecsConfig:(LinphoneCore *)lc
+{
+    [LinphoneManager configureCodecs:linphone_core_get_audio_codecs(lc) core:lc];
+    [LinphoneManager configureCodecs:linphone_core_get_video_codecs(lc) core:lc];
 }
 
 @end

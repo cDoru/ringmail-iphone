@@ -30,6 +30,9 @@
     NSDate *time;
     NSNumber *read;
 	NSNumber *state; //0 IDLE, 1 in progress, 2 delivered, 3 not delivered see LinphoneChatMessageState
+    NSNumber *delivered;
+    NSNumber *sent;
+    NSString *uuid;
 }
 
 @property (readonly) NSNumber *chatId;

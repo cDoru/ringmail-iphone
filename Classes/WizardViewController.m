@@ -200,6 +200,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)reset {
+    LinphoneManager* mgr = [LinphoneManager instance];
+    [mgr remoteLogout];
+    
     [self clearProxyConfig];
     [[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"pushnotification_preference"];
     
@@ -230,7 +233,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     // Remove database file
     linphone_core_clear_call_logs(lc);
     [ChatModel removeConversation:nil];
-    LinphoneManager* mgr = [LinphoneManager instance];
+
     [mgr closeDatabase];
     [mgr removeDatabase];
     [mgr openDatabase];
@@ -448,7 +451,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	linphone_core_add_auth_info([LinphoneManager getLc], info);
 }
 
-- (void)configureCodecs: (const MSList *)codecs {
+/*- (void)configureCodecs: (const MSList *)codecs {
     LinphoneCore *lc = [LinphoneManager getLc];
  	const MSList *elem = codecs;
 	for(;elem != NULL; elem = elem->next) {
@@ -459,16 +462,17 @@ static UICompositeViewDescription *compositeDescription = nil;
             (strcmp(pt->mime_type, "H264") == 0)
         ) {
             linphone_core_enable_payload_type(lc, pt, true);
+            NSLog(@"Codec: '%s' Enabled", pt->mime_type);
         } else {
             linphone_core_enable_payload_type(lc, pt, false);
+            NSLog(@"Codec: '%s' Disabled", pt->mime_type);
         }
     }
-}
+}*/
 
 - (void)setCodecsConfig {
     LinphoneCore *lc = [LinphoneManager getLc];
-    [self configureCodecs: linphone_core_get_audio_codecs(lc)];
-    [self configureCodecs: linphone_core_get_video_codecs(lc)];
+    [LinphoneManager setCodecsConfig:lc];
 }
 
 - (NSString*)identityFromUsername:(NSString*)username {

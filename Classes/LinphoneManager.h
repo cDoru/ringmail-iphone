@@ -170,6 +170,9 @@ typedef struct _LinphoneManagerSounds {
 - (void)openDatabase;
 - (void)removeDatabase;
 - (void)getChatImage:(NSString*)imgurl chat:(ChatModel*)chat;
+- (void)remoteLogout;
++ (void)configureCodecs: (const MSList *)codecs core:(LinphoneCore *)lc;
++ (void)setCodecsConfig:(LinphoneCore *)lc;
 
 @property (readonly) FastAddressBook* fastAddressBook;
 @property Connectivity connectivity;
