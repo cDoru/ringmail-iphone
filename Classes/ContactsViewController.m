@@ -191,6 +191,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [addButton setHidden:TRUE];
             [backButton setHidden:FALSE];
             break;
+        case ContactSelectionModeAddFavorite:
         default:
             [addButton setHidden:FALSE];
             [backButton setHidden:TRUE];

@@ -312,6 +312,19 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
             if(controller != nil) {
                 [controller setRemoteAddress:address];
             }
+        } else if ([ContactSelection getSelectionMode] == ContactSelectionModeAddFavorite) {
+            NSNumber *fav = [NSNumber numberWithInteger:ABRecordGetRecordID(lPerson)];
+            if (! [FavoritesModel isFavorite:fav])
+            {
+                [FavoritesModel addFavorite:fav];
+                [RemoteModel updateRemote:RemoteItemFavorites date:nil];
+                LinphoneManager* mgr = [LinphoneManager instance];
+                FastAddressBook* book = [mgr fastAddressBook];
+                [book setupWheelContacts];
+                [mgr setReloadWheels:YES];
+                [mgr syncRemoteFavorites];
+            }
+            [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
         } else {
             // Go to Contact details view
             ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);

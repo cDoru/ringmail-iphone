@@ -235,14 +235,12 @@
         <image name="chat_cancel_over.png" width="116" height="115"/>
         <image name="chat_edit_default.png" width="86" height="59"/>
         <image name="chat_edit_over.png" width="86" height="59"/>
-        <image name="chat_edit_over.png" width="86" height="59"/>
         <image name="chat_message_background.png" width="640" height="117"/>
         <image name="chat_photo_default.png" width="29" height="29"/>
         <image name="chat_photo_disabled.png" width="117" height="115"/>
         <image name="chat_photo_over.png" width="29" height="29"/>
         <image name="chat_progressbar_background.png" width="524" height="115"/>
         <image name="send_btn_default.png" width="116" height="57"/>
-        <image name="send_btn_over.png" width="116" height="57"/>
         <image name="send_btn_over.png" width="116" height="57"/>
     </resources>
 </document>

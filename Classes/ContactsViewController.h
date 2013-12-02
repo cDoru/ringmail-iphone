@@ -26,7 +26,8 @@ typedef enum _ContactSelectionMode {
     ContactSelectionModeNone,
     ContactSelectionModeEdit,
     ContactSelectionModePhone,
-    ContactSelectionModeMessage
+    ContactSelectionModeMessage,
+    ContactSelectionModeAddFavorite
 } ContactSelectionMode;
 
 @interface ContactSelection : NSObject {

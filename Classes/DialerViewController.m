@@ -382,18 +382,17 @@ static UICompositeViewDescription *compositeDescription = nil;
                     ringMailImage.hidden = YES;
                     inviteButton.hidden = NO;
                 }
+                return;
             }
         }
-        else
-        {
-            //NSLog(@"Blank Value 1");
-        }
     }
-    else
-    {
-        //NSLog(@"Blank Value 2");
-    }
-    return;
+    [self setAddress:@""];
+    [callButton setHiddenContact:nil];
+    [textButton setHiddenContact:nil];
+    [contactButton setImage:[UIImage imageNamed:@"avatar_unknown_small.png"] forState:UIControlStateNormal];
+    currentContact = nil;
+    ringMailImage.hidden = YES;
+    inviteButton.hidden = YES;
 }
 
 #pragma mark - Action Functions
@@ -414,7 +413,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onAddressClick: (id)sender {
-    NSLog(@"Address Click");
+    //NSLog(@"Address Click");
     if ([callButton hasHidden] > 0 && [[addressField text] length] > 0)
     {
         [self setAddress:@""];
@@ -431,6 +430,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 // Go to Contact details view
     if (currentContact == nil)
     {
+        // Add a favorite
+        [ContactSelection setSelectionMode:ContactSelectionModeAddFavorite];
+        [[PhoneMainView instance] changeCurrentView:[ContactsViewController compositeViewDescription] push:TRUE];
         return;
     }
     ContactDetailsViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ContactDetailsViewController compositeViewDescription] push:TRUE], ContactDetailsViewController);
